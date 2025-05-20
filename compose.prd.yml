@@ -1,0 +1,26 @@
+services:
+  app:
+    container_name: lesson_booking_app
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.prd
+    networks:
+      - lesson-booking-network
+  nginx:
+    container_name: lesson_booking_nginx
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.prd
+    ports:
+      - "8000:80"
+    env_file:
+      - nginx.env
+    depends_on:
+      - app
+    dns:
+      - 8.8.8.8
+    networks:
+      - lesson-booking-network
+networks:
+  lesson-booking-network:
+    external: true

@@ -1,0 +1,40 @@
+# cmposerのインストール
+FROM composer:2.6.5 as composer
+
+WORKDIR  /app
+COPY composer.json ./
+COPY composer.lock ./
+
+RUN composer install
+
+# メインステージ
+FROM php:8.2-fpm
+
+# ミドルウェアのインストール
+RUN apt-get update \
+&& apt-get install -y \
+git \
+zip \
+unzip \
+vim \
+libpng-dev \
+libpq-dev \
+&& docker-php-ext-install pdo_pgsql pgsql
+
+WORKDIR  /var/www
+
+# ローカルのファイルをDockerコンテナ内にコピーする
+COPY . .
+
+# php.iniコピー
+COPY php.ini /usr/local/etc/php/
+COPY www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
+
+# composerコピー
+COPY --from=composer /app/vendor/ ./vendor/
+
+RUN chown -R www-data:www-data /var/www
+RUN chmod 744 -R /var/www
+RUN chmod 777 -R /var/www/storage && chmod 777 -R /var/www/bootstrap/cache
+
+USER www-data

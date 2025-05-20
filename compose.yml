@@ -1,0 +1,44 @@
+services:
+  app:
+    container_name: lesson_booking_app
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.php.dev
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
+    volumes:
+     - ./backend/:/var/www/
+     - /var/www/bootstrap/
+     - /var/www/storage/
+     - /var/www/vendor/
+     - ./backend/storage/app:/var/www/storage/app/
+     - ./backend/public:/var/www/public
+    networks:
+      - lesson-booking-network
+  vite:
+    container_name: lesson_booking_vite
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.vite.dev
+    ports:
+      - "8000:8000"
+    command: "npm run check"
+    volumes:
+      - ./frontend/:/var/www/
+      - /var/www/node_modules
+    networks:
+      - lesson-booking-network
+  nginx:
+    container_name: lesson_booking_nginx
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.nginx.dev
+    env_file:
+      - nginx.env
+    depends_on:
+      - app
+    networks:
+      - lesson-booking-network
+networks:
+  lesson-booking-network:
+    external: true
