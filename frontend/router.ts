@@ -1,12 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import SessionErrorComponent from "./components/errors/403Component.vue";
-import NotFoundErrorComponent from "./components/errors/404Component.vue";
-import ServerErrorComponent from "./components/errors/500Component.vue";
-import DeliveryHistoryListComponent from "./components/pages/DeliveryHistoryListComponent.vue";
-import LoginComponent from "./components/pages/LoginComponent.vue";
-import LoginCallbackComponent from "./components/pages/LoginCallbackComponent.vue";
-import LogoutComponent from "./components/pages/LogoutComponent.vue";
+import SessionErrorComponent from "./core/components/error/403Component.vue";
+import NotFoundErrorComponent from "./core/components/error/404Component.vue";
+import ServerErrorComponent from "./core/components/error/500Component.vue";
+import LoginComponent from "./modules/common/views/LoginComponent.vue";
+import LoginCallbackComponent from "./modules/common/views/LoginCallbackComponent.vue";
+import LogoutComponent from "./modules/common/views/LogoutComponent.vue";
 
 export default createRouter({
   history: createWebHistory(),
@@ -37,18 +36,8 @@ export default createRouter({
       path: "/logout",
       component: LogoutComponent,
       name: "logout"
-    },
-    // Contents
-    {
-      path: "/delivery_history/list",
-      component: DeliveryHistoryListComponent,
-      name: "deliveryHistoryList",
-      meta: {
-        title: "配送履歴",
-        heading: "配送履歴画面",
-        breadcrumb: ["deliveryHistoryList"]
-      }
     }
+    // Contents
   ],
   // 遷移にトップに移動
   scrollBehavior() {

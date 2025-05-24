@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { getCurrentInstance, ref, Ref, onMounted } from "vue";
-  import { GeneralInterface } from "../../../interface/CommonInterface";
 
   const props = defineProps<{
     text?: string;
@@ -24,7 +23,7 @@
   // historyか指定先に戻る
   const pageBack = () => {
     if (props.to) {
-      let setting: GeneralInterface = {
+      let setting: any = {
         name: props.to
       };
 

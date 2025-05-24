@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRoute } from "vue-router";
-  import { useLogin } from "../../hooks/useLogin";
+  import { useLogin } from "../store/useLogin";
 
   const { loginCallback } = useLogin();
 

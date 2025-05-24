@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useLogin } from "../../hooks/useLogin";
+  import { useLogin } from "../store/useLogin";
 
   const { getLoginInfo, login, email, password } = useLogin();
 

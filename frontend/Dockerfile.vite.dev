@@ -1,4 +1,4 @@
-FROM node:18.19
+FROM node:20.19.2
 RUN apt-get update -qq
 
 WORKDIR /var/www

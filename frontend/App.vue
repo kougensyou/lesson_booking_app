@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRouter } from "vue-router";
-  import { useLogin } from "./hooks/useLogin";
+  import { useLogin } from "./modules/common/store/useLogin";
 
   const { common } = useLogin();
 

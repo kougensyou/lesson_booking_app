@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { computed } from "vue";
-  import { numberFormat } from "../../../utils/numberFormat";
+  import { numberFormat } from "../utils/numberFormat";
 
   const props = defineProps<{
     count: string;

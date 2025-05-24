@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { ref, Ref, watch, computed } from "vue";
-  import { GeneralInterface } from "../../../interface/CommonInterface";
   import { useRoute } from "vue-router";
 
   const props = defineProps<{
@@ -30,7 +29,7 @@
   let nextQuery: Ref<{
     page?: number;
   }> = ref({});
-  let list: Ref<GeneralInterface[]> = ref([]);
+  let list: Ref<any[]> = ref([]);
 
   // ページリスト取得
   const getPages = () => {
@@ -55,7 +54,7 @@
 
   // 初期化
   const init = () => {
-    let query: GeneralInterface = JSON.parse(JSON.stringify(route.query));
+    let query: any = JSON.parse(JSON.stringify(route.query));
 
     // 前へボタン
     query.page = props.currentPage - 1;

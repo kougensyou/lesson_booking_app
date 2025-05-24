@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { getCurrentInstance, ref, Ref, watch } from "vue";
-  import { DIALOG_MESSAGE } from "../../../const/messages";
+  import { DIALOG_MESSAGE } from "../utils/messages";
   const props = withDefaults(
     defineProps<{
       // ダイアログ表示判定

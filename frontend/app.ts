@@ -2,35 +2,34 @@
  * Import
  *-------------------------------------------------------------- */
 import { createApp } from "vue";
-import "../sass/app.scss";
+import "./scss/app.scss";
 import App from "./App.vue";
 import router from "./router";
 
 import VueDatePicker from "@vuepic/vue-datepicker";
-import SessionErrorComponent from "./components/errors/403Component.vue";
-import NotFoundErrorComponent from "./components/errors/404Component.vue";
-import ServerErrorComponent from "./components/errors/500Component.vue";
-import PageTitleComponent from "./components/pageParts/common/PageTitleComponent.vue";
-import PageSubTitleComponent from "./components/pageParts/common/PageSubTitleComponent.vue";
-import BreadcrumbComponent from "./components/pageParts/common/BreadcrumbComponent.vue";
-import ExecutionButtonComponent from "./components/pageParts/common/ExecutionButtonComponent.vue";
-import ItemCountComponent from "./components/pageParts/common/ItemCountComponent.vue";
-import PageBackComponent from "./components/pageParts/common/PageBackComponent.vue";
-import MessageDialogComponent from "./components/pageParts/common/MessageDialogComponent.vue";
-import ModalComponent from "./components/pageParts/common/ModalComponent.vue";
-import LoadingComponent from "./components/pageParts/common/LoadingComponent.vue";
-import PaginationComponent from "./components/pageParts/common/PaginationComponent.vue";
-import ErrorModalComponent from "./components/pageParts/common/error/ErrorModalComponent.vue";
-import ErrorMessageComponent from "./components/pageParts/common/error/ErrorMessageComponent.vue";
-import ErrorListComponent from "./components/pageParts/common/error/ErrorListComponent.vue";
-import McommonSelectBoxComponent from "./components/pageParts/common/form/McommonSelectBoxComponent.vue";
-import SearchButtonComponent from "./components/pageParts/common/form/SearchButtonComponent.vue";
-import SuggestFormComponent from "./components/pageParts/common/form/SuggestFormComponent.vue";
-import ProgressBar from "./components/pageParts/common/ProgressBar.vue";
-import TabComponent from "./components/pageParts/common/TabComponent.vue";
-import SidebarComponent from "./components/pageParts/common/SidebarComponent.vue";
-import HeaderComponent from "./components/pageParts/common/HeaderComponent.vue";
-import DeliveryHistoryComponent from "./components/pageParts/deliveryHistory/DeliveryHistoryComponent.vue";
+import SessionErrorComponent from "./core/components/error/403Component.vue";
+import NotFoundErrorComponent from "./core/components/error/404Component.vue";
+import ServerErrorComponent from "./core/components/error/500Component.vue";
+import PageTitleComponent from "./core/components/PageTitleComponent.vue";
+import PageSubTitleComponent from "./core/components/PageSubTitleComponent.vue";
+import BreadcrumbComponent from "./core/components/BreadcrumbComponent.vue";
+import ExecutionButtonComponent from "./core/components/ExecutionButtonComponent.vue";
+import ItemCountComponent from "./core/components/ItemCountComponent.vue";
+import PageBackComponent from "./core/components/PageBackComponent.vue";
+import MessageDialogComponent from "./core/components/MessageDialogComponent.vue";
+import ModalComponent from "./core/components/ModalComponent.vue";
+import LoadingComponent from "./core/components/LoadingComponent.vue";
+import PaginationComponent from "./core/components/PaginationComponent.vue";
+import ErrorModalComponent from "./core/components/error/ErrorModalComponent.vue";
+import ErrorMessageComponent from "./core/components/error/ErrorMessageComponent.vue";
+import ErrorListComponent from "./core/components/error/ErrorListComponent.vue";
+import McommonSelectBoxComponent from "./core/components/form/McommonSelectBoxComponent.vue";
+import SearchButtonComponent from "./core/components/form/SearchButtonComponent.vue";
+import SuggestFormComponent from "./core/components/form/SuggestFormComponent.vue";
+import ProgressBar from "./core/components/ProgressBar.vue";
+import TabComponent from "./core/components/TabComponent.vue";
+import SidebarComponent from "./core/components/SidebarComponent.vue";
+import HeaderComponent from "./core/components/HeaderComponent.vue";
 
 /* --------------------------------------------------------------
  * Routing
@@ -66,7 +65,6 @@ app.component("TabComponent", TabComponent);
 app.component("VueDatePicker", VueDatePicker);
 app.component("SidebarComponent", SidebarComponent);
 app.component("HeaderComponent", HeaderComponent);
-app.component("DeliveryHistoryComponent", DeliveryHistoryComponent);
 app.component("SessionErrorComponent", SessionErrorComponent);
 app.component("NotFoundErrorComponent", NotFoundErrorComponent);
 app.component("ServerErrorComponent", ServerErrorComponent);

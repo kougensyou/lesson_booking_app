@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useLogout } from "../../hooks/useLogout";
+  import { useLogout } from "../store/useLogout";
 
   const { logout } = useLogout();
 
