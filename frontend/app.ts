@@ -2,6 +2,7 @@
  * Import
  *-------------------------------------------------------------- */
 import { createApp } from "vue";
+import { createPinia } from 'pinia'
 import "./scss/app.scss";
 import App from "./App.vue";
 import router from "./router";
@@ -38,6 +39,7 @@ import HeaderComponent from "./core/components/HeaderComponent.vue";
 /* --------------------------------------------------------------
  * Instance
  *-------------------------------------------------------------- */
+const pinia = createPinia();
 const app = createApp(App);
 
 /* --------------------------------------------------------------
@@ -73,4 +75,5 @@ app.component("ServerErrorComponent", ServerErrorComponent);
  * Setting
  *-------------------------------------------------------------- */
 app.use(router);
+app.use(pinia);
 router.isReady().then(() => app.mount("#app"));

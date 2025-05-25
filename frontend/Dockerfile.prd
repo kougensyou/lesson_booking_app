@@ -1,4 +1,4 @@
-FROM node:18.19 AS node
+FROM node:20.19.2 AS node
 RUN apt-get update -qq
 
 WORKDIR /app
