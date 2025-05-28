@@ -1,0 +1,6 @@
+FROM nginx:1.25
+
+COPY nginx.conf /etc/nginx/
+COPY default.conf.template /etc/nginx/templates/
+
+CMD ["nginx", "-g", "daemon off;"]
