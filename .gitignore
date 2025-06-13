@@ -1,4 +1,5 @@
 /frontend/node_modules
+/nuxt-front/node_modules
 /backend/storage/*.key
 /backend/storage/*.json
 /backend/storage/*.csv

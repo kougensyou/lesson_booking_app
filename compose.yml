@@ -4,13 +4,10 @@ services:
     build: 
       context: ./backend
       dockerfile: Dockerfile.php.dev
-    # extra_hosts:
-    #  - "host.docker.internal:host-gateway"
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
     volumes:
      - ./backend/:/var/www/
-     - /var/www/bootstrap/
-     - /var/www/storage/
-     - /var/www/vendor/
      - ./backend/storage/app:/var/www/storage/app/
      - ./backend/public:/var/www/public
     networks:
@@ -38,6 +35,11 @@ services:
     ports:
       - 80:80
       - "9000:9000"
+      - '5173:5173'
+    volumes:
+      - ./backend/:/var/www/
+      - ./backend/storage/app:/var/www/storage/app/
+      - ./backend/public:/var/www/public
     depends_on:
       - vite
       - app
