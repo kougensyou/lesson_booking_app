@@ -14,7 +14,7 @@ export default defineNuxtConfig({
       },
       proxy: {
         '/api': {
-          target: 'http://lesson_booking_nginx:9000',
+          target: 'nginx:9000',
           changeOrigin: true,
           secure: false,
         }
@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
+    apiBaseServer: process.env.NUXT_API_BASE_SERVER,
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE
     }

@@ -1,6 +1,7 @@
 export const getLoginInfoAPI = () => {
   const config = useRuntimeConfig()
-  return useFetch(`${config.public.apiBase}/api/login_info`, { server: true })
+  const base = import.meta.server ? config.apiBaseServer : config.public.apiBase
+  return useFetch(`${base}/api/login_info`, { server: true })
 }
 
 export const loginAPI = (data: any) => {
