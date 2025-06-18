@@ -28,10 +28,10 @@ services:
   nginx:
     container_name: lesson_booking_nginx
     build: 
-      context: ./ngnix
+      context: ./nginx
       dockerfile: Dockerfile.nginx.dev
     env_file:
-      - ./ngnix/nginx.env
+      - ./nginx/nginx.env
     ports:
       - "80:80"
       - "9000:9000"
