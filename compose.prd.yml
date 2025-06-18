@@ -1,24 +1,48 @@
 services:
-  app:
-    container_name: lesson_booking_app
+  backend:
+    container_name: lesson_booking_backend
     build: 
       context: ./backend
-      dockerfile: Dockerfile.prd
+      dockerfile: Dockerfile.php.dev
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
+    volumes:
+     - ./backend/:/var/www/
+     - ./backend/storage/app:/var/www/storage/app/
+     - ./backend/public:/var/www/public
+    networks:
+      - lesson-booking-network
+  frontend:
+    container_name: lesson_booking_frontend
+    build: 
+      context: ./nuxt-front
+      dockerfile: Dockerfile.vite.dev
+    ports:
+      - "3000:3000"
+    command: "npm run dev"
+    volumes:
+      - ./nuxt-front/:/var/www/
+      - /var/www/node_modules
     networks:
       - lesson-booking-network
   nginx:
     container_name: lesson_booking_nginx
     build: 
-      context: ./frontend
-      dockerfile: Dockerfile.prd
-    ports:
-      - "8000:80"
+      context: ./ngnix
+      dockerfile: Dockerfile.nginx.dev
     env_file:
-      - nginx.env
+      - ./ngnix/nginx.env
+    ports:
+      - "80:80"
+      - "9000:9000"
+      - "5173:5173"
+    volumes:
+      - ./backend/:/var/www/
+      - ./backend/storage/app:/var/www/storage/app/
+      - ./backend/public:/var/www/public
     depends_on:
-      - app
-    dns:
-      - 8.8.8.8
+      - frontend
+      - backend
     networks:
       - lesson-booking-network
 networks:

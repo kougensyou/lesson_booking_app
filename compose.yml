@@ -1,6 +1,6 @@
 services:
-  app:
-    container_name: lesson_booking_app
+  backend:
+    container_name: lesson_booking_backend
     build: 
       context: ./backend
       dockerfile: Dockerfile.php.dev
@@ -12,8 +12,8 @@ services:
      - ./backend/public:/var/www/public
     networks:
       - lesson-booking-network
-  vite:
-    container_name: lesson_booking_vite
+  frontend:
+    container_name: lesson_booking_frontend
     build: 
       context: ./nuxt-front
       dockerfile: Dockerfile.vite.dev
@@ -33,16 +33,16 @@ services:
     env_file:
       - ./ngnix/nginx.env
     ports:
-      - 80:80
+      - "80:80"
       - "9000:9000"
-      - '5173:5173'
+      - "5173:5173"
     volumes:
       - ./backend/:/var/www/
       - ./backend/storage/app:/var/www/storage/app/
       - ./backend/public:/var/www/public
     depends_on:
-      - vite
-      - app
+      - frontend
+      - backend
     networks:
       - lesson-booking-network
 networks:
