@@ -1,16 +1,15 @@
 <script setup lang="ts">
   import { useUserStore } from "../stores/useUserStore";
-  import { getLoginInfoAPI } from '../composables/api/useUser';
-
-  const { data } = await useAsyncData('loginInfo', getLoginInfoAPI);
 
   const user = useUserStore();
 
-  user.setAuthData(data.value);
+  const { fetchLoginInfo } = user;
+
+  await fetchLoginInfo();
 </script>
 <template>
   <div class="columns cmp-form-search no-border is-multiline">
-    <div class="column small is-12 items has-text-grey mt-3">アス</div>
+    <div class="column small is-12 items has-text-grey mt-3">いいいい</div>
     <div class="column small is-12 cmp-items">
       <input v-model="user.email" class="input" type="text" placeholder="例：test@test.com" />
     </div>

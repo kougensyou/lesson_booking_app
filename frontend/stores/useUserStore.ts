@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { getLoginInfoAPI } from '~/composables/api/useUser';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -11,9 +12,12 @@ export const useUserStore = defineStore('user', {
   getters: {
   },
   actions: {
-    setAuthData(data: any) {
-      console.log('Setting auth data:', data);
-      //this.authData = JSON.stringify(data);
+    fetchLoginInfo() {
+      if (import.meta.client) {
+        const { data }: any = getLoginInfoAPI();
+        console.log('Fetched login info:', data);
+        //this.authData = JSON.stringify(data);
+      }
     },
     // async login() {
     //   if (!this.authData) return
