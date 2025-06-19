@@ -2,10 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
+  ssr: false,
   modules: ['@pinia/nuxt'],
   vite: {
     server: {
-      allowedHosts: ['host.docker.internal'],
+      allowedHosts: ['frontend'],
       watch: {
         usePolling: true,
       },
@@ -14,7 +15,7 @@ export default defineNuxtConfig({
       },
       proxy: {
         '/api': {
-          target: 'nginx:9000',
+          target: 'http://localhost:9000',
           changeOrigin: true,
           secure: false,
         }

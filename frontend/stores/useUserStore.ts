@@ -13,11 +13,9 @@ export const useUserStore = defineStore('user', {
   },
   actions: {
     fetchLoginInfo() {
-      if (import.meta.client) {
         const { data }: any = getLoginInfoAPI();
         console.log('Fetched login info:', data);
         //this.authData = JSON.stringify(data);
-      }
     },
     // async login() {
     //   if (!this.authData) return
