@@ -1,6 +1,6 @@
 export const getLoginInfoAPI = () => {
-  const base = useApiBase()
-  return useFetch(`${base}/api/login_info`)
+  const base = useApiBase();
+  return useFetch(`${base}/api/login_info`);
 }
 
 export const loginAPI = (data: any) => {
