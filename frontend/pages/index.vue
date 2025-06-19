@@ -1,13 +1,16 @@
 <script setup lang="ts">
-  import { useUserStore } from "../stores/user";
+  import { useUserStore } from "../stores/useUserStore";
+  import { getLoginInfoAPI } from '../composables/api/useUser';
+
+  const { data } = await useAsyncData('loginInfo', getLoginInfoAPI);
 
   const user = useUserStore();
 
-  user.getLoginInfo();
+  user.setAuthData(data.value);
 </script>
 <template>
   <div class="columns cmp-form-search no-border is-multiline">
-    <div class="column small is-12 items has-text-grey mt-3">アドレス</div>
+    <div class="column small is-12 items has-text-grey mt-3">アス</div>
     <div class="column small is-12 cmp-items">
       <input v-model="user.email" class="input" type="text" placeholder="例：test@test.com" />
     </div>
@@ -16,7 +19,7 @@
       <input v-model="user.password" class="input" type="text" placeholder="半角英数字" />
     </div>
   </div>
-  <button class="button is-primary is-rounded is-fullwidth mt-6 mb-6" @click="user.login">
+  <button class="button is-primary is-rounded is-fullwidth mt-6 mb-6" @click="">
     ログイン
     <span class="material-symbols-outlined right_arrow">chevron_right</span>
   </button>
