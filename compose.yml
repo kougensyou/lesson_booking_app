@@ -30,8 +30,6 @@ services:
     build: 
       context: ./nginx
       dockerfile: Dockerfile.nginx.dev
-    env_file:
-      - ./nginx/nginx.env
     ports:
       - "80:80"
       - "9000:9000"
