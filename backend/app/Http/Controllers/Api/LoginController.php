@@ -45,51 +45,6 @@ class LoginController extends Controller {
     }
 
     /**
-     * Login
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function login(Request $request): object
-    {
-        $user = $this->loginService->login($request);
-        if($user != null){
-            Auth::login($user);
-            session(['user_id' => $user['rider_no']]);
-            return response()->json(['user' => $user]);
-        }else{
-            return response()->json(['error' => 'Invalid token'], Response::HTTP_UNAUTHORIZED);
-        }
-    }
-
-    /**
-     * ユーザー情報取得
-     * @return object
-     */
-    public function getUserInfo(): object
-    {
-        $user = [
-            'rider_no' => \Auth::user()->rider_no,
-            'rider_name' => \Auth::user()->rider_name,
-            'department_code' => \Auth::user()->department_code,
-            'mail_address_company' => \Auth::user()->mail_address_company,
-        ];
-
-        // 汎用マスタ情報取得
-        list($common, $commonSortData) = $this->loginService->getCommonInfo();
-
-        // ライダー状況取得
-        $riderStatus = $this->riderService->getRiderStatus($user['rider_no']);
-
-        return response()->json([
-            'const' => config('const'),
-            'user' => $user,
-            'riderStatus' => $riderStatus,
-            'common' => $common,
-            'commonSortData' => $commonSortData,
-        ]);
-    }
-
-    /**
      * Logout
      * @param Request $request
      */

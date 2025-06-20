@@ -41,18 +41,8 @@ class AddSecurityHeader
             'X-Content-Type-Options'  =>  'nosniff',
         ];
 
-
-        // symfony由来レスポンスヘッダーの時
-        if( $response instanceof $switch_object ){
-            foreach($output_headers as $header_name => $header_body) {
-                $response->headers->set($header_name, $header_body);
-            }
-
-        // それ以外
-        } else {
-            foreach($output_headers as $header_name => $header_body) {
-                $response->header($header_name, $header_body);
-            }
+        foreach ($output_headers as $header_name => $header_body) {
+            $response->headers->set($header_name, $header_body);
         }
 
         return $response;

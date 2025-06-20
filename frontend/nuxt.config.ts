@@ -15,7 +15,12 @@ export default defineNuxtConfig({
       },
       proxy: {
         '/api': {
-          target: 'http://localhost:9000',
+          target: 'http://nginx:9000',
+          changeOrigin: true,
+          secure: false,
+        },
+        '/oauth': {
+          target: 'http://nginx:9000',
           changeOrigin: true,
           secure: false,
         }

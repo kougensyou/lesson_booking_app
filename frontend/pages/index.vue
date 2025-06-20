@@ -9,16 +9,16 @@
 </script>
 <template>
   <div class="columns cmp-form-search no-border is-multiline">
-    <div class="column small is-12 items has-text-grey mt-3">いいいい</div>
+    <div class="column small is-12 items has-text-grey mt-3">あお</div>
     <div class="column small is-12 cmp-items">
-      <input v-model="user.email" class="input" type="text" placeholder="例：test@test.com" />
+      <input v-model="user.loginData.username" class="input" type="text" placeholder="例：test@test.com" />
     </div>
     <div class="column small is-12 items has-text-grey mt-5">パスワード</div>
     <div class="column small is-12 cmp-items">
-      <input v-model="user.password" class="input" type="text" placeholder="半角英数字" />
+      <input v-model="user.loginData.password" class="input" type="text" placeholder="半角英数字" />
     </div>
   </div>
-  <button class="button is-primary is-rounded is-fullwidth mt-6 mb-6" @click="">
+  <button class="button is-primary is-rounded is-fullwidth mt-6 mb-6" @click="user.login">
     ログイン
     <span class="material-symbols-outlined right_arrow">chevron_right</span>
   </button>
