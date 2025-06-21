@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile.vite.dev
     ports:
       - "3000:3000"
-    command: "npm run dev"
+    command: sh -c "npm run lint:fix & npm run format & npm run dev"
     volumes:
       - ./frontend/:/var/www/
       - /var/www/node_modules

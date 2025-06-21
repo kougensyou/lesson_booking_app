@@ -1,51 +1,53 @@
 <script setup lang="ts">
-  import { useUserStore } from "../stores/useUserStore";
+import { useUserStore } from '../stores/useUserStore';
 
-  const user = useUserStore();
+const user = useUserStore();
 
-  const { fetchLoginInfo } = user;
+const { fetchLoginInfo } = user;
 
-  await fetchLoginInfo();
+await fetchLoginInfo();
 </script>
 <template>
-  <div class="columns cmp-form-search no-border is-multiline">
-    <div class="column small is-12 items has-text-grey mt-3">あお</div>
-    <div class="column small is-12 cmp-items">
-      <input v-model="user.loginData.username" class="input" type="text" placeholder="例：test@test.com" />
+  <div class="">
+    <div class="bg-gray-200 w-full">
+      <div class="max-w-[640px] mx-auto pl-6">
+        <div class="text-left pt-8 pb-8 text-xl font-serif font-medium">
+          ログイン
+        </div>
+      </div>
     </div>
-    <div class="column small is-12 items has-text-grey mt-5">パスワード</div>
-    <div class="column small is-12 cmp-items">
-      <input v-model="user.loginData.password" class="input" type="text" placeholder="半角英数字" />
+    <div class="max-w-[640px] mx-auto pl-6">
+      <div class="pt-52 text-left text-slate-500">会員番号</div>
+      <input
+        v-model="user.loginData.username"
+        class="input border-2"
+        type="text"
+        placeholder="例：test@test.com"
+      />
+      <div class="pt-12 text-left text-slate-500">パスワード</div>
+      <input
+        v-model="user.loginData.password"
+        class="input border-2"
+        type="text"
+        placeholder="半角英数字"
+      />
     </div>
   </div>
-  <button class="button is-primary is-rounded is-fullwidth mt-6 mb-6" @click="user.login">
-    ログイン
-    <span class="material-symbols-outlined right_arrow">chevron_right</span>
+  <button
+    class="pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl"
+    @click="user.login"
+  >
+    <span class="text-white">ログイン</span>
+    <span class="text-white material-symbols-outlined">chevron_right</span>
   </button>
-  <div class="mt-6 has-text-centered login_link">
+  <div class="">
     <a>パスワードを忘れたら</a>
   </div>
-  <div class="login_footer has-background-white-ter">
-    <div class="font-bold is-size-6 mt-6 has-text-centered">アカウントをお持ちでない方</div>
-    <button class="has-background-info button is-primary is-rounded is-fullwidth mt-6 mb-6">
+  <div class="">
+    <div class="">アカウントをお持ちでない方</div>
+    <button class="">
       体験予約
-      <span class="material-symbols-outlined right_arrow">chevron_right</span>
+      <span class="">chevron_right</span>
     </button>
   </div>
 </template>
-<style>
-  .right_arrow {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-  }
-  .login_footer {
-    position: fixed;
-    bottom: 0;
-    width: 400px;
-  }
-  .login_link {
-    font-size: 14px;
-  }
-</style>
