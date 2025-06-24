@@ -20,7 +20,6 @@ export default [
       vue,
       '@typescript-eslint': tseslint,
     },
-    rules: {
-    },
+    rules: {},
   },
 ];

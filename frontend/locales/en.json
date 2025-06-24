@@ -1,0 +1,24 @@
+{
+  "sidebar": {
+    "searchLesson": "Search Lesson",
+    "memberInfo": "Member Information"
+  },
+  "header": {
+    "title": "Lesson Booking"
+  },
+  "footer": {
+    "title": "Lesson Booking"
+  },
+  "index": {
+    "tabTitle": "Login",
+    "title": "Login",
+    "email": "Email",
+    "emailPlaceholder": "Ex：test{'@'}test.com",
+    "password": "Password",
+    "passwordPlaceholder": "alphanumeric characters (half-width)",
+    "loginButton": "Login",
+    "forgetPassword": "Forget Password?",
+    "noAccount": "Don't have an account?",
+    "firstLesson": "Book a Trial Lesson"
+  }
+}
