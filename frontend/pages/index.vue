@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useUserStore } from '../stores/useUserStore';
 
+definePageMeta({
+  layout: 'no-header',
+});
+
 const user = useUserStore();
 
 const { fetchLoginInfo } = user;
@@ -19,40 +23,57 @@ await fetchLoginInfo();
         </div>
       </div>
     </div>
-    <div class="max-w-[640px] mx-auto pl-6">
-      <div class="pt-52 text-left text-slate-500">{{ $t('index.email') }}</div>
+    <div class="max-w-[640px] mx-auto pl-6 pr-6">
+      <div class="pt-36 pb-2 text-left text-slate-500">
+        {{ $t('index.email') }}
+      </div>
       <input
         v-model="user.loginData.username"
-        class="input border-2"
+        class="input border-2 p-2 w-full"
         type="text"
         :placeholder="$t('index.emailPlaceholder')"
       />
-      <div class="pt-12 text-left text-slate-500">
+      <div class="pt-12 pb-2 text-left text-slate-500">
         {{ $t('index.password') }}
       </div>
       <input
         v-model="user.loginData.password"
-        class="input border-2"
+        class="input border-2 p-2 w-full"
         type="text"
         :placeholder="$t('index.passwordPlaceholder')"
       />
+      <button
+        class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
+        @click="user.login"
+      >
+        <span class="text-white">{{ $t('index.loginButton') }}</span>
+        <span
+          class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
+          >chevron_right</span
+        >
+      </button>
+      <div class="flex items-center justify-center mt-6">
+        <a class="text-sm text-sky-600 underline underline-offset-4">{{
+          $t('index.forgetPassword')
+        }}</a>
+      </div>
     </div>
-  </div>
-  <button
-    class="pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl"
-    @click="user.login"
-  >
-    <span class="text-white">{{ $t('index.loginButton') }}</span>
-    <span class="text-white material-symbols-outlined">chevron_right</span>
-  </button>
-  <div class="">
-    <a>{{ $t('index.forgetPassword') }}</a>
-  </div>
-  <div class="">
-    <div class="">{{ $t('index.noAccount') }}</div>
-    <button class="">
-      {{ $t('index.firstLesson') }}
-      <span class="">chevron_right</span>
-    </button>
+    <div class="bg-gray-200 w-full">
+      <div class="max-w-[640px] mx-auto pl-6 pr-6 pb-6">
+        <div class="flex items-center justify-center mt-24">
+          <div class="pt-6 font-bold">{{ $t('index.noAccount') }}</div>
+        </div>
+        <button
+          class="mt-12 pt-6 pb-6 bg-orange-500 rounded-3xl w-full relative"
+          @click=""
+        >
+          <span class="text-white">{{ $t('index.firstLesson') }}</span>
+          <span
+            class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
+            >chevron_right</span
+          >
+        </button>
+      </div>
+    </div>
   </div>
 </template>

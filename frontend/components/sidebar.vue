@@ -20,15 +20,15 @@ defineProps<{
       ]"
     >
       <div class="flex justify-between items-center p-4 border-b">
-        <button @click="closeSidebar">
+        <button @click="closeSidebar" class="ml-auto">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
-      <ul class="p-4 space-y-2">
-        <li>
+      <ul class="space-y-2 font-serif text-xl">
+        <li class="pl-4 pb-4">
           <NuxtLink to="/">{{ $t('sidebar.searchLesson') }}</NuxtLink>
         </li>
-        <li>
+        <li class="pl-4 pb-4">
           <NuxtLink to="/about">{{ $t('sidebar.memberInfo') }}</NuxtLink>
         </li>
       </ul>
