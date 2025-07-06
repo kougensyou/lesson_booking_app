@@ -20,5 +20,8 @@
     "forgetPassword": "パスワードを忘れたら",
     "noAccount": "アカウントをお持ちでない方",
     "firstLesson": "体験予約"
+  },
+  "home": {
+    "tabTitle": "レッスン予約"
   }
 }

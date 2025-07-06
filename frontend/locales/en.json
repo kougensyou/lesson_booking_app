@@ -20,5 +20,8 @@
     "forgetPassword": "Forget Password?",
     "noAccount": "Don't have an account?",
     "firstLesson": "Book a Trial Lesson"
+  },
+  "home": {
+    "tabTitle": "Lesson Booking"
   }
 }

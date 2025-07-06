@@ -1,6 +1,6 @@
 import type { LoginData } from '~/types/user';
 
-export const getLoginInfoAPI = () => {
+export const getLoginDataAPI = () => {
   const base = useApiBase();
   return useFetch(`${base}/api/login_info`);
 };
