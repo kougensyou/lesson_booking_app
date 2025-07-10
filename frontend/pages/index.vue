@@ -8,13 +8,7 @@ definePageMeta({
 
 const router = useRouter();
 const user = useUserStore();
-const { getLoginData, tokenData } = user;
-const onLogin = () => {
-  user.login();
-  if (tokenData.access_token) {
-    router.push('/home');
-  }
-};
+const { getLoginData } = user;
 
 await getLoginData();
 </script>
@@ -51,7 +45,7 @@ await getLoginData();
       />
       <button
         class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
-        @click="onLogin"
+        @click="user.login(router)"
       >
         <span class="text-white">{{ $t('index.loginButton') }}</span>
         <span

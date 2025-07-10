@@ -33,7 +33,7 @@ export const useUserStore = defineStore('user', {
         console.error('Error fetching login info:', err);
       }
     },
-    async login() {
+    async login(router: any) {
       try {
         const res = await loginAPI(this.loginData);
         const tokenInfo = res.data.value as TokenData;
@@ -42,6 +42,10 @@ export const useUserStore = defineStore('user', {
         this.tokenData.expires_in = tokenInfo.expires_in || 0;
         this.tokenData.refresh_token = tokenInfo.refresh_token || '';
         console.log('token info fetched:', this.tokenData);
+        if (this.tokenData.access_token) {
+          console.log('Login successful:', this.tokenData);
+          router.push('/home');
+        }
       } catch (err) {
         console.error(err);
       }
