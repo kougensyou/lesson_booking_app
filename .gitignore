@@ -9,4 +9,5 @@
 /backend/storage/app/*.json
 /backend/vendor
 /.vscode
+/.github/
 *.env

@@ -17,15 +17,15 @@ class HomeService
     public function getHomeData() {
         try {
             $userId = Auth::id();
-            return $this->getNextLessonList($userId);
-            // $lessonListThisMonth = $this->getLessonListThisMonth($userId);
-            // $infoList = $this->getInfoList();
+            $nextLessonList = $this->getNextLessonList($userId);
+            $lessonListThisMonth = $this->getLessonListThisMonth($userId);
+            $infoList = $this->getInfoList();
 
-            // return [
-            //     'next_lesson_list' => $nextLessonList,
-            //     'lesson_list_this_month' => $lessonListThisMonth,
-            //     'info_list' => $infoList,
-            // ];
+            return [
+                'next_lesson_list' => $nextLessonList,
+                'lesson_list_this_month' => $lessonListThisMonth,
+                'info_list' => $infoList,
+            ];
         } catch (\Throwable $e) {
             \Log::error('getHomeData error: ' . $e->getMessage());
             throw $e;
@@ -54,21 +54,25 @@ class HomeService
     }
 
     private function getLessonListThisMonth($userId) {
-        $nextLessonBookings = LessonBooking::whereHas('lesson', function($query) {
-            $query->where('start_time', '>', Carbon::now());
-        })
-        ->with('lesson')
-        ->orderBy('created_at', 'desc')
-        ->take(5)
+        return LessonBooking::select(
+            'done_flag',
+            'lesson.start_time',
+        )
+        ->join('lesson', 'lesson.id', '=', 'lesson_booking.lesson_id')
+        ->whereBetween('lesson.start_time', [
+            Carbon::now()->startOfMonth(),
+            Carbon::now()->endOfMonth()
+        ])
+        ->where('lesson_booking.user_id', $userId)
+        ->orderBy('lesson.start_time', 'asc')
         ->get();
-
-        return $nextLessonBookings;
     }
 
     private function getInfoList() {
-        $infos = Info::all();        
-
-        return $infos;
+        return [
+            'slider_info' => Info::where('kind', 1)->get(),
+            'grid_info'   => Info::where('kind', 2)->get(),
+        ];
     }
 
 }
