@@ -9,6 +9,7 @@ services:
     volumes:
      - ./backend/:/var/www/
      - ./backend/storage/app:/var/www/storage/app/
+     - ./backend/storage/logs:/var/www/storage/logs/
      - ./backend/public:/var/www/public
     networks:
       - lesson-booking-network

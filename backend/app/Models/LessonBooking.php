@@ -15,7 +15,6 @@ class LessonBooking extends AbstractModel
         'id',
         'booking_time',
         'lesson_id',
-        'cancel_flag',
         'user_id',
         'done_flag',
         'created_at',
