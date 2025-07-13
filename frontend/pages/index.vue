@@ -8,9 +8,6 @@ definePageMeta({
 
 const router = useRouter();
 const user = useUserStore();
-const { getLoginData } = user;
-
-await getLoginData();
 </script>
 <template>
   <div class="">

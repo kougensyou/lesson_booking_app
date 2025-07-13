@@ -14,8 +14,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('login_info', [LoginController::class , 'loginInfo']);
-Route::post('logout', [LoginController::class , 'logout']);
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('get_home_data', [HomeController::class , 'getHomeData']);

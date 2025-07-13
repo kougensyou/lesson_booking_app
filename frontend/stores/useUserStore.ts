@@ -1,14 +1,10 @@
 import { defineStore } from 'pinia';
-import { getLoginDataAPI, loginAPI } from '~/composables/api/useUser';
-import type { LoginData, LoginInfoResponse, TokenData } from '~/types/user';
+import { loginAPI } from '~/composables/api/useUser';
+import type { LoginData, TokenData } from '~/types/user';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
     loginData: {
-      grant_type: '',
-      client_id: 0,
-      client_secret: '',
-      scope: '',
       username: '',
       password: '',
     } as LoginData,
@@ -20,22 +16,10 @@ export const useUserStore = defineStore('user', {
     } as TokenData,
   }),
   actions: {
-    async getLoginData() {
-      try {
-        const { data } = await getLoginDataAPI();
-        const loginInfo = data.value as LoginInfoResponse;
-        this.loginData.grant_type = loginInfo.grant_type || '';
-        this.loginData.client_id = loginInfo.client_id || 0;
-        this.loginData.client_secret = loginInfo.client_secret || '';
-        this.loginData.scope = loginInfo.scope || '';
-        console.log('Login info fetched:', this.loginData);
-      } catch (err) {
-        console.error('Error fetching login info:', err);
-      }
-    },
     async login(router: any) {
       try {
         const res = await loginAPI(this.loginData);
+        console.log(res);
         const tokenInfo = res.data.value as TokenData;
         this.tokenData.access_token = tokenInfo.access_token || '';
         this.tokenData.token_type = tokenInfo.token_type || '';

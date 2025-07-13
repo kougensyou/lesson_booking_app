@@ -14,49 +14,10 @@ return [
     |
     */
 
-    'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
-        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
-    ],
-
-    'postmark' => [
-        'token' => env('POSTMARK_TOKEN'),
-    ],
-
-    'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
-        'secret' => env('AWS_SECRET_ACCESS_KEY'),
-        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-    ],
-
-    'sparkpost' => [
-        'secret' => env('SPARKPOST_SECRET'),
-    ],
-
-    'stripe' => [
-        'model' => App\Models\User::class,
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
-        'webhook' => [
-            'secret' => env('STRIPE_WEBHOOK_SECRET'),
-            'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
-        ],
-    ],
-    'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-	    'redirect' => env('GOOGLE_CALLBACK_URL'),
-        'storage' => [
-            'project_id' => env('GOOGLE_CLOUD_PROJECT'),
-            'key_file' => env('GOOGLE_APPLICATION_CREDENTIALS'),
-            'bucket_permanent' => env('GOOGLE_CLOUD_STORAGE_BUCKET_PERMANENT'),
-            'bucket_temporary' => env('GOOGLE_CLOUD_STORAGE_BUCKET_TEMPORARY'),
-        ],
-    ],
-    'docurain' => [
-        'token_url' => env('DOCURAIN_TOKEN_URL'),
-        'get_pdf_invoice' => env('DOCURAIN_GET_PDF_INVOICE_URL'),
-        'secret_key' => env('DOCURAIN_SECRET_KEY')
+    'passport' => [
+        'login_url' => env('LOGIN_URL', 'http://frontend:3000/oauth/token'),
+        'grant_type' => env('GRANT_TYPE', 'password'),
+        'client_id' => env('CLIENT_ID'),
+        'client_secret' => env('CLIENT_SECRET'),
     ],
 ];

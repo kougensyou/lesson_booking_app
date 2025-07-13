@@ -5,6 +5,7 @@ export const getHomeDataAPI = (access_token: string) => {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
+      credentials: 'include',
     },
   });
 };

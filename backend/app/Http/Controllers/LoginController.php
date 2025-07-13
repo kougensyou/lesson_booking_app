@@ -12,17 +12,17 @@ class LoginController extends Controller {
 
     protected $loginService;
     
-    /**
-     * コンストラクタ
-     */
     public function __construct()
     {
         $this->loginService = new LoginService();
     }
 
-    public function loginInfo()
+    public function login(Request $request)
     {
-        return $this->loginService->getLoginInfo();
+        $tokenData = $this->loginService->getTokenData($request);
+        return response()
+                ->json($tokenData)
+                ->cookie('access_token', $tokenData['access_token'] ?? null, 60, null, null, true, true, false, 'Strict');
     }
 
     /**
