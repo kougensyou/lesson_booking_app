@@ -4,7 +4,46 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
   ssr: false,
-  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@nuxtjs/i18n'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n',
+    'nuxt-auth-sanctum',
+  ],
+  sanctum: {
+    mode: 'cookie',
+    baseUrl: process.env.NUXT_PUBLIC_SANCTUM_BASE_URL,
+    userStateKey: 'sanctum.user.identity',
+    redirectIfAuthenticated: false,
+    redirectIfUnauthenticated: false,
+    endpoints: {
+      csrf: '/sanctum/csrf-cookie',
+      login: '/api/login',
+      logout: '/api/logout',
+      user: '/api/user',
+    },
+    csrf: {
+      cookie: 'XSRF-TOKEN',
+      header: 'X-XSRF-TOKEN',
+    },
+    client: {
+      retry: false,
+      initialRequest: false,
+    },
+    redirect: {
+      keepRequestedRoute: false,
+      onLogin: '/home',
+      onLogout: '/',
+      onAuthOnly: '/home',
+      onGuestOnly: '/',
+    },
+    globalMiddleware: {
+      enabled: false,
+      allow404WithoutAuth: true,
+    },
+    logLevel: 5,
+    appendPlugin: false,
+  },
   i18n: {
     locales: [
       { code: 'ja', name: '日本語', file: 'ja.json' },
@@ -41,24 +80,6 @@ export default defineNuxtConfig({
       hmr: {
         clientPort: 80,
       },
-      proxy: {
-        '/api': {
-          target: 'http://nginx:9000',
-          changeOrigin: true,
-          secure: false,
-        },
-        '/oauth': {
-          target: 'http://nginx:9000',
-          changeOrigin: true,
-          secure: false,
-        },
-      },
     },
-  },
-  runtimeConfig: {
-    apiBaseServer: process.env.NUXT_API_BASE_SERVER,
-    public: {
-      apiBaseBrowser: process.env.NUXT_API_BASE_BROWSER,
-    },
-  },
+  }
 });

@@ -38,22 +38,4 @@ server {
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
     }
-
-    location /oauth/ {
-        try_files $uri $uri/ /index.php?$query_string;
-        include fastcgi_params;
-        fastcgi_pass backend:9000;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-    }
-
-    # location /api/ {
-    #     root /var/www/public;
-    #     index index.php;
-    #     try_files $uri $uri/ /index.php?$query_string;
-    #
-    #     include fastcgi_params;
-    #     fastcgi_pass lesson_booking_nginx:9000;
-    #     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #     fastcgi_param PATH_INFO $fastcgi_path_info;
-    # }
 }

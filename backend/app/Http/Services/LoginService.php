@@ -29,14 +29,4 @@ class LoginService
         }
     }
 
-    public function getUserData() {
-        $user = auth()->user();
-
-        if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-
-        return response()->json(['user' => $user]);
-    }
-
 }

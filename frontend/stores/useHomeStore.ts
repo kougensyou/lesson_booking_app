@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
-import { getHomeDataAPI } from '~/composables/api/useHome';
-import type { Lesson, Info, LessonBooking } from '~/types/home';
+import type { Lesson, Info, LessonBooking, HomeData } from '~/types/home';
 
 export const useHomeStore = defineStore('home', {
   state: () => ({
@@ -10,14 +9,16 @@ export const useHomeStore = defineStore('home', {
     gridInfoList: [] as Info[],
   }),
   actions: {
-    async getHomeData(access_token: string) {
+    async getHomeData() {
       try {
-        const { data } = await getHomeDataAPI(access_token);
-        // this.nextLessonList = data.value as Lesson[];
-        // this.lessonListThisMonth = data.value as LessonBooking[];
-        // this.sliderInfoList = data.value as Info[];
-        // this.gridInfoList = data.value as Info[];
-        console.log('home data fetched:', data);
+        const { data } = await useSanctumFetch('/api/get_home_data');
+        const homeData = data.value as HomeData;
+        this.nextLessonList = homeData.next_lesson_list as Lesson[];
+        this.lessonListThisMonth =
+          homeData.lesson_list_this_month as LessonBooking[];
+        this.sliderInfoList = homeData.info_list.slider_info as Info[];
+        this.gridInfoList = homeData.info_list.grid_info as Info[];
+        console.log('home data fetched:', homeData);
       } catch (err) {
         console.error('Error fetching lesson list:', err);
       }

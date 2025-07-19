@@ -20,3 +20,12 @@ export interface Info {
   image_url: string;
   link_url: string;
 }
+
+export interface HomeData {
+  next_lesson_list: Lesson[];
+  lesson_list_this_month: LessonBooking[];
+  info_list: {
+    slider_info: Info[];
+    grid_info: Info[];
+  };
+}
