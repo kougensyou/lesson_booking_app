@@ -50,7 +50,13 @@ class HomeService
         ->whereNull('lesson_booking.done_flag')
         ->orderBy('lesson.start_time', 'asc')
         ->take(5)
-        ->get();
+        ->get()
+        ->map(function ($item) {
+            $start = Carbon::parse($item->start_time);
+            $end = Carbon::parse($item->end_time);
+            $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
+            return $item;
+        });
     }
 
     private function getLessonListThisMonth($userId) {

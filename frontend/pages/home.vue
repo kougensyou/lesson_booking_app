@@ -19,9 +19,17 @@ await homeStore.getHomeData();
       <div
         v-for="lesson in homeStore.nextLessonList"
         :key="lesson.id"
-        class="min-w-[300px] h-[200px] bg-blue-100 rounded-xl shadow flex items-center justify-center shrink-0"
+        class="min-w-[300px] h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between px-4 py-8"
       >
-        カード {{ lesson.lesson_name }}
+        <div>
+          <div class="text-md text-gray-500">{{ lesson.lesson_time }}</div>
+          <div class="text-lg font-bold mt-1">{{ lesson.lesson_name }}</div>
+        </div>
+        <div>
+          <div class="text-md text-gray-600 mt-2">{{ lesson.studio_name }}</div>
+          <!-- <img src="/instructor.jpg" alt="Instructor" class="w-8 h-8 rounded-full mr-2" /> -->
+          <div class="text-md text-gray-800">{{ lesson.instructor_name }}</div>
+        </div>
       </div>
     </HorizontalScroll>
   </template>
