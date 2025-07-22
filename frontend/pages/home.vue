@@ -19,7 +19,7 @@ await homeStore.getHomeData();
       <div
         v-for="lesson in homeStore.nextLessonList"
         :key="lesson.id"
-        class="min-w-[300px] h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between px-4 py-8"
+        class="min-w-[300px] h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between p-8"
       >
         <div>
           <div class="text-md text-gray-500">{{ lesson.lesson_time }}</div>
@@ -27,8 +27,16 @@ await homeStore.getHomeData();
         </div>
         <div>
           <div class="text-md text-gray-600 mt-2">{{ lesson.studio_name }}</div>
-          <!-- <img src="/instructor.jpg" alt="Instructor" class="w-8 h-8 rounded-full mr-2" /> -->
-          <div class="text-md text-gray-800">{{ lesson.instructor_name }}</div>
+          <div class="flex items-center mt-2">
+            <img
+              :src="lesson.image_url"
+              alt="Instructor"
+              class="w-8 h-8 rounded-full mr-2"
+            />
+            <div class="text-md text-gray-800">
+              {{ lesson.instructor_name }}
+            </div>
+          </div>
         </div>
       </div>
     </HorizontalScroll>

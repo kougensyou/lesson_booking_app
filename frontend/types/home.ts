@@ -8,6 +8,7 @@ export interface Lesson {
   lesson_time: string;
   instructor_name: string;
   image_path: string;
+  image_url: string;
 }
 
 export interface LessonBooking {

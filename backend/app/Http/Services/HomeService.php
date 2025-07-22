@@ -55,6 +55,11 @@ class HomeService
             $start = Carbon::parse($item->start_time);
             $end = Carbon::parse($item->end_time);
             $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
+            if ($item->image_path) {
+                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
+                return $item;
+            }
+            $item->image_url = null;
             return $item;
         });
     }
