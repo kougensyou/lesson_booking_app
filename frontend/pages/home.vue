@@ -19,7 +19,7 @@ await homeStore.getHomeData();
       <div
         v-for="lesson in homeStore.nextLessonList"
         :key="lesson.id"
-        class="min-w-[250px] h-[150px] bg-blue-100 rounded-xl shadow flex items-center justify-center shrink-0"
+        class="min-w-[300px] h-[200px] bg-blue-100 rounded-xl shadow flex items-center justify-center shrink-0"
       >
         カード {{ lesson.lesson_name }}
       </div>

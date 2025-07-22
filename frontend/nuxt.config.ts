@@ -31,10 +31,10 @@ export default defineNuxtConfig({
       initialRequest: false,
     },
     redirect: {
-      keepRequestedRoute: false,
+      keepRequestedRoute: true,
       onLogin: '/home',
       onLogout: '/',
-      onAuthOnly: '/home',
+      onAuthOnly: '/',
       onGuestOnly: '/',
     },
     globalMiddleware: {
@@ -81,5 +81,5 @@ export default defineNuxtConfig({
         clientPort: 80,
       },
     },
-  }
+  },
 });
