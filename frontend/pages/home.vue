@@ -7,10 +7,16 @@ import { Calendar } from 'v-calendar';
 
 //const router = useRouter();
 const homeStore = useHomeStore();
+function parseDateString(dateStr: string | undefined | null): Date {
+  if (!dateStr || typeof dateStr !== 'string') return new Date('');
+  const ymd = new Date(dateStr.replace(' ', 'T'));
+  return new Date(ymd);
+}
+
 const attributes = computed(() =>
   homeStore.selectedLessonList.map((lesson, idx) => ({
     key: idx,
-    dates: new Date(lesson.lesson_date),
+    dates: parseDateString(lesson.start_time),
     customData: {
       done_flag: lesson.done_flag,
     },
@@ -75,18 +81,31 @@ await homeStore.getHomeData();
           <span class="day-label text-sm text-gray-900">{{
             slotProps.day.day
           }}</span>
-          <p
-            v-for="attr in slotProps.attributes"
-            :key="attr.key"
-            class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
-          >
-            <span v-if="attr.customData.done_flag"
-              ><p class="w-8 h-8 rounded-full bg-green-600"></p
-            ></span>
-            <span v-else
-              ><p class="w-8 h-8 rounded-full bg-green-100"></p
-            ></span>
-          </p>
+          <template v-if="slotProps.attributes.length > 0">
+            <template
+              v-if="
+                slotProps.attributes.some(
+                  (attr: { dates: Date; customData: { done_flag: boolean } }) =>
+                    attr.customData.done_flag
+                )
+              "
+            >
+              <p class="w-8 h-8 rounded-full bg-green-600"></p>
+            </template>
+            <template
+              v-else-if="
+                slotProps.attributes.some(
+                  (attr: { dates: Date; customData: { done_flag: boolean } }) =>
+                    !attr.customData.done_flag
+                )
+              "
+            >
+              <p class="w-8 h-8 rounded-full bg-green-100"></p>
+            </template>
+          </template>
+          <template v-else>
+            <p class="w-8 h-8 rounded-full transparent"></p>
+          </template>
         </div>
       </template>
     </Calendar>

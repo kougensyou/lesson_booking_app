@@ -13,7 +13,7 @@ export interface Lesson {
 
 export interface LessonBooking {
   id: number;
-  lesson_date: string;
+  start_time: string;
   done_flag: boolean;
 }
 
