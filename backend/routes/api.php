@@ -17,10 +17,7 @@ use Illuminate\Http\Request;
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('get_home_data', [HomeController::class , 'getHomeData']);
+    Route::get('get_selected_lesson_list', [HomeController::class , 'getSelectedLessonList']);
 });

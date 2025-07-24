@@ -27,7 +27,7 @@ export interface Info {
 
 export interface HomeData {
   next_lesson_list: Lesson[];
-  lesson_list_this_month: LessonBooking[];
+  selected_lesson_list: LessonBooking[];
   info_list: {
     slider_info: Info[];
     grid_info: Info[];

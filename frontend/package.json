@@ -16,9 +16,11 @@
     "@nuxtjs/i18n": "^9.5.5",
     "@nuxtjs/tailwindcss": "^6.10.0",
     "@pinia/nuxt": "^0.11.0",
+    "@popperjs/core": "^2.11.8",
     "nuxt": "^3.17.4",
     "nuxt-auth-sanctum": "^1.1.0",
     "pinia": "^3.0.2",
+    "v-calendar": "^3.1.2",
     "vue": "^3.5.14",
     "vue-router": "^4.5.1"
   },

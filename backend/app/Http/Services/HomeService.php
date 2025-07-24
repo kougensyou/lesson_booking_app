@@ -14,16 +14,15 @@ use App\Models\Studio;
 
 class HomeService
 {
-    public function getHomeData() {
+    public function getHomeData($userId, $selectedYear, $selectedMonth) {
         try {
-            $userId = Auth::id();
             $nextLessonList = $this->getNextLessonList($userId);
-            $lessonListThisMonth = $this->getLessonListThisMonth($userId);
+            $lessonListThisMonth = $this->getSelectedLessonList($userId, $selectedYear, $selectedMonth);
             $infoList = $this->getInfoList();
 
             return [
                 'next_lesson_list' => $nextLessonList,
-                'lesson_list_this_month' => $lessonListThisMonth,
+                'selected_lesson_list' => $lessonListThisMonth,
                 'info_list' => $infoList,
             ];
         } catch (\Throwable $e) {
@@ -64,19 +63,26 @@ class HomeService
         });
     }
 
-    private function getLessonListThisMonth($userId) {
-        return LessonBooking::select(
-            'done_flag',
-            'lesson.start_time',
-        )
-        ->join('lesson', 'lesson.id', '=', 'lesson_booking.lesson_id')
-        ->whereBetween('lesson.start_time', [
-            Carbon::now()->startOfMonth(),
-            Carbon::now()->endOfMonth()
-        ])
-        ->where('lesson_booking.user_id', $userId)
-        ->orderBy('lesson.start_time', 'asc')
-        ->get();
+    public function getSelectedLessonList($userId, $selectedYear, $selectedMonth) {
+        try{
+            $startOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->startOfMonth();
+            $endOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->endOfMonth();
+            return LessonBooking::select(
+                'done_flag',
+                'lesson.start_time',
+            )
+            ->join('lesson', 'lesson.id', '=', 'lesson_booking.lesson_id')
+            ->whereBetween('lesson.start_time', [
+                $startOfMonth,
+                $endOfMonth
+            ])
+            ->where('lesson_booking.user_id', $userId)
+            ->orderBy('lesson.start_time', 'asc')
+            ->get();
+        } catch (\Throwable $e) {
+            \Log::error('getSelectedLessonList error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     private function getInfoList() {

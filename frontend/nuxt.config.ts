@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     'nuxt-auth-sanctum',
   ],
+  css: ['v-calendar/dist/style.css'],
   sanctum: {
     mode: 'cookie',
     baseUrl: process.env.NUXT_PUBLIC_SANCTUM_BASE_URL,
