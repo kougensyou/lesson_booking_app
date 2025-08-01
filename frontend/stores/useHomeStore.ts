@@ -10,8 +10,33 @@ export const useHomeStore = defineStore('home', {
     calendarThemeColor: 'green',
     selectedMonth: new Date().getMonth(),
     selectedYear: new Date().getFullYear(),
+    todayMonth: new Date().getMonth() + 1,
+    todayYear: new Date().getFullYear(),
+    todayDay: new Date().getDate(),
   }),
+  getters: {
+    attributes(state): Array<any> {
+      return (state.selectedLessonList ?? []).map((lesson, idx) => ({
+        key: idx,
+        dates: (this as any).parseDateString(lesson.start_time),
+        customData: {
+          done_flag: lesson.done_flag,
+        },
+      }));
+    },
+  },
   actions: {
+    parseDateString(dateStr: string | undefined | null): Date {
+      if (!dateStr || typeof dateStr !== 'string') return new Date('');
+      return new Date(dateStr.replace(' ', 'T'));
+    },
+    checkToday(day: number): boolean {
+      return (
+        this.todayYear === this.selectedYear &&
+        this.todayMonth === this.selectedMonth + 1 &&
+        this.todayDay === day
+      );
+    },
     async getHomeData() {
       try {
         const { data } = await useSanctumFetch('/api/get_home_data', {
@@ -60,7 +85,7 @@ export const useHomeStore = defineStore('home', {
       try {
         this.selectedMonth += 1;
         if (this.selectedMonth > 11) {
-          this.selectedMonth = 9;
+          this.selectedMonth = 0;
           this.selectedYear += 1;
         }
         const { data } = await useSanctumFetch(

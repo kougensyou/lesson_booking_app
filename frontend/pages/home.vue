@@ -7,21 +7,6 @@ import { Calendar } from 'v-calendar';
 
 //const router = useRouter();
 const homeStore = useHomeStore();
-function parseDateString(dateStr: string | undefined | null): Date {
-  if (!dateStr || typeof dateStr !== 'string') return new Date('');
-  const ymd = new Date(dateStr.replace(' ', 'T'));
-  return new Date(ymd);
-}
-
-const attributes = computed(() =>
-  homeStore.selectedLessonList.map((lesson, idx) => ({
-    key: idx,
-    dates: parseDateString(lesson.start_time),
-    customData: {
-      done_flag: lesson.done_flag,
-    },
-  }))
-);
 
 onMounted(() => {
   const prev = document.querySelector('.vc-prev');
@@ -73,14 +58,20 @@ await homeStore.getHomeData();
     <Calendar
       class="custom-calendar max-w-full"
       :color="homeStore.calendarThemeColor"
-      :attributes="attributes"
+      :attributes="homeStore.attributes"
       expanded
     >
       <template v-slot:day-content="slotProps">
         <div class="flex flex-col h-full z-10 overflow-hidden">
-          <span class="day-label text-sm text-gray-900">{{
-            slotProps.day.day
-          }}</span>
+          <span
+            v-if="homeStore.checkToday(slotProps.day.day)"
+            class="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white m-auto my-1"
+          >
+            {{ slotProps.day.day }}
+          </span>
+          <span v-else class="text-center text-sm text-gray-900">
+            {{ slotProps.day.day }}
+          </span>
           <template v-if="slotProps.attributes.length > 0">
             <template
               v-if="
@@ -90,7 +81,13 @@ await homeStore.getHomeData();
                 )
               "
             >
-              <p class="w-8 h-8 rounded-full bg-green-600"></p>
+              <span
+                class="flex items-center justify-center w-full h-full mt-1 mb-1"
+              >
+                <span
+                  class="w-8 h-8 rounded-full bg-green-600 m-auto my-1"
+                ></span>
+              </span>
             </template>
             <template
               v-else-if="
@@ -100,11 +97,21 @@ await homeStore.getHomeData();
                 )
               "
             >
-              <p class="w-8 h-8 rounded-full bg-green-100"></p>
+              <span
+                class="flex items-center justify-center w-full h-full mt-1 mb-1"
+              >
+                <span
+                  class="w-8 h-8 rounded-full bg-green-100 m-auto my-1"
+                ></span>
+              </span>
             </template>
           </template>
           <template v-else>
-            <p class="w-8 h-8 rounded-full transparent"></p>
+            <span
+              class="flex items-center justify-center w-full h-full mt-1 mb-1"
+            >
+              <span class="w-8 h-8 rounded-full transparent m-auto my-1"></span>
+            </span>
           </template>
         </div>
       </template>
