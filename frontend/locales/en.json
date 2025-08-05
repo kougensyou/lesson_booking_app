@@ -25,6 +25,7 @@
     "tabTitle": "Lesson Booking",
     "nextLessonTitle": "Next Lesson",
     "lessonCalendarTitle": "Lesson Calendar",
-    "informationTitle": "Information"
+    "informationTitle": "Information",
+    "reserveLesson": "Reserve"
   }
 }

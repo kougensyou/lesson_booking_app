@@ -25,6 +25,7 @@
     "tabTitle": "レッスン予約",
     "nextLessonTitle": "次のレッスン",
     "lessonCalendarTitle": "レッスンカレンダー",
-    "informationTitle": "お知らせ"
+    "informationTitle": "お知らせ",
+    "reserveLesson": "予約する"
   }
 }

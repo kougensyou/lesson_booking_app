@@ -29,6 +29,14 @@ await homeStore.getHomeData();
     </Head>
   </div>
   <h1 class="text-xl font-bold px-4 pt-4">{{ $t('home.nextLessonTitle') }}</h1>
+  <template v-if="homeStore.nextLessonList.length === 0">
+    <button
+      class="mt-6 pt-6 pb-6 px-8 bg-sky-500 rounded-3xl mx-auto block"
+      @click=""
+    >
+      <span class="text-white">{{ $t('home.reserveLesson') }}</span>
+    </button>
+  </template>
   <template v-if="homeStore.nextLessonList.length > 0">
     <HorizontalScroll>
       <div
