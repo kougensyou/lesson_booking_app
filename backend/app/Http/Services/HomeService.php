@@ -86,8 +86,9 @@ class HomeService
     }
 
     private function getInfoList() {
-        $test = config('const.home.infoKindSlider');
         $sliderInfo = Info::where('kind', config('const.home.infoKindSlider'))
+        ->where('visible_flag', true)
+        ->orderBy('sort_order', 'asc')
         ->get()
         ->map(function ($item) {
             if ($item->image_path) {
@@ -98,6 +99,8 @@ class HomeService
             return $item;
         });
         $gridInfo = Info::where('kind', config('const.home.infoKindGrid'))
+        ->where('visible_flag', true)
+        ->orderBy('sort_order', 'asc')
         ->get()
         ->map(function ($item) {
             if ($item->image_path) {
@@ -107,9 +110,14 @@ class HomeService
             $item->image_url = null;
             return $item;
         });
+        $listInfo = Info::where('kind', config('const.home.infoKindList'))
+        ->where('visible_flag', true)
+        ->orderBy('sort_order', 'asc')
+        ->get();
         return [
             'slider_info' => $sliderInfo,
             'grid_info'   => $gridInfo,
+            'list_info'   => $listInfo,
         ];
     }
 

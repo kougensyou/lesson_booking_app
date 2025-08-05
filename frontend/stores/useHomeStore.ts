@@ -13,6 +13,7 @@ export const useHomeStore = defineStore('home', {
     selectedLessonList: [] as LessonBooking[],
     sliderInfoList: [] as Info[],
     gridInfoList: [] as Info[],
+    listInfoList: [] as Info[],
     calendarThemeColor: 'green',
     selectedMonth: new Date().getMonth(),
     selectedYear: new Date().getFullYear(),
@@ -58,6 +59,7 @@ export const useHomeStore = defineStore('home', {
           homeData.selected_lesson_list as LessonBooking[];
         this.sliderInfoList = homeData.info_list.slider_info as Info[];
         this.gridInfoList = homeData.info_list.grid_info as Info[];
+        this.listInfoList = homeData.info_list.list_info as Info[];
         console.log('home data fetched:', homeData);
       } catch (err) {
         console.error('Error fetching lesson list:', err);

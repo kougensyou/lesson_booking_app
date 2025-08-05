@@ -22,6 +22,9 @@
     "firstLesson": "Book a Trial Lesson"
   },
   "home": {
-    "tabTitle": "Lesson Booking"
+    "tabTitle": "Lesson Booking",
+    "nextLessonTitle": "Next Lesson",
+    "lessonCalendarTitle": "Lesson Calendar",
+    "informationTitle": "Information"
   }
 }

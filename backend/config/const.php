@@ -3,7 +3,8 @@
 return [
     'home' => [
         'infoKindSlider' => 1,
-        'infoKindGrid' => 2
+        'infoKindGrid' => 2,
+        'infoKindList' => 3,
     ],
     // カスタムエクセプション
     'customError' => [

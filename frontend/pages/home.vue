@@ -28,6 +28,7 @@ await homeStore.getHomeData();
       <title>{{ $t('home.tabTitle') }}</title>
     </Head>
   </div>
+  <h1 class="text-xl font-bold px-4 pt-4">{{ $t('home.nextLessonTitle') }}</h1>
   <template v-if="homeStore.nextLessonList.length > 0">
     <HorizontalScroll>
       <div
@@ -56,7 +57,10 @@ await homeStore.getHomeData();
       </div>
     </HorizontalScroll>
   </template>
-  <div class="px-4">
+  <h1 class="text-xl font-bold px-4 pt-4">
+    {{ $t('home.lessonCalendarTitle') }}
+  </h1>
+  <div class="px-4 py-2">
     <Calendar
       class="custom-calendar max-w-full"
       :color="homeStore.calendarThemeColor"
@@ -117,6 +121,7 @@ await homeStore.getHomeData();
       </template>
     </Calendar>
   </div>
+  <h1 class="text-xl font-bold px-4 pt-4">{{ $t('home.informationTitle') }}</h1>
   <HorizontalScroll>
     <div
       v-for="slider in homeStore.sliderInfoList"
@@ -147,5 +152,19 @@ await homeStore.getHomeData();
         class="w-full h-48 object-cover"
       />
     </div>
+  </div>
+  <div
+    v-for="item in homeStore.listInfoList"
+    :key="item.id"
+    class="flex justify-between items-center px-4 py-3 border-b border-gray-100"
+  >
+    <a
+      :href="item.link_url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-gray-800 hover:underline"
+    >
+      {{ item.name }}
+    </a>
   </div>
 </template>

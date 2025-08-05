@@ -22,6 +22,9 @@
     "firstLesson": "体験予約"
   },
   "home": {
-    "tabTitle": "レッスン予約"
+    "tabTitle": "レッスン予約",
+    "nextLessonTitle": "次のレッスン",
+    "lessonCalendarTitle": "レッスンカレンダー",
+    "informationTitle": "お知らせ"
   }
 }

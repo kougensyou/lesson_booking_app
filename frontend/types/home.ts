@@ -23,6 +23,8 @@ export interface Info {
   kind: boolean;
   image_url: string;
   link_url: string;
+  visible_flag: boolean;
+  sort_order: number;
 }
 
 export interface HomeData {
@@ -31,6 +33,7 @@ export interface HomeData {
   info_list: {
     slider_info: Info[];
     grid_info: Info[];
+    list_info: Info[];
   };
 }
 
