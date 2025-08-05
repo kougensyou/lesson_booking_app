@@ -1,5 +1,11 @@
 import { defineStore } from 'pinia';
-import type { Lesson, Info, LessonBooking, HomeData } from '~/types/home';
+import type {
+  Lesson,
+  Info,
+  LessonBooking,
+  HomeData,
+  Attribute,
+} from '~/types/home';
 
 export const useHomeStore = defineStore('home', {
   state: () => ({
@@ -15,7 +21,7 @@ export const useHomeStore = defineStore('home', {
     todayDay: new Date().getDate(),
   }),
   getters: {
-    attributes(state): Array<any> {
+    attributes(state): Array<Attribute> {
       return (state.selectedLessonList ?? []).map((lesson, idx) => ({
         key: idx,
         dates: (this as any).parseDateString(lesson.start_time),

@@ -33,3 +33,10 @@ export interface HomeData {
     grid_info: Info[];
   };
 }
+
+export interface Attribute {
+  dates: Date;
+  customData: {
+    done_flag: boolean;
+  };
+}

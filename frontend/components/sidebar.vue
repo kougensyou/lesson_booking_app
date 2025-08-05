@@ -21,7 +21,9 @@ defineProps<{
     >
       <div class="flex justify-between items-center p-4 border-b">
         <button @click="closeSidebar" class="ml-auto">
-          <span class="material-symbols-outlined">close</span>
+          <span class="material-symbols-outlined" aria-hidden="true"
+            >close</span
+          >
         </button>
       </div>
       <ul class="space-y-2 font-serif text-xl">

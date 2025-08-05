@@ -9,7 +9,7 @@ defineProps<{
     <div class="flex items-center justify-between h-16 px-4">
       <h1 class="text-xl font-bold text-green-600">{{ $t('header.title') }}</h1>
       <button @click="toggleSidebar">
-        <span class="material-symbols-outlined">{{
+        <span class="material-symbols-outlined" aria-hidden="true">{{
           isOpen ? 'close' : 'menu'
         }}</span>
       </button>

@@ -2,6 +2,7 @@
 import { onMounted } from 'vue';
 import { useHomeStore } from '../stores/useHomeStore';
 import HorizontalScroll from '../components/horizontalScroll.vue';
+import type { Attribute } from '../types/home';
 import { Calendar } from 'v-calendar';
 //import { useRouter } from 'vue-router';
 
@@ -45,6 +46,7 @@ await homeStore.getHomeData();
               :src="lesson.image_url"
               alt="Instructor"
               class="w-8 h-8 rounded-full mr-2"
+              draggable="false"
             />
             <div class="text-md text-gray-800">
               {{ lesson.instructor_name }}
@@ -76,8 +78,7 @@ await homeStore.getHomeData();
             <template
               v-if="
                 slotProps.attributes.some(
-                  (attr: { dates: Date; customData: { done_flag: boolean } }) =>
-                    attr.customData.done_flag
+                  (attr: Attribute) => attr.customData.done_flag
                 )
               "
             >
@@ -92,8 +93,7 @@ await homeStore.getHomeData();
             <template
               v-else-if="
                 slotProps.attributes.some(
-                  (attr: { dates: Date; customData: { done_flag: boolean } }) =>
-                    !attr.customData.done_flag
+                  (attr: Attribute) => !attr.customData.done_flag
                 )
               "
             >
@@ -116,5 +116,36 @@ await homeStore.getHomeData();
         </div>
       </template>
     </Calendar>
+  </div>
+  <HorizontalScroll>
+    <div
+      v-for="slider in homeStore.sliderInfoList"
+      :key="slider.id"
+      class="min-w-full h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between"
+    >
+      <a :href="slider.link_url" target="_blank" rel="noopener">
+        <img
+          v-if="slider.image_url"
+          :src="slider.image_url"
+          alt="SliderInfo"
+          class="w-full h-full object-cover"
+          draggable="false"
+        />
+      </a>
+    </div>
+  </HorizontalScroll>
+  <div class="p-4 grid grid-cols-2 gap-4">
+    <div
+      v-for="(grid, index) in homeStore.gridInfoList"
+      :key="index"
+      class="rounded-xl shadow-md overflow-hidden"
+    >
+      <img
+        v-if="grid.image_url"
+        :src="grid.image_url"
+        alt=""
+        class="w-full h-48 object-cover"
+      />
+    </div>
   </div>
 </template>

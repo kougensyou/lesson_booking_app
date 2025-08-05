@@ -45,8 +45,10 @@ const user = useUserStore();
         <span class="text-white">{{ $t('index.loginButton') }}</span>
         <span
           class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
-          >chevron_right</span
+          aria-hidden="true"
         >
+          chevron_right
+        </span>
       </button>
       <div class="flex items-center justify-center mt-6">
         <a class="text-sm text-sky-600 underline underline-offset-4">{{
@@ -66,6 +68,7 @@ const user = useUserStore();
           <span class="text-white">{{ $t('index.firstLesson') }}</span>
           <span
             class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
+            aria-hidden="true"
             >chevron_right</span
           >
         </button>

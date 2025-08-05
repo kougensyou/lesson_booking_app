@@ -86,9 +86,30 @@ class HomeService
     }
 
     private function getInfoList() {
+        $test = config('const.home.infoKindSlider');
+        $sliderInfo = Info::where('kind', config('const.home.infoKindSlider'))
+        ->get()
+        ->map(function ($item) {
+            if ($item->image_path) {
+                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
+                return $item;
+            }
+            $item->image_url = null;
+            return $item;
+        });
+        $gridInfo = Info::where('kind', config('const.home.infoKindGrid'))
+        ->get()
+        ->map(function ($item) {
+            if ($item->image_path) {
+                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
+                return $item;
+            }
+            $item->image_url = null;
+            return $item;
+        });
         return [
-            'slider_info' => Info::where('kind', 1)->get(),
-            'grid_info'   => Info::where('kind', 2)->get(),
+            'slider_info' => $sliderInfo,
+            'grid_info'   => $gridInfo,
         ];
     }
 
