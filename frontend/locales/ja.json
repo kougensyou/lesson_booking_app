@@ -1,6 +1,7 @@
 {
   "sidebar": {
-    "searchLesson": "レッスンをさがす",
+    "home": "ホーム",
+    "lessonBooking": "レッスン予約",
     "memberInfo": "会員情報"
   },
   "header": {
@@ -26,6 +27,10 @@
     "nextLessonTitle": "次のレッスン",
     "lessonCalendarTitle": "レッスンカレンダー",
     "informationTitle": "お知らせ",
-    "reserveLesson": "予約する"
+    "bookLesson": "予約する"
+  },
+  "lessonBooking": {
+    "tabTitle": "レッスン予約",
+    "searchFromStudio": "スタジオからさがす"
   }
 }

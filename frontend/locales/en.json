@@ -1,6 +1,7 @@
 {
   "sidebar": {
-    "searchLesson": "Search Lesson",
+    "home": "Home",
+    "lessonBooking": "Lesson Booking",
     "memberInfo": "Member Information"
   },
   "header": {
@@ -26,6 +27,10 @@
     "nextLessonTitle": "Next Lesson",
     "lessonCalendarTitle": "Lesson Calendar",
     "informationTitle": "Information",
-    "reserveLesson": "Reserve"
+    "bookLesson": "Book"
+  },
+  "lessonBooking": {
+    "tabTitle": "Lesson Booking",
+    "searchFromStudio": "Search from Studio"
   }
 }

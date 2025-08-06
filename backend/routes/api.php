@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LessonBookingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Http\Request;
@@ -20,4 +21,5 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('get_home_data', [HomeController::class , 'getHomeData']);
     Route::get('get_selected_lesson_list', [HomeController::class , 'getSelectedLessonList']);
+    Route::get('get_lesson_booking_data', [LessonBookingController::class , 'getLessonBookingData']);
 });

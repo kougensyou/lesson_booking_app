@@ -34,7 +34,7 @@ await homeStore.getHomeData();
       class="mt-6 pt-6 pb-6 px-8 bg-sky-500 rounded-3xl mx-auto block"
       @click=""
     >
-      <span class="text-white">{{ $t('home.reserveLesson') }}</span>
+      <span class="text-white">{{ $t('home.bookLesson') }}</span>
     </button>
   </template>
   <template v-if="homeStore.nextLessonList.length > 0">

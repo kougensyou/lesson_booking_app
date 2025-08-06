@@ -14,7 +14,6 @@ class Studio extends AbstractModel
     protected $fillable = [
         'id',
         'studio_name',
-        'studio_category_id',
         'created_at',
         'updated_at',
     ];

@@ -10,9 +10,9 @@ class StudioSeeder extends Seeder
     public function run()
     {
         Studio::insert([
-            ['studio_name' => 'Tokyo Studio', 'studio_category_id' => 1],
-            ['studio_name' => 'Yokohama Studio', 'studio_category_id' => 1],
-            ['studio_name' => 'Osaka Studio', 'studio_category_id' => 2],
+            ['studio_name' => 'Tokyo Studio', 'image_path' => '/images/studio/studio_1.png'],
+            ['studio_name' => 'Yokohama Studio', 'image_path' => '/images/studio/studio_2.png'],
+            ['studio_name' => 'Osaka Studio', 'image_path' => '/images/studio/studio_3.png'],
         ]);
     }
 }

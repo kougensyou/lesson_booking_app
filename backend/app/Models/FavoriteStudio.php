@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class StudioCategory extends AbstractModel
+class FavoriteStudio extends AbstractModel
 {
-    protected $table = 'studio_category';
+    protected $table = 'favorite_studio';
     protected $primaryKey = 'id';
     public $incrementing = true;
 
@@ -13,7 +13,8 @@ class StudioCategory extends AbstractModel
 
     protected $fillable = [
         'id',
-        'category_name',
+        'user_id',
+        'studio_id',
         'created_at',
         'updated_at',
     ];
