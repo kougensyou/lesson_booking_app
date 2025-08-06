@@ -26,15 +26,19 @@ defineProps<{
       </div>
       <ul class="space-y-2 font-serif text-xl">
         <li class="pl-4 pb-4">
-          <NuxtLink to="/home">{{ $t('sidebar.home') }}</NuxtLink>
+          <NuxtLink to="/home" @click="closeSidebar">{{
+            $t('sidebar.home')
+          }}</NuxtLink>
         </li>
         <li class="pl-4 pb-4">
-          <NuxtLink to="/lessonBooking">{{
+          <NuxtLink to="/lessonBooking" @click="closeSidebar">{{
             $t('sidebar.lessonBooking')
           }}</NuxtLink>
         </li>
         <li class="pl-4 pb-4">
-          <NuxtLink to="/memberInfo">{{ $t('sidebar.memberInfo') }}</NuxtLink>
+          <NuxtLink to="/memberInfo" @click="closeSidebar">{{
+            $t('sidebar.memberInfo')
+          }}</NuxtLink>
         </li>
       </ul>
     </aside>

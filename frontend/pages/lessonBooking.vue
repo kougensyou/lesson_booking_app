@@ -32,18 +32,25 @@ await lessonBookingStore.getLessonBookingData();
       <div
         v-for="favoriteStudio in lessonBookingStore.favoriteStudioList"
         :key="favoriteStudio.id"
-        class="min-w-[300px] h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between p-8"
       >
-        <img
-          :src="favoriteStudio.image_url"
-          alt=""
-          class="w-full h-32 object-cover rounded-t-lg"
-        />
-        <div class="p-3">
-          <h3 class="text-base font-semibold">
-            {{ favoriteStudio.studio_name }}
-          </h3>
-        </div>
+        <NuxtLink
+          :to="{
+            path: '/studioLesson',
+            query: { studio_id: favoriteStudio.studio_id },
+          }"
+          class="min-w-[300px] h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between p-8"
+        >
+          <img
+            :src="favoriteStudio.image_url"
+            alt=""
+            class="w-full h-32 object-cover rounded-t-lg"
+          />
+          <div class="p-3">
+            <h3 class="text-base font-semibold">
+              {{ favoriteStudio.studio_name }}
+            </h3>
+          </div>
+        </NuxtLink>
       </div>
     </HorizontalScroll>
   </template>
