@@ -33,6 +33,12 @@
     "tabTitle": "Lesson Booking",
     "searchFromStudio": "Search from Studio",
     "otherStudios": "Other Studios...",
-    "customizedSearch": "Customized Search"
+    "customizedSearch": "Customized Search",
+    "selectTime": "Select Time",
+    "yogaOrPilates": "Yoga or Pilates",
+    "studio": "Studio",
+    "instructor": "Instructor",
+    "lessonName": "Lesson Name",
+    "searchButton": "Search"
   }
 }

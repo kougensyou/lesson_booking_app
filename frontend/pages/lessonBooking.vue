@@ -69,7 +69,7 @@ await lessonBookingStore.getLessonBookingData();
       }}</span>
     </NuxtLink>
   </template>
-  <h1 class="text-xl font-bold">
+  <h1 class="text-xl font-bold px-4 pt-4">
     {{ $t('lessonBooking.customizedSearch') }}
   </h1>
   <div class="px-4 py-2">
@@ -96,6 +96,9 @@ await lessonBookingStore.getLessonBookingData();
     </Calendar>
   </div>
   <div class="space-y-2">
+    <span class="text-gray-800 text-sm px-4 pt-4">
+      {{ $t('lessonBooking.selectTime') }}
+    </span>
     <div class="flex space-x-2">
       <select v-model="startTime" class="w-1/2 border p-1 rounded">
         <option v-for="time in timeOptions" :key="time" :value="time">
@@ -109,22 +112,45 @@ await lessonBookingStore.getLessonBookingData();
       </select>
     </div>
 
+    <span class="text-gray-800 text-sm px-4 pt-4">
+      {{ $t('lessonBooking.yogaOrPilates') }}
+    </span>
     <select class="w-full border p-1 rounded">
       <option>-</option>
     </select>
 
+    <span class="text-gray-800 text-sm px-4 pt-4">
+      {{ $t('lessonBooking.studio') }}
+    </span>
     <select class="w-full border p-1 rounded">
       <option>-</option>
     </select>
 
+    <span class="text-gray-800 text-sm px-4 pt-4">
+      {{ $t('lessonBooking.instructor') }}
+    </span>
     <select class="w-full border p-1 rounded">
       <option>-</option>
     </select>
 
+    <span class="text-gray-800 text-sm px-4 pt-4">
+      {{ $t('lessonBooking.lessonName') }}
+    </span>
     <select class="w-full border p-1 rounded">
       <option>-</option>
     </select>
 
-    <button class="w-full bg-blue-600 text-white py-2 rounded">検索</button>
+    <button
+      class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
+      @click=""
+    >
+      <span class="text-white">{{ $t('lessonBooking.searchButton') }}</span>
+      <span
+        class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
+        aria-hidden="true"
+      >
+        chevron_right
+      </span>
+    </button>
   </div>
 </template>

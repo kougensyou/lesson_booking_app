@@ -33,6 +33,12 @@
     "tabTitle": "レッスン予約",
     "searchFromStudio": "スタジオからさがす",
     "otherStudios": "他のスタジオ...",
-    "customizedSearch": "こだわり検索"
+    "customizedSearch": "こだわり検索",
+    "selectTime": "時間を選択",
+    "yogaOrPilates": "ヨガ・ピラティス",
+    "studio": "スタジオ",
+    "instructor": "インストラクター",
+    "lessonName": "レッスン名",
+    "searchButton": "検索"
   }
 }

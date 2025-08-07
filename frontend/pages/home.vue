@@ -164,15 +164,18 @@ await homeStore.getHomeData();
   <div
     v-for="item in homeStore.listInfoList"
     :key="item.id"
-    class="flex justify-between items-center px-4 py-3 border-b border-gray-100"
+    class="px-4 py-3 border-b border-gray-100 relative"
   >
     <a
       :href="item.link_url"
       target="_blank"
       rel="noopener noreferrer"
-      class="text-gray-800 hover:underline"
+      class="text-gray-800"
     >
       {{ item.name }}
     </a>
+    <span class="text-gray-400 material-symbols-outlined absolute right-3">
+      chevron_right
+    </span>
   </div>
 </template>
