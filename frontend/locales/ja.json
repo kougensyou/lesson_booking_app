@@ -31,6 +31,8 @@
   },
   "lessonBooking": {
     "tabTitle": "レッスン予約",
-    "searchFromStudio": "スタジオからさがす"
+    "searchFromStudio": "スタジオからさがす",
+    "otherStudios": "他のスタジオ...",
+    "customizedSearch": "こだわり検索"
   }
 }

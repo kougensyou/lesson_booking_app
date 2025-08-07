@@ -33,7 +33,7 @@ const hasClass = (date: string, hour: string) => {
         <div
           :class="[
             'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold',
-            d.active ? 'bg-black text-white' : 'bg-white text-black border'
+            d.active ? 'bg-black text-white' : 'bg-white text-black border',
           ]"
         >
           {{ d.day }}
@@ -45,11 +45,7 @@ const hasClass = (date: string, hour: string) => {
     <!-- スケジュール表 -->
     <div class="grid grid-cols-7 gap-px text-xs border-t border-l px-2">
       <!-- ヘッダー（日付と曜日） -->
-      <div
-        v-for="d in days"
-        :key="d.date"
-        class="bg-gray-100 text-center py-1"
-      >
+      <div v-for="d in days" :key="d.date" class="bg-gray-100 text-center py-1">
         <div class="text-sm font-bold">{{ d.date }}</div>
         <div class="text-xs text-gray-500">{{ d.label }}</div>
       </div>
@@ -64,7 +60,8 @@ const hasClass = (date: string, hour: string) => {
           v-if="hasClass(d.date, '7:00')"
           class="bg-green-100 p-1 rounded text-[11px] leading-tight"
         >
-          <div class="text-[11px] text-gray-600 mb-1">7:00</div> <!-- ←時間表示を上に -->
+          <div class="text-[11px] text-gray-600 mb-1">7:00</div>
+          <!-- ←時間表示を上に -->
           <div class="text-green-700 font-bold">空き○</div>
           <div>07:00～</div>
           <div>オンラインあり</div>

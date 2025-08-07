@@ -31,6 +31,8 @@
   },
   "lessonBooking": {
     "tabTitle": "Lesson Booking",
-    "searchFromStudio": "Search from Studio"
+    "searchFromStudio": "Search from Studio",
+    "otherStudios": "Other Studios...",
+    "customizedSearch": "Customized Search"
   }
 }
