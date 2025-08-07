@@ -16,5 +16,11 @@ await lessonBookingStore.getLessonBookingData();
   <StudioSearch :favorite-studio-list="lessonBookingStore.favoriteStudioList" />
   <CustomizedSearch
     :calendar-theme-color="lessonBookingStore.calendarThemeColor"
+    :studio-list="lessonBookingStore.studioList"
+    :lesson-category-list="lessonBookingStore.lessonCategoryList"
+    :start-time-options="lessonBookingStore.startTimeOptions"
+    :end-time-options="lessonBookingStore.endTimeOptions"
+    :search-input-form="lessonBookingStore.searchInputForm"
+    :search-lessons="lessonBookingStore.searchLessons"
   />
 </template>

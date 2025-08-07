@@ -1,8 +1,19 @@
 <script setup lang="ts">
 import { Calendar } from 'v-calendar';
+import type {
+  LessonCategory,
+  SearchInputForm,
+  Studio,
+} from '~/types/lessonBooking';
 
 defineProps<{
   calendarThemeColor: string;
+  studioList: Studio[];
+  lessonCategoryList: LessonCategory[];
+  searchInputForm: SearchInputForm;
+  startTimeOptions: string[];
+  endTimeOptions: string[];
+  searchLessons: Function;
 }>();
 </script>
 <template>
@@ -32,54 +43,78 @@ defineProps<{
       </template>
     </Calendar>
   </div>
-  <div class="space-y-2">
-    <span class="text-gray-800 text-sm px-4 pt-4">
+  <div class="space-y-2 px-4">
+    <span class="text-gray-800 text-sm pt-4">
       {{ $t('lessonBooking.selectTime') }}
     </span>
-    <div class="flex space-x-2">
-      <select v-model="startTime" class="w-1/2 border p-1 rounded">
-        <option v-for="time in timeOptions" :key="time" :value="time">
-          {{ time }}から
+    <div class="flex items-center space-x-2">
+      <select
+        v-model="searchInputForm.startTime"
+        class="w-1/2 border p-1 rounded"
+      >
+        <option v-for="time in startTimeOptions" :key="time" :value="time">
+          {{ time }}
         </option>
       </select>
-      <select v-model="endTime" class="w-1/2 border p-1 rounded">
-        <option v-for="time in timeOptions" :key="time" :value="time">
-          {{ time }}まで
+      <span class="text-gray-800 text-sm">~</span>
+      <select
+        v-model="searchInputForm.endTime"
+        class="w-1/2 border p-1 rounded"
+      >
+        <option v-for="time in endTimeOptions" :key="time" :value="time">
+          {{ time }}
         </option>
       </select>
     </div>
 
-    <span class="text-gray-800 text-sm px-4 pt-4">
+    <span class="text-gray-800 text-sm pt-4">
       {{ $t('lessonBooking.yogaOrPilates') }}
     </span>
-    <select class="w-full border p-1 rounded">
-      <option>-</option>
+    <select
+      class="w-full border p-1 rounded"
+      v-model="searchInputForm.yogaOrPilates"
+    >
+      <option value="">-</option>
+      <option
+        v-for="category in lessonCategoryList"
+        :key="category.id"
+        :value="category.id"
+      >
+        {{ category.category_name }}
+      </option>
     </select>
 
-    <span class="text-gray-800 text-sm px-4 pt-4">
+    <span class="text-gray-800 text-sm pt-4">
       {{ $t('lessonBooking.studio') }}
     </span>
-    <select class="w-full border p-1 rounded">
-      <option>-</option>
+    <select class="w-full border p-1 rounded" v-model="searchInputForm.studio">
+      <option value="">-</option>
+      <option v-for="studio in studioList" :key="studio.id" :value="studio.id">
+        {{ studio.studio_name }}
+      </option>
     </select>
 
-    <span class="text-gray-800 text-sm px-4 pt-4">
+    <span class="text-gray-800 text-sm pt-4">
       {{ $t('lessonBooking.instructor') }}
     </span>
-    <select class="w-full border p-1 rounded">
-      <option>-</option>
-    </select>
+    <input
+      class="w-full border p-1 rounded"
+      type="text"
+      v-model="searchInputForm.instructor"
+    />
 
-    <span class="text-gray-800 text-sm px-4 pt-4">
+    <span class="text-gray-800 text-sm pt-4">
       {{ $t('lessonBooking.lessonName') }}
     </span>
-    <select class="w-full border p-1 rounded">
-      <option>-</option>
-    </select>
+    <input
+      class="w-full border p-1 rounded"
+      type="text"
+      v-model="searchInputForm.lessonName"
+    />
 
     <button
       class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
-      @click=""
+      @click="searchLessons"
     >
       <span class="text-white">{{ $t('lessonBooking.searchButton') }}</span>
       <span

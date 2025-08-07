@@ -19,5 +19,10 @@ class LessonBookingController extends Controller
         $userId = Auth::id();
         return $this->lessonBookingService->getLessonBookingData($userId);
     }
+    
+    public function searchLessons(Request $request) {
+        $searchInputForm = $request->input('searchInputForm');
+        return $this->lessonBookingService->searchLessons($searchInputForm);
+    }
 
 }

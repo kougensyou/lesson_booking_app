@@ -22,4 +22,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('get_home_data', [HomeController::class , 'getHomeData']);
     Route::get('get_selected_lesson_list', [HomeController::class , 'getSelectedLessonList']);
     Route::get('get_lesson_booking_data', [LessonBookingController::class , 'getLessonBookingData']);
+    Route::get('search_lessons', [LessonBookingController::class , 'searchLessons']);
 });
