@@ -1,7 +1,7 @@
 <script setup>
-import Header from '../components/header.vue';
-import Footer from '../components/footer.vue';
-import Sidebar from '~/components/sidebar.vue';
+import Header from '../components/common/header.vue';
+import Footer from '../components/common/footer.vue';
+import Sidebar from '~/components/common/sidebar.vue';
 import { ref } from 'vue';
 
 const isOpen = ref(false);

@@ -1,5 +1,5 @@
 <script setup>
-import Footer from '../components/footer.vue';
+import Footer from '../components/common/footer.vue';
 </script>
 <template>
   <div class="min-h-screen bg-cover bg-center flex justify-center">
