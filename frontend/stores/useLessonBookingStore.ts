@@ -96,12 +96,12 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     async searchLessons() {
       try {
         console.log('searching lessons with input:', this.searchInputForm);
-        // const { data } = await useSanctumFetch('/api/search_lessons', {
-        //   method: 'GET',
-        //   query: { searchInputForm: this.searchInputForm },
-        // });
-        // this.searchedLessonList = data.value as Lesson[];
-        // console.log('searched lessons:', this.searchedLessonList);
+        const { data } = await useSanctumFetch('/api/search_lessons', {
+          method: 'POST',
+          body: { searchInputForm: this.searchInputForm },
+        });
+        this.searchedLessonList = data.value as Lesson[];
+        console.log('searched lessons:', this.searchedLessonList);
       } catch (err) {
         console.error('Error searching lessons:', err);
       }

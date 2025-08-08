@@ -40,7 +40,6 @@ onMounted(() => {
     <Calendar
       class="custom-calendar max-w-full"
       :color="calendarThemeColor"
-      :attributes="attributes"
       expanded
     >
       <template v-slot:day-content="slotProps">
@@ -131,18 +130,21 @@ onMounted(() => {
       type="text"
       v-model="searchInputForm.lessonName"
     />
-
-    <button
-      class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
-      @click="searchLessons"
-    >
-      <span class="text-white">{{ $t('lessonBooking.searchButton') }}</span>
-      <span
-        class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
-        aria-hidden="true"
+  </div>
+  <div class="fixed bottom-0 left-0 right-0 bg-white px-4 py-4">
+    <div class="max-w-md mx-auto">
+      <button
+        class="w-full bg-sky-500 text-white rounded-3xl py-4 relative"
+        @click="searchLessons"
       >
-        chevron_right
-      </span>
-    </button>
+        <span>{{ $t('lessonBooking.searchButton') }}</span>
+        <span
+          class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
+          aria-hidden="true"
+        >
+          chevron_right
+        </span>
+      </button>
+    </div>
   </div>
 </template>
