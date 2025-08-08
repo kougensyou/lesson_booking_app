@@ -23,5 +23,9 @@ await lessonBookingStore.getLessonBookingData();
     :search-input-form="lessonBookingStore.searchInputForm"
     :search-lessons="lessonBookingStore.searchLessons"
     :check-selected="lessonBookingStore.checkSelected"
+    :change-by-prev="lessonBookingStore.changeByPrev"
+    :change-by-next="lessonBookingStore.changeByNext"
+    :remove-selected="lessonBookingStore.removeSelected"
+    :add-selected="lessonBookingStore.addSelected"
   />
 </template>

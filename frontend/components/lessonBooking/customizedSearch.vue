@@ -6,7 +6,7 @@ import type {
   Studio,
 } from '~/types/lessonBooking';
 
-defineProps<{
+const props = defineProps<{
   calendarThemeColor: string;
   studioList: Studio[];
   lessonCategoryList: LessonCategory[];
@@ -15,7 +15,22 @@ defineProps<{
   endTimeOptions: string[];
   searchLessons: Function;
   checkSelected: Function;
+  changeByPrev: Function;
+  changeByNext: Function;
+  removeSelected: Function;
+  addSelected: Function;
 }>();
+
+onMounted(() => {
+  const prev = document.querySelector('.vc-prev');
+  const next = document.querySelector('.vc-next');
+  prev?.addEventListener('click', async () => {
+    await props.changeByPrev();
+  });
+  next?.addEventListener('click', async () => {
+    await props.changeByNext();
+  });
+});
 </script>
 <template>
   <h1 class="text-xl font-bold px-4 pt-4">
@@ -33,12 +48,14 @@ defineProps<{
           <span
             v-if="checkSelected(slotProps.day.day)"
             class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-300 text-white m-auto my-1"
+            @click="removeSelected(slotProps.day.day)"
           >
             {{ slotProps.day.day }}
           </span>
           <span
             v-else
             class="flex items-center justify-center text-sm w-8 h-8 text-gray-900 m-auto my-1"
+            @click="addSelected(slotProps.day.day)"
           >
             {{ slotProps.day.day }}
           </span>

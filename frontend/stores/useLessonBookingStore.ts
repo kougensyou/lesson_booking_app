@@ -36,6 +36,41 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           day.toString()
       );
     },
+    changeByPrev() {
+      this.selectedMonth -= 1;
+      if (this.selectedMonth < 0) {
+        this.selectedMonth = 11;
+        this.selectedYear -= 1;
+      }
+    },
+    changeByNext() {
+      this.selectedMonth += 1;
+      if (this.selectedMonth > 11) {
+        this.selectedMonth = 0;
+        this.selectedYear += 1;
+      }
+    },
+    removeSelected(day: number) {
+      this.searchInputForm.selectedDates =
+        this.searchInputForm.selectedDates.filter(
+          (date) =>
+            date !==
+            this.selectedYear.toString() +
+              '-' +
+              (this.selectedMonth + 1).toString() +
+              '-' +
+              day.toString()
+        );
+    },
+    addSelected(day: number) {
+      this.searchInputForm.selectedDates.push(
+        this.selectedYear.toString() +
+          '-' +
+          (this.selectedMonth + 1).toString() +
+          '-' +
+          day.toString()
+      );
+    },
     async getLessonBookingData() {
       try {
         const { data } = await useSanctumFetch('/api/get_lesson_booking_data', {
