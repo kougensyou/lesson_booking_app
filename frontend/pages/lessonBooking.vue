@@ -22,5 +22,6 @@ await lessonBookingStore.getLessonBookingData();
     :end-time-options="lessonBookingStore.endTimeOptions"
     :search-input-form="lessonBookingStore.searchInputForm"
     :search-lessons="lessonBookingStore.searchLessons"
+    :check-selected="lessonBookingStore.checkSelected"
   />
 </template>

@@ -14,6 +14,7 @@ defineProps<{
   startTimeOptions: string[];
   endTimeOptions: string[];
   searchLessons: Function;
+  checkSelected: Function;
 }>();
 </script>
 <template>
@@ -29,16 +30,18 @@ defineProps<{
     >
       <template v-slot:day-content="slotProps">
         <div class="flex flex-col h-full z-10 overflow-hidden">
-          <span>
+          <span
+            v-if="checkSelected(slotProps.day.day)"
+            class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-300 text-white m-auto my-1"
+          >
             {{ slotProps.day.day }}
           </span>
-          <template>
-            <span
-              class="flex items-center justify-center w-full h-full mt-1 mb-1"
-            >
-              <span class="w-8 h-8 rounded-full transparent m-auto my-1"></span>
-            </span>
-          </template>
+          <span
+            v-else
+            class="flex items-center justify-center text-sm w-8 h-8 text-gray-900 m-auto my-1"
+          >
+            {{ slotProps.day.day }}
+          </span>
         </div>
       </template>
     </Calendar>

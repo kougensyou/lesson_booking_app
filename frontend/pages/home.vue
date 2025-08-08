@@ -20,8 +20,8 @@ await homeStore.getHomeData();
     :attributes="homeStore.attributes"
     :calendar-theme-color="homeStore.calendarThemeColor"
     :check-today="homeStore.checkToday"
-    @get-prev-lesson-list="homeStore.getPrevLessonList"
-    @get-next-lesson-list="homeStore.getNextLessonList"
+    :get-prev-lesson-list="homeStore.getPrevLessonList"
+    :get-next-lesson-list="homeStore.getNextLessonList"
   />
   <Information
     :slider-info-list="homeStore.sliderInfoList"

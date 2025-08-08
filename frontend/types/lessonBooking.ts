@@ -21,6 +21,7 @@ export interface SearchInputForm {
   lessonName: string;
   studio: number;
   yogaOrPilates: string;
+  selectedDates: string[];
   startTime: string;
   endTime: string;
 }

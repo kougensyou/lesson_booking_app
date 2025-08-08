@@ -1,4 +1,3 @@
-import { start } from '@popperjs/core';
 import { defineStore } from 'pinia';
 import type {
   FavoriteStudio,
@@ -15,12 +14,28 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     studioList: [] as Studio[],
     lessonCategoryList: [] as LessonCategory[],
     calendarThemeColor: 'green',
-    searchInputForm: {} as SearchInputForm,
+    searchInputForm: {
+      selectedDates: [] as string[],
+    } as SearchInputForm,
     searchedLessonList: [] as Lesson[],
     startTimeOptions: [] as string[],
     endTimeOptions: [] as string[],
+    selectedMonth: new Date().getMonth(),
+    selectedYear: new Date().getFullYear(),
+    todayMonth: new Date().getMonth() + 1,
+    todayYear: new Date().getFullYear(),
+    todayDay: new Date().getDate(),
   }),
   actions: {
+    checkSelected(day: number): boolean {
+      return this.searchInputForm.selectedDates.includes(
+        this.selectedYear.toString() +
+          '-' +
+          (this.selectedMonth + 1).toString() +
+          '-' +
+          day.toString()
+      );
+    },
     async getLessonBookingData() {
       try {
         const { data } = await useSanctumFetch('/api/get_lesson_booking_data', {
@@ -32,6 +47,12 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         this.lessonCategoryList = lessonBookingData.lesson_category_list;
         this.startTimeOptions = lessonBookingData.start_time_options;
         this.endTimeOptions = lessonBookingData.end_time_options;
+        this.searchInputForm.selectedDates[0] =
+          this.todayYear.toString() +
+          '-' +
+          this.todayMonth.toString() +
+          '-' +
+          this.todayDay.toString();
         console.log('lesson booking data fetched:', lessonBookingData);
       } catch (err) {
         console.error('Error fetching lesson booking data:', err);

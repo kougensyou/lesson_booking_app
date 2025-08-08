@@ -2,23 +2,23 @@
 import type { Attribute, LessonBooking } from '~/types/home';
 import { Calendar } from 'v-calendar';
 
-defineProps<{
+const props = defineProps<{
   selectedLessonList: Array<LessonBooking>;
   attributes: Array<Attribute>;
   calendarThemeColor: string;
   checkToday: Function;
+  getPrevLessonList: Function;
+  getNextLessonList: Function;
 }>();
-
-const emit = defineEmits(['getPrevLessonList', 'getNextLessonList']);
 
 onMounted(() => {
   const prev = document.querySelector('.vc-prev');
   const next = document.querySelector('.vc-next');
   prev?.addEventListener('click', async () => {
-    await emit('getPrevLessonList');
+    await props.getPrevLessonList();
   });
   next?.addEventListener('click', async () => {
-    await emit('getNextLessonList');
+    await props.getNextLessonList();
   });
 });
 </script>
