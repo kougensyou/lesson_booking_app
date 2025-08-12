@@ -12,7 +12,12 @@ defineProps<{
       {{ $t('lessonBooking.searchFromStudio') }}
     </h1>
     <button @click="" class="ml-auto">
-      <span class="material-symbols-outlined" aria-hidden="true">search</span>
+      <span
+        class="material-symbols-outlined"
+        aria-hidden="true"
+        @click="$router.push('/studioList')"
+        >search</span
+      >
     </button>
   </div>
   <template v-if="favoriteStudioList.length > 0">
@@ -41,7 +46,7 @@ defineProps<{
         </NuxtLink>
       </div>
       <NuxtLink
-        :to="{ path: '/studio' }"
+        :to="{ path: '/studioList' }"
         class="min-w-[300px] h-[200px] bg-gray-100 rounded-xl shadow-md flex items-center justify-center p-8"
       >
         <span class="text-gray-500 text-sm">{{
@@ -52,7 +57,7 @@ defineProps<{
   </template>
   <template v-if="favoriteStudioList.length === 0">
     <NuxtLink
-      :to="{ path: '/studio' }"
+      :to="{ path: '/studioList' }"
       class="min-w-[300px] h-[200px] bg-gray-100 rounded-xl shadow-md flex items-center justify-center p-8"
     >
       <span class="text-gray-500 text-sm">{{
