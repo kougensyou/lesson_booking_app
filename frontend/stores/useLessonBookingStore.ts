@@ -93,7 +93,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         console.error('Error fetching lesson booking data:', err);
       }
     },
-    async searchLessons() {
+    async searchLessonsApi() {
       try {
         console.log('searching lessons with input:', this.searchInputForm);
         const { data } = await useSanctumFetch('/api/search_lessons', {

@@ -2,8 +2,16 @@
 import CustomizedSearch from '~/components/lessonBooking/customizedSearch.vue';
 import StudioSearch from '~/components/lessonBooking/studioSearch.vue';
 import { useLessonBookingStore } from '../stores/useLessonBookingStore';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const lessonBookingStore = useLessonBookingStore();
+
+const searchLessons = () => {
+  lessonBookingStore.searchLessonsApi().then(() => {
+    router.push({ path: '/searchedLesson' });
+  });
+};
 
 await lessonBookingStore.getLessonBookingData();
 </script>
@@ -21,7 +29,7 @@ await lessonBookingStore.getLessonBookingData();
     :start-time-options="lessonBookingStore.startTimeOptions"
     :end-time-options="lessonBookingStore.endTimeOptions"
     :search-input-form="lessonBookingStore.searchInputForm"
-    :search-lessons="lessonBookingStore.searchLessons"
+    :search-lessons="searchLessons"
     :check-selected="lessonBookingStore.checkSelected"
     :change-by-prev="lessonBookingStore.changeByPrev"
     :change-by-next="lessonBookingStore.changeByNext"
