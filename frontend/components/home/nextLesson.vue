@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Lesson } from '~/types/home';
+import HorizontalScroll from '../common/horizontalScroll.vue';
 
 defineProps<{
   nextLessonList: Array<Lesson>;
