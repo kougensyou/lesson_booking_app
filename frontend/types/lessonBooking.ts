@@ -20,7 +20,7 @@ export interface SearchInputForm {
   instructor: string;
   lessonName: string;
   studio: number;
-  yogaOrPilates: string;
+  lessonCategory: string;
   selectedDates: string[];
   startTime: string;
   endTime: string;

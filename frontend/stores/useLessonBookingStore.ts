@@ -31,9 +31,9 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       return this.searchInputForm.selectedDates.includes(
         this.selectedYear.toString() +
           '-' +
-          (this.selectedMonth + 1).toString() +
+          (this.selectedMonth + 1).toString().padStart(2, '0') +
           '-' +
-          day.toString()
+          day.toString().padStart(2, '0')
       );
     },
     changeByPrev() {
@@ -57,18 +57,18 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
             date !==
             this.selectedYear.toString() +
               '-' +
-              (this.selectedMonth + 1).toString() +
+              (this.selectedMonth + 1).toString().padStart(2, '0') +
               '-' +
-              day.toString()
+              day.toString().padStart(2, '0')
         );
     },
     addSelected(day: number) {
       this.searchInputForm.selectedDates.push(
         this.selectedYear.toString() +
           '-' +
-          (this.selectedMonth + 1).toString() +
+          (this.selectedMonth + 1).toString().padStart(2, '0') +
           '-' +
-          day.toString()
+          day.toString().padStart(2, '0')
       );
     },
     async getLessonBookingData() {
@@ -85,9 +85,9 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         this.searchInputForm.selectedDates[0] =
           this.todayYear.toString() +
           '-' +
-          this.todayMonth.toString() +
+          this.todayMonth.toString().padStart(2, '0') +
           '-' +
-          this.todayDay.toString();
+          this.todayDay.toString().padStart(2, '0');
         console.log('lesson booking data fetched:', lessonBookingData);
       } catch (err) {
         console.error('Error fetching lesson booking data:', err);

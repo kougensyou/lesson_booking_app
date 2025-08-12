@@ -87,11 +87,11 @@ onMounted(() => {
     </div>
 
     <span class="text-gray-800 text-sm pt-4">
-      {{ $t('lessonBooking.yogaOrPilates') }}
+      {{ $t('lessonBooking.lessonCategory') }}
     </span>
     <select
       class="w-full border p-1 rounded"
-      v-model="searchInputForm.yogaOrPilates"
+      v-model="searchInputForm.lessonCategory"
     >
       <option value="">-</option>
       <option
