@@ -1,19 +1,19 @@
 import { defineStore } from 'pinia';
 import type {
-  LessonsByDate,
+  StudioLesson,
   StudioLessonData,
   WeekData,
+  Studio,
 } from '~/types/studioLesson';
 
 export const useStudioLessonStore = defineStore('studioLesson', {
   state: () => ({
+    studioData: {} as Studio,
+    weekData: [] as WeekData[],
     timeOptions: [] as string[],
     fromDate: '',
     toDate: '',
-    selectedDates: [] as string[],
-    hours: [] as string[],
-    studioLessonList: [] as LessonsByDate[],
-    weekData: [] as WeekData[],
+    studioLessonList: [] as StudioLesson[],
   }),
   actions: {
     checkSelected() {},
@@ -49,8 +49,8 @@ export const useStudioLessonStore = defineStore('studioLesson', {
         });
         const studioLessonData = data.value as StudioLessonData;
         this.timeOptions = studioLessonData.time_options;
-        this.selectedDates = studioLessonData.selected_dates;
-        this.studioLessonList = studioLessonData.lessons_by_date;
+        this.studioData = studioLessonData.studio_data as Studio;
+        this.studioLessonList = studioLessonData.studio_lesson_list;
         console.log('studio lesson data fetched:', studioLessonData);
       } catch (err) {
         console.error('Error fetching studio lesson data:', err);
@@ -62,12 +62,14 @@ export const useStudioLessonStore = defineStore('studioLesson', {
           method: 'GET',
           query: {
             studio_id: studioId,
+            from_date: this.fromDate,
+            to_date: this.toDate,
           },
         });
         const studioLessonData = data.value as StudioLessonData;
         this.timeOptions = studioLessonData.time_options;
-        this.selectedDates = studioLessonData.selected_dates;
-        this.studioLessonList = studioLessonData.lessons_by_date;
+        this.studioData = studioLessonData.studio_data as Studio;
+        this.studioLessonList = studioLessonData.studio_lesson_list;
         console.log('studio lesson data fetched:', studioLessonData);
       } catch (err) {
         console.error('Error fetching studio lesson data:', err);

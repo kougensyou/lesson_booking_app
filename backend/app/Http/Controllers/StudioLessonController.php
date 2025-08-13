@@ -16,7 +16,10 @@ class StudioLessonController extends Controller
     }
 
     public function getStudioLessonData(Request $request) {
-        return $this->studioLessonService->getStudioLessonData(Auth::id());
+        $studioId = $request->query('studio_id');
+        $fromDate = $request->query('from_date');
+        $toDate = $request->query('to_date');
+        return $this->studioLessonService->getStudioLessonData($studioId, $fromDate, $toDate);
     }
 
 }

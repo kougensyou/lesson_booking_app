@@ -16,8 +16,12 @@ await studioLessonStore.getStudioLessonData(studioId);
   <div class="p-4">
     <!-- ヘッダー -->
     <div class="w-full text-center mb-2">
-      <div class="text-xl font-bold">日吉</div>
-      <div class="text-sm text-gray-500">pilates</div>
+      <div class="text-xl font-bold">
+        {{ studioLessonStore.studioData.studio_name }}
+      </div>
+      <div class="text-sm text-gray-500">
+        {{ studioLessonStore.studioData.yoga_or_pilates }}
+      </div>
     </div>
 
     <!-- 日付切替 -->
@@ -56,9 +60,7 @@ await studioLessonStore.getStudioLessonData(studioId);
         :key="d.date + '7'"
         class="border-r border-b p-1 align-top h-32"
       >
-        <div
-          class="bg-white rounded text-[11px] leading-tight"
-        >
+        <div class="bg-white rounded text-[11px] leading-tight">
           <div class="bg-green-100 font-bold">空き○</div>
           <div>07:00～</div>
           <div class="font-bold">Beginner Flow</div>
