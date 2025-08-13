@@ -48,8 +48,16 @@ class LessonBookingService
     }
 
     private function getStudioList() {
-        return Studio::select('id', 'studio_name')
-        ->get();
+        return Studio::select('id', 'studio_name', 'image_path')
+        ->get()
+        ->map(function ($item) {
+            if ($item->image_path) {
+                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
+                return $item;
+            }
+            $item->image_url = null;
+            return $item;
+        });
     }
 
     private function getLessonCategoryList() {
