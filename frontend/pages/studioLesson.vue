@@ -50,6 +50,8 @@ const hasClass = (date: string, hour: string) => {
         <div class="text-xs text-gray-500">{{ d.label }}</div>
       </div>
 
+      <div class="col-span-7 text-left text-gray-600 text-sm py-1">7:00</div>
+
       <!-- 7:00行 -->
       <div
         v-for="d in days"
@@ -58,13 +60,11 @@ const hasClass = (date: string, hour: string) => {
       >
         <div
           v-if="hasClass(d.date, '7:00')"
-          class="bg-green-100 p-1 rounded text-[11px] leading-tight"
+          class="bg-white rounded text-[11px] leading-tight"
         >
-          <div class="text-[11px] text-gray-600 mb-1">7:00</div>
           <!-- ←時間表示を上に -->
-          <div class="text-green-700 font-bold">空き○</div>
+          <div class="bg-green-100 font-bold">空き○</div>
           <div>07:00～</div>
-          <div>オンラインあり</div>
           <div class="font-bold">Beginner Flow</div>
           <div class="text-gray-600">Arisa.N</div>
         </div>

@@ -4,10 +4,7 @@ import { useLessonBookingStore } from '../stores/useLessonBookingStore';
 const lessonBookingStore = useLessonBookingStore();
 </script>
 <template>
-  <div
-    v-for="(studio, i) in lessonBookingStore.studioList"
-    :key="i"
-  >
+  <div v-for="(studio, i) in lessonBookingStore.studioList" :key="i">
     <NuxtLink
       :to="{
         path: '/studioLesson',
