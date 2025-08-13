@@ -1,19 +1,16 @@
 <script lang="ts" setup>
-const days = [
-  { date: '08/19', day: '19', label: '火', active: true },
-  { date: '08/20', day: '20', label: '水', active: false },
-  { date: '08/21', day: '21', label: '木', active: false },
-  { date: '08/22', day: '22', label: '金', active: false },
-  { date: '08/23', day: '23', label: '土', active: false },
-  { date: '08/24', day: '24', label: '日', active: false },
-  { date: '08/25', day: '25', label: '月', active: false },
-];
+import { useStudioLessonStore } from '../stores/useStudioLessonStore';
+import { useRoute } from 'vue-router';
 
-const hours = ['7:00', '8:00', '9:00'];
+const route = useRoute();
 
-const hasClass = (date: string, hour: string) => {
-  return date === '08/19' && hour === '7:00';
-};
+const studioLessonStore = useStudioLessonStore();
+
+const studioId = route.query.studio_id as string;
+
+studioLessonStore.setWeekData();
+
+await studioLessonStore.getStudioLessonData(studioId);
 </script>
 <template>
   <div class="p-4">
@@ -26,7 +23,7 @@ const hasClass = (date: string, hour: string) => {
     <!-- 日付切替 -->
     <div class="flex justify-between px-4 mb-2">
       <div
-        v-for="d in days"
+        v-for="d in studioLessonStore.weekData"
         :key="d.date"
         class="flex flex-col items-center w-12"
       >
@@ -45,24 +42,23 @@ const hasClass = (date: string, hour: string) => {
     <!-- スケジュール表 -->
     <div class="grid grid-cols-7 gap-px text-xs border-t border-l px-2">
       <!-- ヘッダー（日付と曜日） -->
-      <div v-for="d in days" :key="d.date" class="bg-gray-100 text-center py-1">
+      <div
+        v-for="d in studioLessonStore.weekData"
+        :key="d.date"
+        class="bg-gray-100 text-center py-1"
+      >
         <div class="text-sm font-bold">{{ d.date }}</div>
         <div class="text-xs text-gray-500">{{ d.label }}</div>
       </div>
-
       <div class="col-span-7 text-left text-gray-600 text-sm py-1">7:00</div>
-
-      <!-- 7:00行 -->
       <div
-        v-for="d in days"
+        v-for="d in studioLessonStore.weekData"
         :key="d.date + '7'"
         class="border-r border-b p-1 align-top h-32"
       >
         <div
-          v-if="hasClass(d.date, '7:00')"
           class="bg-white rounded text-[11px] leading-tight"
         >
-          <!-- ←時間表示を上に -->
           <div class="bg-green-100 font-bold">空き○</div>
           <div>07:00～</div>
           <div class="font-bold">Beginner Flow</div>
