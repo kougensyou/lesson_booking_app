@@ -3,8 +3,6 @@ namespace App\Http\Services;
 
 use Carbon\Carbon;
 use App\Exceptions\CustomErrorResponseException;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Lesson;
 use App\Models\Studio;
 

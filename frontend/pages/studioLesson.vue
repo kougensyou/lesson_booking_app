@@ -11,7 +11,7 @@ const studioId = route.query.studio_id as string;
 const changeStudioLessonData = (selectedDateObj: Date) => {
   studioLessonStore.setDate(selectedDateObj);
   studioLessonStore.setWeekData();
-  studioLessonStore.changeStudioLessonDataApi();
+  studioLessonStore.getStudioLessonDataApi();
 };
 
 studioLessonStore.setStudioId(studioId);

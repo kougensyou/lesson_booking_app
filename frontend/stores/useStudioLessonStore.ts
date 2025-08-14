@@ -58,25 +58,6 @@ export const useStudioLessonStore = defineStore('studioLesson', {
       } catch (err) {
         console.error('Error fetching studio lesson data:', err);
       }
-    },
-    async changeStudioLessonDataApi() {
-      try {
-        const { data } = await useSanctumFetch('/api/get_studio_lesson_data', {
-          method: 'GET',
-          query: {
-            studio_id: this.selectedStudioId,
-            from_date: this.fromDate,
-            to_date: this.toDate,
-          },
-        });
-        const studioLessonData = data.value as StudioLessonData;
-        this.timeOptions = studioLessonData.time_options;
-        this.studioData = studioLessonData.studio_data as Studio;
-        this.studioLessonList = studioLessonData.studio_lesson_list;
-        console.log('studio lesson data fetched:', studioLessonData);
-      } catch (err) {
-        console.error('Error fetching studio lesson data:', err);
-      }
-    },
+    }
   },
 });
