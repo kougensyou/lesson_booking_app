@@ -3,6 +3,7 @@ export interface Studio {
 }
 
 export interface WeekData {
+  dateObj: Date;
   date: string;
   day: number;
   label: string;

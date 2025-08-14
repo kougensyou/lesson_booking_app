@@ -6,11 +6,7 @@ use App\Exceptions\CustomErrorResponseException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Lesson;
-use App\Models\LessonBooking;
-use App\Models\LessonCategory;
 use App\Models\Studio;
-use App\Models\FavoriteStudio;
-
 
 class StudioLessonService
 {

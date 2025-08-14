@@ -14,9 +14,12 @@ export const useStudioLessonStore = defineStore('studioLesson', {
     fromDate: '',
     toDate: '',
     studioLessonList: {} as StudioLesson,
+    selectedStudioId: '',
   }),
   actions: {
-    checkSelected() {},
+    setStudioId(studioId: string) {
+      this.selectedStudioId = studioId;
+    },
     setDate(baseDate: Date) {
       this.fromDate = baseDate.toLocaleDateString('sv-SE');
       this.toDate = new Date(
@@ -29,6 +32,7 @@ export const useStudioLessonStore = defineStore('studioLesson', {
       for (let i = 0; i < 7; i++) {
         const day = new Date(date.getTime() + i * 24 * 60 * 60 * 1000);
         this.weekData.push({
+          dateObj: day,
           date: `${day.getMonth() + 1}/${day.getDate()}`,
           day: day.getDate(),
           label: ['日', '月', '火', '水', '木', '金', '土'][day.getDay()],
@@ -36,12 +40,12 @@ export const useStudioLessonStore = defineStore('studioLesson', {
         });
       }
     },
-    async getStudioLessonData(studioId: string) {
+    async getStudioLessonDataApi() {
       try {
         const { data } = await useSanctumFetch('/api/get_studio_lesson_data', {
           method: 'GET',
           query: {
-            studio_id: studioId,
+            studio_id: this.selectedStudioId,
             from_date: this.fromDate,
             to_date: this.toDate,
           },
@@ -55,12 +59,12 @@ export const useStudioLessonStore = defineStore('studioLesson', {
         console.error('Error fetching studio lesson data:', err);
       }
     },
-    async changeStudioLessonData(studioId: string) {
+    async changeStudioLessonDataApi() {
       try {
         const { data } = await useSanctumFetch('/api/get_studio_lesson_data', {
           method: 'GET',
           query: {
-            studio_id: studioId,
+            studio_id: this.selectedStudioId,
             from_date: this.fromDate,
             to_date: this.toDate,
           },

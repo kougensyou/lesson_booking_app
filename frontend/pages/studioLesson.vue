@@ -8,9 +8,16 @@ const studioLessonStore = useStudioLessonStore();
 
 const studioId = route.query.studio_id as string;
 
+const changeStudioLessonData = (selectedDateObj: Date) => {
+  studioLessonStore.setDate(selectedDateObj);
+  studioLessonStore.setWeekData();
+  studioLessonStore.changeStudioLessonDataApi();
+};
+
+studioLessonStore.setStudioId(studioId);
 studioLessonStore.setDate(new Date());
 studioLessonStore.setWeekData();
-await studioLessonStore.getStudioLessonData(studioId);
+await studioLessonStore.getStudioLessonDataApi();
 </script>
 <template>
   <div class="p-4">
@@ -30,6 +37,7 @@ await studioLessonStore.getStudioLessonData(studioId);
             'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold',
             d.active ? 'bg-black text-white' : 'bg-white text-black border',
           ]"
+          @click="!d.active ? changeStudioLessonData(d.dateObj) : null"
         >
           {{ d.day }}
         </div>
