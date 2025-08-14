@@ -20,6 +20,11 @@ studioLessonStore.setWeekData();
 await studioLessonStore.getStudioLessonDataApi();
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('lessonBooking.tabTitle') }}</title>
+    </Head>
+  </div>
   <div class="p-4">
     <div class="w-full text-center mb-2">
       <div class="text-xl font-bold">

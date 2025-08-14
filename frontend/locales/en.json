@@ -40,5 +40,10 @@
     "instructor": "Instructor",
     "lessonName": "Lesson Name",
     "searchButton": "Search"
+  },
+  "lessonDetail": {
+    "tabTitle": "Lesson Detail",
+    "bookButton": "Book a Lesson",
+    "backButton": "Back"
   }
 }

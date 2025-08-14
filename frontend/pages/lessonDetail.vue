@@ -4,12 +4,19 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-//const lessonDetailStore = useLessonDetailStore();
+const lessonDetailStore = useLessonDetailStore();
 
 const lessonId = route.query.lesson_id as string;
-console.log(lessonId);
+
+lessonDetailStore.setLessonId(lessonId);
+await lessonDetailStore.getLessonDetailApi();
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('lessonDetail.tabTitle') }}</title>
+    </Head>
+  </div>
   <div class="bg-white min-h-screen p-4 space-y-4 max-w-xl mx-auto">
     <h1 class="text-xl font-bold">マジックサークル 〜コアを安定させる〜</h1>
     <div class="text-gray-600 text-sm">Aoi.W</div>
@@ -39,10 +46,10 @@ console.log(lessonId);
           class="w-full bg-sky-500 text-white rounded-3xl py-4 relative"
           @click="searchLessons"
         >
-          <span>スタジオ レッスン予約</span>
+          <span>{{ $t('lessonDetail.bookButton') }}</span>
         </button>
         <div class="text-center text-sm text-blue-600 underline cursor-pointer">
-          戻る
+          {{ $t('lessonDetail.backButton') }}
         </div>
       </div>
     </div>

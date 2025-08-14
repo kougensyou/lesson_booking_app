@@ -4,6 +4,11 @@ import { useLessonBookingStore } from '../stores/useLessonBookingStore';
 const lessonBookingStore = useLessonBookingStore();
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('lessonBooking.tabTitle') }}</title>
+    </Head>
+  </div>
   <div v-for="(studio, i) in lessonBookingStore.studioList" :key="i">
     <NuxtLink
       :to="{

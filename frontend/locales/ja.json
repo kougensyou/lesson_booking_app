@@ -40,5 +40,10 @@
     "instructor": "インストラクター",
     "lessonName": "レッスン名",
     "searchButton": "検索"
+  },
+  "lessonDetail": {
+    "tabTitle": "レッスン詳細",
+    "bookButton": "レッスン予約",
+    "backButton": "戻る"
   }
 }
