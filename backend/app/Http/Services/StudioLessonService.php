@@ -30,7 +30,8 @@ class StudioLessonService
         }
     }
 
-    private function getStudioLessonList($studioId, $fromDate, $toDate) {
+    private function getStudioLessonList($studioId, $fromDate, $toDate)
+    {
         return Lesson::select(
                 'studio.studio_name as studio_name',
                 'lesson.name as lesson_name',
@@ -43,12 +44,28 @@ class StudioLessonService
             ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
             ->where('lesson.start_time', '>', Carbon::now())
             ->where('lesson.studio_id', $studioId)
-            ->whereBetween('lesson.start_time', [$fromDate, $toDate])
-            ->get();
+            ->whereBetween('lesson.start_time', [
+                Carbon::parse($fromDate)->startOfDay(),
+                Carbon::parse($toDate)->endOfDay()
+            ])
+            ->orderBy('lesson.start_time')
+            ->get()
+            ->reduce(function ($carry, $lesson) {
+                $date = Carbon::parse($lesson->start_time)->format('Y-m-d');
+                $hourKey = Carbon::parse($lesson->start_time)->format('H:00');
+                $time    = Carbon::parse($lesson->start_time)->format('H:i');
+
+                $carry[$date][$hourKey][] = [
+                    'startTime'      => $time,
+                    'lessonName'     => $lesson->lesson_name,
+                    'instructorName' => $lesson->instructor_name,
+                ];
+                return $carry;
+            }, []);
     }
 
     private function getStudioData($studioId) {
-        return Studio::select('id', 'studio_name', 'image_path')
+        return Studio::select('id', 'studio_name')
         ->where('id', $studioId)
         ->first();
     }

@@ -18,10 +18,10 @@ export const useStudioLessonStore = defineStore('studioLesson', {
   actions: {
     checkSelected() {},
     setDate(baseDate: Date) {
-      this.fromDate = baseDate.toISOString().split('T')[0];
-      this.toDate = new Date(baseDate.getTime() + 6 * 24 * 60 * 60 * 1000)
-        .toISOString()
-        .split('T')[0];
+      this.fromDate = baseDate.toLocaleDateString('sv-SE');
+      this.toDate = new Date(
+        baseDate.getTime() + 6 * 24 * 60 * 60 * 1000
+      ).toLocaleDateString('sv-SE');
     },
     setWeekData() {
       this.weekData = [];
@@ -37,7 +37,6 @@ export const useStudioLessonStore = defineStore('studioLesson', {
       }
     },
     async getStudioLessonData(studioId: string) {
-      this.setDate(new Date());
       try {
         const { data } = await useSanctumFetch('/api/get_studio_lesson_data', {
           method: 'GET',

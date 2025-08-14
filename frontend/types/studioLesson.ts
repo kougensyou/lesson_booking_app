@@ -1,6 +1,5 @@
 export interface Studio {
   studio_name: string;
-  yoga_or_pilates: string;
 }
 
 export interface WeekData {

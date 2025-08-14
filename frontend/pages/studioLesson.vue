@@ -8,8 +8,8 @@ const studioLessonStore = useStudioLessonStore();
 
 const studioId = route.query.studio_id as string;
 
+studioLessonStore.setDate(new Date());
 studioLessonStore.setWeekData();
-
 await studioLessonStore.getStudioLessonData(studioId);
 </script>
 <template>
@@ -19,29 +19,28 @@ await studioLessonStore.getStudioLessonData(studioId);
       <div class="text-xl font-bold">
         {{ studioLessonStore.studioData.studio_name }}
       </div>
-      <div class="text-sm text-gray-500">
-        {{ studioLessonStore.studioData.yoga_or_pilates }}
-      </div>
     </div>
 
     <!-- 日付切替 -->
-    <div class="flex justify-between px-4 mb-2">
-      <div
-        v-for="d in studioLessonStore.weekData"
-        :key="d.date"
-        class="flex flex-col items-center w-12"
-      >
+    <template v-if="studioLessonStore.weekData.length > 0">
+      <div class="flex justify-between px-4 mb-2">
         <div
-          :class="[
-            'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold',
-            d.active ? 'bg-black text-white' : 'bg-white text-black border',
-          ]"
+          v-for="d in studioLessonStore.weekData"
+          :key="d.date"
+          class="flex flex-col items-center w-12"
         >
-          {{ d.day }}
+          <div
+            :class="[
+              'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold',
+              d.active ? 'bg-black text-white' : 'bg-white text-black border',
+            ]"
+          >
+            {{ d.day }}
+          </div>
+          <div class="text-xs text-gray-500">{{ d.label }}</div>
         </div>
-        <div class="text-xs text-gray-500">{{ d.label }}</div>
       </div>
-    </div>
+    </template>
 
     <!-- スケジュール表 -->
     <div class="grid grid-cols-7 gap-px text-xs border-t border-l px-2">
