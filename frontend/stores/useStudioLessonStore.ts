@@ -58,6 +58,6 @@ export const useStudioLessonStore = defineStore('studioLesson', {
       } catch (err) {
         console.error('Error fetching studio lesson data:', err);
       }
-    }
+    },
   },
 });

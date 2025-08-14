@@ -70,7 +70,15 @@ await studioLessonStore.getStudioLessonDataApi();
               d.date
             ]?.[time]"
           >
-            <div class="bg-white rounded text-[11px] leading-tight">
+            <div
+              class="bg-white rounded text-[11px] leading-tight"
+              @click="
+                $router.push({
+                  path: '/lessonDetail',
+                  query: { lesson_id: studioLesson.lesson_id },
+                })
+              "
+            >
               <div class="bg-green-100 font-bold">空き○</div>
               <div>{{ studioLesson.startTime }} ～</div>
               <div class="font-bold">{{ studioLesson.lessonName }}</div>

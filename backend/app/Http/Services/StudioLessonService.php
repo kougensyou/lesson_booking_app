@@ -28,6 +28,7 @@ class StudioLessonService
     {
         return Lesson::select(
                 'studio.studio_name as studio_name',
+                'lesson.id',
                 'lesson.name as lesson_name',
                 'lesson.start_time',
                 'lesson.end_time',
@@ -50,6 +51,7 @@ class StudioLessonService
                 $time    = Carbon::parse($lesson->start_time)->format('H:i');
 
                 $carry[$date][$hourKey][] = [
+                    'lesson_id'      => $lesson->id,
                     'startTime'      => $time,
                     'lessonName'     => $lesson->lesson_name,
                     'instructorName' => $lesson->instructor_name,

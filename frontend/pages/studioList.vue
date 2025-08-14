@@ -8,7 +8,7 @@ const lessonBookingStore = useLessonBookingStore();
     <NuxtLink
       :to="{
         path: '/studioLesson',
-        query: { studio_id: studio.studio_id },
+        query: { studio_id: studio.id },
       }"
       class="min-w-[300px] h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between p-8"
     >

@@ -10,6 +10,7 @@ export interface WeekData {
   active: boolean;
 }
 export interface BaseStudioLesson {
+  lesson_id: number;
   density_level: string;
   start_time: string;
   lesson_name: string;
