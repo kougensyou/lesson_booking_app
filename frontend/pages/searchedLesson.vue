@@ -14,6 +14,12 @@ const lessonBookingStore = useLessonBookingStore();
       v-for="(lesson, index) in lessonBookingStore.searchedLessonList"
       :key="index"
       class="bg-white border-b p-4"
+      @click="
+        $router.push({
+          path: '/lessonDetail',
+          query: { lesson_id: lesson.lesson_id },
+        })
+      "
     >
       <p class="text-sm text-gray-600">{{ lesson.lesson_time }}</p>
       <p class="font-bold">{{ lesson.lesson_name }}</p>

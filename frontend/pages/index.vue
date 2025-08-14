@@ -5,6 +5,10 @@ definePageMeta({
   layout: 'no-header',
 });
 
+document.fonts.ready.then(() => {
+  document.documentElement.classList.add('font-loaded');
+});
+
 const user = useUserStore();
 </script>
 <template>
@@ -39,12 +43,12 @@ const user = useUserStore();
         :placeholder="$t('index.passwordPlaceholder')"
       />
       <button
-        class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
+        class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative group font-loaded"
         @click="user.login()"
       >
         <span class="text-white">{{ $t('index.loginButton') }}</span>
         <span
-          class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
+          class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible"
           aria-hidden="true"
         >
           chevron_right
@@ -62,12 +66,12 @@ const user = useUserStore();
           <div class="pt-6 font-bold">{{ $t('index.noAccount') }}</div>
         </div>
         <button
-          class="mt-12 pt-6 pb-6 bg-orange-500 rounded-3xl w-full relative"
+          class="mt-12 pt-6 pb-6 bg-orange-500 rounded-3xl w-full relative group font-loaded"
           @click=""
         >
           <span class="text-white">{{ $t('index.firstLesson') }}</span>
           <span
-            class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
+            class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible"
             aria-hidden="true"
             >chevron_right</span
           >
