@@ -15,14 +15,12 @@ export interface BaseStudioLesson {
   instructor_name: string;
 }
 
-export type LessonSchedule = Record<string, BaseStudioLesson[]>; // '07:00'などの時間
+export type LessonSchedule = Record<string, BaseStudioLesson[]>;
 
-export type StudioLesson = Record<string, LessonSchedule>; // '2025-08-11'などの日付
+export type StudioLesson = Record<string, LessonSchedule>;
 
 export interface StudioLessonData {
   time_options: string[];
   studio_data: Studio;
-  selected_date: string;
-  selected_dates: string[];
-  studio_lesson_list: StudioLesson[];
+  studio_lesson_list: StudioLesson;
 }

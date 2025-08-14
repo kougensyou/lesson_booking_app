@@ -13,7 +13,7 @@ export const useStudioLessonStore = defineStore('studioLesson', {
     timeOptions: [] as string[],
     fromDate: '',
     toDate: '',
-    studioLessonList: [] as StudioLesson[],
+    studioLessonList: {} as StudioLesson,
   }),
   actions: {
     checkSelected() {},

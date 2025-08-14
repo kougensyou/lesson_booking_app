@@ -51,7 +51,7 @@ class StudioLessonService
             ->orderBy('lesson.start_time')
             ->get()
             ->reduce(function ($carry, $lesson) {
-                $date = Carbon::parse($lesson->start_time)->format('Y-m-d');
+                $date = Carbon::parse($lesson->start_time)->format('n/j');
                 $hourKey = Carbon::parse($lesson->start_time)->format('H:00');
                 $time    = Carbon::parse($lesson->start_time)->format('H:i');
 
