@@ -5,10 +5,17 @@ export const useLessonDetailStore = defineStore('lessonDetail', {
   state: () => ({
     lessonId: '',
     lessonDetail: {} as LessonDetail,
+    isDialogOpen: false as boolean,
   }),
   actions: {
     setLessonId(lessonId: string) {
       this.lessonId = lessonId;
+    },
+    openDialog() {
+      this.isDialogOpen = true;
+    },
+    closeDialog() {
+      this.isDialogOpen = false;
     },
     async getLessonDetailApi() {
       try {
@@ -22,6 +29,20 @@ export const useLessonDetailStore = defineStore('lessonDetail', {
         console.log('lesson detail data fetched:', this.lessonDetail);
       } catch (err) {
         console.error('Error fetching lesson detail data:', err);
+      }
+    },
+    async bookLesson() {
+      try {
+        const { data } = await useSanctumFetch('/api/book_lesson', {
+          method: 'POST',
+          body: {
+            lesson_id: this.lessonId,
+          },
+        });
+        this.lessonDetail = data.value as LessonDetail;
+        console.log('bookLesson fetched:', this.lessonDetail);
+      } catch (err) {
+        console.error('Error fetching bookLesson data:', err);
       }
     },
   },
