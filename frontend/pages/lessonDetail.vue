@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useLessonDetailStore } from '../stores/useLessonDetailStore';
+import BookConfirmDialog from '~/components/lessonDetail/bookConfirmDialog.vue';
+import BookConfirmButton from '~/components/lessonDetail/bookConfirmButton.vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -56,73 +58,13 @@ await lessonDetailStore.getLessonDetailApi();
       {{ lessonDetailStore.lessonDetail.instructor_introduction }}
     </div>
 
-    <div class="fixed bottom-0 left-0 right-0 bg-white p-8">
-      <div class="max-w-md mx-auto space-y-4">
-        <button
-          class="w-full bg-sky-500 text-white rounded-3xl py-4 relative"
-          @click="lessonDetailStore.openDialog"
-        >
-          <span>{{ $t('lessonDetail.bookButton') }}</span>
-        </button>
-        <div
-          class="text-center text-sm text-blue-600 underline cursor-pointer"
-          @click="$router.back()"
-        >
-          {{ $t('lessonDetail.backButton') }}
-        </div>
-      </div>
-    </div>
+    <BookConfirmButton :open-dialog="lessonDetailStore.openDialog" />
   </div>
   <template v-if="lessonDetailStore.isDialogOpen">
-    <div class="fixed inset-0 bg-black bg-opacity-50 z-50"></div>
-    <div
-      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-    >
-      <div class="bg-white rounded-lg shadow-lg w-[80%] max-w-md p-6">
-        <h2 class="text-lg font-semibold mb-4 text-center">
-          {{ $t('lessonDetail.confirmDialogMessage') }}
-        </h2>
-
-        <div class="border rounded-md p-4 flex items-start mb-6">
-          <div class="text-center w-24 flex-shrink-0">
-            <div class="text-sm font-semibold">
-              {{ lessonDetailStore.lessonDetail.studio_name }}
-            </div>
-            <div class="text-lg font-bold mt-1">
-              {{ lessonDetailStore.lessonDetail.lesson_day }}
-            </div>
-            <div class="text-sm">
-              {{ lessonDetailStore.lessonDetail.lesson_time }}
-            </div>
-          </div>
-          <div class="ml-4 flex-1">
-            <div class="font-semibold text-base mb-1">
-              {{ lessonDetailStore.lessonDetail.lesson_name }}
-            </div>
-            <div class="text-sm text-gray-600 flex items-center space-x-2">
-              <span class="font-medium">{{
-                lessonDetailStore.lessonDetail.instructor_name
-              }}</span>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4"
-        >
-          <button
-            class="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded font-semibold"
-            @click="lessonDetailStore.bookLesson"
-          >
-            {{ $t('lessonDetail.bookConfirmed') }}
-          </button>
-          <button
-            class="flex-1 border border-gray-300 text-gray-700 py-2 rounded"
-            @click="lessonDetailStore.closeDialog"
-          >
-            {{ $t('lessonDetail.backButton') }}
-          </button>
-        </div>
-      </div>
-    </div>
+    <BookConfirmDialog
+      :lesson-detail="lessonDetailStore.lessonDetail"
+      :book-lesson="lessonDetailStore.bookLesson"
+      :close-dialog="lessonDetailStore.closeDialog"
+    />
   </template>
 </template>

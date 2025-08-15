@@ -46,6 +46,6 @@
     "bookButton": "レッスン予約",
     "backButton": "戻る",
     "bookConfirmed": "予約確定",
-    "confirmDialogMessage": "以下のレッスンを予約確定しますか？"
+    "confirmDialogMessage": "以下のレッスンを予約しますか？"
   }
 }
