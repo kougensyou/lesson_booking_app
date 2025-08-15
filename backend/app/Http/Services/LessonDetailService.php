@@ -27,7 +27,9 @@ class LessonDetailService
             ->map(function ($item) {
                 $start = Carbon::parse($item->start_time);
                 $end = Carbon::parse($item->end_time);
-                $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
+                $item->lesson_day = $start->format('n/j');
+                $item->lesson_time = $start->format('G:i') . ' - ' . $end->format('G:i');
+                $item->lesson_datetime = $item->lesson_day . ' ' . $item->lesson_time;
                 $item->lesson_image_url = $item->lesson_image_path ? asset('storage/' . ltrim($item->lesson_image_path, '/')) : null;
                 $item->instructor_image_url = $item->instructor_image_path ? asset('storage/' . ltrim($item->instructor_image_path, '/')) : null;
                 return $item;

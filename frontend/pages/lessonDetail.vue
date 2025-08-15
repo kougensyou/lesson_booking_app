@@ -28,7 +28,7 @@ await lessonDetailStore.getLessonDetailApi();
     <div class="flex text-sm text-gray-700">
       <span>{{ lessonDetailStore.lessonDetail.studio_name }}</span>
       <span class="ml-auto">{{
-        lessonDetailStore.lessonDetail.lesson_time
+        lessonDetailStore.lessonDetail.lesson_datetime
       }}</span>
     </div>
 
@@ -80,21 +80,29 @@ await lessonDetailStore.getLessonDetailApi();
     >
       <div class="bg-white rounded-lg shadow-lg w-[80%] max-w-md p-6">
         <h2 class="text-lg font-semibold mb-4 text-center">
-          以下のレッスンを予約確定しますか？
+          {{ $t('lessonDetail.confirmDialogMessage') }}
         </h2>
 
         <div class="border rounded-md p-4 flex items-start mb-6">
           <div class="text-center w-24 flex-shrink-0">
-            <div class="text-sm font-semibold">札幌</div>
-            <div class="text-lg font-bold mt-1">08/25</div>
-            <div class="text-sm">10:45 - 11:40</div>
+            <div class="text-sm font-semibold">
+              {{ lessonDetailStore.lessonDetail.studio_name }}
+            </div>
+            <div class="text-lg font-bold mt-1">
+              {{ lessonDetailStore.lessonDetail.lesson_day }}
+            </div>
+            <div class="text-sm">
+              {{ lessonDetailStore.lessonDetail.lesson_time }}
+            </div>
           </div>
           <div class="ml-4 flex-1">
             <div class="font-semibold text-base mb-1">
-              骨盤底筋ピラティス〜ポッコリお腹を改善〜
+              {{ lessonDetailStore.lessonDetail.lesson_name }}
             </div>
             <div class="text-sm text-gray-600 flex items-center space-x-2">
-              <span class="font-medium">Kei</span>
+              <span class="font-medium">{{
+                lessonDetailStore.lessonDetail.instructor_name
+              }}</span>
             </div>
           </div>
         </div>
@@ -105,13 +113,13 @@ await lessonDetailStore.getLessonDetailApi();
             class="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded font-semibold"
             @click="lessonDetailStore.bookLesson"
           >
-            予約を確定
+            {{ $t('lessonDetail.bookConfirmed') }}
           </button>
           <button
             class="flex-1 border border-gray-300 text-gray-700 py-2 rounded"
             @click="lessonDetailStore.closeDialog"
           >
-            戻る
+            {{ $t('lessonDetail.backButton') }}
           </button>
         </div>
       </div>

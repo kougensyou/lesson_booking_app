@@ -44,6 +44,8 @@
   "lessonDetail": {
     "tabTitle": "Lesson Detail",
     "bookButton": "Book a Lesson",
-    "backButton": "Back"
+    "backButton": "Back",
+    "bookConfirmed": "Booking Confirmed",
+    "confirmDialogMessage": "Do you book the following lesson?"
   }
 }
