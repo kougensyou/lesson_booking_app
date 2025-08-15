@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonBookingController;
+use App\Http\Controllers\LessonDetailController;
 use App\Http\Controllers\StudioLessonController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -25,4 +26,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('get_lesson_booking_data', [LessonBookingController::class , 'getLessonBookingData']);
     Route::post('search_lessons', [LessonBookingController::class , 'searchLessons']);
     Route::get('get_studio_lesson_data', [StudioLessonController::class , 'getStudioLessonData']);
+    Route::get('get_lesson_detail', [LessonDetailController::class , 'getLessonDetail']);
 });

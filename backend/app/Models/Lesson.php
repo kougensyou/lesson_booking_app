@@ -15,6 +15,7 @@ class Lesson extends AbstractModel
         'id',
         'instructor_id',
         'name',
+        'image_path',
         'studio_id',
         'start_time',
         'end_time',
