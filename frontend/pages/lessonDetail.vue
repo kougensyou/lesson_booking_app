@@ -18,25 +18,39 @@ await lessonDetailStore.getLessonDetailApi();
     </Head>
   </div>
   <div class="bg-white min-h-screen p-4 space-y-4 max-w-xl mx-auto">
-    <h1 class="text-xl font-bold">マジックサークル 〜コアを安定させる〜</h1>
-    <div class="text-gray-600 text-sm">Aoi.W</div>
-    <div class="text-sm text-gray-700">日吉　08/14（木）20:00 - 20:55</div>
+    <h1 class="text-xl font-bold">
+      {{ lessonDetailStore.lessonDetail.lesson_name }}
+    </h1>
+    <div class="text-gray-600 text-sm">
+      {{ lessonDetailStore.lessonDetail.instructor_name }}
+    </div>
+    <div class="text-sm text-gray-700">
+      {{ lessonDetailStore.lessonDetail.lesson_time }}
+    </div>
 
-    <img src="" alt="マジックサークル" class="w-full rounded" />
+    <img
+      :src="lessonDetailStore.lessonDetail.lesson_image_url"
+      alt="マジックサークル"
+      class="w-full rounded"
+    />
 
     <div class="text-sm space-y-2 leading-relaxed">
-      <p>※このレッスンはマジックサークルを使用します。</p>
-      <p>
-        マジックサークルの抵抗を利用して、体幹を支える背骨付近のインナーマッスルを目覚めさせます。
-      </p>
-      <p>呼吸と動きのつながりや、四肢と体幹のつながりを学べるクラスです。</p>
+      {{ lessonDetailStore.lessonDetail.lesson_explanation }}
     </div>
 
     <div class="flex items-center space-x-4 mt-4">
-      <img src="" alt="Aoi.W" class="w-14 h-14 rounded-full object-cover" />
+      <img
+        :src="lessonDetailStore.lessonDetail.instructor_image_url"
+        alt="Aoi.W"
+        class="w-14 h-14 rounded-full object-cover"
+      />
       <div>
-        <div class="font-semibold">Aoi.W</div>
-        <div class="text-sm text-gray-500">神奈川県綾瀬市で育ちました。</div>
+        <div class="font-semibold">
+          {{ lessonDetailStore.lessonDetail.instructor_name }}
+        </div>
+        <div class="text-sm text-gray-500">
+          {{ lessonDetailStore.lessonDetail.instructor_introduction }}
+        </div>
       </div>
     </div>
 

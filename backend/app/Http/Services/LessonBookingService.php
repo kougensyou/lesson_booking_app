@@ -68,6 +68,7 @@ class LessonBookingService
     public function searchLessons($searchInputForm) {
         try {
             return Lesson::select(
+                    'lesson.id',
                     'studio.studio_name as studio_name',
                     'lesson.name as lesson_name',
                     'lesson.start_time',

@@ -17,7 +17,7 @@ const lessonBookingStore = useLessonBookingStore();
       @click="
         $router.push({
           path: '/lessonDetail',
-          query: { lesson_id: lesson.lesson_id },
+          query: { lesson_id: lesson.id },
         })
       "
     >
