@@ -19,4 +19,14 @@ class LessonDetailController extends Controller
         return $this->lessonDetailService->getLessonDetail($lessonId);
     }
 
+    public function bookLesson(Request $request) {
+        $lessonId = $request->input('lesson_id');
+        $this->lessonDetailService->bookLesson($lessonId);
+
+        return [
+            'success' => true,
+            'message' => 'The lesson was booked successfully.'
+        ];
+    }
+
 }

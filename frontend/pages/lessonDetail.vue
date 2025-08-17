@@ -2,9 +2,16 @@
 import { useLessonDetailStore } from '../stores/useLessonDetailStore';
 import BookConfirmDialog from '~/components/lessonDetail/bookConfirmDialog.vue';
 import BookConfirmButton from '~/components/lessonDetail/bookConfirmButton.vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter();
+
+const bookLesson = () => {
+  lessonDetailStore.bookLessonApi().then(() => {
+    router.push({ path: '/bookDone' });
+  });
+};
 
 const lessonDetailStore = useLessonDetailStore();
 
@@ -63,7 +70,7 @@ await lessonDetailStore.getLessonDetailApi();
   <template v-if="lessonDetailStore.isDialogOpen">
     <BookConfirmDialog
       :lesson-detail="lessonDetailStore.lessonDetail"
-      :book-lesson="lessonDetailStore.bookLesson"
+      :book-lesson="bookLesson"
       :close-dialog="lessonDetailStore.closeDialog"
     />
   </template>

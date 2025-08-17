@@ -27,4 +27,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('search_lessons', [LessonBookingController::class , 'searchLessons']);
     Route::get('get_studio_lesson_data', [StudioLessonController::class , 'getStudioLessonData']);
     Route::get('get_lesson_detail', [LessonDetailController::class , 'getLessonDetail']);
+    Route::post('book_lesson', [LessonDetailController::class , 'bookLesson']);
 });

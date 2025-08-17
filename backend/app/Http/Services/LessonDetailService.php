@@ -2,8 +2,11 @@
 namespace App\Http\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Exceptions\CustomErrorResponseException;
 use App\Models\Lesson;
+use App\Models\LessonBooking;
 
 class LessonDetailService
 {
@@ -38,6 +41,31 @@ class LessonDetailService
 
         } catch (\Throwable $e) {
             \Log::error('getLessonDetail error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function bookLesson($lessonId) {
+
+        DB::beginTransaction();
+        
+        try {
+            $insertData = [
+                'booking_time' => Carbon::now(),
+                'lesson_id' => $lessonId,
+                'user_id' => Auth::id(),
+                'done_flag' => null,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+
+            LessonBooking::insert($insertData);
+
+            DB::commit();
+            
+        } catch (\Throwable $e) {
+            \DB::rollback();
+            \Log::error('bookLesson error: ' . $e->getMessage());
             throw $e;
         }
     }

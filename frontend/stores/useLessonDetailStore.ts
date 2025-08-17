@@ -31,7 +31,7 @@ export const useLessonDetailStore = defineStore('lessonDetail', {
         console.error('Error fetching lesson detail data:', err);
       }
     },
-    async bookLesson() {
+    async bookLessonApi() {
       try {
         const { data } = await useSanctumFetch('/api/book_lesson', {
           method: 'POST',
@@ -39,8 +39,8 @@ export const useLessonDetailStore = defineStore('lessonDetail', {
             lesson_id: this.lessonId,
           },
         });
-        this.lessonDetail = data.value as LessonDetail;
-        console.log('bookLesson fetched:', this.lessonDetail);
+        this.closeDialog();
+        console.log('bookLesson fetched:', data.value);
       } catch (err) {
         console.error('Error fetching bookLesson data:', err);
       }
