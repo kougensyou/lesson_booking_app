@@ -35,7 +35,6 @@ class BookDoneService
         ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
         ->where('lesson.start_time', '>', Carbon::now())
         ->where('lesson.studio_id', $studioId)
-        ->whereNull('lesson.done_flag')
         ->orderBy('lesson.start_time', 'asc')
         ->take(5)
         ->get()

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useLessonDetailStore } from '../stores/useLessonDetailStore';
 import { useBookDoneStore } from '../stores/useBookDoneStore';
+import LessonList from '../components/common/lessonList.vue';
 const lessonDetailStore = useLessonDetailStore();
 const bookDoneStore = useBookDoneStore();
 
