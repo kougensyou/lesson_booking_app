@@ -44,14 +44,18 @@
   "lessonDetail": {
     "tabTitle": "Lesson Detail",
     "bookButton": "Book a Lesson",
+    "cancelButton": "Cancel a Lesson",
     "backButton": "Back",
     "bookConfirmed": "Booking Confirmed",
-    "confirmDialogMessage": "Do you book the following lesson?"
+    "cancelConfirmed": "Cancel Confirmed",
+    "confirmDialogMessage": "Do you book the following lesson?",
+    "cancelDialogMessage": "Do you cancel the following lesson?"
   },
   "bookDone": {
     "tabTitle": "Book Complete",
     "doneMessage": "Your booking has been completed.",
     "instructorMessage": "Thank you for your booking!\nLet's continue to challenge yourself!",
-    "continueBookingButton": "Continue Booking"
+    "continueBookingButton": "Continue Booking",
+    "recommended": "Recommended for You"
   }
 }

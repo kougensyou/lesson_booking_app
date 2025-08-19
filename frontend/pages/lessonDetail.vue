@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useLessonDetailStore } from '../stores/useLessonDetailStore';
-import BookConfirmDialog from '~/components/lessonDetail/bookConfirmDialog.vue';
-import BookConfirmButton from '~/components/lessonDetail/bookConfirmButton.vue';
+import ConfirmDialog from '~/components/lessonDetail/confirmDialog.vue';
+import ConfirmButton from '~/components/lessonDetail/confirmButton.vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
@@ -9,6 +9,12 @@ const router = useRouter();
 
 const bookLesson = () => {
   lessonDetailStore.bookLessonApi().then(() => {
+    router.push({ path: '/bookDone' });
+  });
+};
+
+const cancelLesson = () => {
+  lessonDetailStore.cancelLessonApi().then(() => {
     router.push({ path: '/bookDone' });
   });
 };
@@ -65,12 +71,16 @@ await lessonDetailStore.getLessonDetailApi();
       {{ lessonDetailStore.lessonDetail.instructor_introduction }}
     </div>
 
-    <BookConfirmButton :open-dialog="lessonDetailStore.openDialog" />
+    <ConfirmButton
+      :open-dialog="lessonDetailStore.openDialog"
+      :lesson-detail="lessonDetailStore.lessonDetail"
+    />
   </div>
   <template v-if="lessonDetailStore.isDialogOpen">
-    <BookConfirmDialog
+    <ConfirmDialog
       :lesson-detail="lessonDetailStore.lessonDetail"
       :book-lesson="bookLesson"
+      :cancel-lesson="cancelLesson"
       :close-dialog="lessonDetailStore.closeDialog"
     />
   </template>

@@ -10,22 +10,27 @@ use App\Models\LessonBooking;
 
 class LessonDetailService
 {
-    public function getLessonDetail($lessonId) {
+    public function getLessonDetail($userId, $lessonId) {
         try {
             return Lesson::select(
-                    'studio.id as studio_id',
-                    'studio.studio_name as studio_name',
-                    'lesson.name as lesson_name',
-                    'lesson.explanation as lesson_explanation',
-                    'lesson.image_path as lesson_image_path',
-                    'lesson.start_time',
-                    'lesson.end_time',
-                    'instructor.name as instructor_name',
-                    'instructor.introduction as instructor_introduction',
-                    'instructor.image_path as instructor_image_path'
-                )
+                'studio.id as studio_id',
+                'studio.studio_name as studio_name',
+                'lesson.name as lesson_name',
+                'lesson.explanation as lesson_explanation',
+                'lesson.image_path as lesson_image_path',
+                'lesson.start_time',
+                'lesson.end_time',
+                'instructor.name as instructor_name',
+                'instructor.introduction as instructor_introduction',
+                'instructor.image_path as instructor_image_path',
+                \DB::raw('CASE WHEN lesson_booking.id IS NOT NULL THEN true ELSE false END as reserved_flag')
+            )
             ->join('studio', 'studio.id', '=', 'lesson.studio_id')
             ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
+            ->leftJoin('lesson_booking', function ($join) use ($userId) {
+                $join->on('lesson_booking.lesson_id', '=', 'lesson.id')
+                    ->where('lesson_booking.user_id', '=', $userId);
+            })
             ->where('lesson.id', $lessonId)
             ->get()
             ->map(function ($item) {
@@ -36,6 +41,7 @@ class LessonDetailService
                 $item->lesson_datetime = $item->lesson_day . ' ' . $item->lesson_time;
                 $item->lesson_image_url = $item->lesson_image_path ? asset('storage/' . ltrim($item->lesson_image_path, '/')) : null;
                 $item->instructor_image_url = $item->instructor_image_path ? asset('storage/' . ltrim($item->instructor_image_path, '/')) : null;
+                $item->reserved_flag = (bool) $item->reserved_flag;
                 return $item;
             })
             ->first();

@@ -45,5 +45,19 @@ export const useLessonDetailStore = defineStore('lessonDetail', {
         console.error('Error fetching bookLesson data:', err);
       }
     },
+    async cancelLessonApi() {
+      try {
+        const { data } = await useSanctumFetch('/api/cancel_lesson', {
+          method: 'POST',
+          body: {
+            lesson_id: this.lessonId,
+          },
+        });
+        this.closeDialog();
+        console.log('cancelLesson fetched:', data.value);
+      } catch (err) {
+        console.error('Error fetching cancelLesson data:', err);
+      }
+    },
   },
 });

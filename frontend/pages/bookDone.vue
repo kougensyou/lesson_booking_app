@@ -49,7 +49,7 @@ await bookDoneStore.getBookDoneData(lessonDetailStore.lessonDetail.studio_id);
 
     <div class="mt-6">
       <h3 class="font-semibold mb-2">
-        {{ lessonDetailStore.lessonDetail.studio_name }}のその他のレッスン
+        {{ $t('bookDone.recommended') }}
       </h3>
 
       <LessonList :lesson-list="bookDoneStore.sameStudioLessonList" />

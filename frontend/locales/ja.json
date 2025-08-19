@@ -44,14 +44,18 @@
   "lessonDetail": {
     "tabTitle": "レッスン詳細",
     "bookButton": "レッスン予約",
+    "cancelButton": "キャンセル",
     "backButton": "戻る",
     "bookConfirmed": "予約確定",
-    "confirmDialogMessage": "以下のレッスンを予約しますか？"
+    "cancelConfirmed": "キャンセル確定",
+    "bookDialogMessage": "以下のレッスンを予約しますか？",
+    "cancelDialogMessage": "以下のレッスンをキャンセルしますがよろしいですか？"
   },
   "bookDone": {
     "tabTitle": "予約完了",
     "doneMessage": "予約が完了しました。",
     "instructorMessage": "ご予約ありがとうございます！\n更に挑戦を続けていきましょう！",
-    "continueBookingButton": "続けて予約してみる"
+    "continueBookingButton": "続けて予約してみる",
+    "recommended": "こちらもおすすめ"
   }
 }
