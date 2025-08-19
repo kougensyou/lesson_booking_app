@@ -57,5 +57,11 @@
     "instructorMessage": "ご予約ありがとうございます！\n更に挑戦を続けていきましょう！",
     "continueBookingButton": "続けて予約してみる",
     "recommended": "こちらもおすすめ"
+  },
+  "cancelDone": {
+    "tabTitle": "キャンセル完了",
+    "cancelMessage": "以下のレッスンをキャンセルしました。",
+    "continueBookingButton": "続けて予約",
+    "toMyPageButton": "マイページへ"
   }
 }

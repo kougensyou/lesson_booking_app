@@ -77,4 +77,22 @@ class LessonDetailService
         }
     }
 
+    public function cancelLesson($userId, $lessonId) {
+        DB::beginTransaction();
+
+        try {
+            
+            LessonBooking::where('user_id', $userId)
+                ->where('lesson_id', $lessonId)
+                ->delete();
+
+            DB::commit();
+            
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            \Log::error('deleteLessonBooking error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
 }

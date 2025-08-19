@@ -31,4 +31,15 @@ class LessonDetailController extends Controller
         ];
     }
 
+    public function cancelLesson(Request $request) {
+        $userId = Auth::id();
+        $lessonId = $request->input('lesson_id');
+        $this->lessonDetailService->cancelLesson($userId, $lessonId);
+
+        return [
+            'success' => true,
+            'message' => 'The lesson was canceled successfully.'
+        ];
+    }
+
 }

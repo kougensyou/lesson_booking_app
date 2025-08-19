@@ -15,7 +15,7 @@ const bookLesson = () => {
 
 const cancelLesson = () => {
   lessonDetailStore.cancelLessonApi().then(() => {
-    router.push({ path: '/bookDone' });
+    router.push({ path: '/cancelDone' });
   });
 };
 

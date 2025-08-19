@@ -57,5 +57,11 @@
     "instructorMessage": "Thank you for your booking!\nLet's continue to challenge yourself!",
     "continueBookingButton": "Continue Booking",
     "recommended": "Recommended for You"
+  },
+  "cancelDone": {
+    "tabTitle": "Cancel Complete",
+    "cancelMessage": "The following lesson has been canceled.",
+    "continueBookingButton": "Continue Booking",
+    "toMyPageButton": "to MyPage"
   }
 }
