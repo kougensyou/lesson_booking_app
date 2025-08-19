@@ -47,5 +47,11 @@
     "backButton": "戻る",
     "bookConfirmed": "予約確定",
     "confirmDialogMessage": "以下のレッスンを予約しますか？"
+  },
+  "bookDone": {
+    "tabTitle": "予約完了",
+    "doneMessage": "予約が完了しました。",
+    "instructorMessage": "ご予約ありがとうございます！\n更に挑戦を続けていきましょう！",
+    "continueBookingButton": "続けて予約してみる"
   }
 }

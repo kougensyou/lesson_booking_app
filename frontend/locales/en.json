@@ -47,5 +47,11 @@
     "backButton": "Back",
     "bookConfirmed": "Booking Confirmed",
     "confirmDialogMessage": "Do you book the following lesson?"
+  },
+  "bookDone": {
+    "tabTitle": "Book Complete",
+    "doneMessage": "Your booking has been completed.",
+    "instructorMessage": "Thank you for your booking!\nLet's continue to challenge yourself!",
+    "continueBookingButton": "Continue Booking"
   }
 }
