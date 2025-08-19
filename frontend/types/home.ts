@@ -1,15 +1,4 @@
-export interface Lesson {
-  id: number;
-  done_flag: boolean;
-  studio_name: string;
-  lesson_name: string;
-  start_time: string;
-  end_time: string;
-  lesson_time: string;
-  instructor_name: string;
-  image_path: string;
-  image_url: string;
-}
+import type { Lesson } from '~/types/common';
 
 export interface LessonBooking {
   id: number;

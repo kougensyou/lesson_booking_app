@@ -34,7 +34,6 @@ class HomeService
     private function getNextLessonList($userId) {
         return LessonBooking::select(
             'lesson.id',
-            'done_flag',
             'studio.studio_name as studio_name',
             'lesson.name as lesson_name',
             'lesson.start_time',

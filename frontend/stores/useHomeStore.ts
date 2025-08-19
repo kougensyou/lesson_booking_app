@@ -1,11 +1,6 @@
 import { defineStore } from 'pinia';
-import type {
-  Lesson,
-  Info,
-  LessonBooking,
-  HomeData,
-  Attribute,
-} from '~/types/home';
+import type { Info, LessonBooking, HomeData, Attribute } from '~/types/home';
+import type { Lesson } from '~/types/common';
 
 export const useHomeStore = defineStore('home', {
   state: () => ({

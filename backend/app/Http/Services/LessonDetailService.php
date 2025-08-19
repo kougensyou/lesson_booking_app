@@ -13,6 +13,7 @@ class LessonDetailService
     public function getLessonDetail($lessonId) {
         try {
             return Lesson::select(
+                    'studio.id as studio_id',
                     'studio.studio_name as studio_name',
                     'lesson.name as lesson_name',
                     'lesson.explanation as lesson_explanation',

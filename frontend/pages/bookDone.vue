@@ -3,6 +3,8 @@ import { useLessonDetailStore } from '../stores/useLessonDetailStore';
 import { useBookDoneStore } from '../stores/useBookDoneStore';
 const lessonDetailStore = useLessonDetailStore();
 const bookDoneStore = useBookDoneStore();
+
+await bookDoneStore.getBookDoneData(lessonDetailStore.lessonDetail.studio_id);
 </script>
 <template>
   <div class="p-4">
@@ -35,28 +37,21 @@ const bookDoneStore = useBookDoneStore();
 
     <button
       class="w-full bg-orange-500 text-white py-2 rounded-md font-semibold hover:bg-orange-600"
+      @click="
+        $router.push({
+          path: '/lessonBooking',
+        })
+      "
     >
       {{ $t('bookDone.continueBookingButton') }}
     </button>
 
     <div class="mt-6">
-      <h3 class="font-semibold mb-2">予約したレッスンと似ている</h3>
+      <h3 class="font-semibold mb-2">
+        {{ lessonDetailStore.lessonDetail.studio_name }}のその他のレッスン
+      </h3>
 
-      <div class="bg-white border p-4 rounded-lg shadow-sm">
-        <div class="flex justify-between text-sm text-gray-600">
-          <span>綱島</span>
-          <span>08/20（水）20:00 - 20:55</span>
-        </div>
-        <div class="mt-1 text-blue-600 text-xs">空き〇</div>
-        <div class="mt-2 text-sm">
-          <span
-            class="bg-blue-200 text-blue-800 px-2 py-0.5 rounded text-xs mr-1"
-            >グループ ALL</span
-          >
-          マジックサークル〜コアを安定させる〜
-        </div>
-        <div class="text-xs text-gray-500 mt-1">講師: Sam</div>
-      </div>
+      <LessonList :lesson-list="bookDoneStore.sameStudioLessonList" />
     </div>
   </div>
 </template>

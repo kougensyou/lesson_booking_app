@@ -4,9 +4,9 @@ import type {
   LessonBookingData,
   Studio,
   LessonCategory,
-  Lesson,
   SearchInputForm,
 } from '~/types/lessonBooking';
+import type { Lesson } from '~/types/common';
 
 export const useLessonBookingStore = defineStore('lessonBooking', {
   state: () => ({

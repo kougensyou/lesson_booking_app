@@ -1,5 +1,6 @@
 export interface LessonDetail {
   id: number;
+  studio_id: string;
   studio_name: string;
   lesson_name: string;
   lesson_explanation: string;
