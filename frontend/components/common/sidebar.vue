@@ -36,6 +36,11 @@ defineProps<{
           }}</NuxtLink>
         </li>
         <li class="pl-4 pb-4">
+          <NuxtLink to="/bookingHistory" @click="closeSidebar">{{
+            $t('sidebar.bookingHistory')
+          }}</NuxtLink>
+        </li>
+        <li class="pl-4 pb-4">
           <NuxtLink to="/memberInfo" @click="closeSidebar">{{
             $t('sidebar.memberInfo')
           }}</NuxtLink>

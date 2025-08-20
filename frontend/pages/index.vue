@@ -48,7 +48,7 @@ const user = useUserStore();
       >
         <span class="text-white">{{ $t('index.loginButton') }}</span>
         <span
-          class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible"
+          class="text-transparent material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible group-[.font-loaded]:text-white"
           aria-hidden="true"
         >
           chevron_right
@@ -71,7 +71,7 @@ const user = useUserStore();
         >
           <span class="text-white">{{ $t('index.firstLesson') }}</span>
           <span
-            class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible"
+            class="text-transparent material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible group-[.font-loaded]:text-white"
             aria-hidden="true"
             >chevron_right</span
           >

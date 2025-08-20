@@ -21,5 +21,10 @@ class User extends Authenticatable
         'name', 
         'email', 
         'password',
+        'birth_date',
+        'image_path',
+        'zip_code',
+        'tel_no',
+        'address'
     ];
 }

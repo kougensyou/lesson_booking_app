@@ -2,7 +2,8 @@
   "sidebar": {
     "home": "Home",
     "lessonBooking": "Lesson Booking",
-    "memberInfo": "Member Information"
+    "bookingHistory": "Booking History",
+    "memberInfo": "Member Information/Settings"
   },
   "header": {
     "title": "Lesson Booking"

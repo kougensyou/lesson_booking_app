@@ -2,7 +2,8 @@
   "sidebar": {
     "home": "ホーム",
     "lessonBooking": "レッスン予約",
-    "memberInfo": "会員情報"
+    "bookingHistory": "予約履歴",
+    "memberInfo": "会員情報・設定"
   },
   "header": {
     "title": "レッスン予約"
