@@ -6,7 +6,7 @@ import type {
   LessonCategory,
   SearchInputForm,
 } from '~/types/lessonBooking';
-import type { Lesson } from '~/types/common';
+import type { Lesson } from '~/types/lesson';
 
 export const useLessonBookingStore = defineStore('lessonBooking', {
   state: () => ({

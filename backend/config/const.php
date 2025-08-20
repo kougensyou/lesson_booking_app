@@ -1,7 +1,7 @@
 <?php
 // 共通定数
 return [
-    'home' => [
+    'information' => [
         'infoKindSlider' => 1,
         'infoKindGrid' => 2,
         'infoKindList' => 3,

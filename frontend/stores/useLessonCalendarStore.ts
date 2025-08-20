@@ -1,14 +1,9 @@
 import { defineStore } from 'pinia';
-import type { Info, LessonBooking, HomeData, Attribute } from '~/types/home';
-import type { Lesson } from '~/types/common';
+import type { LessonBooking, Attribute } from '~/types/lessonCalendar';
 
-export const useHomeStore = defineStore('home', {
+export const useLessonCalendarStore = defineStore('lessonCalendar', {
   state: () => ({
-    nextLessonList: [] as Lesson[],
     selectedLessonList: [] as LessonBooking[],
-    sliderInfoList: [] as Info[],
-    gridInfoList: [] as Info[],
-    listInfoList: [] as Info[],
     calendarThemeColor: 'green',
     selectedMonth: new Date().getMonth(),
     selectedYear: new Date().getFullYear(),
@@ -39,23 +34,20 @@ export const useHomeStore = defineStore('home', {
         this.todayDay === day
       );
     },
-    async getHomeData() {
+    async getSelectedLessonList() {
       try {
-        const { data } = await useSanctumFetch('/api/get_home_data', {
-          method: 'GET',
-          query: {
-            selected_year: this.selectedYear,
-            selected_month: this.selectedMonth,
-          },
-        });
-        const homeData = data.value as HomeData;
-        this.nextLessonList = homeData.next_lesson_list as Lesson[];
-        this.selectedLessonList =
-          homeData.selected_lesson_list as LessonBooking[];
-        this.sliderInfoList = homeData.info_list.slider_info as Info[];
-        this.gridInfoList = homeData.info_list.grid_info as Info[];
-        this.listInfoList = homeData.info_list.list_info as Info[];
-        console.log('home data fetched:', homeData);
+        const { data } = await useSanctumFetch(
+          '/api/get_selected_lesson_list',
+          {
+            method: 'GET',
+            query: {
+              selected_year: this.selectedYear,
+              selected_month: this.selectedMonth,
+            },
+          }
+        );
+        this.selectedLessonList = data.value as LessonBooking[];
+        console.log('home data fetched:', data.value);
       } catch (err) {
         console.error('Error fetching lesson list:', err);
       }

@@ -1,5 +1,7 @@
 <?php
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\InformationController;
+use App\Http\Controllers\LessonCalendarController;
 use App\Http\Controllers\LessonBookingController;
 use App\Http\Controllers\LessonDetailController;
 use App\Http\Controllers\StudioLessonController;
@@ -22,8 +24,9 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('get_home_data', [HomeController::class , 'getHomeData']);
-    Route::get('get_selected_lesson_list', [HomeController::class , 'getSelectedLessonList']);
+    Route::get('get_next_lesson_data', [LessonController::class , 'getNextLessonData']);
+    Route::get('get_information_list', [InformationController::class , 'getInformationList']);
+    Route::get('get_selected_lesson_list', [LessonCalendarController::class , 'getSelectedLessonList']);
     Route::get('get_lesson_booking_data', [LessonBookingController::class , 'getLessonBookingData']);
     Route::post('search_lessons', [LessonBookingController::class , 'searchLessons']);
     Route::get('get_studio_lesson_data', [StudioLessonController::class , 'getStudioLessonData']);

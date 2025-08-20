@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import type { Lesson } from '~/types/common';
+import type { Lesson } from '~/types/lesson';
 import type { BookDoneData } from '~/types/bookDone';
 
 export const useBookDoneStore = defineStore('bookDone', {
