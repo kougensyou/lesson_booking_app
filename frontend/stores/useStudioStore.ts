@@ -1,9 +1,5 @@
 import { defineStore } from 'pinia';
-import type {
-  FavoriteStudio,
-  LessonBookingData,
-  Studio,
-} from '~/types/lessonBooking';
+import type { FavoriteStudio, Studio } from '~/types/studio';
 
 export const useStudioStore = defineStore('studio', {
   state: () => ({
@@ -11,17 +7,29 @@ export const useStudioStore = defineStore('studio', {
     studioList: [] as Studio[],
   }),
   actions: {
-    async getStudioData() {
+    async getStudioList() {
       try {
-        const { data } = await useSanctumFetch('/api/get_studio_data', {
+        const { data } = await useSanctumFetch('/api/get_studio_list', {
           method: 'GET',
         });
-        const lessonBookingData = data.value as LessonBookingData;
-        this.favoriteStudioList = lessonBookingData.favorite_studio_list;
-        this.studioList = lessonBookingData.studio_list;
-        console.log('lesson booking data fetched:', lessonBookingData);
+        this.studioList = data.value as Studio[];
+        console.log('studio data fetched:', this.studioList);
       } catch (err) {
-        console.error('Error fetching lesson booking data:', err);
+        console.error('Error fetching studio data:', err);
+      }
+    },
+    async getFavoriteStudioList() {
+      try {
+        const { data } = await useSanctumFetch(
+          '/api/get_favorite_studio_list',
+          {
+            method: 'GET',
+          }
+        );
+        this.favoriteStudioList = data.value as FavoriteStudio[];
+        console.log('favorite studio data fetched:', this.favoriteStudioList);
+      } catch (err) {
+        console.error('Error fetching favorite studio data:', err);
       }
     },
   },

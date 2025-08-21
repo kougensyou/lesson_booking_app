@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useLessonBookingStore } from '../stores/useLessonBookingStore';
+import { useLessonStore } from '../stores/useLessonStore';
 import LessonList from '../components/common/lessonList.vue';
 
-const lessonBookingStore = useLessonBookingStore();
+const lessonStore = useLessonStore();
 </script>
 <template>
   <div class="">
@@ -10,5 +10,5 @@ const lessonBookingStore = useLessonBookingStore();
       <title>{{ $t('lessonBooking.tabTitle') }}</title>
     </Head>
   </div>
-  <LessonList :lesson-list="lessonBookingStore.searchedLessonList" />
+  <LessonList :lesson-list="lessonStore.searchedLessonList" />
 </template>

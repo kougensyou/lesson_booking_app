@@ -1,109 +1,103 @@
 import { defineStore } from 'pinia';
-import type {
-  FavoriteStudio,
-  LessonBookingData,
-  Studio,
-  LessonCategory,
-  SearchInputForm,
-} from '~/types/lessonBooking';
-import type { Lesson } from '~/types/lesson';
+import type { LessonBooking, Attribute } from '~/types/lessonBooking';
 
 export const useLessonBookingStore = defineStore('lessonBooking', {
   state: () => ({
-    favoriteStudioList: [] as FavoriteStudio[],
-    studioList: [] as Studio[],
-    lessonCategoryList: [] as LessonCategory[],
+    selectedLessonList: [] as LessonBooking[],
     calendarThemeColor: 'green',
-    searchInputForm: {
-      selectedDates: [] as string[],
-    } as SearchInputForm,
-    searchedLessonList: [] as Lesson[],
-    startTimeOptions: [] as string[],
-    endTimeOptions: [] as string[],
     selectedMonth: new Date().getMonth(),
     selectedYear: new Date().getFullYear(),
     todayMonth: new Date().getMonth() + 1,
     todayYear: new Date().getFullYear(),
     todayDay: new Date().getDate(),
   }),
+  getters: {
+    attributes(state): Array<Attribute> {
+      return (state.selectedLessonList ?? []).map((lesson, idx) => ({
+        key: idx,
+        dates: (this as any).parseDateString(lesson.start_time),
+        customData: {
+          done_flag: lesson.done_flag,
+        },
+      }));
+    },
+  },
   actions: {
-    checkSelected(day: number): boolean {
-      return this.searchInputForm.selectedDates.includes(
-        this.selectedYear.toString() +
-          '-' +
-          (this.selectedMonth + 1).toString().padStart(2, '0') +
-          '-' +
-          day.toString().padStart(2, '0')
+    parseDateString(dateStr: string | undefined | null): Date {
+      if (!dateStr || typeof dateStr !== 'string') return new Date('');
+      return new Date(dateStr.replace(' ', 'T'));
+    },
+    checkToday(day: number): boolean {
+      return (
+        this.todayYear === this.selectedYear &&
+        this.todayMonth === this.selectedMonth + 1 &&
+        this.todayDay === day
       );
     },
-    changeByPrev() {
-      this.selectedMonth -= 1;
-      if (this.selectedMonth < 0) {
-        this.selectedMonth = 11;
-        this.selectedYear -= 1;
-      }
-    },
-    changeByNext() {
-      this.selectedMonth += 1;
-      if (this.selectedMonth > 11) {
-        this.selectedMonth = 0;
-        this.selectedYear += 1;
-      }
-    },
-    removeSelected(day: number) {
-      this.searchInputForm.selectedDates =
-        this.searchInputForm.selectedDates.filter(
-          (date) =>
-            date !==
-            this.selectedYear.toString() +
-              '-' +
-              (this.selectedMonth + 1).toString().padStart(2, '0') +
-              '-' +
-              day.toString().padStart(2, '0')
+    async getSelectedLessonList() {
+      try {
+        const { data } = await useSanctumFetch(
+          '/api/get_selected_lesson_list',
+          {
+            method: 'GET',
+            query: {
+              selected_year: this.selectedYear,
+              selected_month: this.selectedMonth,
+            },
+          }
         );
-    },
-    addSelected(day: number) {
-      this.searchInputForm.selectedDates.push(
-        this.selectedYear.toString() +
-          '-' +
-          (this.selectedMonth + 1).toString().padStart(2, '0') +
-          '-' +
-          day.toString().padStart(2, '0')
-      );
-    },
-    async getLessonBookingData() {
-      try {
-        const { data } = await useSanctumFetch('/api/get_lesson_booking_data', {
-          method: 'GET',
-        });
-        const lessonBookingData = data.value as LessonBookingData;
-        this.favoriteStudioList = lessonBookingData.favorite_studio_list;
-        this.studioList = lessonBookingData.studio_list;
-        this.lessonCategoryList = lessonBookingData.lesson_category_list;
-        this.startTimeOptions = lessonBookingData.start_time_options;
-        this.endTimeOptions = lessonBookingData.end_time_options;
-        this.searchInputForm.selectedDates[0] =
-          this.todayYear.toString() +
-          '-' +
-          this.todayMonth.toString().padStart(2, '0') +
-          '-' +
-          this.todayDay.toString().padStart(2, '0');
-        console.log('lesson booking data fetched:', lessonBookingData);
+        this.selectedLessonList = data.value as LessonBooking[];
+        console.log('home data fetched:', data.value);
       } catch (err) {
-        console.error('Error fetching lesson booking data:', err);
+        console.error('Error fetching lesson list:', err);
       }
     },
-    async searchLessonsApi() {
+    async getPrevLessonList() {
       try {
-        console.log('searching lessons with input:', this.searchInputForm);
-        const { data } = await useSanctumFetch('/api/search_lessons', {
-          method: 'POST',
-          body: { searchInputForm: this.searchInputForm },
-        });
-        this.searchedLessonList = data.value as Lesson[];
-        console.log('searched lessons:', this.searchedLessonList);
+        this.selectedMonth -= 1;
+        if (this.selectedMonth < 0) {
+          this.selectedMonth = 11;
+          this.selectedYear -= 1;
+        }
+        const { data } = await useSanctumFetch(
+          '/api/get_selected_lesson_list',
+          {
+            method: 'GET',
+            query: {
+              selected_year: this.selectedYear,
+              selected_month: this.selectedMonth,
+            },
+          }
+        );
+        const selectedLessonList = data.value as LessonBooking[];
+        this.selectedLessonList = selectedLessonList;
+        console.log('selected lesson list fetched:', selectedLessonList);
       } catch (err) {
-        console.error('Error searching lessons:', err);
+        console.error('Error fetching lesson list:', err);
+      }
+    },
+    async getNextLessonList() {
+      try {
+        this.selectedMonth += 1;
+        if (this.selectedMonth > 11) {
+          this.selectedMonth = 0;
+          this.selectedYear += 1;
+        }
+        const { data } = await useSanctumFetch(
+          '/api/get_selected_lesson_list',
+          {
+            method: 'GET',
+            query: {
+              selected_year: this.selectedYear,
+              selected_month: this.selectedMonth,
+            },
+          }
+        );
+        const selectedLessonList = data.value as LessonBooking[];
+        this.selectedLessonList = selectedLessonList;
+        console.log('selected lesson list fetched:', selectedLessonList);
+      } catch (err) {
+        console.error('Error fetching lesson list:', err);
       }
     },
   },

@@ -6,7 +6,7 @@ return [
         'infoKindGrid' => 2,
         'infoKindList' => 3,
     ],
-    'lessonBooking' => [
+    'lesson' => [
         'startTimeOptions' => [
             '05:00','06:00','07:00','08:00','09:00',
             '10:00','11:00','12:00','13:00','14:00',

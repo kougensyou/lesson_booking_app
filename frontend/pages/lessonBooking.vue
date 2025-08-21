@@ -1,19 +1,23 @@
 <script setup lang="ts">
 import CustomizedSearch from '~/components/lessonBooking/customizedSearch.vue';
 import StudioSearch from '~/components/lessonBooking/studioSearch.vue';
-import { useLessonBookingStore } from '../stores/useLessonBookingStore';
+import { useStudioStore } from '../stores/useStudioStore';
+import { useLessonStore } from '../stores/useLessonStore';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const lessonBookingStore = useLessonBookingStore();
+const studioStore = useStudioStore();
+const lessonStore = useLessonStore();
 
 const searchLessons = () => {
-  lessonBookingStore.searchLessonsApi().then(() => {
+  lessonStore.searchLessonsApi().then(() => {
     router.push({ path: '/searchedLesson' });
   });
 };
 
-await lessonBookingStore.getLessonBookingData();
+await studioStore.getStudioList();
+await studioStore.getFavoriteStudioList();
+await lessonStore.getSearchInputData();
 </script>
 <template>
   <div class="">
@@ -21,19 +25,19 @@ await lessonBookingStore.getLessonBookingData();
       <title>{{ $t('lessonBooking.tabTitle') }}</title>
     </Head>
   </div>
-  <StudioSearch :favorite-studio-list="lessonBookingStore.favoriteStudioList" />
+  <StudioSearch :favorite-studio-list="studioStore.favoriteStudioList" />
   <CustomizedSearch
-    :calendar-theme-color="lessonBookingStore.calendarThemeColor"
-    :studio-list="lessonBookingStore.studioList"
-    :lesson-category-list="lessonBookingStore.lessonCategoryList"
-    :start-time-options="lessonBookingStore.startTimeOptions"
-    :end-time-options="lessonBookingStore.endTimeOptions"
-    :search-input-form="lessonBookingStore.searchInputForm"
+    :calendar-theme-color="lessonStore.calendarThemeColor"
+    :studio-list="studioStore.studioList"
+    :lesson-category-list="lessonStore.lessonCategoryList"
+    :start-time-options="lessonStore.startTimeOptions"
+    :end-time-options="lessonStore.endTimeOptions"
+    :search-input-form="lessonStore.searchInputForm"
     :search-lessons="searchLessons"
-    :check-selected="lessonBookingStore.checkSelected"
-    :change-by-prev="lessonBookingStore.changeByPrev"
-    :change-by-next="lessonBookingStore.changeByNext"
-    :remove-selected="lessonBookingStore.removeSelected"
-    :add-selected="lessonBookingStore.addSelected"
+    :check-selected="lessonStore.checkSelected"
+    :change-by-prev="lessonStore.changeByPrev"
+    :change-by-next="lessonStore.changeByNext"
+    :remove-selected="lessonStore.removeSelected"
+    :add-selected="lessonStore.addSelected"
   />
 </template>

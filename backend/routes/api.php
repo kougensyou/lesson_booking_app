@@ -1,11 +1,10 @@
 <?php
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\InformationController;
-use App\Http\Controllers\LessonCalendarController;
+use App\Http\Controllers\StudioController;
 use App\Http\Controllers\LessonBookingController;
 use App\Http\Controllers\LessonDetailController;
 use App\Http\Controllers\StudioLessonController;
-use App\Http\Controllers\BookDoneController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Http\Request;
@@ -26,12 +25,15 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('get_next_lesson_data', [LessonController::class , 'getNextLessonData']);
     Route::get('get_information_list', [InformationController::class , 'getInformationList']);
-    Route::get('get_selected_lesson_list', [LessonCalendarController::class , 'getSelectedLessonList']);
+    Route::get('get_selected_lesson_list', [LessonBookingController::class , 'getSelectedLessonList']);
+    Route::get('get_studio_list', [StudioController::class , 'getStudioList']);
+    Route::get('get_favorite_studio_list', [StudioController::class , 'getFavoriteStudioList']);
     Route::get('get_lesson_booking_data', [LessonBookingController::class , 'getLessonBookingData']);
-    Route::post('search_lessons', [LessonBookingController::class , 'searchLessons']);
+    Route::get('get_same_studio_lesson_list', [LessonController::class , 'getSameStudioLessonList']);
+    Route::get('get_search_input_data', [LessonController::class , 'getSearchInputData']);
+    Route::post('search_lessons', [LessonController::class , 'searchLessons']);
     Route::get('get_studio_lesson_data', [StudioLessonController::class , 'getStudioLessonData']);
     Route::get('get_lesson_detail', [LessonDetailController::class , 'getLessonDetail']);
     Route::post('book_lesson', [LessonDetailController::class , 'bookLesson']);
     Route::post('cancel_lesson', [LessonDetailController::class , 'cancelLesson']);
-    Route::get('get_book_done_data', [BookDoneController::class , 'getBookDoneData']);
 });

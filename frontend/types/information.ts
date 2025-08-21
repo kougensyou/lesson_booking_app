@@ -9,7 +9,7 @@ export interface Info {
 }
 
 export interface InformationData {
-    slider_info: Info[];
-    grid_info: Info[];
-    list_info: Info[];
+  slider_info: Info[];
+  grid_info: Info[];
+  list_info: Info[];
 }
