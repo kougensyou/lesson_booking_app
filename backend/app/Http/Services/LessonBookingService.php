@@ -15,20 +15,6 @@ use App\Models\FavoriteStudio;
 class LessonBookingService
 {
 
-    private function getFavoriteStudioList($userId) {
-        return FavoriteStudio::join('studio', 'studio.id', '=', 'favorite_studio.studio_id')
-        ->where('favorite_studio.user_id', $userId)
-        ->get()
-        ->map(function ($item) {
-            if ($item->image_path) {
-                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                return $item;
-            }
-            $item->image_url = null;
-            return $item;
-        });
-    }
-
     public function getSelectedLessonList($userId, $selectedYear, $selectedMonth) {
         try{
             $startOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->startOfMonth();
@@ -91,6 +77,41 @@ class LessonBookingService
         } catch (\Throwable $e) {
             DB::rollBack();
             \Log::error('deleteLessonBooking error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function getBookingHistory($userId) {
+        try {
+            return LessonBooking::select(
+                'lesson.id',
+                'studio.studio_name as studio_name',
+                'lesson.name as lesson_name',
+                'lesson.start_time',
+                'lesson.end_time',
+                'instructor.name as instructor_name',
+                'instructor.image_path'
+            )
+            ->join('lesson', 'lesson.id', '=', 'lesson_booking.lesson_id')
+            ->join('studio', 'studio.id', '=', 'lesson.studio_id')
+            ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
+            ->where('lesson_booking.user_id', $userId)
+            ->where('lesson_booking.done_flag', config('const.lessonBooking.lessonDone'))
+            ->orderBy('lesson.start_time', 'asc')
+            ->paginate(config('const.lessonBooking.pagination'))
+            ->through(function ($item) {
+                $start = Carbon::parse($item->start_time);
+                $end = Carbon::parse($item->end_time);
+                $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
+                if ($item->image_path) {
+                    $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
+                    return $item;
+                }
+                $item->image_url = null;
+                return $item;
+            });
+        } catch (\Throwable $e) {
+            \Log::error('getLessonData error: ' . $e->getMessage());
             throw $e;
         }
     }

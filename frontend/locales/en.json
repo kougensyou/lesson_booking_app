@@ -64,5 +64,9 @@
     "cancelMessage": "The following lesson has been canceled.",
     "continueBookingButton": "Continue Booking",
     "toMyPageButton": "to MyPage"
+  },
+  "bookingHistory": {
+    "tabTitle": "Booking History",
+    "noBookingHistory": "No booking history."
   }
 }

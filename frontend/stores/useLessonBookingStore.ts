@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import type { LessonBooking, Attribute } from '~/types/lessonBooking';
+import type { Lesson } from '~/types/lesson';
 
 export const useLessonBookingStore = defineStore('lessonBooking', {
   state: () => ({
@@ -11,6 +12,9 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     todayYear: new Date().getFullYear(),
     todayDay: new Date().getDate(),
     isDialogOpen: false as boolean,
+    loadedPage: 0 as number,
+    lastPage: 0 as number,
+    bookingHistoryList: [] as Lesson[],
   }),
   getters: {
     attributes(state): Array<Attribute> {
@@ -133,6 +137,24 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         console.log('cancelLesson fetched:', data.value);
       } catch (err) {
         console.error('Error fetching cancelLesson data:', err);
+      }
+    },
+    async getBookingHistory() {
+      try {
+        const { data } = await useSanctumFetch('/api/get_booking_history', {
+          method: 'GET',
+          query: {
+            page: ++this.loadedPage,
+          },
+        });
+        const bookingHistoryResponse = data.value as any;
+        this.bookingHistoryList = this.bookingHistoryList.concat(
+          bookingHistoryResponse.data
+        );
+        this.lastPage = bookingHistoryResponse.last_page;
+        console.log('booking history fetched:', bookingHistoryResponse);
+      } catch (err) {
+        console.error('Error fetching booking history:', err);
       }
     },
   },

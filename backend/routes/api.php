@@ -34,4 +34,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('get_lesson_detail', [LessonController::class , 'getLessonDetail']);
     Route::post('book_lesson', [LessonBookingController::class , 'bookLesson']);
     Route::post('cancel_lesson', [LessonBookingController::class , 'cancelLesson']);
+    Route::get('get_booking_history', [LessonBookingController::class , 'getBookingHistory']);
 });

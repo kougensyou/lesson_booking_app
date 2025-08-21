@@ -64,5 +64,9 @@
     "cancelMessage": "以下のレッスンをキャンセルしました。",
     "continueBookingButton": "続けて予約",
     "toMyPageButton": "マイページへ"
+  },
+  "bookingHistory": {
+    "tabTitle": "予約履歴",
+    "noBookingHistory": "予約履歴はありません。"
   }
 }

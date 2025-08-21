@@ -26,6 +26,10 @@ return [
             '21:00','22:00'
         ],
     ],
+    'lessonBooking' => [
+        'lessonDone' => 1,
+        'pagination' => 5,
+    ],
     // カスタムエクセプション
     'customError' => [
         'httpStatusCode' => [

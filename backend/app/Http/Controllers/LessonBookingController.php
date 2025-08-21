@@ -15,11 +15,6 @@ class LessonBookingController extends Controller
         $this->lessonBookingService = new LessonBookingService();
     }
 
-    public function getLessonBookingData(Request $request) {
-        $userId = Auth::id();
-        return $this->lessonBookingService->getLessonBookingData($userId);
-    }
-
     public function getSelectedLessonList(Request $request) {
         $userId = Auth::id();
         $selectedYear = $request->query('selected_year');
@@ -46,6 +41,11 @@ class LessonBookingController extends Controller
             'success' => true,
             'message' => 'The lesson was canceled successfully.'
         ];
+    }
+
+    public function getBookingHistory(Request $request) {
+        $userId = Auth::id();
+        return $this->lessonBookingService->getBookingHistory($userId);
     }
 
 }
