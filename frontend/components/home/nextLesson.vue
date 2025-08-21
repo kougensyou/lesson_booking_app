@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Lesson } from '~/types/common';
+import type { Lesson } from '~/types/lesson';
 import HorizontalScroll from '../common/horizontalScroll.vue';
 
 defineProps<{

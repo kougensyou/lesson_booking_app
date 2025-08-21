@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Attribute, LessonBooking } from '~/types/home';
+import type { Attribute, LessonBooking } from '~/types/lessonBooking';
 import { Calendar } from 'v-calendar';
 
 const props = defineProps<{
