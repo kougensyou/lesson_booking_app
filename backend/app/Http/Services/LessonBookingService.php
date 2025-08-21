@@ -51,5 +51,49 @@ class LessonBookingService
         }
     }
 
+    
+    public function bookLesson($lessonId) {
+
+        DB::beginTransaction();
+        
+        try {
+            $insertData = [
+                'booking_time' => Carbon::now(),
+                'lesson_id' => $lessonId,
+                'user_id' => Auth::id(),
+                'done_flag' => null,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+
+            LessonBooking::insert($insertData);
+
+            DB::commit();
+            
+        } catch (\Throwable $e) {
+            \DB::rollback();
+            \Log::error('bookLesson error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function cancelLesson($userId, $lessonId) {
+        DB::beginTransaction();
+
+        try {
+            
+            LessonBooking::where('user_id', $userId)
+                ->where('lesson_id', $lessonId)
+                ->delete();
+
+            DB::commit();
+            
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            \Log::error('deleteLessonBooking error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
 
 }

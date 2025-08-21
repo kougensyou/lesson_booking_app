@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useLessonDetailStore } from '../stores/useLessonDetailStore';
+import { useLessonStore } from '../stores/useLessonStore';
+import { useLessonBookingStore } from '../stores/useLessonBookingStore';
 import ConfirmDialog from '~/components/lessonDetail/confirmDialog.vue';
 import ConfirmButton from '~/components/lessonDetail/confirmButton.vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -8,23 +9,24 @@ const route = useRoute();
 const router = useRouter();
 
 const bookLesson = () => {
-  lessonDetailStore.bookLessonApi().then(() => {
+  lessonBookingStore.bookLessonApi(lessonStore.lessonId).then(() => {
     router.push({ path: '/bookDone' });
   });
 };
 
 const cancelLesson = () => {
-  lessonDetailStore.cancelLessonApi().then(() => {
+  lessonBookingStore.cancelLessonApi(lessonStore.lessonId).then(() => {
     router.push({ path: '/cancelDone' });
   });
 };
 
-const lessonDetailStore = useLessonDetailStore();
+const lessonStore = useLessonStore();
+const lessonBookingStore = useLessonBookingStore();
 
 const lessonId = route.query.lesson_id as string;
 
-lessonDetailStore.setLessonId(lessonId);
-await lessonDetailStore.getLessonDetailApi();
+lessonStore.setLessonId(lessonId);
+await lessonStore.getLessonDetailApi();
 </script>
 <template>
   <div class="">
@@ -34,54 +36,54 @@ await lessonDetailStore.getLessonDetailApi();
   </div>
   <div class="bg-white min-h-screen p-4 space-y-4 max-w-xl mx-auto">
     <h1 class="text-xl font-bold">
-      {{ lessonDetailStore.lessonDetail.lesson_name }}
+      {{ lessonStore.lessonDetail.lesson_name }}
     </h1>
     <div class="flex items-center text-gray-600 text-sm">
       <span class="material-symbols-outlined"> person </span>
-      {{ lessonDetailStore.lessonDetail.instructor_name }}
+      {{ lessonStore.lessonDetail.instructor_name }}
     </div>
     <div class="flex text-sm text-gray-700">
-      <span>{{ lessonDetailStore.lessonDetail.studio_name }}</span>
+      <span>{{ lessonStore.lessonDetail.studio_name }}</span>
       <span class="ml-auto">{{
-        lessonDetailStore.lessonDetail.lesson_datetime
+        lessonStore.lessonDetail.lesson_datetime
       }}</span>
     </div>
 
     <img
-      :src="lessonDetailStore.lessonDetail.lesson_image_url"
+      :src="lessonStore.lessonDetail.lesson_image_url"
       alt="Lesson"
       class="w-full rounded"
     />
 
     <div class="text-sm space-y-2 leading-relaxed">
-      {{ lessonDetailStore.lessonDetail.lesson_explanation }}
+      {{ lessonStore.lessonDetail.lesson_explanation }}
     </div>
 
     <div class="flex items-center space-x-4 mt-4">
       <img
-        :src="lessonDetailStore.lessonDetail.instructor_image_url"
+        :src="lessonStore.lessonDetail.instructor_image_url"
         alt="Instructor"
         class="w-14 h-14 rounded-full object-cover"
       />
       <div class="font-semibold">
-        {{ lessonDetailStore.lessonDetail.instructor_name }}
+        {{ lessonStore.lessonDetail.instructor_name }}
       </div>
     </div>
     <div class="text-sm text-gray-500">
-      {{ lessonDetailStore.lessonDetail.instructor_introduction }}
+      {{ lessonStore.lessonDetail.instructor_introduction }}
     </div>
 
     <ConfirmButton
-      :open-dialog="lessonDetailStore.openDialog"
-      :lesson-detail="lessonDetailStore.lessonDetail"
+      :open-dialog="lessonBookingStore.openDialog"
+      :lesson-detail="lessonStore.lessonDetail"
     />
   </div>
-  <template v-if="lessonDetailStore.isDialogOpen">
+  <template v-if="lessonBookingStore.isDialogOpen">
     <ConfirmDialog
-      :lesson-detail="lessonDetailStore.lessonDetail"
+      :lesson-detail="lessonStore.lessonDetail"
       :book-lesson="bookLesson"
       :cancel-lesson="cancelLesson"
-      :close-dialog="lessonDetailStore.closeDialog"
+      :close-dialog="lessonBookingStore.closeDialog"
     />
   </template>
 </template>

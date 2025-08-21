@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { LessonDetail } from '~/types/lessonDetail';
+import type { LessonDetail } from '~/types/lesson';
 
 defineProps<{
   openDialog: Function;

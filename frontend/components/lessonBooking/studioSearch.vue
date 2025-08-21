@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import HorizontalScroll from '../common/horizontalScroll.vue';
-import type { FavoriteStudio } from '~/types/lessonBooking';
+import type { FavoriteStudio } from '~/types/studio';
 
 defineProps<{
   favoriteStudioList: Array<FavoriteStudio>;

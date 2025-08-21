@@ -10,6 +10,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     todayMonth: new Date().getMonth() + 1,
     todayYear: new Date().getFullYear(),
     todayDay: new Date().getDate(),
+    isDialogOpen: false as boolean,
   }),
   getters: {
     attributes(state): Array<Attribute> {
@@ -98,6 +99,40 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         console.log('selected lesson list fetched:', selectedLessonList);
       } catch (err) {
         console.error('Error fetching lesson list:', err);
+      }
+    },
+    openDialog() {
+      this.isDialogOpen = true;
+    },
+    closeDialog() {
+      this.isDialogOpen = false;
+    },
+    async bookLessonApi(lessonId: string) {
+      try {
+        const { data } = await useSanctumFetch('/api/book_lesson', {
+          method: 'POST',
+          body: {
+            lesson_id: lessonId,
+          },
+        });
+        this.closeDialog();
+        console.log('bookLesson fetched:', data.value);
+      } catch (err) {
+        console.error('Error fetching bookLesson data:', err);
+      }
+    },
+    async cancelLessonApi(lessonId: string) {
+      try {
+        const { data } = await useSanctumFetch('/api/cancel_lesson', {
+          method: 'POST',
+          body: {
+            lesson_id: lessonId,
+          },
+        });
+        this.closeDialog();
+        console.log('cancelLesson fetched:', data.value);
+      } catch (err) {
+        console.error('Error fetching cancelLesson data:', err);
       }
     },
   },

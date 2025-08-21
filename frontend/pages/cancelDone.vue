@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useLessonDetailStore } from '../stores/useLessonDetailStore';
-const lessonDetailStore = useLessonDetailStore();
+import { useLessonStore } from '../stores/useLessonStore';
+const lessonStore = useLessonStore();
 </script>
 <template>
   <div class="p-4 max-w-md mx-auto">
@@ -11,19 +11,19 @@ const lessonDetailStore = useLessonDetailStore();
     <div class="border p-4 rounded mb-4">
       <div class="flex justify-between mb-2">
         <span class="font-bold">{{
-          lessonDetailStore.lessonDetail.studio_name
+          lessonStore.lessonDetail.studio_name
         }}</span>
-        <span>{{ lessonDetailStore.lessonDetail.lesson_datetime }}</span>
+        <span>{{ lessonStore.lessonDetail.lesson_datetime }}</span>
       </div>
 
       <div class="flex items-center justify-between">
         <span class="font-medium">{{
-          lessonDetailStore.lessonDetail.lesson_name
+          lessonStore.lessonDetail.lesson_name
         }}</span>
       </div>
 
       <div class="text-sm mt-2 text-gray-600">
-        {{ lessonDetailStore.lessonDetail.instructor_name }}
+        {{ lessonStore.lessonDetail.instructor_name }}
       </div>
     </div>
 

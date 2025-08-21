@@ -35,4 +35,17 @@ class LessonController extends Controller
         return $this->lessonService->searchLessons($searchInputForm);
     }
 
+    public function getLessonDetail(Request $request) {
+        $userId = Auth::id();
+        $lessonId = $request->query('lesson_id');
+        return $this->lessonService->getLessonDetail($userId, $lessonId);
+    }
+
+    public function getStudioLessonData(Request $request) {
+        $studioId = $request->query('studio_id');
+        $fromDate = $request->query('from_date');
+        $toDate = $request->query('to_date');
+        return $this->lessonService->getStudioLessonData($studioId, $fromDate, $toDate);
+    }
+
 }

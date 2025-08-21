@@ -27,4 +27,25 @@ class LessonBookingController extends Controller
         return $this->lessonBookingService->getSelectedLessonList($userId, $selectedYear, $selectedMonth);
     }
 
+    public function bookLesson(Request $request) {
+        $lessonId = $request->input('lesson_id');
+        $this->lessonBookingService->bookLesson($lessonId);
+
+        return [
+            'success' => true,
+            'message' => 'The lesson was booked successfully.'
+        ];
+    }
+
+    public function cancelLesson(Request $request) {
+        $userId = Auth::id();
+        $lessonId = $request->input('lesson_id');
+        $this->lessonBookingService->cancelLesson($userId, $lessonId);
+
+        return [
+            'success' => true,
+            'message' => 'The lesson was canceled successfully.'
+        ];
+    }
+
 }

@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { useLessonDetailStore } from '../stores/useLessonDetailStore';
-import { useBookDoneStore } from '../stores/useBookDoneStore';
+import { useLessonStore } from '../stores/useLessonStore';
 import LessonList from '../components/common/lessonList.vue';
-const lessonDetailStore = useLessonDetailStore();
-const bookDoneStore = useBookDoneStore();
+const lessonStore = useLessonStore();
 
-await bookDoneStore.getBookDoneData(lessonDetailStore.lessonDetail.studio_id);
+await lessonStore.getSameStudioLessonList(lessonStore.lessonDetail.studio_id);
 </script>
 <template>
   <div class="p-4">
@@ -15,15 +13,15 @@ await bookDoneStore.getBookDoneData(lessonDetailStore.lessonDetail.studio_id);
 
     <div class="bg-white shadow-md rounded-lg p-4 mb-4">
       <div class="text-center text-sm text-gray-500">
-        {{ lessonDetailStore.lessonDetail.studio_name }}
+        {{ lessonStore.lessonDetail.studio_name }}
       </div>
       <div class="text-center text-2xl font-semibold my-2">
-        {{ lessonDetailStore.lessonDetail.lesson_datetime }}
+        {{ lessonStore.lessonDetail.lesson_datetime }}
       </div>
 
       <div class="flex items-start space-x-2 mt-4">
         <img
-          :src="lessonDetailStore.lessonDetail.instructor_image_url"
+          :src="lessonStore.lessonDetail.instructor_image_url"
           alt="Instructor"
           class="rounded-full w-10 h-10"
         />
@@ -31,7 +29,7 @@ await bookDoneStore.getBookDoneData(lessonDetailStore.lessonDetail.studio_id);
           style="white-space: pre-line"
           class="bg-gray-100 rounded-md p-2 text-sm"
         >
-          {{ bookDoneStore.instructorMessage }}
+          <!-- {{ bookDoneStore.instructorMessage }} -->
         </div>
       </div>
     </div>
@@ -52,7 +50,7 @@ await bookDoneStore.getBookDoneData(lessonDetailStore.lessonDetail.studio_id);
         {{ $t('bookDone.recommended') }}
       </h3>
 
-      <LessonList :lesson-list="bookDoneStore.sameStudioLessonList" />
+      <LessonList :lesson-list="lessonStore.sameStudioLessonList" />
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useLessonBookingStore } from '../stores/useLessonBookingStore';
+import { useStudioStore } from '../stores/useStudioStore';
 
-const lessonBookingStore = useLessonBookingStore();
+const studioStore = useStudioStore();
 </script>
 <template>
   <div class="">
@@ -9,7 +9,7 @@ const lessonBookingStore = useLessonBookingStore();
       <title>{{ $t('lessonBooking.tabTitle') }}</title>
     </Head>
   </div>
-  <div v-for="(studio, i) in lessonBookingStore.studioList" :key="i">
+  <div v-for="(studio, i) in studioStore.studioList" :key="i">
     <NuxtLink
       :to="{
         path: '/studioLesson',

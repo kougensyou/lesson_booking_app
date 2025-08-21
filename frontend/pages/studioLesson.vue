@@ -1,23 +1,23 @@
 <script lang="ts" setup>
-import { useStudioLessonStore } from '../stores/useStudioLessonStore';
+import { useLessonStore } from '../stores/useLessonStore';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-const studioLessonStore = useStudioLessonStore();
+const lessonStore = useLessonStore();
 
 const studioId = route.query.studio_id as string;
 
 const changeStudioLessonData = (selectedDateObj: Date) => {
-  studioLessonStore.setDate(selectedDateObj);
-  studioLessonStore.setWeekData();
-  studioLessonStore.getStudioLessonDataApi();
+  lessonStore.setDate(selectedDateObj);
+  lessonStore.setWeekData();
+  lessonStore.getStudioLessonDataApi();
 };
 
-studioLessonStore.setStudioId(studioId);
-studioLessonStore.setDate(new Date());
-studioLessonStore.setWeekData();
-await studioLessonStore.getStudioLessonDataApi();
+lessonStore.setStudioId(studioId);
+lessonStore.setDate(new Date());
+lessonStore.setWeekData();
+await lessonStore.getStudioLessonDataApi();
 </script>
 <template>
   <div class="">
@@ -28,12 +28,12 @@ await studioLessonStore.getStudioLessonDataApi();
   <div class="p-4">
     <div class="w-full text-center mb-2">
       <div class="text-xl font-bold">
-        {{ studioLessonStore.studioData.studio_name }}
+        {{ lessonStore.studioData.studio_name }}
       </div>
     </div>
     <div class="flex justify-between px-4 mb-2">
       <div
-        v-for="d in studioLessonStore.weekData"
+        v-for="d in lessonStore.weekData"
         :key="d.date"
         class="flex flex-col items-center w-12"
       >
@@ -52,7 +52,7 @@ await studioLessonStore.getStudioLessonDataApi();
 
     <div class="grid grid-cols-7 gap-px text-xs border-t border-l px-2">
       <div
-        v-for="d in studioLessonStore.weekData"
+        v-for="d in lessonStore.weekData"
         :key="d.date"
         class="bg-gray-100 text-center py-1"
       >
@@ -60,20 +60,20 @@ await studioLessonStore.getStudioLessonDataApi();
         <div class="text-xs text-gray-500">{{ d.label }}</div>
       </div>
 
-      <template v-for="time in studioLessonStore.timeOptions">
+      <template v-for="time in lessonStore.timeOptions">
         <div class="col-span-7 text-left text-gray-600 text-sm py-1">
           {{ time }}
         </div>
 
         <div
-          v-for="d in studioLessonStore.weekData"
+          v-for="d in lessonStore.weekData"
           :key="d.date"
           class="border-r border-b p-1 align-top h-32"
         >
           <template
-            v-for="studioLesson in studioLessonStore.studioLessonList?.[
-              d.date
-            ]?.[time]"
+            v-for="studioLesson in lessonStore.studioLessonList?.[d.date]?.[
+              time
+            ]"
           >
             <div
               class="bg-white rounded text-[11px] leading-tight"

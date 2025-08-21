@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { Calendar } from 'v-calendar';
-import type {
-  LessonCategory,
-  SearchInputForm,
-  Studio,
-} from '~/types/lessonBooking';
+import type { Studio } from '~/types/studio';
+import type { LessonCategory, SearchInputForm } from '~/types/lesson';
 
 const props = defineProps<{
   calendarThemeColor: string;
