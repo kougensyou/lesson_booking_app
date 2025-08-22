@@ -21,7 +21,7 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 
-const handleScroll = (e: any) => {
+const handleScroll = () => {
   const element = scrollComponent.value;
   if (
     !props.isLoading &&

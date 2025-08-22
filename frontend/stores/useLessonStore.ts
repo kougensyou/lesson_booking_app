@@ -133,7 +133,7 @@ export const useLessonStore = defineStore('lesson', {
       }
     },
     changeIsLoading() {
-      this.isLoading = !this.isLoading;
+      this.isLoading = true;
     },
     async addSearchedLessonsApi() {
       try {
@@ -150,7 +150,7 @@ export const useLessonStore = defineStore('lesson', {
           searchedLessonsResponse.data
         );
         this.lastPage = searchedLessonsResponse.last_page;
-        this.changeIsLoading();
+        this.isLoading = false;
         console.log('searched lessons:', this.searchedLessonList);
       } catch (err) {
         console.error('Error searching lessons:', err);

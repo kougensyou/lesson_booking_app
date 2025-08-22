@@ -63,12 +63,13 @@ class LessonService
             )
             ->join('studio', 'studio.id', '=', 'lesson.studio_id')
             ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
+            ->leftJoin('lesson_booking', 'lesson_booking.lesson_id', '=', 'lesson.id')
+            ->whereNull('lesson_booking.id')
             ->where('lesson.start_time', '>', Carbon::now())
             ->where('lesson.studio_id', $studioId)
             ->orderBy('lesson.start_time', 'asc')
-            ->take(5)
-            ->get()
-            ->map(function ($item) {
+            ->paginate(config('const.lesson.pagination'))
+            ->through(function ($item) {
                 $start = Carbon::parse($item->start_time);
                 $end = Carbon::parse($item->end_time);
                 $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
