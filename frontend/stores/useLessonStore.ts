@@ -96,18 +96,31 @@ export const useLessonStore = defineStore('lesson', {
         console.error('Error fetching lesson list:', err);
       }
     },
-    async getSameStudioLessonList(studioId: string) {
+    initializePaginationData() {
+      this.loadedPage = 0;
+      this.lastPage = 0;
+      this.isLoading = false;
+      this.searchedLessonList = [] as Lesson[];
+      this.sameStudioLessonList = [] as Lesson[];
+    },
+    async addSameStudioLessonList(studioId: string) {
       try {
         const { data } = await useSanctumFetch(
-          '/api/get_same_studio_lesson_list',
+          '/api/add_same_studio_lesson_list',
           {
             method: 'GET',
             query: {
+              page: ++this.loadedPage,
               studio_id: studioId,
             },
           }
         );
-        this.sameStudioLessonList = data.value as Lesson[];
+        const sameStudioLessonsResponse = data.value as any;
+        this.sameStudioLessonList = this.sameStudioLessonList.concat(
+          sameStudioLessonsResponse.data
+        );
+        this.lastPage = sameStudioLessonsResponse.last_page;
+        this.isLoading = false;
         console.log('same studio lesson data fetched:', data.value);
       } catch (err) {
         console.error('Error fetching same studio lesson data:', err);

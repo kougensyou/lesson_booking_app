@@ -20,9 +20,9 @@ class LessonController extends Controller
         return $this->lessonService->getNextLessonData($userId);
     }
 
-    public function getSameStudioLessonList(Request $request) {
+    public function addSameStudioLessonList(Request $request) {
         $studioId = $request->query('studio_id');
-        return $this->lessonService->getSameStudioLessonList($studioId);
+        return $this->lessonService->addSameStudioLessonList($studioId);
     }
 
     public function getSearchInputData(Request $request) {

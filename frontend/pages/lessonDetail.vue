@@ -34,6 +34,24 @@ await lessonStore.getLessonDetailApi();
       <title>{{ $t('lessonDetail.tabTitle') }}</title>
     </Head>
   </div>
+  <p
+    v-if="
+      lessonStore.lessonDetail.done_flag &&
+      lessonStore.lessonDetail.reserved_flag
+    "
+    class="text-center mb-2 bg-gray-100 px-4 py-6 rounded"
+  >
+    {{ $t('lessonDetail.doneMessage') }}
+  </p>
+  <p
+    v-if="
+      !lessonStore.lessonDetail.done_flag &&
+      lessonStore.lessonDetail.reserved_flag
+    "
+    class="text-center mb-2 bg-gray-100 px-4 py-6 rounded"
+  >
+    {{ $t('lessonDetail.bookingMessage') }}
+  </p>
   <div class="bg-white min-h-screen p-4 space-y-4 max-w-xl mx-auto">
     <h1 class="text-xl font-bold">
       {{ lessonStore.lessonDetail.lesson_name }}
@@ -73,10 +91,17 @@ await lessonStore.getLessonDetailApi();
       {{ lessonStore.lessonDetail.instructor_introduction }}
     </div>
 
-    <ConfirmButton
-      :open-dialog="lessonBookingStore.openDialog"
-      :lesson-detail="lessonStore.lessonDetail"
-    />
+    <template
+      v-if="
+        !lessonStore.lessonDetail.done_flag ||
+        !lessonStore.lessonDetail.reserved_flag
+      "
+    >
+      <ConfirmButton
+        :open-dialog="lessonBookingStore.openDialog"
+        :lesson-detail="lessonStore.lessonDetail"
+      />
+    </template>
   </div>
   <template v-if="lessonBookingStore.isDialogOpen">
     <ConfirmDialog

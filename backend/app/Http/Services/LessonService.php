@@ -49,7 +49,7 @@ class LessonService
         }
     }
 
-    public function getSameStudioLessonList($studioId) {
+    public function addSameStudioLessonList($studioId) {
         try {
 
             return Lesson::select(
@@ -190,7 +190,8 @@ class LessonService
                 'instructor.name as instructor_name',
                 'instructor.introduction as instructor_introduction',
                 'instructor.image_path as instructor_image_path',
-                \DB::raw('CASE WHEN lesson_booking.id IS NOT NULL THEN true ELSE false END as reserved_flag')
+                \DB::raw('CASE WHEN lesson_booking.id IS NOT NULL THEN true ELSE false END as reserved_flag'),
+                'lesson_booking.done_flag'
             )
             ->join('studio', 'studio.id', '=', 'lesson.studio_id')
             ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')

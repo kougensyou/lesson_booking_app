@@ -3,7 +3,8 @@ import { useLessonStore } from '../stores/useLessonStore';
 import LessonList from '../components/common/lessonList.vue';
 const lessonStore = useLessonStore();
 
-await lessonStore.getSameStudioLessonList(lessonStore.lessonDetail.studio_id);
+lessonStore.initializePaginationData();
+await lessonStore.addSameStudioLessonList(lessonStore.lessonDetail.studio_id);
 </script>
 <template>
   <div class="p-4">
@@ -50,7 +51,14 @@ await lessonStore.getSameStudioLessonList(lessonStore.lessonDetail.studio_id);
         {{ $t('bookDone.recommended') }}
       </h3>
 
-      <LessonList :lesson-list="lessonStore.sameStudioLessonList" />
+      <LessonList
+        :lesson-list="lessonStore.sameStudioLessonList"
+        :add-lessons="lessonStore.addSameStudioLessonList"
+        :loaded-page="lessonStore.loadedPage"
+        :last-page="lessonStore.lastPage"
+        :is-loading="lessonStore.isLoading"
+        :change-is-loading="lessonStore.changeIsLoading"
+      />
     </div>
   </div>
 </template>

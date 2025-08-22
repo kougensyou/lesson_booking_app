@@ -50,7 +50,9 @@
     "bookConfirmed": "予約確定",
     "cancelConfirmed": "キャンセル確定",
     "bookDialogMessage": "以下のレッスンを予約しますか？",
-    "cancelDialogMessage": "以下のレッスンをキャンセルしますがよろしいですか？"
+    "cancelDialogMessage": "以下のレッスンをキャンセルしますがよろしいですか？",
+    "doneMessage": "受講済のレッスンです。",
+    "bookingMessage": "予約中のレッスンです。"
   },
   "bookDone": {
     "tabTitle": "予約完了",

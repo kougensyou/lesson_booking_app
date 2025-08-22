@@ -50,7 +50,9 @@
     "bookConfirmed": "Booking Confirmed",
     "cancelConfirmed": "Cancel Confirmed",
     "confirmDialogMessage": "Do you book the following lesson?",
-    "cancelDialogMessage": "Do you cancel the following lesson?"
+    "cancelDialogMessage": "Do you cancel the following lesson?",
+    "doneMessage": "This lesson has been completed.",
+    "bookingMessage": "This lesson is currently booked."
   },
   "bookDone": {
     "tabTitle": "Book Complete",

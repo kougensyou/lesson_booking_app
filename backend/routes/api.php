@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('get_studio_list', [StudioController::class , 'getStudioList']);
     Route::get('get_favorite_studio_list', [StudioController::class , 'getFavoriteStudioList']);
     Route::get('get_lesson_booking_data', [LessonBookingController::class , 'getLessonBookingData']);
-    Route::get('get_same_studio_lesson_list', [LessonController::class , 'getSameStudioLessonList']);
+    Route::get('add_same_studio_lesson_list', [LessonController::class , 'addSameStudioLessonList']);
     Route::get('get_search_input_data', [LessonController::class , 'getSearchInputData']);
     Route::get('add_searched_lessons', [LessonController::class , 'addSearchedLessons']);
     Route::get('get_studio_lesson_data', [LessonController::class , 'getStudioLessonData']);

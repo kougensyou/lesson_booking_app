@@ -10,6 +10,7 @@ const studioStore = useStudioStore();
 const lessonStore = useLessonStore();
 
 const addSearchedLessons = () => {
+  lessonStore.initializePaginationData();
   lessonStore.addSearchedLessonsApi().then(() => {
     router.push({ path: '/searchedLesson' });
   });
