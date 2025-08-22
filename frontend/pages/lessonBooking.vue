@@ -9,8 +9,8 @@ const router = useRouter();
 const studioStore = useStudioStore();
 const lessonStore = useLessonStore();
 
-const searchLessons = () => {
-  lessonStore.searchLessonsApi().then(() => {
+const addSearchedLessons = () => {
+  lessonStore.addSearchedLessonsApi().then(() => {
     router.push({ path: '/searchedLesson' });
   });
 };
@@ -33,7 +33,7 @@ await lessonStore.getSearchInputData();
     :start-time-options="lessonStore.startTimeOptions"
     :end-time-options="lessonStore.endTimeOptions"
     :search-input-form="lessonStore.searchInputForm"
-    :search-lessons="searchLessons"
+    :add-searched-lessons="addSearchedLessons"
     :check-selected="lessonStore.checkSelected"
     :change-by-prev="lessonStore.changeByPrev"
     :change-by-next="lessonStore.changeByNext"

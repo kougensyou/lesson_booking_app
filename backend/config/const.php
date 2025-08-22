@@ -25,10 +25,11 @@ return [
             '16:00','17:00','18:00','19:00','20:00',
             '21:00','22:00'
         ],
+        'pagination' => 10,
     ],
     'lessonBooking' => [
         'lessonDone' => 1,
-        'pagination' => 5,
+        'pagination' => 10,
     ],
     // カスタムエクセプション
     'customError' => [

@@ -139,9 +139,9 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         console.error('Error fetching cancelLesson data:', err);
       }
     },
-    async getBookingHistory() {
+    async addBookingHistory() {
       try {
-        const { data } = await useSanctumFetch('/api/get_booking_history', {
+        const { data } = await useSanctumFetch('/api/add_booking_history', {
           method: 'GET',
           query: {
             page: ++this.loadedPage,

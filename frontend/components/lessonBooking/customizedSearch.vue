@@ -10,7 +10,7 @@ const props = defineProps<{
   searchInputForm: SearchInputForm;
   startTimeOptions: string[];
   endTimeOptions: string[];
-  searchLessons: Function;
+  addSearchedLessons: Function;
   checkSelected: Function;
   changeByPrev: Function;
   changeByNext: Function;
@@ -132,7 +132,7 @@ onMounted(() => {
     <div class="max-w-md mx-auto">
       <button
         class="w-full bg-sky-500 text-white rounded-3xl py-4 relative"
-        @click="searchLessons"
+        @click="addSearchedLessons"
       >
         <span>{{ $t('lessonBooking.searchButton') }}</span>
         <span

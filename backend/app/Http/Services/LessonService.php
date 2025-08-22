@@ -122,7 +122,7 @@ class LessonService
         ->get();
     }
 
-    public function searchLessons($searchInputForm) {
+    public function addSearchedLessons($searchInputForm) {
         try {
             return Lesson::select(
                     'lesson.id',
@@ -162,9 +162,8 @@ class LessonService
                     $q->where('lesson.name', 'like', "%{$searchInputForm['lessonName']}%");
                 })
                 ->orderBy('lesson.start_time', 'asc')
-                ->take(5)
-                ->get()
-                ->map(function ($item) {
+                ->paginate(config('const.lesson.pagination'))
+                ->through(function ($item) {
                     $start = Carbon::parse($item->start_time);
                     $end = Carbon::parse($item->end_time);
                     $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');

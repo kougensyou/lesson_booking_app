@@ -43,9 +43,9 @@ class LessonBookingController extends Controller
         ];
     }
 
-    public function getBookingHistory(Request $request) {
+    public function addBookingHistory(Request $request) {
         $userId = Auth::id();
-        return $this->lessonBookingService->getBookingHistory($userId);
+        return $this->lessonBookingService->addBookingHistory($userId);
     }
 
 }

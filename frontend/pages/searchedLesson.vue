@@ -10,5 +10,12 @@ const lessonStore = useLessonStore();
       <title>{{ $t('lessonBooking.tabTitle') }}</title>
     </Head>
   </div>
-  <LessonList :lesson-list="lessonStore.searchedLessonList" />
+  <LessonList
+    :lesson-list="lessonStore.searchedLessonList"
+    :add-lessons="lessonStore.addSearchedLessonsApi"
+    :loaded-page="lessonStore.loadedPage"
+    :last-page="lessonStore.lastPage"
+    :is-loading="lessonStore.isLoading"
+    :change-is-loading="lessonStore.changeIsLoading"
+  />
 </template>

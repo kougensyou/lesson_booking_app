@@ -81,7 +81,7 @@ class LessonBookingService
         }
     }
 
-    public function getBookingHistory($userId) {
+    public function addBookingHistory($userId) {
         try {
             return LessonBooking::select(
                 'lesson.id',

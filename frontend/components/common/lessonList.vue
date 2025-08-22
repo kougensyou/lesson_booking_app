@@ -1,12 +1,42 @@
 <script setup lang="ts">
 import type { Lesson } from '~/types/lesson';
+import { onMounted, onUnmounted } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   lessonList: Array<Lesson>;
+  addLessons: Function;
+  loadedPage: number;
+  lastPage: number;
+  isLoading: boolean;
+  changeIsLoading: Function;
 }>();
+
+const scrollComponent = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+
+const handleScroll = (e: any) => {
+  const element = scrollComponent.value;
+  if (
+    !props.isLoading &&
+    element &&
+    element.getBoundingClientRect().top + element.offsetHeight <
+      window.innerHeight &&
+    props.loadedPage < props.lastPage
+  ) {
+    props.changeIsLoading();
+    props.addLessons();
+  }
+};
 </script>
 <template>
-  <div class="space-y-4 bg-gray-100">
+  <div ref="scrollComponent" class="scrolling-component space-y-4 bg-gray-100">
     <div
       v-for="(lesson, index) in lessonList"
       :key="index"

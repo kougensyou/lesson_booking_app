@@ -30,9 +30,9 @@ class LessonController extends Controller
         return $this->lessonService->getSearchInputData($userId);
     }
 
-    public function searchLessons(Request $request) {
-        $searchInputForm = $request->input('searchInputForm');
-        return $this->lessonService->searchLessons($searchInputForm);
+    public function addSearchedLessons(Request $request) {
+        $searchInputForm = $request->query('search_input_form');
+        return $this->lessonService->addSearchedLessons($searchInputForm);
     }
 
     public function getLessonDetail(Request $request) {

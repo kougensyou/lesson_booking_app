@@ -29,10 +29,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('get_lesson_booking_data', [LessonBookingController::class , 'getLessonBookingData']);
     Route::get('get_same_studio_lesson_list', [LessonController::class , 'getSameStudioLessonList']);
     Route::get('get_search_input_data', [LessonController::class , 'getSearchInputData']);
-    Route::post('search_lessons', [LessonController::class , 'searchLessons']);
+    Route::get('add_searched_lessons', [LessonController::class , 'addSearchedLessons']);
     Route::get('get_studio_lesson_data', [LessonController::class , 'getStudioLessonData']);
     Route::get('get_lesson_detail', [LessonController::class , 'getLessonDetail']);
     Route::post('book_lesson', [LessonBookingController::class , 'bookLesson']);
     Route::post('cancel_lesson', [LessonBookingController::class , 'cancelLesson']);
-    Route::get('get_booking_history', [LessonBookingController::class , 'getBookingHistory']);
+    Route::get('add_booking_history', [LessonBookingController::class , 'addBookingHistory']);
 });

@@ -19,6 +19,9 @@ export const useLessonStore = defineStore('lesson', {
     searchInputForm: {
       selectedDates: [] as string[],
     } as SearchInputForm,
+    loadedPage: 0 as number,
+    lastPage: 0 as number,
+    isLoading: false as boolean,
     searchedLessonList: [] as Lesson[],
     startTimeOptions: [] as string[],
     endTimeOptions: [] as string[],
@@ -129,14 +132,25 @@ export const useLessonStore = defineStore('lesson', {
         console.error('Error getSearchInputData:', err);
       }
     },
-    async searchLessonsApi() {
+    changeIsLoading() {
+      this.isLoading = !this.isLoading;
+    },
+    async addSearchedLessonsApi() {
       try {
         console.log('searching lessons with input:', this.searchInputForm);
-        const { data } = await useSanctumFetch('/api/search_lessons', {
-          method: 'POST',
-          body: { searchInputForm: this.searchInputForm },
+        const { data } = await useSanctumFetch('/api/add_searched_lessons', {
+          method: 'GET',
+          query: {
+            page: ++this.loadedPage,
+            search_input_form: this.searchInputForm,
+          },
         });
-        this.searchedLessonList = data.value as Lesson[];
+        const searchedLessonsResponse = data.value as any;
+        this.searchedLessonList = this.searchedLessonList.concat(
+          searchedLessonsResponse.data
+        );
+        this.lastPage = searchedLessonsResponse.last_page;
+        this.changeIsLoading();
         console.log('searched lessons:', this.searchedLessonList);
       } catch (err) {
         console.error('Error searching lessons:', err);
