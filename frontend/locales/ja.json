@@ -70,5 +70,15 @@
   "bookingHistory": {
     "tabTitle": "予約履歴",
     "noBookingHistory": "予約履歴はありません。"
+  },
+  "memberInfo": {
+    "tabTitle": "会員情報・設定",
+    "birthDay": "生年月日",
+    "address": "住所",
+    "telNo": "電話番号",
+    "favoriteStudio": "お気に入りスタジオ登録",
+    "bugReport": "不具合報告・ご要望",
+    "passwordChange": "パスワード変更",
+    "logout": "ログアウト"
   }
 }

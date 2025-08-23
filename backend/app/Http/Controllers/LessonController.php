@@ -31,7 +31,7 @@ class LessonController extends Controller
     }
 
     public function addSearchedLessons(Request $request) {
-        $searchInputForm = $request->query('search_input_form');
+        $searchInputForm = json_decode($request->query('search_input_form'), true);
         return $this->lessonService->addSearchedLessons($searchInputForm);
     }
 

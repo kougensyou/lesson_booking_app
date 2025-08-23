@@ -11,7 +11,7 @@ defineProps<{
     <h1 class="text-xl font-bold">
       {{ $t('lessonBooking.searchFromStudio') }}
     </h1>
-    <button @click="" class="ml-auto">
+    <button class="ml-auto">
       <span
         class="material-symbols-outlined"
         aria-hidden="true"

@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { useSettingStore } from '~/stores/useSettingStore';
+
+const settingStore = useSettingStore();
+settingStore.setSettingList();
+
 const user = {
   memberId: '100065786',
   name: 'テスト',
@@ -22,24 +27,35 @@ const user = {
 
     <div class="text-sm space-y-4">
       <div class="flex justify-between">
-        <span class="font-medium">会員番号:</span>
-        <span>{{ user.memberId }}</span>
-      </div>
-      <div class="flex justify-between">
-        <span class="font-medium">生年月日:</span>
+        <span class="font-medium">{{ $t('memberInfo.birthDay') }}</span>
         <span>{{ user.birth }}</span>
       </div>
       <div class="flex justify-between">
-        <span class="font-medium">住所:</span>
+        <span class="font-medium">{{ $t('memberInfo.address') }}</span>
         <span>{{ user.zip }}</span>
       </div>
       <div class="text-sm text-right">
         {{ user.address }}
       </div>
       <div class="flex justify-between">
-        <span class="font-medium">電話番号:</span>
+        <span class="font-medium">{{ $t('memberInfo.telNo') }}</span>
         <span>{{ user.phone }}</span>
       </div>
     </div>
+  </div>
+  <div
+    v-for="setting in settingStore.settingList"
+    class="px-4 py-3 border-b border-gray-100 relative"
+  >
+    <a
+      @click="$router.push(setting.path)"
+      rel="noopener noreferrer"
+      class="text-gray-800"
+    >
+      {{ setting.setting_name }}
+    </a>
+    <span class="text-gray-400 material-symbols-outlined absolute right-3">
+      chevron_right
+    </span>
   </div>
 </template>

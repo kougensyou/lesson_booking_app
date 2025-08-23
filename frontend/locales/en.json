@@ -70,5 +70,15 @@
   "bookingHistory": {
     "tabTitle": "Booking History",
     "noBookingHistory": "No booking history."
+  },
+  "memberInfo": {
+    "tabTitle": "Member Information/Settings",
+    "birthDay": "Date of Birth",
+    "address": "Address",
+    "telNo": "Telephone Number",
+    "favoriteStudio": "Favorite Studio Registration",
+    "bugReport": "Bug Report / Feedback",
+    "passwordChange": "Password Change",
+    "logout": "Logout"
   }
 }
