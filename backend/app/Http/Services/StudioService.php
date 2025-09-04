@@ -46,4 +46,37 @@ class StudioService
             throw $e;
         }
     }
+
+    public function saveFavoriteStudioList($userId, $initialFavoriteStudioList, $favoriteStudioList) {
+        DB::beginTransaction();
+
+        try {
+            $initialIds = collect($initialFavoriteStudioList)->pluck('id')->all();
+            $currentIds = collect($favoriteStudioList)->pluck('id')->all();
+
+            // 削除
+            $toDelete = array_diff($initialIds, $currentIds);
+            if (!empty($toDelete)) {
+                FavoriteStudio::where('user_id', $userId)
+                    ->whereIn('studio_id', $toDelete)
+                    ->delete();
+            }
+
+            // 追加
+            $toAdd = array_diff($currentIds, $initialIds);
+            foreach ($toAdd as $studioId) {
+                FavoriteStudio::create([
+                    'user_id'   => $userId,
+                    'studio_id' => $studioId,
+                ]);
+            }
+
+            DB::commit();
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            \Log::error('saveFavoriteStudioList error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
 }

@@ -35,4 +35,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('book_lesson', [LessonBookingController::class , 'bookLesson']);
     Route::post('cancel_lesson', [LessonBookingController::class , 'cancelLesson']);
     Route::get('add_booking_history', [LessonBookingController::class , 'addBookingHistory']);
+    Route::post('save_favorite_studio_list', [StudioController::class , 'saveFavoriteStudioList']);
 });

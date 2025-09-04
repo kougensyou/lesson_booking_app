@@ -86,6 +86,7 @@
     "noFavoriteStudio": "No favorite studio.",
     "pageTitle": "MY Studio Settings",
     "searchStudio": "＋ Search Studio",
-    "save": "Save"
+    "save": "Save",
+    "toastMessage": "MY Studio has been saved!"
   }
 }

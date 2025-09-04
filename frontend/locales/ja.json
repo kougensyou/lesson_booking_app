@@ -86,6 +86,7 @@
     "noFavoriteStudio": "お気に入りスタジオはありません。",
     "pageTitle": "MYスタジオ設定",
     "searchStudio": "＋ スタジオを検索",
-    "save": "保存する"
+    "save": "保存する",
+    "toastMessage": "MYスタジオを保存しました!"
   }
 }

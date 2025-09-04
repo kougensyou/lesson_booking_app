@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useStudioStore } from '../stores/useStudioStore';
-
+import Toast from '~/components/common/toast.vue';
 const studioStore = useStudioStore();
+studioStore.setToastMessage();
 await studioStore.getFavoriteStudioList();
 </script>
 <template>
@@ -25,7 +26,12 @@ await studioStore.getFavoriteStudioList();
           <span class="ml-1 text-red-500">❤</span>
         </div>
       </div>
-      <button class="ml-2 text-red-400 text-xl">－</button>
+      <button
+        class="ml-2 text-red-400 text-xl"
+        @click="studioStore.deleteFavoriteStudio(studio.id)"
+      >
+        －
+      </button>
     </div>
     <div
       class="border-2 border-dashed rounded-lg py-4 text-center text-gray-500 mb-4"
@@ -33,9 +39,20 @@ await studioStore.getFavoriteStudioList();
       {{ $t('favoriteStudio.searchStudio') }}
     </div>
     <button
-      class="w-full py-2 rounded-2xl bg-blue-100 text-blue-600 font-semibold"
+      :class="[
+        'w-full py-2 rounded-2xl',
+        studioStore.saveButtonActive
+          ? 'bg-blue-100 text-blue-600 font-semibold'
+          : 'bg-gray-200 text-gray-500 cursor-not-allowed',
+      ]"
+      @click="studioStore.saveFavoriteStudioList()"
+      :disabled="!studioStore.saveButtonActive"
     >
       {{ $t('favoriteStudio.save') }}
     </button>
+    <Toast
+      :show="studioStore.toastVisible"
+      :message="studioStore.toastMessage"
+    />
   </div>
 </template>
