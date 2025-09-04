@@ -69,7 +69,9 @@ export const useStudioStore = defineStore('studio', {
       this.saveButtonActive = true;
     },
     addFavoriteStudio(studio: Studio) {
-      this.favoriteStudioList = [...this.favoriteStudioList, studio];
+      if (!this.favoriteStudioList.some((s) => s.id === studio.id)) {
+        this.favoriteStudioList = [...this.favoriteStudioList, studio];
+      }
       this.saveButtonActive = true;
     },
     openToast(ms = 2500) {
