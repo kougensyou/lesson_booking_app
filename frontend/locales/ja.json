@@ -80,5 +80,12 @@
     "bugReport": "不具合報告・ご要望",
     "passwordChange": "パスワード変更",
     "logout": "ログアウト"
+  },
+  "favoriteStudio": {
+    "tabTitle": "お気に入りスタジオ",
+    "noFavoriteStudio": "お気に入りスタジオはありません。",
+    "pageTitle": "MYスタジオ設定",
+    "searchStudio": "＋ スタジオを検索",
+    "save": "保存する"
   }
 }

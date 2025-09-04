@@ -80,5 +80,12 @@
     "bugReport": "Bug Report / Feedback",
     "passwordChange": "Password Change",
     "logout": "Logout"
+  },
+  "favoriteStudio": {
+    "tabTitle": "Favorite Studio",
+    "noFavoriteStudio": "No favorite studio.",
+    "pageTitle": "MY Studio Settings",
+    "searchStudio": "＋ Search Studio",
+    "save": "Save"
   }
 }
