@@ -15,8 +15,8 @@ export const useSettingStore = defineStore('setting', {
           setting_name: t('memberInfo.favoriteStudio'),
         },
         {
-          path: '/bugReport',
-          setting_name: t('memberInfo.bugReport'),
+          path: '/report',
+          setting_name: t('memberInfo.report'),
         },
         {
           path: '/passwordChange',

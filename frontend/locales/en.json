@@ -77,7 +77,7 @@
     "address": "Address",
     "telNo": "Telephone Number",
     "favoriteStudio": "Favorite Studio Registration",
-    "bugReport": "Bug Report / Feedback",
+    "report": "Bug Report / Feedback",
     "passwordChange": "Password Change",
     "logout": "Logout"
   },
@@ -88,5 +88,12 @@
     "searchStudio": "＋ Search Studio",
     "save": "Save",
     "toastMessage": "MY Studio has been saved!"
+  },
+  "report": {
+    "report": "Contact Us",
+    "reportTitle": "Subject",
+    "replyEmail": "Reply Email Address",
+    "reportContent": "Content",
+    "send": "Send"
   }
 }

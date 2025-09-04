@@ -77,7 +77,7 @@
     "address": "住所",
     "telNo": "電話番号",
     "favoriteStudio": "お気に入りスタジオ登録",
-    "bugReport": "不具合報告・ご要望",
+    "report": "不具合報告・ご要望",
     "passwordChange": "パスワード変更",
     "logout": "ログアウト"
   },
@@ -88,5 +88,12 @@
     "searchStudio": "＋ スタジオを検索",
     "save": "保存する",
     "toastMessage": "MYスタジオを保存しました!"
+  },
+  "report": {
+    "report": "お問合せ",
+    "reportTitle": "お問合せ件名",
+    "replyEmail": "返信先メールアドレス",
+    "reportContent": "お問合せ内容",
+    "send": "送信"
   }
 }
