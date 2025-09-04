@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
-import type { FavoriteStudio, Studio } from '~/types/studio';
+import type { Studio } from '~/types/studio';
 import { useI18n } from 'vue-i18n';
 
 export const useStudioStore = defineStore('studio', {
   state: () => ({
-    initialFavoriteStudioList: [] as FavoriteStudio[],
-    favoriteStudioList: [] as FavoriteStudio[],
+    initialFavoriteStudioList: [] as Studio[],
+    favoriteStudioList: [] as Studio[],
     studioList: [] as Studio[],
     saveButtonActive: false as boolean,
     toastMessage: '' as string,
@@ -36,8 +36,8 @@ export const useStudioStore = defineStore('studio', {
             method: 'GET',
           }
         );
-        this.initialFavoriteStudioList = data.value as FavoriteStudio[];
-        this.favoriteStudioList = data.value as FavoriteStudio[];
+        this.initialFavoriteStudioList = data.value as Studio[];
+        this.favoriteStudioList = data.value as Studio[];
         console.log('favorite studio data fetched:', this.favoriteStudioList);
       } catch (err) {
         console.error('Error fetching favorite studio data:', err);
@@ -66,6 +66,10 @@ export const useStudioStore = defineStore('studio', {
       this.favoriteStudioList = this.favoriteStudioList.filter(
         (studio) => studio.id !== studioId
       );
+      this.saveButtonActive = true;
+    },
+    addFavoriteStudio(studio: Studio) {
+      this.favoriteStudioList = [...this.favoriteStudioList, studio];
       this.saveButtonActive = true;
     },
     openToast(ms = 2500) {

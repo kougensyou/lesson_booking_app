@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import HorizontalScroll from '../common/horizontalScroll.vue';
-import type { FavoriteStudio } from '~/types/studio';
+import type { Studio } from '~/types/studio';
 
 defineProps<{
-  favoriteStudioList: Array<FavoriteStudio>;
+  favoriteStudioList: Array<Studio>;
 }>();
 </script>
 <template>
@@ -15,7 +15,7 @@ defineProps<{
       <span
         class="material-symbols-outlined"
         aria-hidden="true"
-        @click="$router.push('/studioList')"
+        @click="$router.push('/studioForSearch')"
         >search</span
       >
     </button>
@@ -46,7 +46,7 @@ defineProps<{
         </NuxtLink>
       </div>
       <NuxtLink
-        :to="{ path: '/studioList' }"
+        :to="{ path: '/studioForSearch' }"
         class="min-w-[300px] h-[200px] bg-gray-100 rounded-xl shadow-md flex items-center justify-center p-8"
       >
         <span class="text-gray-500 text-sm">{{
@@ -57,7 +57,7 @@ defineProps<{
   </template>
   <template v-if="favoriteStudioList.length === 0">
     <NuxtLink
-      :to="{ path: '/studioList' }"
+      :to="{ path: '/studioForSearch' }"
       class="min-w-[300px] h-[200px] bg-gray-100 rounded-xl shadow-md flex items-center justify-center p-8"
     >
       <span class="text-gray-500 text-sm">{{

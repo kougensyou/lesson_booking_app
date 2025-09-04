@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import { useStudioStore } from '../stores/useStudioStore';
 import Toast from '~/components/common/toast.vue';
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 const studioStore = useStudioStore();
-studioStore.setToastMessage();
-await studioStore.getFavoriteStudioList();
+onMounted(() => {
+  const addFlag = route.query.add_flag;
+  if (!addFlag) {
+    studioStore.setToastMessage();
+    studioStore.getFavoriteStudioList();
+  }
+});
 </script>
 <template>
   <div class="p-4">
@@ -35,6 +44,7 @@ await studioStore.getFavoriteStudioList();
     </div>
     <div
       class="border-2 border-dashed rounded-lg py-4 text-center text-gray-500 mb-4"
+      @click="$router.push('/studioForFavorite')"
     >
       {{ $t('favoriteStudio.searchStudio') }}
     </div>
