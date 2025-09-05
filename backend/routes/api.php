@@ -3,6 +3,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\LessonBookingController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Http\Request;
@@ -36,4 +37,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('cancel_lesson', [LessonBookingController::class , 'cancelLesson']);
     Route::get('add_booking_history', [LessonBookingController::class , 'addBookingHistory']);
     Route::post('save_favorite_studio_list', [StudioController::class , 'saveFavoriteStudioList']);
+    Route::post('send_report', [ReportController::class , 'sendReport']);
 });

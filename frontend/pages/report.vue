@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useReportStore } from '../stores/useReportStore';
+import Toast from '~/components/common/toast.vue';
 
 const reportStore = useReportStore();
+reportStore.initializeReport();
+reportStore.setToastMessage();
 </script>
 <template>
   <div class="max-w-[640px] mx-auto pl-6 pr-6">
@@ -13,12 +16,11 @@ const reportStore = useReportStore();
         $t('report.reportTitle')
       }}</label>
       <input
-        v-model="reportStore.subject"
+        v-model="reportStore.title"
         type="text"
         class="w-full border rounded px-3 py-2"
       />
     </div>
-
     <div>
       <label class="pt-36 pb-2 text-left text-slate-500">{{
         $t('report.replyEmail')
@@ -35,7 +37,7 @@ const reportStore = useReportStore();
         $t('report.reportContent')
       }}</label>
       <textarea
-        v-model="reportStore.message"
+        v-model="reportStore.contents"
         rows="5"
         class="w-full border rounded px-3 py-2"
       ></textarea>
@@ -53,5 +55,9 @@ const reportStore = useReportStore();
         chevron_right
       </span>
     </button>
+    <Toast
+      :show="reportStore.toastVisible"
+      :message="reportStore.toastMessage"
+    />
   </div>
 </template>

@@ -77,7 +77,7 @@
     "address": "Address",
     "telNo": "Telephone Number",
     "favoriteStudio": "Favorite Studio Registration",
-    "report": "Bug Report / Feedback",
+    "report": "Report",
     "passwordChange": "Password Change",
     "logout": "Logout"
   },
@@ -94,6 +94,7 @@
     "reportTitle": "Subject",
     "replyEmail": "Reply Email Address",
     "reportContent": "Content",
-    "send": "Send"
+    "send": "Send",
+    "toastMessage": "Your inquiry has been sent!"
   }
 }
