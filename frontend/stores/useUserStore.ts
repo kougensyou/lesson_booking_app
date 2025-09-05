@@ -29,15 +29,12 @@ export const useUserStore = defineStore('user', {
     },
     async updatePassword() {
       try {
-        const { data } = await useSanctumFetch(
-          '/api/update_password',
-          {
-            method: 'POST',
-            body: {
-              password_data: this.passwordData,
-            },
-          }
-        );
+        const { data } = await useSanctumFetch('/api/update_password', {
+          method: 'POST',
+          body: {
+            password_data: this.passwordData,
+          },
+        });
         console.log('updatePassword fetched:', data.value);
         this.initializePasswordData();
         this.openToast(2500);
@@ -52,7 +49,7 @@ export const useUserStore = defineStore('user', {
     },
     setToastMessage() {
       const { t } = useI18n();
-      this.toastMessage = t('favoriteStudio.toastMessage');
+      this.toastMessage = t('passwordChange.toastMessage');
     },
     openToast(ms = 2500) {
       this.toastVisible = true;

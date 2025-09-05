@@ -55,9 +55,6 @@ userStore.setToastMessage();
         chevron_right
       </span>
     </button>
-    <Toast
-      :show="userStore.toastVisible"
-      :message="userStore.toastMessage"
-    />
+    <Toast :show="userStore.toastVisible" :message="userStore.toastMessage" />
   </div>
 </template>
