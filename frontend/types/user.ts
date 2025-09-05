@@ -3,3 +3,9 @@ export interface LoginData {
   password: string;
   remember: boolean;
 }
+
+export interface PasswordData {
+  currentPassword: string;
+  newPassword: string;
+  newPasswordConfirmation: string;
+}

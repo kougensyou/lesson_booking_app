@@ -96,5 +96,13 @@
     "reportContent": "お問合せ内容",
     "send": "送信",
     "toastMessage": "お問合せを送信しました!"
+  },
+  "passwordChange": {
+    "passwordChange": "パスワード変更",
+    "currentPassword": "現在のパスワード",
+    "newPassword": "新しいパスワード",
+    "newPasswordConfirmation": "新しいパスワード（確認）",
+    "updatePassword": "パスワード変更",
+    "toastMessage": "パスワードを変更しました!"
   }
 }

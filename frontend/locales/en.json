@@ -96,5 +96,13 @@
     "reportContent": "Content",
     "send": "Send",
     "toastMessage": "Your inquiry has been sent!"
+  },
+  "passwordChange": {
+    "passwordChange": "Password Change",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "newPasswordConfirmation": "New Password (Confirmation)",
+    "updatePassword": "Update Password",
+    "toastMessage": "Your password has been changed!"
   }
 }

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
-import type { LoginData } from '~/types/user';
+import type { LoginData, PasswordData } from '~/types/user';
+import { useI18n } from 'vue-i18n';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -8,6 +9,14 @@ export const useUserStore = defineStore('user', {
       password: '',
       remember: true,
     } as LoginData,
+    passwordData: {
+      currentPassword: '',
+      newPassword: '',
+      newPasswordConfirmation: '',
+    } as PasswordData,
+    toastMessage: '' as string,
+    toastVisible: false as boolean,
+    toastTimeout: 0 as number,
   }),
   actions: {
     async login() {
@@ -17,6 +26,41 @@ export const useUserStore = defineStore('user', {
       } catch (err) {
         console.error('Login failed:', err);
       }
+    },
+    async updatePassword() {
+      try {
+        const { data } = await useSanctumFetch(
+          '/api/update_password',
+          {
+            method: 'POST',
+            body: {
+              password_data: this.passwordData,
+            },
+          }
+        );
+        console.log('updatePassword fetched:', data.value);
+        this.initializePasswordData();
+        this.openToast(2500);
+      } catch (err) {
+        console.error('Update password failed:', err);
+      }
+    },
+    initializePasswordData() {
+      this.passwordData.currentPassword = '';
+      this.passwordData.newPassword = '';
+      this.passwordData.newPasswordConfirmation = '';
+    },
+    setToastMessage() {
+      const { t } = useI18n();
+      this.toastMessage = t('favoriteStudio.toastMessage');
+    },
+    openToast(ms = 2500) {
+      this.toastVisible = true;
+      clearTimeout(this.toastTimeout);
+      this.toastTimeout = window.setTimeout(
+        () => (this.toastVisible = false),
+        ms
+      );
     },
   },
 });
