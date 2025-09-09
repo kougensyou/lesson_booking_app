@@ -21,8 +21,10 @@ use Illuminate\Http\Request;
 */
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/logout', [LogoutController::class , 'logout']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('user', [UserController::class , 'getUser']);
     Route::get('get_next_lesson_data', [LessonController::class , 'getNextLessonData']);
     Route::get('get_information_list', [InformationController::class , 'getInformationList']);
     Route::get('get_selected_lesson_list', [LessonBookingController::class , 'getSelectedLessonList']);

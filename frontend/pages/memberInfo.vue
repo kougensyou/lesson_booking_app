@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { useSettingStore } from '~/stores/useSettingStore';
+import { useUserStore } from '~/stores/useUserStore';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const settingStore = useSettingStore();
+const userStore = useUserStore();
 settingStore.setSettingList();
 
 const user = {
@@ -12,6 +16,14 @@ const user = {
   address: '神奈川県横浜市港北区',
   zip: '223-1111',
   phone: '080-1111-1111',
+};
+
+const clickSettingArea = (path: string) => {
+  if (path === '/logout') {
+    userStore.logout();
+    return;
+  }
+  router.push(path);
 };
 </script>
 
@@ -46,12 +58,9 @@ const user = {
   <div
     v-for="setting in settingStore.settingList"
     class="px-4 py-3 border-b border-gray-100 relative"
+    @click="clickSettingArea(setting.path)"
   >
-    <a
-      @click="$router.push(setting.path)"
-      rel="noopener noreferrer"
-      class="text-gray-800"
-    >
+    <a rel="noopener noreferrer" class="text-gray-800">
       {{ setting.setting_name }}
     </a>
     <span class="text-gray-400 material-symbols-outlined absolute right-3">

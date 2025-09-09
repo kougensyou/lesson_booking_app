@@ -17,11 +17,7 @@ final class LogoutController extends Controller
     ) {
     }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function __invoke(Request $request): JsonResponse
+    public function logout(Request $request): object
     {
         if ($this->auth->guard()->guest()) {
             return new JsonResponse([
@@ -33,8 +29,6 @@ final class LogoutController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return new JsonResponse([
-            'message' => 'Unauthenticated.',
-        ]);
+        return response()->json(['message' => 'Logged out successfully']);
     }
 }

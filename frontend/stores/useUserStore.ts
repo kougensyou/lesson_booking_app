@@ -22,9 +22,18 @@ export const useUserStore = defineStore('user', {
     async login() {
       try {
         const { login } = useSanctumAuth();
-        await login(this.loginData, false);
+        await login(this.loginData);
+        this.initializeLoginData();
       } catch (err) {
         console.error('Login failed:', err);
+      }
+    },
+    async logout() {
+      try {
+        const { logout } = useSanctumAuth();
+        await logout();
+      } catch (err) {
+        console.error('Logout failed:', err);
       }
     },
     async updatePassword() {
@@ -41,6 +50,11 @@ export const useUserStore = defineStore('user', {
       } catch (err) {
         console.error('Update password failed:', err);
       }
+    },
+    initializeLoginData() {
+      this.loginData.email = '';
+      this.loginData.password = '';
+      this.loginData.remember = true;
     },
     initializePasswordData() {
       this.passwordData.currentPassword = '';
