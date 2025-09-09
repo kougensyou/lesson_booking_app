@@ -17,7 +17,7 @@ export const useUserStore = defineStore('user', {
     toastMessage: '' as string,
     toastVisible: false as boolean,
     toastTimeout: 0 as number,
-    user: {} as User
+    user: {} as User,
   }),
   actions: {
     async login() {

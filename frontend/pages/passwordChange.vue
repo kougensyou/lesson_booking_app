@@ -44,12 +44,12 @@ userStore.setToastMessage();
     </div>
 
     <button
-      class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative group font-loaded"
+      class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
       @click="userStore.updatePassword()"
     >
       <span class="text-white">{{ $t('passwordChange.updatePassword') }}</span>
       <span
-        class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
+        class="text-white material-symbols-outlined absolute right-3"
         aria-hidden="true"
       >
         chevron_right
