@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { LoginData, PasswordData } from '~/types/user';
+import type { LoginData, PasswordData, User } from '~/types/user';
 import { useI18n } from 'vue-i18n';
 
 export const useUserStore = defineStore('user', {
@@ -17,12 +17,14 @@ export const useUserStore = defineStore('user', {
     toastMessage: '' as string,
     toastVisible: false as boolean,
     toastTimeout: 0 as number,
+    user: {} as User
   }),
   actions: {
     async login() {
       try {
-        const { login } = useSanctumAuth();
+        const { user, login } = useSanctumAuth();
         await login(this.loginData);
+        this.user = user.value as User;
         this.initializeLoginData();
       } catch (err) {
         console.error('Login failed:', err);

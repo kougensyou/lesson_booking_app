@@ -10,17 +10,23 @@ class UserService
 {
 
     public function getUser($userId) {
-        $user = User::where('id', $userId)->first();
-        if (!$user) {
-            throw new CustomErrorResponseException('ユーザーが見つかりません。', 404);
+        try {
+            return User::select('id', 'name', 'email', 'zip_code', 'address', 'birth_date', 'tel_no', 'image_path')
+            ->where('id', $userId)
+            ->get()
+            ->map(function ($item) {
+                if ($item->image_path) {
+                    $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
+                    return $item;
+                }
+                $item->image_url = null;
+                return $item;
+            })
+            ->first();
+        } catch (\Throwable $e) {
+            \Log::error('getUser error: ' . $e->getMessage());
+            throw $e;
         }
-        return response()->json([
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'created_at' => Carbon::parse($user->created_at)->toDateTimeString(),
-            'updated_at' => Carbon::parse($user->updated_at)->toDateTimeString(),
-        ]);
     }
 
     public function updatePassword($userId, $passwordData) {

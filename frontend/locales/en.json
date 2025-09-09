@@ -76,6 +76,7 @@
     "birthDay": "Date of Birth",
     "address": "Address",
     "telNo": "Telephone Number",
+    "email": "Email",
     "favoriteStudio": "Favorite Studio Registration",
     "report": "Report",
     "passwordChange": "Password Change",

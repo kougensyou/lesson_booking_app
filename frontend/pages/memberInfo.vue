@@ -8,16 +8,6 @@ const settingStore = useSettingStore();
 const userStore = useUserStore();
 settingStore.setSettingList();
 
-const user = {
-  memberId: '100065786',
-  name: 'テスト',
-  nameKana: 'テスト',
-  birth: '1995-01-01',
-  address: '神奈川県横浜市港北区',
-  zip: '223-1111',
-  phone: '080-1111-1111',
-};
-
 const clickSettingArea = (path: string) => {
   if (path === '/logout') {
     userStore.logout();
@@ -28,30 +18,33 @@ const clickSettingArea = (path: string) => {
 </script>
 
 <template>
-  <div class="max-w-md mx-auto bg-white shadow rounded-lg p-6 space-y-6">
+  <div class="px-4 py-3 space-y-6">
     <div class="flex items-center space-x-4">
-      <img src="" alt="profile" class="w-16 h-16 rounded-full" />
+      <img :src="userStore.user.image_url" alt="profile" class="w-16 h-16 rounded-full" />
       <div>
-        <p class="font-bold text-lg">{{ user.name }}</p>
-        <p class="text-sm text-gray-500">{{ user.nameKana }}</p>
+        <p class="font-bold text-lg">{{ userStore.user.name }}</p>
       </div>
     </div>
 
-    <div class="text-sm space-y-4">
+    <div class="text-sm space-y-6">
       <div class="flex justify-between">
         <span class="font-medium">{{ $t('memberInfo.birthDay') }}</span>
-        <span>{{ user.birth }}</span>
+        <span>{{ userStore.user.birth_date }}</span>
       </div>
       <div class="flex justify-between">
         <span class="font-medium">{{ $t('memberInfo.address') }}</span>
-        <span>{{ user.zip }}</span>
+        <span>{{ userStore.user.zip_code }}</span>
       </div>
       <div class="text-sm text-right">
-        {{ user.address }}
+        {{ userStore.user.address }}
       </div>
       <div class="flex justify-between">
         <span class="font-medium">{{ $t('memberInfo.telNo') }}</span>
-        <span>{{ user.phone }}</span>
+        <span>{{ userStore.user.tel_no }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-medium">{{ $t('memberInfo.email') }}</span>
+        <span>{{ userStore.user.email }}</span>
       </div>
     </div>
   </div>
