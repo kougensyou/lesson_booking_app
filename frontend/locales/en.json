@@ -109,7 +109,10 @@
   },
   "userUpdate": {
     "tabTitle": "User Update",
+    "selectImage": "Select Image",
+    "name": "Profile Name",
     "birthDay": "Date of Birth",
+    "zipCode": "Zip Code",
     "address": "Address",
     "telNo": "Telephone Number",
     "email": "Email",

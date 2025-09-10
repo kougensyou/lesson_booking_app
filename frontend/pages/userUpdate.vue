@@ -13,68 +13,100 @@ userStore.setToastMessageForUser();
         alt="profile"
         class="w-16 h-16 rounded-full"
       />
-      <div>
-        <input
-          v-model="userStore.user.name"
-          class="input border-2 p-2 w-full"
-          type="text"
-        />
-      </div>
+      <button
+        @click="$refs.fileInput.click()"
+        class="px-3 py-1 border rounded text-red-500"
+      >
+        {{ $t('userUpdate.selectImage') }}
+      </button>
+      <input
+        ref="fileInput"
+        type="file"
+        accept="image/*"
+        capture="environment"
+        class="hidden"
+        @change="userStore.onFileChange"
+      />
     </div>
 
-    <div class="text-sm space-y-6">
-      <div class="flex justify-between">
-        <span class="font-medium">{{ $t('userUpdate.birthDay') }}</span>
-        <input
-          v-model="userStore.user.birth_date"
-          class="input border-2 p-2 w-full"
-          type="text"
-        />
-      </div>
-      <div class="flex justify-between">
-        <span class="font-medium">{{ $t('userUpdate.address') }}</span>
-        <input
-          v-model="userStore.user.zip_code"
-          class="input border-2 p-2 w-full"
-          type="text"
-        />
-      </div>
-      <div class="text-sm text-right">
-        <input
-          v-model="userStore.user.address"
-          class="input border-2 p-2 w-full"
-          type="text"
-        />
-      </div>
-      <div class="flex justify-between">
-        <span class="font-medium">{{ $t('userUpdate.telNo') }}</span>
-        <input
-          v-model="userStore.user.tel_no"
-          class="input border-2 p-2 w-full"
-          type="text"
-        />
-      </div>
-      <div class="flex justify-between">
-        <span class="font-medium">{{ $t('userUpdate.email') }}</span>
-        <input
-          v-model="userStore.user.email"
-          class="input border-2 p-2 w-full"
-          type="text"
-        />
-      </div>
-      <button
-        class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
-        @click="userStore.updateUser()"
-      >
-        <span class="text-white">{{ $t('userUpdate.update') }}</span>
-        <span
-          class="text-white material-symbols-outlined absolute right-3"
-          aria-hidden="true"
-        >
-          chevron_right
-        </span>
-      </button>
+    <div>
+      <label class="block text-sm font-medium">{{
+        $t('userUpdate.name')
+      }}</label>
+      <input
+        v-model="userStore.user.name"
+        type="text"
+        class="mt-1 w-full rounded border p-2"
+      />
     </div>
+
+    <div>
+      <label class="block text-sm font-medium">{{
+        $t('userUpdate.birthDay')
+      }}</label>
+      <input
+        v-model="userStore.user.birth_date"
+        type="text"
+        class="mt-1 w-full rounded border p-2"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium">{{
+        $t('userUpdate.zipCode')
+      }}</label>
+      <input
+        v-model="userStore.user.zip_code"
+        type="text"
+        class="mt-1 w-full rounded border p-2"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium">{{
+        $t('userUpdate.address')
+      }}</label>
+      <input
+        v-model="userStore.user.address"
+        type="text"
+        class="mt-1 w-full rounded border p-2"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium">{{
+        $t('userUpdate.telNo')
+      }}</label>
+      <input
+        v-model="userStore.user.tel_no"
+        type="text"
+        class="mt-1 w-full rounded border p-2"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium">{{
+        $t('userUpdate.email')
+      }}</label>
+      <input
+        v-model="userStore.user.email"
+        type="text"
+        class="mt-1 w-full rounded border p-2"
+      />
+    </div>
+
+    <button
+      class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
+      @click="userStore.updateUser()"
+    >
+      <span class="text-white">{{ $t('userUpdate.update') }}</span>
+      <span
+        class="text-white material-symbols-outlined absolute right-3"
+        aria-hidden="true"
+      >
+        chevron_right
+      </span>
+    </button>
   </div>
   <Toast :show="userStore.toastVisible" :message="userStore.toastMessage" />
 </template>

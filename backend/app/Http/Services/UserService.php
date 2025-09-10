@@ -4,6 +4,7 @@ namespace App\Http\Services;
 use Carbon\Carbon;
 use App\Exceptions\CustomErrorResponseException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Models\User;
 
 class UserService
@@ -29,20 +30,39 @@ class UserService
         }
     }
 
-    public function updateUser($userId, $userData) {
+    public function updateUser($userId, Request $request) {
 
         DB::beginTransaction();
 
         try {
 
-            $updateData = [];
-            $updateData['name'] = $userData['name'];
-            $updateData['email'] = $userData['email'];
-            $updateData['zip_code'] = $userData['zip_code'];
-            $updateData['address'] = $userData['address'];
-            $updateData['birth_date'] = Carbon::parse($userData['birth_date'])->format('Y-m-d');
-            $updateData['tel_no'] = $userData['tel_no'];
-            $updateData['image_path'] = $userData['image_path'];
+            $userData = json_decode($request->input('user'), true);
+
+            $updateData = [
+                'name' => $userData['name'],
+                'email' => $userData['email'],
+                'zip_code' => $userData['zip_code'],
+                'address' => $userData['address'],
+                'birth_date' => Carbon::parse($userData['birth_date'])->format('Y-m-d'),
+                'tel_no' => $userData['tel_no'],
+            ];
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $newPath = $file->store('images/user', 'public');
+                $updateData['image_path'] = '/' . $newPath;
+
+                if (!empty($userData['image_path'])) {
+                    $oldFile = basename($userData['image_path']);
+                    $newFile = basename($newPath);
+                    if ($oldFile !== $newFile) {
+                        $oldPath = storage_path('images/user/' . $oldFile);
+                        if (file_exists($oldPath)) {
+                            unlink($oldPath);
+                        }
+                    }
+                }
+            }
 
             User::where('id', '=', $userId)
             ->update($updateData);

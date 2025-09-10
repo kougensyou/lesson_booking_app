@@ -18,6 +18,7 @@ export const useUserStore = defineStore('user', {
     toastVisible: false as boolean,
     toastTimeout: 0 as number,
     user: {} as User,
+    fileData: null as File | null,
   }),
   actions: {
     async login() {
@@ -54,12 +55,14 @@ export const useUserStore = defineStore('user', {
       }
     },
     async updateUser() {
+      if (!this.fileData) return;
+      const formData = new FormData();
+      formData.append('image', this.fileData);
+      formData.append('user', JSON.stringify(this.user));
       try {
         const { data } = await useSanctumFetch('/api/update_user', {
           method: 'POST',
-          body: {
-            user: this.user,
-          },
+          body: formData,
         });
         console.log('updateUser fetched:', data.value);
         this.openToast(2500);
@@ -92,6 +95,13 @@ export const useUserStore = defineStore('user', {
         () => (this.toastVisible = false),
         ms
       );
+    },
+    onFileChange(e: Event) {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        this.fileData = file;
+        this.user.image_url = URL.createObjectURL(file);
+      }
     },
   },
 });
