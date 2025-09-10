@@ -52,9 +52,9 @@ const clickSettingArea = (path: string) => {
       </div>
       <button
         class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
-        @click="$router.push('/profileUpdate')"
+        @click="$router.push('/userUpdate')"
       >
-        <span class="text-white">{{ $t('memberInfo.profileUpdate') }}</span>
+        <span class="text-white">{{ $t('memberInfo.userUpdate') }}</span>
         <span
           class="text-white material-symbols-outlined absolute right-3"
           aria-hidden="true"

@@ -53,6 +53,20 @@ export const useUserStore = defineStore('user', {
         console.error('Update password failed:', err);
       }
     },
+    async updateUser() {
+      try {
+        const { data } = await useSanctumFetch('/api/update_user', {
+          method: 'POST',
+          body: {
+            user: this.user,
+          },
+        });
+        console.log('updateUser fetched:', data.value);
+        this.openToast(2500);
+      } catch (err) {
+        console.error('Update user failed:', err);
+      }
+    },
     initializeLoginData() {
       this.loginData.email = '';
       this.loginData.password = '';
@@ -63,9 +77,13 @@ export const useUserStore = defineStore('user', {
       this.passwordData.newPassword = '';
       this.passwordData.newPasswordConfirmation = '';
     },
-    setToastMessage() {
+    setToastMessageForPassword() {
       const { t } = useI18n();
       this.toastMessage = t('passwordChange.toastMessage');
+    },
+    setToastMessageForUser() {
+      const { t } = useI18n();
+      this.toastMessage = t('userUpdate.toastMessage');
     },
     openToast(ms = 2500) {
       this.toastVisible = true;

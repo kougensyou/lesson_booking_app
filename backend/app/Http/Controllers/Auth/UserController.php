@@ -20,6 +20,12 @@ class UserController extends Controller
         return $this->userService->getUser($userId);
     }
 
+    public function updateUser(Request $request) {
+        $userId = Auth::id();
+        $userData = $request->input('user');
+        return $this->userService->updateUser($userId, $userData);
+    }
+
     public function updatePassword(Request $request) {
         $userId = Auth::id();
         $passwordData = $request->input('password_data');

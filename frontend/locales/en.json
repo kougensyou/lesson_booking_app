@@ -77,7 +77,7 @@
     "address": "Address",
     "telNo": "Telephone Number",
     "email": "Email",
-    "profileUpdate": "Profile Update",
+    "userUpdate": "Profile Update",
     "favoriteStudio": "Favorite Studio Registration",
     "report": "Report",
     "passwordChange": "Password Change",
@@ -106,5 +106,14 @@
     "newPasswordConfirmation": "New Password (Confirmation)",
     "updatePassword": "Update Password",
     "toastMessage": "Your password has been changed!"
+  },
+  "userUpdate": {
+    "tabTitle": "User Update",
+    "birthDay": "Date of Birth",
+    "address": "Address",
+    "telNo": "Telephone Number",
+    "email": "Email",
+    "update": "Update Profile",
+    "toastMessage": "Your profile has been updated!"
   }
 }

@@ -29,6 +29,33 @@ class UserService
         }
     }
 
+    public function updateUser($userId, $userData) {
+
+        DB::beginTransaction();
+
+        try {
+
+            $updateData = [];
+            $updateData['name'] = $userData['name'];
+            $updateData['email'] = $userData['email'];
+            $updateData['zip_code'] = $userData['zip_code'];
+            $updateData['address'] = $userData['address'];
+            $updateData['birth_date'] = Carbon::parse($userData['birth_date'])->format('Y-m-d');
+            $updateData['tel_no'] = $userData['tel_no'];
+            $updateData['image_path'] = $userData['image_path'];
+
+            User::where('id', '=', $userId)
+            ->update($updateData);
+
+            DB::commit();
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            \Log::error('updateUser error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
     public function updatePassword($userId, $passwordData) {
 
         DB::beginTransaction();

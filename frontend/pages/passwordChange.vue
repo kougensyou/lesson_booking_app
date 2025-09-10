@@ -4,7 +4,7 @@ import Toast from '~/components/common/toast.vue';
 
 const userStore = useUserStore();
 userStore.initializePasswordData();
-userStore.setToastMessage();
+userStore.setToastMessageForPassword();
 </script>
 <template>
   <div class="max-w-[640px] mx-auto pl-6 pr-6">

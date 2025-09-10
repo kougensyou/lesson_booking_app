@@ -77,7 +77,7 @@
     "address": "住所",
     "telNo": "電話番号",
     "email": "メールアドレス",
-    "profileUpdate": "プロフィール更新",
+    "userUpdate": "プロフィール更新",
     "favoriteStudio": "お気に入りスタジオ登録",
     "report": "お問合せ",
     "passwordChange": "パスワード変更",
@@ -106,5 +106,14 @@
     "newPasswordConfirmation": "新しいパスワード（確認）",
     "updatePassword": "パスワード変更",
     "toastMessage": "パスワードを変更しました!"
+  },
+  "userUpdate": {
+    "tabTitle": "プロフィール更新",
+    "birthDay": "生年月日",
+    "address": "住所",
+    "telNo": "電話番号",
+    "email": "メールアドレス",
+    "update": "プロフィール更新",
+    "toastMessage": "プロフィールを変更しました!"
   }
 }

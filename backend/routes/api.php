@@ -42,4 +42,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('save_favorite_studio_list', [StudioController::class , 'saveFavoriteStudioList']);
     Route::post('send_report', [ReportController::class , 'sendReport']);
     Route::post('update_password', [UserController::class , 'updatePassword']);
+    Route::post('update_user', [UserController::class , 'updateUser']);
 });
