@@ -2,6 +2,10 @@
 import { useUserStore } from '../stores/useUserStore';
 import Toast from '~/components/common/toast.vue';
 
+definePageMeta({
+  layout: 'no-header',
+});
+
 const userStore = useUserStore();
 userStore.setToastMessageForPasswordReset();
 </script>
@@ -25,7 +29,7 @@ userStore.setToastMessageForPasswordReset();
     >
       <span class="text-white">{{ $t('passwordReset.sendButton') }}</span>
       <span
-        class="material-symbols-outlined absolute right-3"
+        class="text-white material-symbols-outlined absolute right-3"
         aria-hidden="true"
       >
         chevron_right
@@ -41,7 +45,7 @@ userStore.setToastMessageForPasswordReset();
     >
       <span class="text-white">{{ $t('passwordReset.firstLesson') }}</span>
       <span
-        class="material-symbols-outlined absolute right-3"
+        class="text-white material-symbols-outlined absolute right-3"
         aria-hidden="true"
         >chevron_right</span
       >

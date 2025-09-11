@@ -4,7 +4,7 @@ namespace App\Http\Services;
 use Carbon\Carbon;
 use App\Exceptions\CustomErrorResponseException;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\User;
 use SendGrid;
@@ -106,21 +106,27 @@ class UserService
         }
     }
 
-    public function sendPasswordResetMail($userId, $destinationEmail) {
+    public function sendPasswordResetMail($toEmail) {
 
         DB::beginTransaction();
 
         try {
 
+            $randomPassword = Str::random(12);
+
+            $this->updatePasswordForReset($toEmail, $randomPassword);
+
+            $body = __('messages.password_changed', ['password' => $randomPassword]);
+
             $email = new \SendGrid\Mail\Mail();
-            $email->setFrom('0028tkhr@gmail.com');
-            $email->setSubject("テスト送信");
-            $email->addTo($destinationEmail);
+            $email->setFrom(getenv('SENDGRID_FROM_EMAIL'));
+            $email->setSubject(__('messages.password_reset_subject'));
+            $email->addTo($toEmail);
             $apiKey = getenv('SENDGRID_API_KEY');
             $sendGrid = new \SendGrid($apiKey);
             $email->addContent(
                 "text/plain",
-                "test mail"
+                $body
             );
             $response = $sendGrid->send($email);
             if ($response->statusCode() == 202) {
@@ -129,8 +135,18 @@ class UserService
             return back()->withErrors(json_decode($response->body())->errors);
 
         } catch (\Throwable $e) {
+            DB::rollBack();
             \Log::error('sendPasswordResetMail error: ' . $e->getMessage());
             throw $e;
         }
+    }
+
+    private function updatePasswordForReset($toEmail, $randomPassword) {
+        
+            $user = User::where('email', $toEmail)->firstOrFail();
+            $user->password = \Hash::make($randomPassword);
+            $user->save();
+
+            DB::commit();
     }
 }
