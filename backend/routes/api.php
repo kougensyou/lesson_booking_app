@@ -23,6 +23,8 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LogoutController::class , 'logout']);
 
+Route::post('/send_password_reset_mail', [UserController::class , 'sendPasswordResetMail']);
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('user', [UserController::class , 'getUser']);
     Route::get('get_next_lesson_data', [LessonController::class , 'getNextLessonData']);

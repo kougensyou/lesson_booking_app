@@ -30,4 +30,10 @@ class UserController extends Controller
         $passwordData = $request->input('password_data');
         return $this->userService->updatePassword($userId, $passwordData);
     }
+
+    public function sendPasswordResetMail(Request $request) {
+        $userId = Auth::id();
+        $destinationEmail = $request->input('email');
+        return $this->userService->sendPasswordResetMail($userId, $destinationEmail);
+    }
 }

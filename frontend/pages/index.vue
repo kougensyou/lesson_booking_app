@@ -55,9 +55,11 @@ const user = useUserStore();
         </span>
       </button>
       <div class="flex items-center justify-center mt-6">
-        <a class="text-sm text-sky-600 underline underline-offset-4">{{
-          $t('index.forgetPassword')
-        }}</a>
+        <a
+          class="text-sm text-sky-600 underline underline-offset-4"
+          @click="$router.push('/passwordReset')"
+          >{{ $t('index.forgetPassword') }}</a
+        >
       </div>
     </div>
     <div class="bg-gray-200 w-full">

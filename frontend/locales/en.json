@@ -23,6 +23,17 @@
     "noAccount": "Don't have an account?",
     "firstLesson": "Book a Trial Lesson"
   },
+  "passwordReset": {
+    "tabTitle": "Password Reset",
+    "title": "Password Reset",
+    "emailPlaceholder": "Please enter your email address.",
+    "resetMessage1": "We will issue a password reset.",
+    "resetMessage2": "Please enter the email address you registered with.",
+    "sendButton": "Send",
+    "noAccount": "Don't have an account?",
+    "firstLesson": "Book a Trial Lesson",
+    "toastMessage": "Password reset email has been sent!"
+  },
   "home": {
     "tabTitle": "Lesson Booking",
     "nextLessonTitle": "Next Lesson",

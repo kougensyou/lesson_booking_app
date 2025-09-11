@@ -4,8 +4,10 @@ namespace App\Http\Services;
 use Carbon\Carbon;
 use App\Exceptions\CustomErrorResponseException;
 use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Models\User;
+use SendGrid;
 
 class UserService
 {
@@ -100,6 +102,34 @@ class UserService
         } catch (\Throwable $e) {
             DB::rollBack();
             \Log::error('updatePassword error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function sendPasswordResetMail($userId, $destinationEmail) {
+
+        DB::beginTransaction();
+
+        try {
+
+            $email = new \SendGrid\Mail\Mail();
+            $email->setFrom('0028tkhr@gmail.com');
+            $email->setSubject("テスト送信");
+            $email->addTo($destinationEmail);
+            $apiKey = getenv('SENDGRID_API_KEY');
+            $sendGrid = new \SendGrid($apiKey);
+            $email->addContent(
+                "text/plain",
+                "test mail"
+            );
+            $response = $sendGrid->send($email);
+            if ($response->statusCode() == 202) {
+                return back()->with(['success' => "E-mails successfully sent out!!"]);
+            }
+            return back()->withErrors(json_decode($response->body())->errors);
+
+        } catch (\Throwable $e) {
+            \Log::error('sendPasswordResetMail error: ' . $e->getMessage());
             throw $e;
         }
     }

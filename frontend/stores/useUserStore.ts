@@ -19,6 +19,7 @@ export const useUserStore = defineStore('user', {
     toastTimeout: 0 as number,
     user: {} as User,
     fileData: null as File | null,
+    emailForPasswordReset: '' as string,
   }),
   actions: {
     async login() {
@@ -70,6 +71,23 @@ export const useUserStore = defineStore('user', {
         console.error('Update user failed:', err);
       }
     },
+    async sendPasswordResetMail() {
+      try {
+        const { data } = await useSanctumFetch(
+          '/api/send_password_reset_mail',
+          {
+            method: 'POST',
+            body: {
+              email: this.emailForPasswordReset,
+            },
+          }
+        );
+        console.log('sendPasswordResetMail fetched:', data.value);
+        this.openToast(2500);
+      } catch (err) {
+        console.error('sendPasswordResetMail failed:', err);
+      }
+    },
     initializeLoginData() {
       this.loginData.email = '';
       this.loginData.password = '';
@@ -83,6 +101,10 @@ export const useUserStore = defineStore('user', {
     setToastMessageForPassword() {
       const { t } = useI18n();
       this.toastMessage = t('passwordChange.toastMessage');
+    },
+    setToastMessageForPasswordReset() {
+      const { t } = useI18n();
+      this.toastMessage = t('passwordReset.toastMessage');
     },
     setToastMessageForUser() {
       const { t } = useI18n();

@@ -23,6 +23,17 @@
     "noAccount": "アカウントをお持ちでない方",
     "firstLesson": "体験予約"
   },
+  "passwordReset": {
+    "tabTitle": "パスワードリセット",
+    "title": "パスワードリセット",
+    "emailPlaceholder": "メールアドレスを入力してください。",
+    "resetMessage1": "パスワードを再発行いたします。",
+    "resetMessage2": "ご登録されているメールアドレスを入力してください。",
+    "sendButton": "送信",
+    "noAccount": "アカウントをお持ちでない方",
+    "firstLesson": "体験予約",
+    "toastMessage": "パスワードリセットメールを送信しました!"
+  },
   "home": {
     "tabTitle": "レッスン予約",
     "nextLessonTitle": "次のレッスン",
