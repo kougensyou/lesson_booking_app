@@ -28,6 +28,7 @@ Route::post('/send_password_reset_mail', [UserController::class , 'sendPasswordR
 Route::get('get_lesson_category_list', [LessonController::class , 'getLessonCategoryList']);
 Route::get('get_time_options', [LessonController::class , 'getTimeOptions']);
 Route::get('get_studio_list', [StudioController::class , 'getStudioList']);
+Route::get('get_studio_lesson_data', [LessonController::class , 'getStudioLessonData']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('user', [UserController::class , 'getUser']);
@@ -38,7 +39,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('get_lesson_booking_data', [LessonBookingController::class , 'getLessonBookingData']);
     Route::get('add_same_studio_lesson_list', [LessonController::class , 'addSameStudioLessonList']);
     Route::get('add_searched_lessons', [LessonController::class , 'addSearchedLessons']);
-    Route::get('get_studio_lesson_data', [LessonController::class , 'getStudioLessonData']);
     Route::get('get_lesson_detail', [LessonController::class , 'getLessonDetail']);
     Route::post('book_lesson', [LessonBookingController::class , 'bookLesson']);
     Route::post('cancel_lesson', [LessonBookingController::class , 'cancelLesson']);

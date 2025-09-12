@@ -30,7 +30,7 @@ await lessonStore.getStudioLessonDataApi();
   </div>
   <div class="p-4">
     <StudioLessonCalendar
-      :is-auth="userStore.user ? true : false"
+      :is-auth="userStore.user.id ? true : false"
       :studio-name="lessonStore.studioData.studio_name"
       :week-data="lessonStore.weekData"
       :studio-lesson-list="lessonStore.studioLessonList"
