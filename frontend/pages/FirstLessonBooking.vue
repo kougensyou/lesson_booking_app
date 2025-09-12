@@ -3,8 +3,8 @@ import { useLessonStore } from '~/stores/useLessonStore';
 import { useStudioStore } from '~/stores/useStudioStore';
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useUserStore } from '~/stores/useUserStore';
-import FirstSelectedLesson from '~/components/firstLessonBooking/firstSelectedLesson.vue';
-import FirstUser from '~/components/firstLessonBooking/firstUser.vue';
+import FirstSelectedLesson from '~/components/firstLessonBooking/FirstSelectedLesson.vue';
+import FirstUser from '~/components/firstLessonBooking/FirstUser.vue';
 
 definePageMeta({
   layout: 'no-header',

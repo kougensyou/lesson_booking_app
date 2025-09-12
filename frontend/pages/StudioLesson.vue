@@ -2,7 +2,7 @@
 import { useLessonStore } from '../stores/useLessonStore';
 import { useUserStore } from '../stores/useUserStore';
 import { useRoute } from 'vue-router';
-import StudioLessonCalendar from '~/components/common/studioLessonCalendar.vue';
+import StudioLessonCalendar from '~/components/common/StudioLessonCalendar.vue';
 
 const route = useRoute();
 

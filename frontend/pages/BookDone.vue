@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useLessonStore } from '../stores/useLessonStore';
-import LessonList from '../components/common/lessonList.vue';
+import LessonList from '../components/common/LessonList.vue';
 const lessonStore = useLessonStore();
 
 lessonStore.initializePaginationData();

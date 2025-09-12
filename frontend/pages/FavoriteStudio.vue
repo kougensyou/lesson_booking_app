@@ -2,7 +2,7 @@
 import { useStudioStore } from '../stores/useStudioStore';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import Toast from '~/components/common/toast.vue';
+import Toast from '~/components/common/Toast.vue';
 
 const route = useRoute();
 const studioStore = useStudioStore();

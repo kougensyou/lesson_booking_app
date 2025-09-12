@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useLessonBookingStore } from '../stores/useLessonBookingStore';
-import LessonList from '../components/common/lessonList.vue';
+import LessonList from '../components/common/LessonList.vue';
 
 const lessonBookingStore = useLessonBookingStore();
 lessonBookingStore.initializeBookingHistory();

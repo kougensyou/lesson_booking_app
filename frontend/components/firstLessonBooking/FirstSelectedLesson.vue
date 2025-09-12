@@ -2,7 +2,7 @@
 import type { LessonCategory, StudioLesson, WeekData } from '~/types/lesson';
 import type { FirstSelectedLesson } from '~/types/lessonBooking';
 import type { Studio } from '~/types/studio';
-import StudioLessonCalendar from '../common/studioLessonCalendar.vue';
+import StudioLessonCalendar from '../common/StudioLessonCalendar.vue';
 
 defineProps<{
   isAuth: boolean;

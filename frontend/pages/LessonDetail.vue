@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useLessonStore } from '../stores/useLessonStore';
 import { useLessonBookingStore } from '../stores/useLessonBookingStore';
-import ConfirmDialog from '~/components/lessonDetail/confirmDialog.vue';
-import ConfirmButton from '~/components/lessonDetail/confirmButton.vue';
+import ConfirmDialog from '~/components/lessonDetail/ConfirmDialog.vue';
+import ConfirmButton from '~/components/lessonDetail/ConfirmButton.vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();

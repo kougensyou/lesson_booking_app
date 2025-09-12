@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Studio } from '~/types/studio';
 import { useStudioStore } from '../stores/useStudioStore';
-import studioList from '~/components/common/studioList.vue';
+import studioList from '~/components/common/StudioList.vue';
 
 const studioStore = useStudioStore();
 await studioStore.getStudioList();

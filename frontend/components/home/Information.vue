@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Info } from '~/types/information';
-import HorizontalScroll from '../common/horizontalScroll.vue';
+import HorizontalScroll from '../common/HorizontalScroll.vue';
 
 defineProps<{
   sliderInfoList: Array<Info>;

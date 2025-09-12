@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HorizontalScroll from '../common/horizontalScroll.vue';
+import HorizontalScroll from '../common/HorizontalScroll.vue';
 import type { Studio } from '~/types/studio';
 
 defineProps<{

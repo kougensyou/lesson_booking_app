@@ -2,9 +2,9 @@
 import { useLessonStore } from '../stores/useLessonStore';
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useInformationStore } from '~/stores/useInformationStore';
-import NextLesson from '~/components/home/nextLesson.vue';
-import LessonCalendar from '~/components/home/lessonCalendar.vue';
-import Information from '~/components/home/information.vue';
+import NextLesson from '~/components/home/NextLesson.vue';
+import LessonCalendar from '~/components/home/LessonCalendar.vue';
+import Information from '~/components/home/Information.vue';
 
 const lessonStore = useLessonStore();
 const lessonBookingStore = useLessonBookingStore();

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useReportStore } from '../stores/useReportStore';
-import Toast from '~/components/common/toast.vue';
+import Toast from '~/components/common/Toast.vue';
 
 const reportStore = useReportStore();
 reportStore.initializeReport();

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CustomizedSearch from '~/components/lessonBooking/customizedSearch.vue';
-import StudioSearch from '~/components/lessonBooking/studioSearch.vue';
+import CustomizedSearch from '~/components/lessonBooking/CustomizedSearch.vue';
+import StudioSearch from '~/components/lessonBooking/StudioSearch.vue';
 import { useStudioStore } from '../stores/useStudioStore';
 import { useLessonStore } from '../stores/useLessonStore';
 import { useRouter } from 'vue-router';
