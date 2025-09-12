@@ -34,6 +34,15 @@
     "firstLesson": "Book a Trial Lesson",
     "toastMessage": "Password reset email has been sent!"
   },
+  "firstLessonBooking": {
+    "tabTitle": "Trial Lesson Booking",
+    "lessonCategory": "Category",
+    "studio": "Studio",
+    "name": "Name",
+    "birthDay": "Date of Birth",
+    "email": "Email",
+    "next": "Next"
+  },
   "home": {
     "tabTitle": "Lesson Booking",
     "nextLessonTitle": "Next Lesson",

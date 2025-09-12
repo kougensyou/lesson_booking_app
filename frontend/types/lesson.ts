@@ -25,8 +25,7 @@ export interface Lesson {
   image_url: string;
 }
 
-export interface SearchInputData {
-  lesson_category_list: LessonCategory[];
+export interface TimeOptions {
   start_time_options: string[];
   end_time_options: string[];
 }

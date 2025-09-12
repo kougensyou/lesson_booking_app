@@ -69,7 +69,7 @@ const user = useUserStore();
         </div>
         <button
           class="mt-12 pt-6 pb-6 bg-orange-500 rounded-3xl w-full relative group font-loaded"
-          @click=""
+          @click="$router.push('/firstLessonBooking')"
         >
           <span class="text-white">{{ $t('index.firstLesson') }}</span>
           <span

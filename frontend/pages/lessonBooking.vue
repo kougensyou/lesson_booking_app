@@ -16,9 +16,12 @@ const addSearchedLessons = () => {
   });
 };
 
+lessonStore.initializeSelectedDates();
+
 await studioStore.getStudioList();
 await studioStore.getFavoriteStudioList();
-await lessonStore.getSearchInputData();
+await lessonStore.getLessonCategoryList();
+await lessonStore.getTimeOptions();
 </script>
 <template>
   <div class="">

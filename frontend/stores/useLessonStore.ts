@@ -3,7 +3,7 @@ import type {
   Lesson,
   LessonCategory,
   SearchInputForm,
-  SearchInputData,
+  TimeOptions,
   LessonDetail,
   Studio,
   WeekData,
@@ -126,24 +126,38 @@ export const useLessonStore = defineStore('lesson', {
         console.error('Error fetching same studio lesson data:', err);
       }
     },
-    async getSearchInputData() {
+    async getLessonCategoryList() {
       try {
-        const { data } = await useSanctumFetch('/api/get_search_input_data', {
+        const { data } = await useSanctumFetch(
+          '/api/get_lesson_category_list',
+          {
+            method: 'GET',
+          }
+        );
+        this.lessonCategoryList = data.value as LessonCategory[];
+      } catch (err) {
+        console.error('Error getLessonCategoryList:', err);
+      }
+    },
+    async getTimeOptions() {
+      try {
+        const { data } = await useSanctumFetch('/api/get_time_options', {
           method: 'GET',
         });
-        const searchInputData = data.value as SearchInputData;
-        this.lessonCategoryList = searchInputData.lesson_category_list;
-        this.startTimeOptions = searchInputData.start_time_options;
-        this.endTimeOptions = searchInputData.end_time_options;
-        this.searchInputForm.selectedDates[0] =
-          this.todayYear.toString() +
-          '-' +
-          this.todayMonth.toString().padStart(2, '0') +
-          '-' +
-          this.todayDay.toString().padStart(2, '0');
+        const timeOptionsData = data.value as TimeOptions;
+        this.startTimeOptions = timeOptionsData.start_time_options;
+        this.endTimeOptions = timeOptionsData.end_time_options;
       } catch (err) {
-        console.error('Error getSearchInputData:', err);
+        console.error('Error getTimeOptions:', err);
       }
+    },
+    async initializeSelectedDates() {
+      this.searchInputForm.selectedDates[0] =
+        this.todayYear.toString() +
+        '-' +
+        this.todayMonth.toString().padStart(2, '0') +
+        '-' +
+        this.todayDay.toString().padStart(2, '0');
     },
     changeIsLoading() {
       this.isLoading = true;

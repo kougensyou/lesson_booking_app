@@ -34,6 +34,15 @@
     "firstLesson": "体験予約",
     "toastMessage": "パスワードリセットメールを送信しました!"
   },
+  "firstLessonBooking": {
+    "tabTitle": "体験予約",
+    "lessonCategory": "カテゴリー",
+    "studio": "スタジオ",
+    "name": "名前",
+    "birthDay": "生年月日",
+    "email": "メール",
+    "next": "次へ"
+  },
   "home": {
     "tabTitle": "レッスン予約",
     "nextLessonTitle": "次のレッスン",

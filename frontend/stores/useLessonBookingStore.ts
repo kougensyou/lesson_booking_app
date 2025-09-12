@@ -1,5 +1,11 @@
 import { defineStore } from 'pinia';
-import type { LessonBooking, Attribute } from '~/types/lessonBooking';
+import type {
+  LessonBooking,
+  Attribute,
+  FirstBooking,
+  FirstSelectedLesson,
+  FirstUser,
+} from '~/types/lessonBooking';
 import type { Lesson } from '~/types/lesson';
 
 export const useLessonBookingStore = defineStore('lessonBooking', {
@@ -16,6 +22,19 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     lastPage: 0 as number,
     isLoading: false as boolean,
     bookingHistoryList: [] as Lesson[],
+    firstBooking: {
+      selectedLesson: {
+        lesson_category_name: '',
+        studio_name: '',
+        lesson_time: '',
+        lesson_name: '',
+      } as FirstSelectedLesson,
+      user: {
+        name: '',
+        email: '',
+        birth_date: '',
+      } as FirstUser,
+    } as FirstBooking,
   }),
   getters: {
     attributes(state): Array<Attribute> {

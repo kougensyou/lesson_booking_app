@@ -25,16 +25,18 @@ Route::post('/logout', [LogoutController::class , 'logout']);
 
 Route::post('/send_password_reset_mail', [UserController::class , 'sendPasswordResetMail']);
 
+Route::get('get_lesson_category_list', [LessonController::class , 'getLessonCategoryList']);
+Route::get('get_time_options', [LessonController::class , 'getTimeOptions']);
+Route::get('get_studio_list', [StudioController::class , 'getStudioList']);
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('user', [UserController::class , 'getUser']);
     Route::get('get_next_lesson_data', [LessonController::class , 'getNextLessonData']);
     Route::get('get_information_list', [InformationController::class , 'getInformationList']);
     Route::get('get_selected_lesson_list', [LessonBookingController::class , 'getSelectedLessonList']);
-    Route::get('get_studio_list', [StudioController::class , 'getStudioList']);
     Route::get('get_favorite_studio_list', [StudioController::class , 'getFavoriteStudioList']);
     Route::get('get_lesson_booking_data', [LessonBookingController::class , 'getLessonBookingData']);
     Route::get('add_same_studio_lesson_list', [LessonController::class , 'addSameStudioLessonList']);
-    Route::get('get_search_input_data', [LessonController::class , 'getSearchInputData']);
     Route::get('add_searched_lessons', [LessonController::class , 'addSearchedLessons']);
     Route::get('get_studio_lesson_data', [LessonController::class , 'getStudioLessonData']);
     Route::get('get_lesson_detail', [LessonController::class , 'getLessonDetail']);

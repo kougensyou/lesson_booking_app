@@ -25,9 +25,12 @@ class LessonController extends Controller
         return $this->lessonService->addSameStudioLessonList($studioId);
     }
 
-    public function getSearchInputData(Request $request) {
-        $userId = Auth::id();
-        return $this->lessonService->getSearchInputData($userId);
+    public function getLessonCategorylist(Request $request) {
+        return $this->lessonService->getLessonCategorylist();
+    }
+
+    public function getTimeOptions(Request $request) {
+        return $this->lessonService->getTimeOptions();
     }
 
     public function addSearchedLessons(Request $request) {

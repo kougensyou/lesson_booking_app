@@ -88,39 +88,21 @@ class LessonService
         
     }
 
-    public function getSearchInputData($userId) {
-        try {
-            $studioList = $this->getStudioList();
-            $lessonCategoryList = $this->getLessonCategoryList();
+    public function getTimeOptions() {
+        return [
+            'start_time_options' => config('const.lesson.startTimeOptions'),
+            'end_time_options' => config('const.lesson.endTimeOptions'),
+        ];
+    }
 
-            return [
-                'studio_list' => $studioList,
-                'lesson_category_list' => $lessonCategoryList,
-                'start_time_options' => config('const.lesson.startTimeOptions'),
-                'end_time_options' => config('const.lesson.endTimeOptions'),
-            ];
+    public function getLessonCategoryList() {
+        try{
+            return LessonCategory::select('id', 'category_name')
+            ->get();
         } catch (\Throwable $e) {
-            \Log::error('getSearchInputData error: ' . $e->getMessage());
+            \Log::error('getLessonCategoryList error: ' . $e->getMessage());
             throw $e;
         }
-    }
-
-    private function getStudioList() {
-        return Studio::select('id', 'studio_name', 'image_path')
-        ->get()
-        ->map(function ($item) {
-            if ($item->image_path) {
-                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                return $item;
-            }
-            $item->image_url = null;
-            return $item;
-        });
-    }
-
-    private function getLessonCategoryList() {
-        return LessonCategory::select('id', 'category_name')
-        ->get();
     }
 
     public function addSearchedLessons($searchInputForm) {
