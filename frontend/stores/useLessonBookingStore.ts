@@ -196,11 +196,9 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         studioLessonData.lesson_name;
     },
     initializeFirstSelectedLesson() {
-      this.firstBooking.selectedLesson = {
-        lesson_day: '',
-        lesson_time: '',
-        lesson_name: '',
-      } as FirstSelectedLesson;
+      this.firstBooking.selectedLesson.lesson_day = '';
+      this.firstBooking.selectedLesson.lesson_time = '';
+      this.firstBooking.selectedLesson.lesson_name = '';
     },
   },
 });

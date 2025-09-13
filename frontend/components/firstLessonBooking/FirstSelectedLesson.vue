@@ -110,4 +110,11 @@ defineProps<{
       </div>
     </div>
   </div>
+  <button
+    v-if="selectedLesson.lesson_name"
+    class="w-full py-3 border text-red-500 font-bold rounded-md"
+    @click="initializeFirstSelectedLesson()"
+  >
+    <span>{{ $t('firstLessonBooking.change') }}</span>
+  </button>
 </template>
