@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import type { LessonCategory, StudioLesson, WeekData } from '~/types/lesson';
+import type {
+  BaseStudioLesson,
+  LessonCategory,
+  StudioLesson,
+  WeekData,
+} from '~/types/lesson';
 import type { FirstSelectedLesson } from '~/types/lessonBooking';
 import type { Studio } from '~/types/studio';
 import StudioLessonCalendar from '../common/StudioLessonCalendar.vue';
@@ -15,6 +20,8 @@ defineProps<{
   setStudioId: Function;
   getStudioLessonDataApi: Function;
   changeStudioLessonData: Function;
+  setFirstSelectedLesson: Function;
+  initializeFirstSelectedLesson: Function;
 }>();
 </script>
 <template>
@@ -52,6 +59,7 @@ defineProps<{
             (s: Studio) => s.studio_name === target.value
           );
           if (studio) setStudioId(studio.id);
+          if (!studio) initializeFirstSelectedLesson();
           getStudioLessonDataApi();
         }
       "
@@ -68,19 +76,38 @@ defineProps<{
   </div>
 
   <StudioLessonCalendar
-    v-if="selectedLesson.studio_name"
+    v-if="selectedLesson.studio_name && selectedLesson.lesson_name === ''"
     :is-auth="isAuth"
     :week-data="weekData"
     :studio-lesson-list="studioLessonList"
     :time-options="timeOptions"
     :change-studio-lesson-data="changeStudioLessonData"
     :click-card="
-      (studioLesson: any) => {
-        $router.push({
-          path: '/lessonDetail',
-          query: { lesson_id: studioLesson.lesson_id },
-        });
+      (studioLesson: BaseStudioLesson) => {
+        setFirstSelectedLesson(studioLesson);
       }
     "
   />
+
+  <div
+    v-if="selectedLesson.lesson_name"
+    class="border rounded-md p-4 flex items-start mb-6"
+  >
+    <div class="text-center w-24 flex-shrink-0">
+      <div class="text-sm font-semibold">
+        {{ selectedLesson.studio_name }}
+      </div>
+      <div class="text-lg font-bold mt-1">
+        {{ selectedLesson.lesson_day }}
+      </div>
+      <div class="text-sm">
+        {{ selectedLesson.lesson_time }}
+      </div>
+    </div>
+    <div class="ml-4 flex-1">
+      <div class="font-semibold text-base mb-1">
+        {{ selectedLesson.lesson_name }}
+      </div>
+    </div>
+  </div>
 </template>

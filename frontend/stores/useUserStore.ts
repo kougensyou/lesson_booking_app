@@ -36,6 +36,7 @@ export const useUserStore = defineStore('user', {
       try {
         const { logout } = useSanctumAuth();
         await logout();
+        this.initializeUser();
       } catch (err) {
         console.error('Logout failed:', err);
       }
@@ -97,6 +98,10 @@ export const useUserStore = defineStore('user', {
       this.passwordData.currentPassword = '';
       this.passwordData.newPassword = '';
       this.passwordData.newPasswordConfirmation = '';
+    },
+    initializeUser() {
+      this.user = {} as User;
+      this.fileData = null;
     },
     setToastMessageForPassword() {
       const { t } = useI18n();

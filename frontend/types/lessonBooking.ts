@@ -14,6 +14,7 @@ export interface Attribute {
 export interface FirstSelectedLesson {
   lesson_category_name: string;
   studio_name: string;
+  lesson_day: string;
   lesson_time: string;
   lesson_name: string;
 }

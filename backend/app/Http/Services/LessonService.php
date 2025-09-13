@@ -240,15 +240,19 @@ class LessonService
             ->orderBy('lesson.start_time')
             ->get()
             ->reduce(function ($carry, $lesson) {
-                $date = Carbon::parse($lesson->start_time)->format('n/j');
-                $hourKey = Carbon::parse($lesson->start_time)->format('H:00');
-                $time    = Carbon::parse($lesson->start_time)->format('H:i');
+                $start = Carbon::parse($lesson->start_time);
+                $end = Carbon::parse($lesson->end_time);
+                $date = $start->format('n/j');
+                $hourKey = $start->format('H:00');
+                $time    = $start->format('H:i');
 
                 $carry[$date][$hourKey][] = [
                     'lesson_id'      => $lesson->id,
-                    'startTime'      => $time,
-                    'lessonName'     => $lesson->lesson_name,
-                    'instructorName' => $lesson->instructor_name,
+                    'lesson_day'      => $date,
+                    'lesson_time'     => $start->format('G:i') . ' - ' . $end->format('G:i'),
+                    'start_time'      => $time,
+                    'lesson_name'     => $lesson->lesson_name,
+                    'instructor_name' => $lesson->instructor_name,
                 ];
                 return $carry;
             }, []);

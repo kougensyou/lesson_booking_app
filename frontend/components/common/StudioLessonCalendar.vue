@@ -62,10 +62,10 @@ defineProps<{
             @click="clickCard(studioLesson)"
           >
             <div v-if="isAuth" class="bg-green-100 font-bold">空き○</div>
-            <div>{{ studioLesson.startTime }} ～</div>
-            <div class="font-bold">{{ studioLesson.lessonName }}</div>
+            <div>{{ studioLesson.start_time }} ～</div>
+            <div class="font-bold">{{ studioLesson.lesson_name }}</div>
             <div v-if="isAuth" class="text-gray-600">
-              {{ studioLesson.instructorName }}
+              {{ studioLesson.instructor_name }}
             </div>
           </div>
         </template>

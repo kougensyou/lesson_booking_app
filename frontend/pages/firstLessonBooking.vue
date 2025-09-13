@@ -37,6 +37,10 @@ await lessonStore.getLessonCategoryList();
       :set-studio-id="lessonStore.setStudioId"
       :get-studio-lesson-data-api="lessonStore.getStudioLessonDataApi"
       :change-studio-lesson-data="changeStudioLessonData"
+      :set-first-selected-lesson="lessonBookingStore.setFirstSelectedLesson"
+      :initialize-first-selected-lesson="
+        lessonBookingStore.initializeFirstSelectedLesson
+      "
       :is-auth="userStore.user.id ? true : false"
       :week-data="lessonStore.weekData"
       :time-options="lessonStore.timeOptions"

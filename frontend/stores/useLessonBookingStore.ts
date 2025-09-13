@@ -6,7 +6,7 @@ import type {
   FirstSelectedLesson,
   FirstUser,
 } from '~/types/lessonBooking';
-import type { Lesson } from '~/types/lesson';
+import type { BaseStudioLesson, Lesson } from '~/types/lesson';
 
 export const useLessonBookingStore = defineStore('lessonBooking', {
   state: () => ({
@@ -26,6 +26,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       selectedLesson: {
         lesson_category_name: '',
         studio_name: '',
+        lesson_day: '',
         lesson_time: '',
         lesson_name: '',
       } as FirstSelectedLesson,
@@ -186,6 +187,20 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       } catch (err) {
         console.error('Error fetching booking history:', err);
       }
+    },
+    setFirstSelectedLesson(studioLessonData: BaseStudioLesson) {
+      this.firstBooking.selectedLesson.lesson_day = studioLessonData.lesson_day;
+      this.firstBooking.selectedLesson.lesson_time =
+        studioLessonData.lesson_time;
+      this.firstBooking.selectedLesson.lesson_name =
+        studioLessonData.lesson_name;
+    },
+    initializeFirstSelectedLesson() {
+      this.firstBooking.selectedLesson = {
+        lesson_day: '',
+        lesson_time: '',
+        lesson_name: '',
+      } as FirstSelectedLesson;
     },
   },
 });
