@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Studio } from '~/types/studio';
 import { useStudioStore } from '../stores/useStudioStore';
-import studioList from '~/components/common/StudioList.vue';
+import StudioList from '~/components/common/StudioList.vue';
 
 const studioStore = useStudioStore();
 </script>
@@ -11,9 +11,9 @@ const studioStore = useStudioStore();
       <title>{{ $t('lessonBooking.tabTitle') }}</title>
     </Head>
   </div>
-  <studioList
-    :studioList="studioStore.studioList"
-    :clickStudioCard="
+  <StudioList
+    :studio-list="studioStore.studioList"
+    :click-studio-card="
       (studio: Studio) => {
         $router.push({
           path: '/studioLesson',
