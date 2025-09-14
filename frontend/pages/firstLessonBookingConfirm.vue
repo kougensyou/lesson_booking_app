@@ -42,7 +42,7 @@ const applyFirstLesson = () => {
     <FirstUser :user="lessonBookingStore.firstBooking.user" />
 
     <button
-      class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
+      class="mt-12 bg-sky-500 rounded-3xl py-4 w-full relative"
       @click="lessonBookingStore.openDialog()"
     >
       <span class="text-white">{{ $t('firstLessonBookingConfirm.book') }}</span>

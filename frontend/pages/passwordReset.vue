@@ -24,7 +24,7 @@ userStore.setToastMessageForPasswordReset();
     />
 
     <button
-      class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative group font-loaded"
+      class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"
       @click="userStore.sendPasswordResetMail()"
     >
       <span class="text-white">{{ $t('passwordReset.sendButton') }}</span>

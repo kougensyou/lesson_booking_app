@@ -43,7 +43,7 @@ const user = useUserStore();
         :placeholder="$t('index.passwordPlaceholder')"
       />
       <button
-        class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative group font-loaded"
+        class="mt-12 w-full bg-sky-500 rounded-3xl py-4 relative group font-loaded"
         @click="user.login()"
       >
         <span class="text-white">{{ $t('index.loginButton') }}</span>
@@ -68,7 +68,7 @@ const user = useUserStore();
           <div class="pt-6 font-bold">{{ $t('index.noAccount') }}</div>
         </div>
         <button
-          class="mt-12 pt-6 pb-6 bg-orange-500 rounded-3xl w-full relative group font-loaded"
+          class="mt-12 bg-orange-500 rounded-3xl w-full py-4 relative group font-loaded"
           @click="$router.push('/firstLessonBooking')"
         >
           <span class="text-white">{{ $t('index.firstLesson') }}</span>

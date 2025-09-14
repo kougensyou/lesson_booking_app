@@ -44,7 +44,7 @@ userStore.setToastMessageForPassword();
     </div>
 
     <button
-      class="mt-12 pt-6 pb-6 pl-3 pr-3 bg-sky-500 rounded-3xl w-full relative"
+      class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
       @click="userStore.updatePassword()"
     >
       <span class="text-white">{{ $t('passwordChange.updatePassword') }}</span>
