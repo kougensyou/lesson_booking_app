@@ -2,12 +2,21 @@
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import FirstUser from '~/components/firstLessonBookingConfirm/FirstUser.vue';
 import ConfirmDialog from '~/components/firstLessonBookingConfirm/ConfirmDialog.vue';
+import { useRouter } from 'vue-router';
 
 definePageMeta({
   layout: 'no-header',
 });
 
 const lessonBookingStore = useLessonBookingStore();
+
+const router = useRouter();
+
+const applyFirstLesson = () => {
+  lessonBookingStore.applyFirstLessonApi().then(() => {
+    router.push({ path: '/firstLessonBookingDone' });
+  });
+};
 </script>
 <template>
   <div class="px-4 py-3 space-y-6">
@@ -48,7 +57,7 @@ const lessonBookingStore = useLessonBookingStore();
     <ConfirmDialog
       v-if="lessonBookingStore.isDialogOpen"
       :selected-lesson="lessonBookingStore.firstBooking.selectedLesson"
-      :apply-first-lesson="lessonBookingStore.applyFirstLesson"
+      :apply-first-lesson="applyFirstLesson"
       :close-dialog="lessonBookingStore.closeDialog"
     />
   </div>

@@ -53,6 +53,10 @@
     "book": "Book",
     "back": "Back"
   },
+  "firstLessonBookingDone": {
+    "tabTitle": "Trial Lesson Booking",
+    "doneMessage": "Your booking has been completed.\nA confirmation email has been sent \nto the following email address."
+  },
   "home": {
     "tabTitle": "Lesson Booking",
     "nextLessonTitle": "Next Lesson",

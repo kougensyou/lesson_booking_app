@@ -53,6 +53,10 @@
     "book": "予約する",
     "back": "戻る"
   },
+  "firstLessonBookingDone": {
+    "tabTitle": "体験予約",
+    "doneMessage": "予約が完了しました。\n以下のメールアドレスにメールを送信しましたので\nご確認ください。"
+  },
   "home": {
     "tabTitle": "レッスン予約",
     "nextLessonTitle": "次のレッスン",
