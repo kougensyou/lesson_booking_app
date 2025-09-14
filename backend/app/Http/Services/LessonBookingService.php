@@ -10,6 +10,7 @@ use App\Models\LessonBooking;
 use App\Models\LessonCategory;
 use App\Models\Studio;
 use App\Models\FavoriteStudio;
+use SendGrid;
 
 
 class LessonBookingService
@@ -112,6 +113,42 @@ class LessonBookingService
             });
         } catch (\Throwable $e) {
             \Log::error('getLessonData error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function applyFirstLesson($firstBooking) {
+
+        DB::beginTransaction();
+
+        try {
+
+            $body = __('messages.first_lesson_booking', [
+                'name' => $firstBooking['user']['name'], 
+                'studio_name' => $firstBooking['selectedLesson']['studio_name'], 
+                'lesson_name' => $firstBooking['selectedLesson']['lesson_name'], 
+                'lesson_datetime' => $firstBooking['selectedLesson']['lesson_day'] . ' ' . $firstBooking['selectedLesson']['lesson_time'],
+            ]);
+
+            $email = new \SendGrid\Mail\Mail();
+            $email->setFrom(getenv('SENDGRID_FROM_EMAIL'));
+            $email->setSubject(__('messages.first_lesson_booking_subject'));
+            $email->addTo($firstBooking['user']['email']);
+            $apiKey = getenv('SENDGRID_API_KEY');
+            $sendGrid = new \SendGrid($apiKey);
+            $email->addContent(
+                "text/plain",
+                $body
+            );
+            $response = $sendGrid->send($email);
+            if ($response->statusCode() == 202) {
+                return back()->with(['success' => "E-mails successfully sent out!!"]);
+            }
+            return back()->withErrors(json_decode($response->body())->errors);
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            \Log::error('applyFirstLesson error: ' . $e->getMessage());
             throw $e;
         }
     }

@@ -44,6 +44,15 @@
     "email": "Email",
     "next": "Next"
   },
+  "firstLessonBookingConfirm": {
+    "tabTitle": "Trial Lesson Booking",
+    "name": "Name",
+    "birthDay": "Date of Birth",
+    "email": "Email",
+    "bookDialogMessage": "Is the following information correct?",
+    "book": "Book",
+    "back": "Back"
+  },
   "home": {
     "tabTitle": "Lesson Booking",
     "nextLessonTitle": "Next Lesson",

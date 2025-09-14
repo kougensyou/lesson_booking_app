@@ -44,6 +44,15 @@
     "email": "メール",
     "next": "次へ"
   },
+  "firstLessonBookingConfirm": {
+    "tabTitle": "体験予約",
+    "name": "名前",
+    "birthDay": "生年月日",
+    "email": "メール",
+    "bookDialogMessage": "以下の内容でお間違いないでしょうか。",
+    "book": "予約する",
+    "back": "戻る"
+  },
   "home": {
     "tabTitle": "レッスン予約",
     "nextLessonTitle": "次のレッスン",

@@ -48,4 +48,14 @@ class LessonBookingController extends Controller
         return $this->lessonBookingService->addBookingHistory($userId);
     }
 
+    public function applyFirstLesson(Request $request) {
+        $firstBooking = $request->input('first_booking');
+        $this->lessonBookingService->applyFirstLesson($firstBooking);
+
+        return [
+            'success' => true,
+            'message' => 'The lesson was applied successfully.'
+        ];
+    }
+
 }

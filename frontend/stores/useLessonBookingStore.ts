@@ -200,5 +200,19 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       this.firstBooking.selectedLesson.lesson_time = '';
       this.firstBooking.selectedLesson.lesson_name = '';
     },
+    async applyFirstLesson() {
+      try {
+        const { data } = await useSanctumFetch('/api/apply_first_lesson', {
+          method: 'POST',
+          body: {
+            first_booking: this.firstBooking,
+          },
+        });
+        this.closeDialog();
+        console.log('bookLesson fetched:', data.value);
+      } catch (err) {
+        console.error('Error fetching bookLesson data:', err);
+      }
+    },
   },
 });

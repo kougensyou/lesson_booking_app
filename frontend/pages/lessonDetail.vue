@@ -91,24 +91,21 @@ await lessonStore.getLessonDetailApi();
       {{ lessonStore.lessonDetail.instructor_introduction }}
     </div>
 
-    <template
+    <ConfirmButton
       v-if="
         !lessonStore.lessonDetail.done_flag ||
         !lessonStore.lessonDetail.reserved_flag
       "
-    >
-      <ConfirmButton
-        :open-dialog="lessonBookingStore.openDialog"
-        :lesson-detail="lessonStore.lessonDetail"
-      />
-    </template>
-  </div>
-  <template v-if="lessonBookingStore.isDialogOpen">
-    <ConfirmDialog
+      :open-dialog="lessonBookingStore.openDialog"
       :lesson-detail="lessonStore.lessonDetail"
-      :book-lesson="bookLesson"
-      :cancel-lesson="cancelLesson"
-      :close-dialog="lessonBookingStore.closeDialog"
     />
-  </template>
+  </div>
+
+  <ConfirmDialog
+    v-if="lessonBookingStore.isDialogOpen"
+    :lesson-detail="lessonStore.lessonDetail"
+    :book-lesson="bookLesson"
+    :cancel-lesson="cancelLesson"
+    :close-dialog="lessonBookingStore.closeDialog"
+  />
 </template>
