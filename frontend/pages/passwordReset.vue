@@ -10,46 +10,49 @@ const userStore = useUserStore();
 userStore.setToastMessageForPasswordReset();
 </script>
 <template>
-  <div class="max-w-[640px] mx-auto pl-6 pr-6">
-    <div class="text-center mb-6">
-      <p class="text-gray-700">{{ $t('passwordReset.resetMessage1') }}</p>
-      <p class="text-gray-700">{{ $t('passwordReset.resetMessage2') }}</p>
-    </div>
+  <div class="pt-4 pb-4">
+    <div class="max-w-[640px] mx-auto p-4 bg-white">
+      <div class="text-center mb-6">
+        <p class="text-gray-700">{{ $t('passwordReset.resetMessage1') }}</p>
+        <p class="text-gray-700">{{ $t('passwordReset.resetMessage2') }}</p>
+      </div>
 
-    <input
-      type="email"
-      :placeholder="$t('passwordReset.emailPlaceholder')"
-      v-model="userStore.emailForPasswordReset"
-      class="w-full max-w-md border rounded px-4 py-2 mb-4 text-gray-800"
-    />
+      <input
+        type="email"
+        :placeholder="$t('passwordReset.emailPlaceholder')"
+        v-model="userStore.emailForPasswordReset"
+        class="w-full max-w-md border rounded px-4 py-2 mb-4 text-gray-800"
+      />
 
-    <button
-      class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"
-      @click="userStore.sendPasswordResetMail()"
-    >
-      <span class="text-white">{{ $t('passwordReset.sendButton') }}</span>
-      <span
-        class="text-white material-symbols-outlined absolute right-3"
-        aria-hidden="true"
+      <button
+        class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"
+        @click="userStore.sendPasswordResetMail()"
       >
-        chevron_right
-      </span>
-    </button>
-
-    <div class="flex items-center justify-center mt-24">
-      <div class="pt-6 font-bold">{{ $t('passwordReset.noAccount') }}</div>
+        <span class="text-white">{{ $t('passwordReset.sendButton') }}</span>
+        <span
+          class="text-white material-symbols-outlined absolute right-3"
+          aria-hidden="true"
+        >
+          chevron_right
+        </span>
+      </button>
     </div>
-    <button
-      class="mt-12 pt-6 pb-6 bg-orange-500 rounded-3xl w-full relative"
-      @click=""
-    >
-      <span class="text-white">{{ $t('passwordReset.firstLesson') }}</span>
-      <span
-        class="text-white material-symbols-outlined absolute right-3"
-        aria-hidden="true"
-        >chevron_right</span
+    <div class="mt-4 mb-4 bg-white max-w-[640px] mx-auto p-6">
+      <div class="flex items-center justify-center">
+        <div class="font-bold">{{ $t('index.noAccount') }}</div>
+      </div>
+      <button
+        class="mt-12 bg-orange-500 rounded-3xl w-full py-4 relative group font-loaded"
+        @click="$router.push('/firstLessonBooking')"
       >
-    </button>
+        <span class="text-white">{{ $t('index.firstLesson') }}</span>
+        <span
+          class="text-white material-symbols-outlined absolute right-3"
+          aria-hidden="true"
+          >chevron_right</span
+        >
+      </button>
+    </div>
   </div>
   <Toast :show="userStore.toastVisible" :message="userStore.toastMessage" />
 </template>

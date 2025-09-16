@@ -12,19 +12,15 @@ document.fonts.ready.then(() => {
 const user = useUserStore();
 </script>
 <template>
-  <div class="">
+  <div class="pt-4 pb-4">
     <Head>
       <title>{{ $t('index.tabTitle') }}</title>
     </Head>
-    <div class="bg-gray-200 w-full">
-      <div class="max-w-[640px] mx-auto pl-6">
-        <div class="text-left pt-8 pb-8 text-xl font-serif font-medium">
-          {{ $t('index.title') }}
-        </div>
+    <div class="mt-4 mb-4 p-4 bg-white max-w-[640px] mx-auto">
+      <div class="flex items-center justify-center">
+        {{ $t('index.title') }}
       </div>
-    </div>
-    <div class="max-w-[640px] mx-auto pl-6 pr-6">
-      <div class="pt-36 pb-2 text-left text-slate-500">
+      <div class="pb-2 text-left text-slate-500">
         {{ $t('index.email') }}
       </div>
       <input
@@ -33,13 +29,13 @@ const user = useUserStore();
         type="text"
         :placeholder="$t('index.emailPlaceholder')"
       />
-      <div class="pt-12 pb-2 text-left text-slate-500">
+      <div class="pb-2 text-left text-slate-500">
         {{ $t('index.password') }}
       </div>
       <input
         v-model="user.loginData.password"
         class="input border-2 p-2 w-full"
-        type="text"
+        type="password"
         :placeholder="$t('index.passwordPlaceholder')"
       />
       <button
@@ -62,23 +58,21 @@ const user = useUserStore();
         >
       </div>
     </div>
-    <div class="bg-gray-200 w-full">
-      <div class="max-w-[640px] mx-auto pl-6 pr-6 pb-6">
-        <div class="flex items-center justify-center mt-24">
-          <div class="pt-6 font-bold">{{ $t('index.noAccount') }}</div>
-        </div>
-        <button
-          class="mt-12 bg-orange-500 rounded-3xl w-full py-4 relative group font-loaded"
-          @click="$router.push('/firstLessonBooking')"
-        >
-          <span class="text-white">{{ $t('index.firstLesson') }}</span>
-          <span
-            class="text-transparent material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible group-[.font-loaded]:text-white"
-            aria-hidden="true"
-            >chevron_right</span
-          >
-        </button>
+    <div class="bg-white max-w-[640px] mx-auto p-6">
+      <div class="flex items-center justify-center">
+        <div class="font-bold">{{ $t('index.noAccount') }}</div>
       </div>
+      <button
+        class="mt-12 bg-orange-500 rounded-3xl w-full py-4 relative group font-loaded"
+        @click="$router.push('/firstLessonBooking')"
+      >
+        <span class="text-white">{{ $t('index.firstLesson') }}</span>
+        <span
+          class="text-transparent material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible group-[.font-loaded]:text-white"
+          aria-hidden="true"
+          >chevron_right</span
+        >
+      </button>
     </div>
   </div>
 </template>

@@ -4,9 +4,9 @@ import Footer from '../components/common/Footer.vue';
 <template>
   <div class="min-h-screen bg-cover bg-center flex justify-center">
     <div
-      class="w-full max-w-lg bg-white border border-gray-300 shadow-xl rounded-xl flex flex-col min-h-screen"
+      class="w-full max-w-lg bg-white border border-gray-300 shadow-xl flex flex-col min-h-screen"
     >
-      <main class="flex-1">
+      <main class="flex-1 bg-gray-100">
         <NuxtPage />
       </main>
       <Footer />
