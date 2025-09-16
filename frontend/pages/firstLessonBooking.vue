@@ -7,7 +7,7 @@ import FirstSelectedLesson from '~/components/firstLessonBooking/FirstSelectedLe
 import FirstUser from '~/components/firstLessonBooking/FirstUser.vue';
 
 definePageMeta({
-  layout: 'no-header',
+  layout: 'no-sidebar',
 });
 
 const lessonStore = useLessonStore();

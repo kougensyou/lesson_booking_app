@@ -2,7 +2,7 @@
 import { useLessonBookingStore } from '../stores/useLessonBookingStore';
 
 definePageMeta({
-  layout: 'no-header',
+  layout: 'no-sidebar',
 });
 
 const lessonBookingStore = useLessonBookingStore();

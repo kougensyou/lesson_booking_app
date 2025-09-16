@@ -5,7 +5,7 @@ import ConfirmDialog from '~/components/firstLessonBookingConfirm/ConfirmDialog.
 import { useRouter } from 'vue-router';
 
 definePageMeta({
-  layout: 'no-header',
+  layout: 'no-sidebar',
 });
 
 const lessonBookingStore = useLessonBookingStore();

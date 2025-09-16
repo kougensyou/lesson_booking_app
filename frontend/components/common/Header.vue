@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{
+  isSidebarIcon: boolean;
   isOpen: boolean;
   toggleSidebar: () => void;
 }>();
@@ -7,8 +8,8 @@ defineProps<{
 <template>
   <header :class="['shadow-md z-30 transition-colors duration-300']">
     <div class="flex items-center justify-between h-16 px-4">
-      <h1 class="text-xl font-bold text-green-600">{{ $t('header.title') }}</h1>
-      <button @click="toggleSidebar">
+      <h1 class="text-xl font-bold text-sky-300">{{ $t('header.title') }}</h1>
+      <button v-if="isSidebarIcon" @click="toggleSidebar">
         <span class="material-symbols-outlined" aria-hidden="true">{{
           isOpen ? 'close' : 'menu'
         }}</span>

@@ -4,6 +4,7 @@ import Footer from '../components/common/Footer.vue';
 import Sidebar from '~/components/common/Sidebar.vue';
 import { ref } from 'vue';
 
+const isSidebarIcon = ref(true);
 const isOpen = ref(false);
 
 const toggleSidebar = () => {
@@ -21,6 +22,7 @@ const closeSidebar = () => {
     >
       <Sidebar :is-open="isOpen" :close-sidebar="closeSidebar" />
       <Header
+        :is-sidebar-icon="isSidebarIcon"
         :is-open="isOpen"
         :toggle-sidebar="toggleSidebar"
         :close-sidebar="closeSidebar"

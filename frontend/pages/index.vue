@@ -2,7 +2,7 @@
 import { useUserStore } from '../stores/useUserStore';
 
 definePageMeta({
-  layout: 'no-header',
+  layout: 'no-sidebar',
 });
 
 document.fonts.ready.then(() => {
@@ -12,7 +12,7 @@ document.fonts.ready.then(() => {
 const user = useUserStore();
 </script>
 <template>
-  <div class="pt-4 pb-4">
+  <div class="pt-2 pb-2">
     <Head>
       <title>{{ $t('index.tabTitle') }}</title>
     </Head>

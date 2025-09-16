@@ -3,7 +3,7 @@ import { useUserStore } from '../stores/useUserStore';
 import Toast from '~/components/common/Toast.vue';
 
 definePageMeta({
-  layout: 'no-header',
+  layout: 'no-sidebar',
 });
 
 const userStore = useUserStore();
