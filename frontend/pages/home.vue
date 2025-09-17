@@ -10,9 +10,9 @@ const lessonStore = useLessonStore();
 const lessonBookingStore = useLessonBookingStore();
 const informationStore = useInformationStore();
 
-await lessonStore.getNextLessonData();
-await lessonBookingStore.getSelectedLessonList();
-await informationStore.getInformationList();
+lessonStore.getNextLessonData();
+lessonBookingStore.getSelectedLessonList();
+informationStore.getInformationList();
 </script>
 <template>
   <div class="">
@@ -20,8 +20,12 @@ await informationStore.getInformationList();
       <title>{{ $t('home.tabTitle') }}</title>
     </Head>
   </div>
-  <NextLesson :next-lesson-list="lessonStore.nextLessonList" />
+  <NextLesson
+    :is-loading="lessonStore.isNextLessonLoading"
+    :next-lesson-list="lessonStore.nextLessonList"
+  />
   <LessonCalendar
+    :is-loading="lessonBookingStore.isSelectedLessonLoading"
     :selected-lesson-list="lessonBookingStore.selectedLessonList"
     :attributes="lessonBookingStore.attributes"
     :calendar-theme-color="lessonBookingStore.calendarThemeColor"

@@ -13,6 +13,7 @@ import type {
 
 export const useLessonStore = defineStore('lesson', {
   state: () => ({
+    isNextLessonLoading: false as boolean,
     nextLessonList: [] as Lesson[],
     sameStudioLessonList: [] as Lesson[],
     lessonCategoryList: [] as LessonCategory[],
@@ -86,11 +87,13 @@ export const useLessonStore = defineStore('lesson', {
       );
     },
     async getNextLessonData() {
+      this.isNextLessonLoading = true;
       try {
         const { data } = await useSanctumFetch('/api/get_next_lesson_data', {
           method: 'GET',
         });
         this.nextLessonList = data.value as Lesson[];
+        this.isNextLessonLoading = false;
         console.log(' data fetched:', data.value);
       } catch (err) {
         console.error('Error fetching lesson list:', err);

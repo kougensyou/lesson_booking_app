@@ -3,12 +3,16 @@ import type { Lesson } from '~/types/lesson';
 import HorizontalScroll from '../common/HorizontalScroll.vue';
 
 defineProps<{
+  isLoading: boolean;
   nextLessonList: Array<Lesson>;
 }>();
 </script>
 <template>
   <h1 class="text-xl font-bold px-4 pt-4">{{ $t('home.nextLessonTitle') }}</h1>
-  <template v-if="nextLessonList.length === 0">
+  <div v-if="isLoading" class="flex items-center justify-center pt-12 pb-12">
+    <span :class="isLoading ? 'spinLoader' : ''"></span>
+  </div>
+  <template v-if="!isLoading && nextLessonList.length === 0">
     <button
       class="mt-6 pt-6 pb-6 px-8 bg-sky-500 rounded-3xl mx-auto block"
       @click=""
@@ -16,7 +20,7 @@ defineProps<{
       <span class="text-white">{{ $t('home.bookLesson') }}</span>
     </button>
   </template>
-  <template v-if="nextLessonList.length > 0">
+  <template v-if="!isLoading && nextLessonList.length > 0">
     <HorizontalScroll>
       <div
         v-for="lesson in nextLessonList"

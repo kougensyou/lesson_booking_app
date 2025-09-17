@@ -10,6 +10,7 @@ import type { BaseStudioLesson, Lesson } from '~/types/lesson';
 
 export const useLessonBookingStore = defineStore('lessonBooking', {
   state: () => ({
+    isSelectedLessonLoading: false as boolean,
     selectedLessonList: [] as LessonBooking[],
     calendarThemeColor: 'green',
     selectedMonth: new Date().getMonth(),
@@ -61,6 +62,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       );
     },
     async getSelectedLessonList() {
+      this.isSelectedLessonLoading = true;
       try {
         const { data } = await useSanctumFetch(
           '/api/get_selected_lesson_list',
@@ -73,8 +75,10 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           }
         );
         this.selectedLessonList = data.value as LessonBooking[];
+        this.isSelectedLessonLoading = false;
         console.log('home data fetched:', data.value);
       } catch (err) {
+        this.isSelectedLessonLoading = false;
         console.error('Error fetching lesson list:', err);
       }
     },

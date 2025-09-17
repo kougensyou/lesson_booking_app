@@ -3,6 +3,7 @@ import type { Attribute, LessonBooking } from '~/types/lessonBooking';
 import { Calendar } from 'v-calendar';
 
 const props = defineProps<{
+  isLoading: boolean;
   selectedLessonList: Array<LessonBooking>;
   attributes: Array<Attribute>;
   calendarThemeColor: string;
@@ -26,6 +27,9 @@ onMounted(() => {
   <h1 class="text-xl font-bold px-4 pt-4">
     {{ $t('home.lessonCalendarTitle') }}
   </h1>
+  <div v-if="isLoading" class="px-4">
+    <span :class="isLoading ? 'loader' : ''"></span>
+  </div>
   <div class="custom-calendar px-4 py-2">
     <Calendar
       class="max-w-full"
@@ -92,5 +96,59 @@ onMounted(() => {
 .custom-calendar :deep(.vc-bordered) {
   border: none;
   border-radius: 1.5rem;
+}
+
+.loader {
+  /* width: 100%;
+  height: 450px;
+  border-radius: 1.5rem; */
+  width: 215px;
+  height: 215px;
+  display: block;
+  margin: auto;
+  position: relative;
+  background: #fff;
+  box-sizing: border-box;
+}
+.loader::after {
+  content: '';
+  width: calc(100% - 30px);
+  height: calc(100% - 15px);
+  top: 15px;
+  left: 15px;
+  position: absolute;
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 100%
+    ),
+    linear-gradient(#ddd 100px, transparent 0),
+    linear-gradient(#ddd 16px, transparent 0),
+    linear-gradient(#ddd 50px, transparent 0);
+  background-repeat: no-repeat;
+  background-size:
+    75px 175px,
+    100% 100px,
+    100% 16px,
+    100% 30px;
+  background-position:
+    -185px 0,
+    center 0,
+    center 115px,
+    center 142px;
+  box-sizing: border-box;
+  animation: animloader 1s linear infinite;
+}
+
+@keyframes animloader {
+  to {
+    background-position:
+      185px 0,
+      center 0,
+      center 115px,
+      center 142px;
+  }
 }
 </style>
