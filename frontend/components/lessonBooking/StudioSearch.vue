@@ -13,7 +13,7 @@ defineProps<{
     </h1>
     <button class="ml-auto">
       <span
-        class="material-symbols-outlined"
+        class="material-symbols-outlined text-gray-800"
         aria-hidden="true"
         @click="$router.push('/studioForSearch')"
         >search</span
@@ -31,7 +31,7 @@ defineProps<{
             path: '/studioLesson',
             query: { studio_id: favoriteStudio.studio_id },
           }"
-          class="min-w-[300px] h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between p-8"
+          class="min-w-[300px] h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between p-8"
         >
           <img
             :src="favoriteStudio.image_url"
@@ -47,7 +47,7 @@ defineProps<{
       </div>
       <NuxtLink
         :to="{ path: '/studioForSearch' }"
-        class="min-w-[300px] h-[200px] bg-gray-100 rounded-xl shadow-md flex items-center justify-center p-8"
+        class="min-w-[300px] h-[200px] bg-gray-100 rounded-3xl shadow-md flex items-center justify-center p-8"
       >
         <span class="text-gray-500 text-sm">{{
           $t('lessonBooking.otherStudios')
@@ -58,7 +58,7 @@ defineProps<{
   <template v-if="favoriteStudioList.length === 0">
     <NuxtLink
       :to="{ path: '/studioForSearch' }"
-      class="min-w-[300px] h-[200px] bg-gray-100 rounded-xl shadow-md flex items-center justify-center p-8"
+      class="min-w-[300px] h-[200px] bg-gray-100 rounded-3xl shadow-md flex items-center justify-center p-8"
     >
       <span class="text-gray-500 text-sm">{{
         $t('lessonBooking.otherStudios')

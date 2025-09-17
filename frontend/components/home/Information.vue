@@ -14,7 +14,7 @@ defineProps<{
     <div
       v-for="slider in sliderInfoList"
       :key="slider.id"
-      class="min-w-full h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between"
+      class="min-w-full h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between"
     >
       <a :href="slider.link_url" target="_blank" rel="noopener">
         <img
@@ -31,7 +31,7 @@ defineProps<{
     <div
       v-for="(grid, index) in gridInfoList"
       :key="index"
-      class="rounded-xl shadow-md overflow-hidden"
+      class="rounded-3xl bg-white shadow-md overflow-hidden"
     >
       <img
         v-if="grid.image_url"
@@ -41,11 +41,7 @@ defineProps<{
       />
     </div>
   </div>
-  <div
-    v-for="item in listInfoList"
-    :key="item.id"
-    class="px-4 py-3 border-b border-gray-100 relative"
-  >
+  <div v-for="item in listInfoList" :key="item.id" class="px-4 py-3 relative">
     <a
       :href="item.link_url"
       target="_blank"

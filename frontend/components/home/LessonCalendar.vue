@@ -26,9 +26,9 @@ onMounted(() => {
   <h1 class="text-xl font-bold px-4 pt-4">
     {{ $t('home.lessonCalendarTitle') }}
   </h1>
-  <div class="px-4 py-2">
+  <div class="custom-calendar px-4 py-2">
     <Calendar
-      class="custom-calendar max-w-full"
+      class="max-w-full"
       :color="calendarThemeColor"
       :attributes="attributes"
       expanded
@@ -88,3 +88,9 @@ onMounted(() => {
     </Calendar>
   </div>
 </template>
+<style scoped>
+.custom-calendar :deep(.vc-bordered) {
+  border: none;
+  border-radius: 1.5rem;
+}
+</style>

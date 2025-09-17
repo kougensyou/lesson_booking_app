@@ -11,10 +11,7 @@ const isOpen = ref(false);
     <div
       class="w-full max-w-lg bg-white border border-gray-300 shadow-xl flex flex-col min-h-screen"
     >
-      <Header
-        :is-sidebar-icon="isSidebarIcon"
-        :is-open="isOpen"
-      />
+      <Header :is-sidebar-icon="isSidebarIcon" :is-open="isOpen" />
       <main class="flex-1 bg-gray-100">
         <NuxtPage />
       </main>

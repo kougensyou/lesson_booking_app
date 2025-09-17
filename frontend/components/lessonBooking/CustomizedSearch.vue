@@ -33,12 +33,8 @@ onMounted(() => {
   <h1 class="text-xl font-bold px-4 pt-4">
     {{ $t('lessonBooking.customizedSearch') }}
   </h1>
-  <div class="px-4 py-2">
-    <Calendar
-      class="custom-calendar max-w-full"
-      :color="calendarThemeColor"
-      expanded
-    >
+  <div class="custom-calendar px-4 py-2">
+    <Calendar class="max-w-full" :color="calendarThemeColor" expanded>
       <template v-slot:day-content="slotProps">
         <div class="flex flex-col h-full z-10 overflow-hidden">
           <span
@@ -145,3 +141,9 @@ onMounted(() => {
     </div>
   </div>
 </template>
+<style scoped>
+.custom-calendar :deep(.vc-bordered) {
+  border: none;
+  border-radius: 1.5rem;
+}
+</style>

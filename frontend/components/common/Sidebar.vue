@@ -19,7 +19,9 @@ defineProps<{
     >
       <div class="flex justify-between items-center p-4 border-b">
         <button @click="closeSidebar" class="ml-auto">
-          <span class="material-symbols-outlined" aria-hidden="true"
+          <span
+            class="material-symbols-outlined text-gray-800"
+            aria-hidden="true"
             >close</span
           >
         </button>

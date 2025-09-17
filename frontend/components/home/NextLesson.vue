@@ -21,7 +21,7 @@ defineProps<{
       <div
         v-for="lesson in nextLessonList"
         :key="lesson.id"
-        class="min-w-[300px] h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between p-8"
+        class="min-w-[300px] h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between p-8"
         @click="
           $router.push({
             path: '/lessonDetail',
