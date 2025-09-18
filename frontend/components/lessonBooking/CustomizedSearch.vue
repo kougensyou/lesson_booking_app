@@ -5,6 +5,7 @@ import type { LessonCategory, SearchInputForm } from '~/types/lesson';
 
 const props = defineProps<{
   calendarThemeColor: string;
+  calendarLocale: string;
   studioList: Studio[];
   lessonCategoryList: LessonCategory[];
   searchInputForm: SearchInputForm;
@@ -34,7 +35,14 @@ onMounted(() => {
     {{ $t('lessonBooking.customizedSearch') }}
   </h1>
   <div class="custom-calendar px-4 py-2">
-    <Calendar class="max-w-full" :color="calendarThemeColor" expanded>
+    <Calendar
+      class="max-w-full"
+      :masks="{ title: 'YYYY/MM' }"
+      :color="calendarThemeColor"
+      :locale="calendarLocale"
+      trim-weeks
+      expanded
+    >
       <template v-slot:day-content="slotProps">
         <div class="flex flex-col h-full z-10 overflow-hidden">
           <span
@@ -55,74 +63,85 @@ onMounted(() => {
       </template>
     </Calendar>
   </div>
-  <div class="space-y-2 px-4">
-    <span class="text-gray-800 text-sm pt-4">
-      {{ $t('lessonBooking.selectTime') }}
-    </span>
-    <div class="flex items-center space-x-2">
-      <select
-        v-model="searchInputForm.startTime"
-        class="w-1/2 border p-1 rounded"
-      >
-        <option v-for="time in startTimeOptions" :key="time" :value="time">
-          {{ time }}
-        </option>
-      </select>
-      <span class="text-gray-800 text-sm">~</span>
-      <select
-        v-model="searchInputForm.endTime"
-        class="w-1/2 border p-1 rounded"
-      >
-        <option v-for="time in endTimeOptions" :key="time" :value="time">
-          {{ time }}
-        </option>
-      </select>
-    </div>
-
-    <span class="text-gray-800 text-sm pt-4">
-      {{ $t('lessonBooking.lessonCategory') }}
-    </span>
-    <select
-      class="w-full border p-1 rounded"
-      v-model="searchInputForm.lessonCategory"
+  <div class="p-4">
+    <div
+      class="bg-white rounded-3xl shadow-md flex flex-col justify-between px-8 py-4"
     >
-      <option value="">-</option>
-      <option
-        v-for="category in lessonCategoryList"
-        :key="category.id"
-        :value="category.id"
+      <span class="text-gray-800 text-sm pt-4 pb-2">
+        {{ $t('lessonBooking.selectTime') }}
+      </span>
+      <div class="flex items-center space-x-2">
+        <select
+          v-model="searchInputForm.startTime"
+          class="w-1/2 border p-1 rounded"
+        >
+          <option v-for="time in startTimeOptions" :key="time" :value="time">
+            {{ time }}
+          </option>
+        </select>
+        <span class="text-gray-800 text-sm">~</span>
+        <select
+          v-model="searchInputForm.endTime"
+          class="w-1/2 border p-1 rounded"
+        >
+          <option v-for="time in endTimeOptions" :key="time" :value="time">
+            {{ time }}
+          </option>
+        </select>
+      </div>
+
+      <span class="text-gray-800 text-sm pt-4 pb-2">
+        {{ $t('lessonBooking.lessonCategory') }}
+      </span>
+      <select
+        class="w-full border p-1 rounded"
+        v-model="searchInputForm.lessonCategory"
       >
-        {{ category.category_name }}
-      </option>
-    </select>
+        <option value="">-</option>
+        <option
+          v-for="category in lessonCategoryList"
+          :key="category.id"
+          :value="category.id"
+        >
+          {{ category.category_name }}
+        </option>
+      </select>
 
-    <span class="text-gray-800 text-sm pt-4">
-      {{ $t('lessonBooking.studio') }}
-    </span>
-    <select class="w-full border p-1 rounded" v-model="searchInputForm.studio">
-      <option value="">-</option>
-      <option v-for="studio in studioList" :key="studio.id" :value="studio.id">
-        {{ studio.studio_name }}
-      </option>
-    </select>
+      <span class="text-gray-800 text-sm pt-4 pb-2">
+        {{ $t('lessonBooking.studio') }}
+      </span>
+      <select
+        class="w-full border p-1 rounded"
+        v-model="searchInputForm.studio"
+      >
+        <option value="">-</option>
+        <option
+          v-for="studio in studioList"
+          :key="studio.id"
+          :value="studio.id"
+        >
+          {{ studio.studio_name }}
+        </option>
+      </select>
 
-    <span class="text-gray-800 text-sm pt-4">
-      {{ $t('lessonBooking.instructor') }}
-    </span>
-    <input
-      class="w-full border p-1 rounded"
-      type="text"
-      v-model="searchInputForm.instructor"
-    />
+      <span class="text-gray-800 text-sm pt-4 pb-2">
+        {{ $t('lessonBooking.instructor') }}
+      </span>
+      <input
+        class="w-full border p-1 rounded"
+        type="text"
+        v-model="searchInputForm.instructor"
+      />
 
-    <span class="text-gray-800 text-sm pt-4">
-      {{ $t('lessonBooking.lessonName') }}
-    </span>
-    <input
-      class="w-full border p-1 rounded"
-      type="text"
-      v-model="searchInputForm.lessonName"
-    />
+      <span class="text-gray-800 text-sm pt-4 pb-2">
+        {{ $t('lessonBooking.lessonName') }}
+      </span>
+      <input
+        class="w-full border p-1 rounded"
+        type="text"
+        v-model="searchInputForm.lessonName"
+      />
+    </div>
   </div>
   <div class="fixed bottom-0 left-0 right-0 bg-white px-4 py-4">
     <div class="max-w-md mx-auto">

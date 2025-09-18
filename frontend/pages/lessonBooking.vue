@@ -3,6 +3,7 @@ import CustomizedSearch from '~/components/lessonBooking/CustomizedSearch.vue';
 import StudioSearch from '~/components/lessonBooking/StudioSearch.vue';
 import { useStudioStore } from '../stores/useStudioStore';
 import { useLessonStore } from '../stores/useLessonStore';
+import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useRouter } from 'vue-router';
 import SpinLoader from '~/components/common/SpinLoader.vue';
 import CardLoader from '~/components/common/CardLoader.vue';
@@ -10,6 +11,9 @@ import CardLoader from '~/components/common/CardLoader.vue';
 const router = useRouter();
 const studioStore = useStudioStore();
 const lessonStore = useLessonStore();
+const lessonBookingStore = useLessonBookingStore();
+
+lessonBookingStore.setCalendarLocaleForLessonBooking();
 
 const addSearchedLessons = () => {
   lessonStore.initializePaginationData();
@@ -59,6 +63,7 @@ lessonStore.getTimeOptions();
       !lessonStore.isTimeOptionsLoading
     "
     :calendar-theme-color="lessonStore.calendarThemeColor"
+    :calendar-locale="lessonBookingStore.calendarLocale"
     :studio-list="studioStore.studioList"
     :lesson-category-list="lessonStore.lessonCategoryList"
     :start-time-options="lessonStore.startTimeOptions"

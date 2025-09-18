@@ -10,7 +10,7 @@ defineProps<{
   <div v-for="(studio, i) in studioList" :key="i">
     <div
       @click="clickStudioCard(studio)"
-      class="min-w-[300px] h-[200px] bg-white rounded-xl shadow-md flex flex-col justify-between p-8"
+      class="min-w-[300px] h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between p-8"
     >
       <img
         :src="studio.image_url"
