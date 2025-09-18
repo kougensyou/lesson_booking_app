@@ -12,7 +12,8 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
   state: () => ({
     isSelectedLessonLoading: false as boolean,
     selectedLessonList: [] as LessonBooking[],
-    calendarThemeColor: 'green',
+    calendarLocale: '' as string,
+    calendarThemeColor: 'blue',
     selectedMonth: new Date().getMonth(),
     selectedYear: new Date().getFullYear(),
     todayMonth: new Date().getMonth() + 1,
@@ -50,6 +51,14 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     },
   },
   actions: {
+    setCalendarLocaleForHome() {
+      const { t } = useI18n();
+      this.calendarLocale = t('home.calendarLocale');
+    },
+    setCalendarLocaleForLessonBooking() {
+      const { t } = useI18n();
+      this.calendarLocale = t('lessonBooking.calendarLocale');
+    },
     parseDateString(dateStr: string | undefined | null): Date {
       if (!dateStr || typeof dateStr !== 'string') return new Date('');
       return new Date(dateStr.replace(' ', 'T'));

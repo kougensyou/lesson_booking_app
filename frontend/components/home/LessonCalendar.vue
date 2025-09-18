@@ -4,6 +4,7 @@ import { Calendar } from 'v-calendar';
 
 const props = defineProps<{
   isLoading: boolean;
+  calendarLocale: string;
   selectedLessonList: Array<LessonBooking>;
   attributes: Array<Attribute>;
   calendarThemeColor: string;
@@ -33,17 +34,21 @@ onMounted(() => {
   <div class="custom-calendar px-4 py-2">
     <Calendar
       class="max-w-full"
+      :masks="{ title: 'YYYY/MM' }"
       :color="calendarThemeColor"
       :attributes="attributes"
+      :locale="calendarLocale"
+      trim-weeks
       expanded
     >
       <template v-slot:day-content="slotProps">
         <div class="flex flex-col h-full z-10 overflow-hidden">
-          <span
-            v-if="checkToday(slotProps.day.day)"
-            class="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white m-auto my-1"
-          >
-            {{ slotProps.day.day }}
+          <span v-if="checkToday(slotProps.day.day)">
+            <span
+              class="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white m-auto"
+            >
+              {{ slotProps.day.day }}
+            </span>
           </span>
           <span v-else class="text-center text-sm text-gray-900">
             {{ slotProps.day.day }}
@@ -60,8 +65,9 @@ onMounted(() => {
                 class="flex items-center justify-center w-full h-full mt-1 mb-1"
               >
                 <span
-                  class="w-8 h-8 rounded-full bg-green-600 m-auto my-1"
-                ></span>
+                  class="material-symbols-outlined w-8 h-8 rounded-full bg-green-600 text-white m-auto my-1 flex items-center justify-center"
+                  >check</span
+                >
               </span>
             </template>
             <template
@@ -92,11 +98,27 @@ onMounted(() => {
     </Calendar>
   </div>
 </template>
-<style scoped>
-.custom-calendar :deep(.vc-bordered) {
+<style>
+.custom-calendar .vc-bordered {
   border: none;
   border-radius: 1.5rem;
 }
+
+.custom-calendar .vc-arrow {
+  color: rgb(125 211 252 / 1);
+}
+
+.custom-calendar .vc-title {
+  color: #71747a;
+}
+
+/* .custom-calendar .vc-nav-arrow {
+  color: rgb(125 211 252 / 1);
+}
+
+.custom-calendar .vc-nav-title {
+  color: #71747a;
+} */
 
 .loader {
   /* width: 100%;

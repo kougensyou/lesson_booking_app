@@ -60,6 +60,7 @@
   "home": {
     "tabTitle": "Lesson Booking",
     "nextLessonTitle": "Next Lesson",
+    "calendarLocale": "en",
     "lessonCalendarTitle": "Lesson Calendar",
     "informationTitle": "Information",
     "bookLesson": "Book"
@@ -69,6 +70,7 @@
     "searchFromStudio": "Search from Studio",
     "otherStudios": "Other Studios...",
     "customizedSearch": "Customized Search",
+    "calendarLocale": "en",
     "selectTime": "Select Time",
     "lessonCategory": "Yoga or Pilates",
     "studio": "Studio",

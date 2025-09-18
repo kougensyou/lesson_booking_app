@@ -5,10 +5,13 @@ import { useInformationStore } from '~/stores/useInformationStore';
 import NextLesson from '~/components/home/NextLesson.vue';
 import LessonCalendar from '~/components/home/LessonCalendar.vue';
 import Information from '~/components/home/Information.vue';
+import { Calendar } from 'v-calendar';
 
 const lessonStore = useLessonStore();
 const lessonBookingStore = useLessonBookingStore();
 const informationStore = useInformationStore();
+
+lessonBookingStore.setCalendarLocaleForHome();
 
 lessonStore.getNextLessonData();
 lessonBookingStore.getSelectedLessonList();
@@ -26,6 +29,7 @@ informationStore.getInformationList();
   />
   <LessonCalendar
     :is-loading="lessonBookingStore.isSelectedLessonLoading"
+    :calendar-locale="lessonBookingStore.calendarLocale"
     :selected-lesson-list="lessonBookingStore.selectedLessonList"
     :attributes="lessonBookingStore.attributes"
     :calendar-theme-color="lessonBookingStore.calendarThemeColor"
