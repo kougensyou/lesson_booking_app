@@ -8,6 +8,10 @@ import Information from '~/components/home/Information.vue';
 import SpinLoader from '~/components/common/SpinLoader.vue';
 import CardLoader from '~/components/common/CardLoader.vue';
 
+definePageMeta({
+  layout: 'bg-gradation',
+});
+
 const lessonStore = useLessonStore();
 const lessonBookingStore = useLessonBookingStore();
 const informationStore = useInformationStore();
@@ -31,20 +35,14 @@ informationStore.getInformationList();
   >
     <SpinLoader />
   </div>
-  <div v-if="lessonBookingStore.isSelectedLessonLoading" class="px-4">
-    <CardLoader :card-height="'h-96'" :card-width="'w-full'" />
-  </div>
-  <div
-    v-if="informationStore.isInformationLoading"
-    class="flex items-center justify-center pt-12 pb-12"
-  >
-    <SpinLoader />
-  </div>
-
   <NextLesson
     v-if="!lessonStore.isNextLessonLoading"
     :next-lesson-list="lessonStore.nextLessonList"
   />
+
+  <div v-if="lessonBookingStore.isSelectedLessonLoading" class="px-4">
+    <CardLoader :card-height="'h-96'" :card-width="'w-full'" />
+  </div>
   <LessonCalendar
     v-if="!lessonBookingStore.isSelectedLessonLoading"
     :calendar-locale="lessonBookingStore.calendarLocale"
@@ -55,6 +53,13 @@ informationStore.getInformationList();
     :get-prev-lesson-list="lessonBookingStore.getPrevLessonList"
     :get-next-lesson-list="lessonBookingStore.getNextLessonList"
   />
+
+  <div
+    v-if="informationStore.isInformationLoading"
+    class="flex items-center justify-center pt-12 pb-12"
+  >
+    <SpinLoader />
+  </div>
   <Information
     v-if="!informationStore.isInformationLoading"
     :slider-info-list="informationStore.sliderInfoList"
