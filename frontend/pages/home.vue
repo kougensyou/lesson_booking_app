@@ -5,7 +5,6 @@ import { useInformationStore } from '~/stores/useInformationStore';
 import NextLesson from '~/components/home/NextLesson.vue';
 import LessonCalendar from '~/components/home/LessonCalendar.vue';
 import Information from '~/components/home/Information.vue';
-import { Calendar } from 'v-calendar';
 
 const lessonStore = useLessonStore();
 const lessonBookingStore = useLessonBookingStore();
@@ -28,7 +27,7 @@ informationStore.getInformationList();
     :next-lesson-list="lessonStore.nextLessonList"
   />
   <LessonCalendar
-    :is-loading="lessonBookingStore.isSelectedLessonLoading"
+    :is-loading="!lessonBookingStore.isSelectedLessonLoading"
     :calendar-locale="lessonBookingStore.calendarLocale"
     :selected-lesson-list="lessonBookingStore.selectedLessonList"
     :attributes="lessonBookingStore.attributes"

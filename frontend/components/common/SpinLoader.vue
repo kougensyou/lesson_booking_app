@@ -1,3 +1,7 @@
+<template>
+  <span class="spinLoader"></span>
+</template>
+<style>
 .spinLoader {
   width: 36px;
   height: 36px;
@@ -17,3 +21,4 @@
     transform: rotate(360deg);
   }
 }
+</style>

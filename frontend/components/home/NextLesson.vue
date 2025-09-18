@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Lesson } from '~/types/lesson';
 import HorizontalScroll from '../common/HorizontalScroll.vue';
+import SpinLoader from '../common/SpinLoader.vue';
 
 defineProps<{
   isLoading: boolean;
@@ -10,7 +11,7 @@ defineProps<{
 <template>
   <h1 class="text-xl font-bold px-4 pt-4">{{ $t('home.nextLessonTitle') }}</h1>
   <div v-if="isLoading" class="flex items-center justify-center pt-12 pb-12">
-    <span :class="isLoading ? 'spinLoader' : ''"></span>
+    <SpinLoader />
   </div>
   <template v-if="!isLoading && nextLessonList.length === 0">
     <button
