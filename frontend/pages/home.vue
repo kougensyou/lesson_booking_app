@@ -27,7 +27,7 @@ informationStore.getInformationList();
     :next-lesson-list="lessonStore.nextLessonList"
   />
   <LessonCalendar
-    :is-loading="!lessonBookingStore.isSelectedLessonLoading"
+    :is-loading="lessonBookingStore.isSelectedLessonLoading"
     :calendar-locale="lessonBookingStore.calendarLocale"
     :selected-lesson-list="lessonBookingStore.selectedLessonList"
     :attributes="lessonBookingStore.attributes"
@@ -37,6 +37,7 @@ informationStore.getInformationList();
     :get-next-lesson-list="lessonBookingStore.getNextLessonList"
   />
   <Information
+    :is-loading="informationStore.isInformationLoading"
     :slider-info-list="informationStore.sliderInfoList"
     :grid-info-list="informationStore.gridInfoList"
     :list-info-list="informationStore.listInfoList"
