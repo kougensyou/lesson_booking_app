@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import type { Lesson } from '~/types/lesson';
 import HorizontalScroll from '../common/HorizontalScroll.vue';
-import SpinLoader from '../common/SpinLoader.vue';
 
 defineProps<{
-  isLoading: boolean;
   nextLessonList: Array<Lesson>;
 }>();
 </script>
 <template>
   <h1 class="text-xl font-bold px-4 pt-4">{{ $t('home.nextLessonTitle') }}</h1>
-  <div v-if="isLoading" class="flex items-center justify-center pt-12 pb-12">
-    <SpinLoader />
-  </div>
-  <template v-if="!isLoading && nextLessonList.length === 0">
+  <template v-if="nextLessonList.length === 0">
     <div class="px-4 py-2">
       <div class="flex flex-col items-center justify-center space-y-4 p-4">
         <span class="text-gray-500 text-sm">{{
@@ -28,7 +23,7 @@ defineProps<{
       </div>
     </div>
   </template>
-  <template v-if="!isLoading && nextLessonList.length > 0">
+  <template v-if="nextLessonList.length > 0">
     <HorizontalScroll>
       <div
         v-for="lesson in nextLessonList"

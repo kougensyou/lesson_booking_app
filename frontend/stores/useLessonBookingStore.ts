@@ -92,6 +92,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       }
     },
     async getPrevLessonList() {
+      console.log('getPrevLessonList called');
       try {
         this.selectedMonth -= 1;
         if (this.selectedMonth < 0) {

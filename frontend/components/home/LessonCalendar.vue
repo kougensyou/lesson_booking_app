@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import type { Attribute, LessonBooking } from '~/types/lessonBooking';
 import { Calendar } from 'v-calendar';
-import CardLoader from '../common/CardLoader.vue';
 
 const props = defineProps<{
-  isLoading: boolean;
   calendarLocale: string;
   selectedLessonList: Array<LessonBooking>;
   attributes: Array<Attribute>;
@@ -29,10 +27,7 @@ onMounted(() => {
   <h1 class="text-xl font-bold px-4 pt-4">
     {{ $t('home.lessonCalendarTitle') }}
   </h1>
-  <div v-if="isLoading" class="px-4">
-    <CardLoader :card-height="'h-96'" :card-width="'w-full'" />
-  </div>
-  <div v-if="!isLoading" class="custom-calendar px-4 py-2">
+  <div class="custom-calendar px-4 py-2">
     <Calendar
       class="max-w-full"
       :masks="{ title: 'YYYY/MM' }"
