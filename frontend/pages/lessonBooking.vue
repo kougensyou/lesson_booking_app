@@ -4,6 +4,8 @@ import StudioSearch from '~/components/lessonBooking/StudioSearch.vue';
 import { useStudioStore } from '../stores/useStudioStore';
 import { useLessonStore } from '../stores/useLessonStore';
 import { useRouter } from 'vue-router';
+import SpinLoader from '~/components/common/SpinLoader.vue';
+import CardLoader from '~/components/common/CardLoader.vue';
 
 const router = useRouter();
 const studioStore = useStudioStore();
@@ -18,10 +20,10 @@ const addSearchedLessons = () => {
 
 lessonStore.initializeSelectedDates();
 
-await studioStore.getStudioList();
-await studioStore.getFavoriteStudioList();
-await lessonStore.getLessonCategoryList();
-await lessonStore.getTimeOptions();
+studioStore.getStudioList();
+studioStore.getFavoriteStudioList();
+lessonStore.getLessonCategoryList();
+lessonStore.getTimeOptions();
 </script>
 <template>
   <div class="">
@@ -29,8 +31,33 @@ await lessonStore.getTimeOptions();
       <title>{{ $t('lessonBooking.tabTitle') }}</title>
     </Head>
   </div>
-  <StudioSearch :favorite-studio-list="studioStore.favoriteStudioList" />
+  <div
+    v-if="studioStore.isFavoriteStudioLoading"
+    class="flex items-center justify-center pt-12 pb-12"
+  >
+    <SpinLoader />
+  </div>
+  <StudioSearch
+    v-if="!studioStore.isFavoriteStudioLoading"
+    :favorite-studio-list="studioStore.favoriteStudioList"
+  />
+
+  <div
+    v-if="
+      studioStore.isStudioListLoading ||
+      lessonStore.isLessonCategoryLoading ||
+      lessonStore.isTimeOptionsLoading
+    "
+    class="px-4"
+  >
+    <CardLoader :card-height="'h-96'" :card-width="'w-full'" />
+  </div>
   <CustomizedSearch
+    v-if="
+      !studioStore.isStudioListLoading &&
+      !lessonStore.isLessonCategoryLoading &&
+      !lessonStore.isTimeOptionsLoading
+    "
     :calendar-theme-color="lessonStore.calendarThemeColor"
     :studio-list="studioStore.studioList"
     :lesson-category-list="lessonStore.lessonCategoryList"

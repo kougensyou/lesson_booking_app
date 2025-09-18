@@ -5,7 +5,9 @@ import { useI18n } from 'vue-i18n';
 export const useStudioStore = defineStore('studio', {
   state: () => ({
     initialFavoriteStudioList: [] as Studio[],
+    isFavoriteStudioLoading: false as boolean,
     favoriteStudioList: [] as Studio[],
+    isStudioLoading: false as boolean,
     studioList: [] as Studio[],
     saveButtonActive: false as boolean,
     toastMessage: '' as string,
@@ -18,17 +20,20 @@ export const useStudioStore = defineStore('studio', {
       this.toastMessage = t('favoriteStudio.toastMessage');
     },
     async getStudioList() {
+      this.isStudioLoading = true;
       try {
         const { data } = await useSanctumFetch('/api/get_studio_list', {
           method: 'GET',
         });
         this.studioList = data.value as Studio[];
+        this.isStudioLoading = false;
         console.log('studio data fetched:', this.studioList);
       } catch (err) {
         console.error('Error fetching studio data:', err);
       }
     },
     async getFavoriteStudioList() {
+      this.isFavoriteStudioLoading = true;
       try {
         const { data } = await useSanctumFetch(
           '/api/get_favorite_studio_list',
@@ -38,6 +43,7 @@ export const useStudioStore = defineStore('studio', {
         );
         this.initialFavoriteStudioList = data.value as Studio[];
         this.favoriteStudioList = data.value as Studio[];
+        this.isFavoriteStudioLoading = false;
         console.log('favorite studio data fetched:', this.favoriteStudioList);
       } catch (err) {
         console.error('Error fetching favorite studio data:', err);

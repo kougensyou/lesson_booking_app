@@ -16,6 +16,7 @@ export const useLessonStore = defineStore('lesson', {
     isNextLessonLoading: false as boolean,
     nextLessonList: [] as Lesson[],
     sameStudioLessonList: [] as Lesson[],
+    isLessonCategoryLoading: false as boolean,
     lessonCategoryList: [] as LessonCategory[],
     searchInputForm: {
       selectedDates: [] as string[],
@@ -35,6 +36,7 @@ export const useLessonStore = defineStore('lesson', {
     lessonDetail: {} as LessonDetail,
     studioData: {} as Studio,
     weekData: [] as WeekData[],
+    isTimeOptionsLoading: false as boolean,
     timeOptions: [] as string[],
     fromDate: '',
     toDate: '',
@@ -130,6 +132,7 @@ export const useLessonStore = defineStore('lesson', {
       }
     },
     async getLessonCategoryList() {
+      this.isLessonCategoryLoading = true;
       try {
         const { data } = await useSanctumFetch(
           '/api/get_lesson_category_list',
@@ -138,11 +141,13 @@ export const useLessonStore = defineStore('lesson', {
           }
         );
         this.lessonCategoryList = data.value as LessonCategory[];
+        this.isLessonCategoryLoading = false;
       } catch (err) {
         console.error('Error getLessonCategoryList:', err);
       }
     },
     async getTimeOptions() {
+      this.isTimeOptionsLoading = true;
       try {
         const { data } = await useSanctumFetch('/api/get_time_options', {
           method: 'GET',
@@ -150,6 +155,7 @@ export const useLessonStore = defineStore('lesson', {
         const timeOptionsData = data.value as TimeOptions;
         this.startTimeOptions = timeOptionsData.start_time_options;
         this.endTimeOptions = timeOptionsData.end_time_options;
+        this.isTimeOptionsLoading = false;
       } catch (err) {
         console.error('Error getTimeOptions:', err);
       }
