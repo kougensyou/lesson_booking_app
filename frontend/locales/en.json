@@ -60,10 +60,11 @@
   "home": {
     "tabTitle": "Lesson Booking",
     "nextLessonTitle": "Next Lesson",
+    "noBookingLessons": "No booked lessons.",
     "calendarLocale": "en",
     "lessonCalendarTitle": "Lesson Calendar",
     "informationTitle": "Information",
-    "bookLesson": "Book"
+    "bookLesson": "Book Lesson"
   },
   "lessonBooking": {
     "tabTitle": "Lesson Booking",

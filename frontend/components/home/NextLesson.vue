@@ -14,12 +14,19 @@ defineProps<{
     <SpinLoader />
   </div>
   <template v-if="!isLoading && nextLessonList.length === 0">
-    <button
-      class="mt-6 pt-6 pb-6 px-8 bg-sky-500 rounded-3xl mx-auto block"
-      @click=""
-    >
-      <span class="text-white">{{ $t('home.bookLesson') }}</span>
-    </button>
+    <div class="px-4 py-2">
+      <div class="flex flex-col items-center justify-center space-y-4 p-4">
+        <span class="text-gray-500 text-sm">{{
+          $t('home.noBookingLessons')
+        }}</span>
+        <button
+          class="w-3/5 bg-sky-500 text-white rounded-3xl py-4"
+          @click="$router.push({ path: '/lessonBooking' })"
+        >
+          <span class="text-white">{{ $t('home.bookLesson') }}</span>
+        </button>
+      </div>
+    </div>
   </template>
   <template v-if="!isLoading && nextLessonList.length > 0">
     <HorizontalScroll>

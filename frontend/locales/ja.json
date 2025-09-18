@@ -60,10 +60,11 @@
   "home": {
     "tabTitle": "レッスン予約",
     "nextLessonTitle": "次のレッスン",
+    "noBookingLessons": "予約しているレッスンがありません",
     "calendarLocale": "ja",
     "lessonCalendarTitle": "レッスンカレンダー",
     "informationTitle": "お知らせ",
-    "bookLesson": "予約する"
+    "bookLesson": "レッスンをさがす"
   },
   "lessonBooking": {
     "tabTitle": "レッスン予約",
