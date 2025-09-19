@@ -36,11 +36,12 @@ defineProps<{
           <img
             :src="favoriteStudio.image_url"
             alt=""
-            class="w-full h-40 object-cover rounded-t-lg"
+            class="w-full h-40 object-cover rounded-t-3xl"
           />
           <div class="p-2">
             <h3 class="text-base font-semibold">
               {{ favoriteStudio.studio_name }}
+              <span class="text-red-500">❤</span>
             </h3>
           </div>
         </NuxtLink>
