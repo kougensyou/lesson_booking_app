@@ -169,6 +169,8 @@ class LessonService
                 'lesson.image_path as lesson_image_path',
                 'lesson.start_time',
                 'lesson.end_time',
+                'lesson.max_user_num',
+                'lesson.booking_user_num',
                 'instructor.name as instructor_name',
                 'instructor.introduction as instructor_introduction',
                 'instructor.image_path as instructor_image_path',
@@ -192,6 +194,7 @@ class LessonService
                 $item->lesson_image_url = $item->lesson_image_path ? asset('storage/' . ltrim($item->lesson_image_path, '/')) : null;
                 $item->instructor_image_url = $item->instructor_image_path ? asset('storage/' . ltrim($item->instructor_image_path, '/')) : null;
                 $item->reserved_flag = (bool) $item->reserved_flag;
+                $item->empty_flag = $item->max_user_num !== $item->booking_user_num;
                 return $item;
             })
             ->first();
@@ -248,7 +251,7 @@ class LessonService
                 $hourKey = $start->format('H:00');
                 $time    = $start->format('H:i');
 
-                $emptyFlag = $lesson->max_user_num === $lesson->booking_user_num ? false : true;
+                $emptyFlag = $lesson->max_user_num !== $lesson->booking_user_num;
 
                 $carry[$date][$hourKey][] = [
                     'lesson_id'      => $lesson->id,

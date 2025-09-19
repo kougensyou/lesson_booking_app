@@ -94,7 +94,8 @@
     "bookDialogMessage": "以下のレッスンを予約しますか？",
     "cancelDialogMessage": "以下のレッスンをキャンセルしますがよろしいですか？",
     "doneMessage": "受講済のレッスンです。",
-    "bookingMessage": "予約中のレッスンです。"
+    "bookingMessage": "予約中のレッスンです。",
+    "fullMessage": "満席のレッスンです。"
   },
   "bookDone": {
     "tabTitle": "予約完了",

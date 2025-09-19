@@ -94,7 +94,8 @@
     "confirmDialogMessage": "Do you book the following lesson?",
     "cancelDialogMessage": "Do you cancel the following lesson?",
     "doneMessage": "This lesson has been completed.",
-    "bookingMessage": "This lesson is currently booked."
+    "bookingMessage": "This lesson is currently booked.",
+    "fullMessage": "This lesson is fully booked."
   },
   "bookDone": {
     "tabTitle": "Book Complete",

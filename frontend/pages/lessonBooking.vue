@@ -6,7 +6,7 @@ import { useLessonStore } from '../stores/useLessonStore';
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useRouter } from 'vue-router';
 import SpinLoading from '~/components/common/SpinLoading.vue';
-import CardLoading from '~/components/common/CardLoading.vue';
+import * as CardLoading from '~/components/common/CardLoading.vue';
 
 definePageMeta({
   layout: 'bg-gradation',

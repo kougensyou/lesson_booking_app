@@ -19,6 +19,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     todayMonth: new Date().getMonth() + 1,
     todayYear: new Date().getFullYear(),
     todayDay: new Date().getDate(),
+    isBookingStatusLoading: false as boolean,
     isDialogOpen: false as boolean,
     loadedPage: 0 as number,
     lastPage: 0 as number,
@@ -147,6 +148,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       this.isDialogOpen = false;
     },
     async bookLessonApi(lessonId: string) {
+      this.isBookingStatusLoading = true;
       try {
         const { data } = await useSanctumFetch('/api/book_lesson', {
           method: 'POST',
@@ -155,12 +157,14 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           },
         });
         this.closeDialog();
+        this.isBookingStatusLoading = false;
         console.log('bookLesson fetched:', data.value);
       } catch (err) {
         console.error('Error fetching bookLesson data:', err);
       }
     },
     async cancelLessonApi(lessonId: string) {
+      this.isBookingStatusLoading = true;
       try {
         const { data } = await useSanctumFetch('/api/cancel_lesson', {
           method: 'POST',
@@ -169,6 +173,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           },
         });
         this.closeDialog();
+        this.isBookingStatusLoading = false;
         console.log('cancelLesson fetched:', data.value);
       } catch (err) {
         console.error('Error fetching cancelLesson data:', err);

@@ -49,6 +49,7 @@ export interface LessonDetail {
   instructor_image_url: string;
   reserved_flag: boolean;
   done_flag: boolean;
+  empty_flag: boolean;
 }
 
 export interface Studio {

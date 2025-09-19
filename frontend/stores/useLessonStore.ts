@@ -33,6 +33,7 @@ export const useLessonStore = defineStore('lesson', {
     todayYear: new Date().getFullYear(),
     todayDay: new Date().getDate(),
     lessonId: '',
+    isLessonDetailLoading: false as boolean,
     lessonDetail: {} as LessonDetail,
     studioData: {} as Studio,
     weekData: [] as WeekData[],
@@ -197,6 +198,7 @@ export const useLessonStore = defineStore('lesson', {
       this.lessonId = lessonId;
     },
     async getLessonDetailApi() {
+      this.isLessonDetailLoading = true;
       try {
         const { data } = await useSanctumFetch('/api/get_lesson_detail', {
           method: 'GET',
@@ -205,6 +207,7 @@ export const useLessonStore = defineStore('lesson', {
           },
         });
         this.lessonDetail = data.value as LessonDetail;
+        this.isLessonDetailLoading = false;
         console.log('lesson detail data fetched:', this.lessonDetail);
       } catch (err) {
         console.error('Error fetching lesson detail data:', err);
