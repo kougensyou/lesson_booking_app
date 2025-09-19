@@ -55,6 +55,9 @@ class LessonBookingService
 
             LessonBooking::insert($insertData);
 
+            Lesson::where('id', $lessonId)
+            ->increment('booking_user_num', 1);
+
             DB::commit();
             
         } catch (\Throwable $e) {
@@ -72,6 +75,9 @@ class LessonBookingService
             LessonBooking::where('user_id', $userId)
                 ->where('lesson_id', $lessonId)
                 ->delete();
+            
+            Lesson::where('id', $lessonId)
+            ->decrement('booking_user_num', 1);
 
             DB::commit();
             

@@ -21,6 +21,7 @@ class Lesson extends AbstractModel
         'end_time',
         'explanation',
         'max_user_num',
+        'booking_user_num',
         'lesson_category_id',
         'created_at',
         'updated_at',

@@ -79,6 +79,11 @@
     "lessonName": "Lesson Name",
     "searchButton": "Search"
   },
+  "studioLesson": {
+    "tabTitle": "Lesson of Studio",
+    "vacantMessage": "Vacant〇",
+    "noVacantMessage": "Vacant✕"
+  },
   "lessonDetail": {
     "tabTitle": "Lesson Detail",
     "bookButton": "Book a Lesson",

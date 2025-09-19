@@ -226,6 +226,8 @@ class LessonService
                 'lesson.name as lesson_name',
                 'lesson.start_time',
                 'lesson.end_time',
+                'lesson.max_user_num',
+                'lesson.booking_user_num',
                 'instructor.name as instructor_name',
                 'instructor.image_path'
             )
@@ -246,6 +248,8 @@ class LessonService
                 $hourKey = $start->format('H:00');
                 $time    = $start->format('H:i');
 
+                $emptyFlag = $lesson->max_user_num === $lesson->booking_user_num ? false : true;
+
                 $carry[$date][$hourKey][] = [
                     'lesson_id'      => $lesson->id,
                     'lesson_day'      => $date,
@@ -253,6 +257,7 @@ class LessonService
                     'start_time'      => $time,
                     'lesson_name'     => $lesson->lesson_name,
                     'instructor_name' => $lesson->instructor_name,
+                    'empty_flag'    => $emptyFlag,
                 ];
                 return $carry;
             }, []);

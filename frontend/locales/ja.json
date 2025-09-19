@@ -79,6 +79,11 @@
     "lessonName": "レッスン名",
     "searchButton": "検索"
   },
+  "studioLesson": {
+    "tabTitle": "スタジオ別レッスン一覧",
+    "vacantMessage": "空き〇",
+    "noVacantMessage": "空き✕"
+  },
   "lessonDetail": {
     "tabTitle": "レッスン詳細",
     "bookButton": "レッスン予約",

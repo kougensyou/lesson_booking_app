@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { StudioLesson, WeekData } from '~/types/lesson';
 defineProps<{
+  vacantMessage: string;
+  noVacantMessage: string;
   isAuth: boolean;
   studioName: string;
   weekData: Array<WeekData>;
@@ -66,8 +68,17 @@ defineProps<{
             class="bg-white rounded text-center"
             @click="clickCard(studioLesson)"
           >
-            <div v-if="isAuth" class="bg-green-100 font-bold p-1 text-[11px]">
-              空き○
+            <div
+              v-if="isAuth && studioLesson.empty_flag"
+              class="bg-green-200 font-bold p-1 text-[11px]"
+            >
+              {{ vacantMessage }}
+            </div>
+            <div
+              v-if="isAuth && !studioLesson.empty_flag"
+              class="bg-red-200 font-bold p-1 text-[11px]"
+            >
+              {{ noVacantMessage }}
             </div>
             <div class="p-1 text-[11px]">{{ studioLesson.start_time }} ～</div>
             <div class="font-bold p-1 text-[14px] break-words">

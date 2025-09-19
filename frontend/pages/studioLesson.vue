@@ -25,11 +25,13 @@ await lessonStore.getStudioLessonDataApi();
 <template>
   <div class="">
     <Head>
-      <title>{{ $t('lessonBooking.tabTitle') }}</title>
+      <title>{{ $t('studioLesson.tabTitle') }}</title>
     </Head>
   </div>
   <div class="pb-4">
     <StudioLessonCalendar
+      :vacant-message="$t('studioLesson.vacantMessage')"
+      :no-vacant-message="$t('studioLesson.noVacantMessage')"
       :is-auth="userStore.user.id ? true : false"
       :studio-name="lessonStore.studioData.studio_name"
       :week-data="lessonStore.weekData"
