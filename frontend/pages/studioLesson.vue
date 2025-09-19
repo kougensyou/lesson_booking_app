@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+import type { BaseStudioLesson } from '~/types/lesson';
 import { useLessonStore } from '../stores/useLessonStore';
 import { useUserStore } from '../stores/useUserStore';
 import { useRoute } from 'vue-router';
 import StudioLessonCalendar from '~/components/common/StudioLessonCalendar.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 const route = useRoute();
 
@@ -20,7 +22,7 @@ const changeStudioLessonData = (selectedDateObj: Date) => {
 lessonStore.setStudioId(studioId);
 lessonStore.setDate(new Date());
 lessonStore.setWeekData();
-await lessonStore.getStudioLessonDataApi();
+lessonStore.getStudioLessonDataApi();
 </script>
 <template>
   <div class="">
@@ -28,8 +30,15 @@ await lessonStore.getStudioLessonDataApi();
       <title>{{ $t('studioLesson.tabTitle') }}</title>
     </Head>
   </div>
+  <div
+    v-if="lessonStore.isStudioLessonLoading"
+    class="fixed inset-0 flex items-center justify-center"
+  >
+    <SpinLoading />
+  </div>
   <div class="pb-4">
     <StudioLessonCalendar
+      v-if="!lessonStore.isStudioLessonLoading"
       :vacant-message="$t('studioLesson.vacantMessage')"
       :no-vacant-message="$t('studioLesson.noVacantMessage')"
       :is-auth="userStore.user.id ? true : false"
@@ -39,7 +48,7 @@ await lessonStore.getStudioLessonDataApi();
       :time-options="lessonStore.timeOptions"
       :change-studio-lesson-data="changeStudioLessonData"
       :click-card="
-        (studioLesson: any) => {
+        (studioLesson: BaseStudioLesson) => {
           $router.push({
             path: '/lessonDetail',
             query: { lesson_id: studioLesson.lesson_id },

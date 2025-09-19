@@ -40,6 +40,7 @@ export const useLessonStore = defineStore('lesson', {
     timeOptions: [] as string[],
     fromDate: '',
     toDate: '',
+    isStudioLessonLoading: false as boolean,
     studioLessonList: {} as StudioLesson,
     selectedStudioId: '',
   }),
@@ -233,6 +234,7 @@ export const useLessonStore = defineStore('lesson', {
       }
     },
     async getStudioLessonDataApi() {
+      this.isStudioLessonLoading = true;
       try {
         const { data } = await useSanctumFetch('/api/get_studio_lesson_data', {
           method: 'GET',
@@ -246,6 +248,7 @@ export const useLessonStore = defineStore('lesson', {
         this.timeOptions = studioLessonData.time_options;
         this.studioData = studioLessonData.studio_data as Studio;
         this.studioLessonList = studioLessonData.studio_lesson_list;
+        this.isStudioLessonLoading = false;
         console.log('studio lesson data fetched:', studioLessonData);
       } catch (err) {
         console.error('Error fetching studio lesson data:', err);

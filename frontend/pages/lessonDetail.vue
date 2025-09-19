@@ -26,7 +26,7 @@ const lessonBookingStore = useLessonBookingStore();
 const lessonId = route.query.lesson_id as string;
 
 lessonStore.setLessonId(lessonId);
-await lessonStore.getLessonDetailApi();
+lessonStore.getLessonDetailApi();
 </script>
 <template>
   <div class="">

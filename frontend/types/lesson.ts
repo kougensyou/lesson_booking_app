@@ -64,7 +64,7 @@ export interface WeekData {
 }
 export interface BaseStudioLesson {
   lesson_id: number;
-  density_level: string;
+  empty_flag: boolean;
   lesson_day: string;
   lesson_time: string;
   start_time: string;
