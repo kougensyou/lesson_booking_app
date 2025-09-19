@@ -1,8 +1,8 @@
 <template>
-  <span class="spinLoader"></span>
+  <span class="spinLoading"></span>
 </template>
 <style>
-.spinLoader {
+.spinLoading {
   width: 36px;
   height: 36px;
   border: 4px solid #5d5656f1;

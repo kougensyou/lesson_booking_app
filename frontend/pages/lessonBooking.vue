@@ -5,8 +5,12 @@ import { useStudioStore } from '../stores/useStudioStore';
 import { useLessonStore } from '../stores/useLessonStore';
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useRouter } from 'vue-router';
-import SpinLoader from '~/components/common/SpinLoader.vue';
-import CardLoader from '~/components/common/CardLoader.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
+import CardLoading from '~/components/common/CardLoading.vue';
+
+definePageMeta({
+  layout: 'bg-gradation',
+});
 
 const router = useRouter();
 const studioStore = useStudioStore();
@@ -39,7 +43,7 @@ lessonStore.getTimeOptions();
     v-if="studioStore.isFavoriteStudioLoading"
     class="flex items-center justify-center pt-12 pb-12"
   >
-    <SpinLoader />
+    <SpinLoading />
   </div>
   <StudioSearch
     v-if="!studioStore.isFavoriteStudioLoading"
@@ -54,7 +58,7 @@ lessonStore.getTimeOptions();
     "
     class="px-4"
   >
-    <CardLoader :card-height="'h-96'" :card-width="'w-full'" />
+    <CardLoading :card-height="'h-96'" :card-width="'w-full'" />
   </div>
   <CustomizedSearch
     v-if="

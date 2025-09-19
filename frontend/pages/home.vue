@@ -5,8 +5,8 @@ import { useInformationStore } from '~/stores/useInformationStore';
 import NextLesson from '~/components/home/NextLesson.vue';
 import LessonCalendar from '~/components/home/LessonCalendar.vue';
 import Information from '~/components/home/Information.vue';
-import SpinLoader from '~/components/common/SpinLoader.vue';
-import CardLoader from '~/components/common/CardLoader.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
+import CardLoading from '~/components/common/CardLoading.vue';
 
 definePageMeta({
   layout: 'bg-gradation',
@@ -33,7 +33,7 @@ informationStore.getInformationList();
     v-if="lessonStore.isNextLessonLoading"
     class="flex items-center justify-center pt-12 pb-12"
   >
-    <SpinLoader />
+    <SpinLoading />
   </div>
   <NextLesson
     v-if="!lessonStore.isNextLessonLoading"
@@ -41,7 +41,7 @@ informationStore.getInformationList();
   />
 
   <div v-if="lessonBookingStore.isSelectedLessonLoading" class="px-4">
-    <CardLoader :card-height="'h-96'" :card-width="'w-full'" />
+    <CardLoading cardHeight="h-60" cardWidth="w-full" />
   </div>
   <LessonCalendar
     v-if="!lessonBookingStore.isSelectedLessonLoading"
@@ -58,7 +58,7 @@ informationStore.getInformationList();
     v-if="informationStore.isInformationLoading"
     class="flex items-center justify-center pt-12 pb-12"
   >
-    <SpinLoader />
+    <SpinLoading />
   </div>
   <Information
     v-if="!informationStore.isInformationLoading"
