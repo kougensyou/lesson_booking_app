@@ -28,7 +28,7 @@ await lessonStore.getStudioLessonDataApi();
       <title>{{ $t('lessonBooking.tabTitle') }}</title>
     </Head>
   </div>
-  <div class="p-4">
+  <div class="pb-4">
     <StudioLessonCalendar
       :is-auth="userStore.user.id ? true : false"
       :studio-name="lessonStore.studioData.studio_name"

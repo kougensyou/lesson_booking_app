@@ -11,13 +11,16 @@ defineProps<{
 }>();
 </script>
 <template>
-  <div v-if="isAuth" class="w-full text-center mb-2">
+  <div v-if="isAuth" class="w-full text-center p-4 bg-white">
     <div class="text-xl font-bold">
       {{ studioName }}
     </div>
   </div>
 
-  <div class="flex justify-between px-4 mb-2">
+  <div
+    class="flex justify-between px-4 py-6 mb-2"
+    style="background-image: url('/studio-template.png')"
+  >
     <div
       v-for="d in weekData"
       :key="d.date"
@@ -26,13 +29,15 @@ defineProps<{
       <div
         :class="[
           'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold',
-          d.active ? 'bg-black text-white' : 'bg-white text-black border',
+          d.active
+            ? 'bg-black text-white'
+            : 'bg-transparent text-white no-border',
         ]"
         @click="!d.active ? changeStudioLessonData(d.dateObj) : null"
       >
         {{ d.day }}
       </div>
-      <div class="text-xs text-gray-500">{{ d.label }}</div>
+      <div class="text-xs text-white">{{ d.label }}</div>
     </div>
   </div>
 
@@ -40,7 +45,7 @@ defineProps<{
     <div
       v-for="d in weekData"
       :key="d.date"
-      class="bg-gray-100 text-center py-1"
+      class="bg-gray-100 text-center py-2 sticky top-0 z-10"
     >
       <div class="text-sm font-bold">{{ d.date }}</div>
       <div class="text-xs text-gray-500">{{ d.label }}</div>
@@ -54,16 +59,24 @@ defineProps<{
       <div
         v-for="d in weekData"
         :key="d.date"
-        class="border-r border-b p-1 align-top h-32"
+        class="border-r border-b p-1 align-top bg-indigo-50 min-h-32"
       >
         <template v-for="studioLesson in studioLessonList?.[d.date]?.[time]">
           <div
-            class="bg-white rounded text-[11px] leading-tight"
+            class="bg-white rounded text-center"
             @click="clickCard(studioLesson)"
           >
-            <div v-if="isAuth" class="bg-green-100 font-bold">空き○</div>
-            <div>{{ studioLesson.start_time }} ～</div>
-            <div class="font-bold">{{ studioLesson.lesson_name }}</div>
+            <div v-if="isAuth" class="bg-green-100 font-bold p-1 text-[11px]">
+              空き○
+            </div>
+            <div class="p-1 text-[11px]">{{ studioLesson.start_time }} ～</div>
+            <div class="font-bold p-1 text-[14px] break-words">
+              {{
+                studioLesson.lesson_name.length > 20
+                  ? studioLesson.lesson_name.slice(0, 20) + '…'
+                  : studioLesson.lesson_name
+              }}
+            </div>
             <div v-if="isAuth" class="text-gray-600">
               {{ studioLesson.instructor_name }}
             </div>

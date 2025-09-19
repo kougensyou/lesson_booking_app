@@ -65,7 +65,7 @@ onMounted(() => {
   </div>
   <div class="p-4">
     <div
-      class="bg-white rounded-3xl shadow-md flex flex-col justify-between px-8 py-4"
+      class="bg-white rounded-3xl shadow-md flex flex-col justify-between px-8 py-4 mb-4"
     >
       <span class="text-gray-800 text-sm pt-4 pb-2">
         {{ $t('lessonBooking.selectTime') }}
