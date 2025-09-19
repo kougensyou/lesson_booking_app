@@ -47,7 +47,7 @@ lessonStore.getLessonDetailApi();
   <template v-if="!lessonStore.isLessonDetailLoading">
     <StatusMessage
       :done-flag="lessonStore.lessonDetail.done_flag"
-      :reserved-flag="lessonStore.lessonDetail.reserved_flag"
+      :reserved-flag="lessonStore.lessonDetail.booked_flag"
       :empty-flag="lessonStore.lessonDetail.empty_flag"
     />
 
@@ -93,7 +93,7 @@ lessonStore.getLessonDetailApi();
       <ConfirmButton
         v-if="
           (!lessonStore.lessonDetail.done_flag ||
-            !lessonStore.lessonDetail.reserved_flag) &&
+            !lessonStore.lessonDetail.booked_flag) &&
           lessonStore.lessonDetail.empty_flag
         "
         :open-dialog="lessonBookingStore.openDialog"

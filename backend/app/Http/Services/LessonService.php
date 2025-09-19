@@ -174,7 +174,7 @@ class LessonService
                 'instructor.name as instructor_name',
                 'instructor.introduction as instructor_introduction',
                 'instructor.image_path as instructor_image_path',
-                \DB::raw('CASE WHEN lesson_booking.id IS NOT NULL THEN true ELSE false END as reserved_flag'),
+                \DB::raw('CASE WHEN lesson_booking.id IS NOT NULL THEN true ELSE false END as booked_flag'),
                 'lesson_booking.done_flag'
             )
             ->join('studio', 'studio.id', '=', 'lesson.studio_id')
@@ -193,7 +193,7 @@ class LessonService
                 $item->lesson_datetime = $item->lesson_day . ' ' . $item->lesson_time;
                 $item->lesson_image_url = $item->lesson_image_path ? asset('storage/' . ltrim($item->lesson_image_path, '/')) : null;
                 $item->instructor_image_url = $item->instructor_image_path ? asset('storage/' . ltrim($item->instructor_image_path, '/')) : null;
-                $item->reserved_flag = (bool) $item->reserved_flag;
+                $item->booked_flag = (bool) $item->booked_flag;
                 $item->empty_flag = $item->max_user_num !== $item->booking_user_num;
                 return $item;
             })

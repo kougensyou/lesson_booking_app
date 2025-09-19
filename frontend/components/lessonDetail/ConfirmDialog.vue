@@ -15,13 +15,13 @@ defineProps<{
   >
     <div class="bg-white rounded-lg shadow-lg w-[80%] max-w-md p-6">
       <h2
-        v-if="!lessonDetail.reserved_flag"
+        v-if="!lessonDetail.booked_flag"
         class="text-lg font-semibold mb-4 text-center"
       >
         {{ $t('lessonDetail.bookDialogMessage') }}
       </h2>
       <h2
-        v-if="lessonDetail.reserved_flag"
+        v-if="lessonDetail.booked_flag"
         class="text-lg font-semibold mb-4 text-center"
       >
         {{ $t('lessonDetail.cancelDialogMessage') }}
@@ -50,14 +50,14 @@ defineProps<{
       </div>
       <div class="max-w-md mx-auto space-y-4">
         <button
-          v-if="!lessonDetail.reserved_flag"
+          v-if="!lessonDetail.booked_flag"
           class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-3xl font-semibold"
           @click="bookLesson"
         >
           {{ $t('lessonDetail.bookConfirmed') }}
         </button>
         <button
-          v-if="lessonDetail.reserved_flag"
+          v-if="lessonDetail.booked_flag"
           class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-3xl font-semibold"
           @click="cancelLesson"
         >

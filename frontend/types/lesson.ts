@@ -47,7 +47,7 @@ export interface LessonDetail {
   instructor_introduction: string;
   instructor_image_path: string;
   instructor_image_url: string;
-  reserved_flag: boolean;
+  booked_flag: boolean;
   done_flag: boolean;
   empty_flag: boolean;
 }
