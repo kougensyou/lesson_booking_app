@@ -91,7 +91,11 @@ lessonStore.getLessonDetailApi();
       </div>
 
       <ConfirmButton
-        v-if="(lessonStore.lessonDetail.empty_flag || lessonStore.lessonDetail.booked_flag) && !lessonStore.lessonDetail.done_flag"
+        v-if="
+          (lessonStore.lessonDetail.empty_flag ||
+            lessonStore.lessonDetail.booked_flag) &&
+          !lessonStore.lessonDetail.done_flag
+        "
         :open-dialog="lessonBookingStore.openDialog"
         :lesson-detail="lessonStore.lessonDetail"
       />

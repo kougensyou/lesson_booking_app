@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import CustomizedSearch from '~/components/lessonBooking/CustomizedSearch.vue';
+import CalendarSearch from '~/components/lessonBooking/CalendarSearch.vue';
+import SearchButton from '~/components/lessonBooking/SearchButton.vue';
+import FormSearch from '~/components/lessonBooking/FormSearch.vue';
 import StudioSearch from '~/components/lessonBooking/StudioSearch.vue';
 import { useStudioStore } from '../stores/useStudioStore';
 import { useLessonStore } from '../stores/useLessonStore';
@@ -60,24 +62,36 @@ lessonStore.getTimeOptions();
   >
     <CardLoading :card-height="'h-96'" :card-width="'w-full'" />
   </div>
-  <CustomizedSearch
+
+  <template
     v-if="
       !studioStore.isStudioListLoading &&
       !lessonStore.isLessonCategoryLoading &&
       !lessonStore.isTimeOptionsLoading
     "
-    :calendar-theme-color="lessonStore.calendarThemeColor"
-    :calendar-locale="lessonBookingStore.calendarLocale"
-    :studio-list="studioStore.studioList"
-    :lesson-category-list="lessonStore.lessonCategoryList"
-    :start-time-options="lessonStore.startTimeOptions"
-    :end-time-options="lessonStore.endTimeOptions"
-    :search-input-form="lessonStore.searchInputForm"
-    :add-searched-lessons="addSearchedLessons"
-    :check-selected="lessonStore.checkSelected"
-    :change-by-prev="lessonStore.changeByPrev"
-    :change-by-next="lessonStore.changeByNext"
-    :remove-selected="lessonStore.removeSelected"
-    :add-selected="lessonStore.addSelected"
-  />
+  >
+    <h1 class="text-xl font-bold px-4 pt-4">
+      {{ $t('lessonBooking.customizedSearch') }}
+    </h1>
+
+    <CalendarSearch
+      :calendar-theme-color="lessonStore.calendarThemeColor"
+      :calendar-locale="lessonBookingStore.calendarLocale"
+      :check-selected="lessonStore.checkSelected"
+      :change-by-prev="lessonStore.changeByPrev"
+      :change-by-next="lessonStore.changeByNext"
+      :remove-selected="lessonStore.removeSelected"
+      :add-selected="lessonStore.addSelected"
+    />
+
+    <FormSearch
+      :studio-list="studioStore.studioList"
+      :lesson-category-list="lessonStore.lessonCategoryList"
+      :search-input-form="lessonStore.searchInputForm"
+      :start-time-options="lessonStore.startTimeOptions"
+      :end-time-options="lessonStore.endTimeOptions"
+    />
+
+    <SearchButton :add-searched-lessons="addSearchedLessons" />
+  </template>
 </template>

@@ -1,68 +1,16 @@
 <script setup lang="ts">
-import { Calendar } from 'v-calendar';
 import type { Studio } from '~/types/studio';
 import type { LessonCategory, SearchInputForm } from '~/types/lesson';
 
-const props = defineProps<{
-  calendarThemeColor: string;
-  calendarLocale: string;
+defineProps<{
   studioList: Studio[];
   lessonCategoryList: LessonCategory[];
   searchInputForm: SearchInputForm;
   startTimeOptions: string[];
   endTimeOptions: string[];
-  addSearchedLessons: Function;
-  checkSelected: Function;
-  changeByPrev: Function;
-  changeByNext: Function;
-  removeSelected: Function;
-  addSelected: Function;
 }>();
-
-onMounted(() => {
-  const prev = document.querySelector('.vc-prev');
-  const next = document.querySelector('.vc-next');
-  prev?.addEventListener('click', async () => {
-    await props.changeByPrev();
-  });
-  next?.addEventListener('click', async () => {
-    await props.changeByNext();
-  });
-});
 </script>
 <template>
-  <h1 class="text-xl font-bold px-4 pt-4">
-    {{ $t('lessonBooking.customizedSearch') }}
-  </h1>
-  <div class="custom-calendar px-4 py-2">
-    <Calendar
-      class="max-w-full"
-      :masks="{ title: 'YYYY/MM' }"
-      :color="calendarThemeColor"
-      :locale="calendarLocale"
-      trim-weeks
-      expanded
-    >
-      <template v-slot:day-content="slotProps">
-        <div class="flex flex-col h-full z-10 overflow-hidden">
-          <span
-            v-if="checkSelected(slotProps.day.day)"
-            class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-300 text-white m-auto my-1"
-            @click="removeSelected(slotProps.day.day)"
-          >
-            {{ slotProps.day.day }}
-          </span>
-          <span
-            v-else
-            class="flex items-center justify-center text-sm w-8 h-8 text-gray-900 m-auto my-1"
-            @click="addSelected(slotProps.day.day)"
-          >
-            {{ slotProps.day.day }}
-          </span>
-        </div>
-      </template>
-    </Calendar>
-  </div>
   <div class="p-4">
     <div
       class="bg-white rounded-3xl shadow-md flex flex-col justify-between px-8 py-4 mb-4"
@@ -143,26 +91,4 @@ onMounted(() => {
       />
     </div>
   </div>
-  <div class="fixed bottom-0 left-0 right-0 bg-white px-4 py-4">
-    <div class="max-w-md mx-auto">
-      <button
-        class="w-full bg-sky-500 text-white rounded-3xl py-4 relative"
-        @click="addSearchedLessons"
-      >
-        <span>{{ $t('lessonBooking.searchButton') }}</span>
-        <span
-          class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
-          aria-hidden="true"
-        >
-          chevron_right
-        </span>
-      </button>
-    </div>
-  </div>
 </template>
-<style scoped>
-.custom-calendar :deep(.vc-bordered) {
-  border: none;
-  border-radius: 1.5rem;
-}
-</style>
