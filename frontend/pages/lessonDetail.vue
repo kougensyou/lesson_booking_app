@@ -47,7 +47,7 @@ lessonStore.getLessonDetailApi();
   <template v-if="!lessonStore.isLessonDetailLoading">
     <StatusMessage
       :done-flag="lessonStore.lessonDetail.done_flag"
-      :reserved-flag="lessonStore.lessonDetail.booked_flag"
+      :booked-flag="lessonStore.lessonDetail.booked_flag"
       :empty-flag="lessonStore.lessonDetail.empty_flag"
     />
 
@@ -91,26 +91,16 @@ lessonStore.getLessonDetailApi();
       </div>
 
       <ConfirmButton
-        v-if="
-          (!lessonStore.lessonDetail.done_flag ||
-            !lessonStore.lessonDetail.booked_flag) &&
-          lessonStore.lessonDetail.empty_flag
-        "
+        v-if="(lessonStore.lessonDetail.empty_flag || lessonStore.lessonDetail.booked_flag) && !lessonStore.lessonDetail.done_flag"
         :open-dialog="lessonBookingStore.openDialog"
         :lesson-detail="lessonStore.lessonDetail"
       />
     </div>
   </template>
 
-  <div
-    v-if="lessonBookingStore.isBookingStatusLoading"
-    class="fixed inset-0 flex items-center justify-center"
-  >
-    <SpinLoading />
-  </div>
-
   <ConfirmDialog
     v-if="lessonBookingStore.isDialogOpen"
+    :is-booking-status-loading="lessonBookingStore.isBookingStatusLoading"
     :lesson-detail="lessonStore.lessonDetail"
     :book-lesson="bookLesson"
     :cancel-lesson="cancelLesson"

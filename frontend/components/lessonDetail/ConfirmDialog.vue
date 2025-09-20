@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { LessonDetail } from '~/types/lesson';
+import SpinLoading from '../common/SpinLoading.vue';
 
 defineProps<{
   lessonDetail: LessonDetail;
+  isBookingStatusLoading: boolean;
   bookLesson: Function;
   cancelLesson: Function;
   closeDialog: Function;
@@ -13,6 +15,12 @@ defineProps<{
   <div
     class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
   >
+    <div
+      v-if="isBookingStatusLoading"
+      class="fixed inset-0 flex items-center justify-center z-60"
+    >
+      <SpinLoading />
+    </div>
     <div class="bg-white rounded-lg shadow-lg w-[80%] max-w-md p-6">
       <h2
         v-if="!lessonDetail.booked_flag"
