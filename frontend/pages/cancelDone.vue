@@ -8,7 +8,7 @@ const lessonStore = useLessonStore();
       {{ $t('cancelDone.cancelMessage') }}
     </h2>
 
-    <div class="border p-4 rounded mb-4">
+    <div class="border p-4 rounded mb-4 bg-white">
       <div class="flex justify-between mb-2">
         <span class="font-bold">{{
           lessonStore.lessonDetail.studio_name
@@ -36,7 +36,7 @@ const lessonStore = useLessonStore();
       </button>
       <button
         @click="$router.push({ path: '/memberInfo' })"
-        class="w-full border py-2 rounded"
+        class="w-full border border-gray-300 py-2 rounded"
       >
         {{ $t('cancelDone.toMyPageButton') }}
       </button>
