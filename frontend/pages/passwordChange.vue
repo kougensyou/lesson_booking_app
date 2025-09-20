@@ -7,12 +7,12 @@ userStore.initializePasswordData();
 userStore.setToastMessageForPassword();
 </script>
 <template>
-  <div class="max-w-[640px] mx-auto pl-6 pr-6">
+  <div class="max-w-[640px] mx-auto p-6">
     <h1 class="text-xl font-bold text-center mb-2">
       {{ $t('passwordChange.passwordChange') }}
     </h1>
-    <div>
-      <label class="pt-36 pb-2 text-left text-slate-500">{{
+    <div class="mb-4">
+      <label class="text-left text-slate-500">{{
         $t('passwordChange.currentPassword')
       }}</label>
       <input
@@ -21,8 +21,8 @@ userStore.setToastMessageForPassword();
         class="w-full border rounded px-3 py-2"
       />
     </div>
-    <div>
-      <label class="pt-36 pb-2 text-left text-slate-500">{{
+    <div class="mb-4">
+      <label class="text-left text-slate-500">{{
         $t('passwordChange.newPassword')
       }}</label>
       <input
@@ -32,8 +32,8 @@ userStore.setToastMessageForPassword();
       />
     </div>
 
-    <div>
-      <label class="pt-36 pb-2 text-left text-slate-500">{{
+    <div class="mb-4">
+      <label class="text-left text-slate-500">{{
         $t('passwordChange.newPasswordConfirmation')
       }}</label>
       <input

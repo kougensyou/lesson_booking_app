@@ -5,7 +5,7 @@ defineProps<{ show: boolean; message: string }>();
   <transition name="fade">
     <div
       v-if="show"
-      class="fixed top-4 inset-x-0 mx-auto w-[90%] max-w-md rounded-full bg-emerald-500 text-white text-center px-5 py-3 shadow-lg"
+      class="fixed top-4 inset-x-0 mx-auto w-[90%] max-w-md rounded-full bg-emerald-500 text-white text-center px-5 py-3 shadow-lg z-50"
       role="status"
       aria-live="polite"
     >

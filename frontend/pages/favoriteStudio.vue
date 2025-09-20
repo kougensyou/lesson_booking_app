@@ -35,12 +35,12 @@ onMounted(() => {
           <span class="ml-1 text-red-500">❤</span>
         </div>
       </div>
-      <button
-        class="ml-2 text-red-400 text-xl"
+      <span
+        class="material-symbols-outlined ml-2 text-red-400 text-xl"
         @click="studioStore.deleteFavoriteStudio(studio.id)"
       >
-        －
-      </button>
+        do_not_disturb_on
+      </span>
     </div>
     <div
       class="border-2 border-dashed rounded-lg py-4 text-center text-gray-500 mb-4"

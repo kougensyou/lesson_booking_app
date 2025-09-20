@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  cardHeight: string;
-  cardWidth: string;
+  cardHeight?: string;
+  cardWidth?: string;
 }>();
 </script>
 <template>

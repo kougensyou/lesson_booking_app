@@ -6,7 +6,7 @@ import NextLesson from '~/components/home/NextLesson.vue';
 import LessonCalendar from '~/components/home/LessonCalendar.vue';
 import Information from '~/components/home/Information.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
-import * as CardLoading from '~/components/common/CardLoading.vue';
+import CardLoading from '~/components/common/CardLoading.vue';
 
 definePageMeta({
   layout: 'bg-gradation',
