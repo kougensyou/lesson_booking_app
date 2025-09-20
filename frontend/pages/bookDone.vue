@@ -14,25 +14,14 @@ lessonStore.addSameStudioLessonList(lessonStore.lessonDetail.studio_id);
     </h2>
 
     <div class="bg-white shadow-md rounded-lg p-4 mb-4">
-      <div class="text-center text-sm text-gray-500">
-        {{ lessonStore.lessonDetail.studio_name }}
+      <div class="text-center text-2xl font-semibold mb-2">
+        {{ lessonStore.lessonDetail.lesson_name }}
       </div>
       <div class="text-center text-2xl font-semibold my-2">
         {{ lessonStore.lessonDetail.lesson_datetime }}
       </div>
-
-      <div class="flex items-start space-x-2 mt-4">
-        <img
-          :src="lessonStore.lessonDetail.instructor_image_url"
-          alt="Instructor"
-          class="rounded-full w-10 h-10"
-        />
-        <div
-          style="white-space: pre-line"
-          class="bg-gray-100 rounded-md p-2 text-sm"
-        >
-          <!-- {{ bookDoneStore.instructorMessage }} -->
-        </div>
+      <div class="text-center text-sm text-gray-500">
+        {{ lessonStore.lessonDetail.studio_name }}
       </div>
     </div>
 
