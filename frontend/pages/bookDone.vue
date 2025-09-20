@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useLessonStore } from '../stores/useLessonStore';
 import LessonList from '../components/common/LessonList.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 const lessonStore = useLessonStore();
 
 lessonStore.initializePaginationData();
-await lessonStore.addSameStudioLessonList(lessonStore.lessonDetail.studio_id);
+lessonStore.addSameStudioLessonList(lessonStore.lessonDetail.studio_id);
 </script>
 <template>
   <div class="p-4">
@@ -46,7 +47,14 @@ await lessonStore.addSameStudioLessonList(lessonStore.lessonDetail.studio_id);
       {{ $t('bookDone.continueBookingButton') }}
     </button>
 
-    <div class="mt-6">
+    <div
+      v-if="lessonStore.isAddLessonLoading"
+      class="flex items-center justify-center pt-12 pb-12"
+    >
+      <SpinLoading />
+    </div>
+
+    <div v-if="!lessonStore.isAddLessonLoading" class="mt-6">
       <h3 class="font-semibold mb-2">
         {{ $t('bookDone.recommended') }}
       </h3>
@@ -56,8 +64,7 @@ await lessonStore.addSameStudioLessonList(lessonStore.lessonDetail.studio_id);
         :add-lessons="lessonStore.addSameStudioLessonList"
         :loaded-page="lessonStore.loadedPage"
         :last-page="lessonStore.lastPage"
-        :is-loading="lessonStore.isLoading"
-        :change-is-loading="lessonStore.changeIsLoading"
+        :is-loading="lessonStore.isAddLessonLoading"
       />
     </div>
   </div>

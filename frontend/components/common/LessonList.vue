@@ -8,7 +8,6 @@ const props = defineProps<{
   loadedPage: number;
   lastPage: number;
   isLoading: boolean;
-  changeIsLoading: Function;
 }>();
 
 const scrollComponent = ref<HTMLElement | null>(null);
@@ -30,7 +29,6 @@ const handleScroll = () => {
       window.innerHeight &&
     props.loadedPage < props.lastPage
   ) {
-    props.changeIsLoading();
     props.addLessons();
   }
 };

@@ -23,7 +23,7 @@ export const useLessonStore = defineStore('lesson', {
     } as SearchInputForm,
     loadedPage: 0 as number,
     lastPage: 0 as number,
-    isLoading: false as boolean,
+    isAddLessonLoading: false as boolean,
     searchedLessonList: [] as Lesson[],
     startTimeOptions: [] as string[],
     endTimeOptions: [] as string[],
@@ -106,11 +106,12 @@ export const useLessonStore = defineStore('lesson', {
     initializePaginationData() {
       this.loadedPage = 0;
       this.lastPage = 0;
-      this.isLoading = false;
+      this.isAddLessonLoading = false;
       this.searchedLessonList = [] as Lesson[];
       this.sameStudioLessonList = [] as Lesson[];
     },
     async addSameStudioLessonList(studioId: string) {
+      this.isAddLessonLoading = true;
       try {
         const { data } = await useSanctumFetch(
           '/api/add_same_studio_lesson_list',
@@ -127,7 +128,7 @@ export const useLessonStore = defineStore('lesson', {
           sameStudioLessonsResponse.data
         );
         this.lastPage = sameStudioLessonsResponse.last_page;
-        this.isLoading = false;
+        this.isAddLessonLoading = false;
         console.log('same studio lesson data fetched:', data.value);
       } catch (err) {
         console.error('Error fetching same studio lesson data:', err);
@@ -170,10 +171,8 @@ export const useLessonStore = defineStore('lesson', {
         '-' +
         this.todayDay.toString().padStart(2, '0');
     },
-    changeIsLoading() {
-      this.isLoading = true;
-    },
     async addSearchedLessonsApi() {
+      this.isAddLessonLoading = true;
       try {
         console.log('searching lessons with input:', this.searchInputForm);
         const { data } = await useSanctumFetch('/api/add_searched_lessons', {
@@ -188,7 +187,7 @@ export const useLessonStore = defineStore('lesson', {
           searchedLessonsResponse.data
         );
         this.lastPage = searchedLessonsResponse.last_page;
-        this.isLoading = false;
+        this.isAddLessonLoading = false;
         console.log('searched lessons:', this.searchedLessonList);
       } catch (err) {
         console.error('Error searching lessons:', err);

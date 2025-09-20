@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useLessonBookingStore } from '../stores/useLessonBookingStore';
 import LessonList from '../components/common/LessonList.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 const lessonBookingStore = useLessonBookingStore();
 lessonBookingStore.initializeBookingHistory();
-await lessonBookingStore.addBookingHistory();
+lessonBookingStore.addBookingHistory();
 </script>
 <template>
   <div class="">
@@ -12,12 +13,20 @@ await lessonBookingStore.addBookingHistory();
       <title>{{ $t('bookingHistory.tabTitle') }}</title>
     </Head>
   </div>
+
+  <div
+    v-if="lessonBookingStore.isBookingHistoryLoading"
+    class="fixed inset-0 flex items-center justify-center"
+  >
+    <SpinLoading />
+  </div>
+
   <LessonList
+    v-if="!lessonBookingStore.isBookingHistoryLoading"
     :lesson-list="lessonBookingStore.bookingHistoryList"
     :add-lessons="lessonBookingStore.addBookingHistory"
     :loaded-page="lessonBookingStore.loadedPage"
     :last-page="lessonBookingStore.lastPage"
-    :is-loading="lessonBookingStore.isLoading"
-    :change-is-loading="lessonBookingStore.changeIsLoading"
+    :is-loading="lessonBookingStore.isBookingHistoryLoading"
   />
 </template>

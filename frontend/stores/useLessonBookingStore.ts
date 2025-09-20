@@ -23,7 +23,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     isDialogOpen: false as boolean,
     loadedPage: 0 as number,
     lastPage: 0 as number,
-    isLoading: false as boolean,
+    isBookingHistoryLoading: false as boolean,
     bookingHistoryList: [] as Lesson[],
     firstBooking: {
       selectedLesson: {
@@ -179,16 +179,14 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         console.error('Error fetching cancelLesson data:', err);
       }
     },
-    changeIsLoading() {
-      this.isLoading = true;
-    },
     initializeBookingHistory() {
       this.loadedPage = 0;
       this.lastPage = 0;
-      this.isLoading = false;
+      this.isBookingHistoryLoading = false;
       this.bookingHistoryList = [];
     },
     async addBookingHistory() {
+      this.isBookingHistoryLoading = true;
       try {
         const { data } = await useSanctumFetch('/api/add_booking_history', {
           method: 'GET',
@@ -201,7 +199,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           bookingHistoryResponse.data
         );
         this.lastPage = bookingHistoryResponse.last_page;
-        this.isLoading = false;
+        this.isBookingHistoryLoading = false;
         console.log('booking history fetched:', bookingHistoryResponse);
       } catch (err) {
         console.error('Error fetching booking history:', err);
