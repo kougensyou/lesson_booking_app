@@ -91,7 +91,7 @@ defineProps<{
 
   <div
     v-if="selectedLesson.lesson_name"
-    class="border rounded-md p-4 flex items-start mb-6"
+    class="border rounded-md p-4 flex items-start mb-6 bg-white"
   >
     <div class="text-center w-24 flex-shrink-0">
       <div class="text-sm font-semibold">
@@ -112,7 +112,7 @@ defineProps<{
   </div>
   <button
     v-if="selectedLesson.lesson_name"
-    class="w-full py-3 border text-red-500 font-bold rounded-md"
+    class="w-full py-3 border border-red-500 text-red-500 font-bold rounded bg-transparent"
     @click="initializeFirstSelectedLesson()"
   >
     <span>{{ $t('firstLessonBooking.change') }}</span>

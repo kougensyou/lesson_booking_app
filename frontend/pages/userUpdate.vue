@@ -15,7 +15,7 @@ userStore.setToastMessageForUser();
       />
       <button
         @click="$refs.fileInput.click()"
-        class="px-3 py-1 border rounded text-red-500"
+        class="px-3 py-1 border border-red-500 rounded text-red-500 bg-transparent"
       >
         {{ $t('userUpdate.selectImage') }}
       </button>

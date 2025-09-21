@@ -103,6 +103,9 @@ export const useUserStore = defineStore('user', {
       this.user = {} as User;
       this.fileData = null;
     },
+    setUser(user: User) {
+      this.user = user;
+    },
     setToastMessageForPassword() {
       const { t } = useI18n();
       this.toastMessage = t('passwordChange.toastMessage');

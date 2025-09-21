@@ -9,7 +9,7 @@ const lessonBookingStore = useLessonBookingStore();
 </script>
 <template>
   <div class="p-4">
-    <h2 class="text-xl font-bold text-center mb-4 whitespace-pre-line">
+    <h2 class="text-l text-center mb-4 whitespace-pre-line">
       {{ $t('firstLessonBookingDone.doneMessage') }}
     </h2>
 
