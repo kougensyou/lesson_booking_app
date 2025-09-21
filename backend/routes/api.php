@@ -4,9 +4,9 @@ use App\Http\Controllers\InformationController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\LessonBookingController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 
 /*
