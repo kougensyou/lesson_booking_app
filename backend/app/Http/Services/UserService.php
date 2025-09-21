@@ -58,7 +58,7 @@ class UserService
                     $oldFile = basename($userData['image_path']);
                     $newFile = basename($newPath);
                     if ($oldFile !== $newFile) {
-                        $oldPath = storage_path('images/user/' . $oldFile);
+                        $oldPath = base_path('storage/app/public/images/user/' . $oldFile);
                         if (file_exists($oldPath)) {
                             unlink($oldPath);
                         }

@@ -57,15 +57,17 @@ export const useUserStore = defineStore('user', {
       }
     },
     async updateUser() {
-      if (!this.fileData) return;
       const formData = new FormData();
-      formData.append('image', this.fileData);
+      if (this.fileData) {
+        formData.append('image', this.fileData);
+      }
       formData.append('user', JSON.stringify(this.user));
       try {
         const { data } = await useSanctumFetch('/api/update_user', {
           method: 'POST',
           body: formData,
         });
+        this.user = data.value as User;
         console.log('updateUser fetched:', data.value);
         this.openToast(2500);
       } catch (err) {
