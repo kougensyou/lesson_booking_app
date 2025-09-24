@@ -11,6 +11,25 @@
   "footer": {
     "title": "レッスン予約"
   },
+  "forbidden": {
+    "title": "403 Forbidden",
+    "message": "権限がありません。",
+    "toLogin": "ログイン画面へ"
+  },
+  "notFound": {
+    "title": "404 Not Found",
+    "message": "お探しのページは見つかりませんでした。",
+    "toLogin": "ログイン画面へ"
+  },
+  "serverError": {
+    "title": "500 Server Error",
+    "message": "サーバー内部でエラーが発生しました。しばらくしてからお試しください。",
+    "toLogin": "ログイン画面へ"
+  },
+  "error": {
+    "title": "申し訳ありません。",
+    "message": "申し訳ありません。問題が発生したため、アクセスできません。"
+  },
   "index": {
     "tabTitle": "ログイン",
     "title": "ログイン",

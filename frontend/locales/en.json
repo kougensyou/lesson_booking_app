@@ -11,6 +11,25 @@
   "footer": {
     "title": "Lesson Booking"
   },
+  "forbidden": {
+    "title": "403 Forbidden",
+    "message": "You do not have permission.",
+    "toLogin": "Go to Login"
+  },
+  "notFound": {
+    "title": "404 Not Found",
+    "message": "The page you are looking for could not be found.",
+    "toLogin": "Go to Login"
+  },
+  "serverError": {
+    "title": "500 Server Error",
+    "message": "An internal server error has occurred. Please try again later.",
+    "toLogin": "Go to Login"
+  },
+  "error": {
+    "title": "We are sorry.",
+    "message": "We are sorry, but you cannot access this page due to a problem."
+  },
   "index": {
     "tabTitle": "Login",
     "title": "Login",
