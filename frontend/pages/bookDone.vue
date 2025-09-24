@@ -2,6 +2,11 @@
 import { useLessonStore } from '../stores/useLessonStore';
 import LessonList from '../components/common/LessonList.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
+
+definePageMeta({
+  middleware: 'auth',
+});
+
 const lessonStore = useLessonStore();
 
 lessonStore.initializePaginationData();

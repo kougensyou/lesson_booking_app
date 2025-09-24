@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/useUserStore';
 import Toast from '~/components/common/Toast.vue';
+
+definePageMeta({
+  middleware: 'auth',
+});
+
 const userStore = useUserStore();
 userStore.setToastMessageForUser();
 </script>

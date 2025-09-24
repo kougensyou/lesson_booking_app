@@ -2,6 +2,10 @@
 import { useReportStore } from '../stores/useReportStore';
 import Toast from '~/components/common/Toast.vue';
 
+definePageMeta({
+  middleware: 'auth',
+});
+
 const reportStore = useReportStore();
 reportStore.initializeReport();
 reportStore.setToastMessage();

@@ -3,6 +3,10 @@ import type { Studio } from '~/types/studio';
 import { useStudioStore } from '../stores/useStudioStore';
 import StudioList from '~/components/common/StudioList.vue';
 
+definePageMeta({
+  middleware: 'auth',
+});
+
 const studioStore = useStudioStore();
 </script>
 <template>

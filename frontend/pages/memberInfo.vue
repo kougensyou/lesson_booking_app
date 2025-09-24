@@ -3,6 +3,10 @@ import { useSettingStore } from '~/stores/useSettingStore';
 import { useUserStore } from '~/stores/useUserStore';
 import { useRouter } from 'vue-router';
 
+definePageMeta({
+  middleware: 'auth',
+});
+
 const router = useRouter();
 const settingStore = useSettingStore();
 const userStore = useUserStore();

@@ -2,6 +2,10 @@
 import { useUserStore } from '../stores/useUserStore';
 import Toast from '~/components/common/Toast.vue';
 
+definePageMeta({
+  middleware: 'auth',
+});
+
 const userStore = useUserStore();
 userStore.initializePasswordData();
 userStore.setToastMessageForPassword();

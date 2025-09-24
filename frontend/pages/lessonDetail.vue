@@ -7,6 +7,10 @@ import ConfirmButton from '~/components/lessonDetail/ConfirmButton.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
 import StatusMessage from '~/components/lessonDetail/StatusMessage.vue';
 
+definePageMeta({
+  middleware: 'auth',
+});
+
 const route = useRoute();
 const router = useRouter();
 

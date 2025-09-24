@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { useLessonStore } from '../stores/useLessonStore';
+
+definePageMeta({
+  middleware: 'auth',
+});
+
 const lessonStore = useLessonStore();
 </script>
 <template>

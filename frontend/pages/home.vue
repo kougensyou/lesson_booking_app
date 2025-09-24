@@ -10,6 +10,7 @@ import CardLoading from '~/components/common/CardLoading.vue';
 
 definePageMeta({
   layout: 'bg-gradation',
+  middleware: 'auth',
 });
 
 const lessonStore = useLessonStore();

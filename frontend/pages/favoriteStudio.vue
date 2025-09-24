@@ -4,6 +4,10 @@ import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
 
+definePageMeta({
+  middleware: 'auth',
+});
+
 const route = useRoute();
 const studioStore = useStudioStore();
 onMounted(() => {

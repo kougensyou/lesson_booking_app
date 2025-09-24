@@ -6,6 +6,10 @@ import { useRoute } from 'vue-router';
 import StudioLessonCalendar from '~/components/common/StudioLessonCalendar.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
 
+definePageMeta({
+  middleware: 'auth',
+});
+
 const route = useRoute();
 
 const lessonStore = useLessonStore();

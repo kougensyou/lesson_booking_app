@@ -3,6 +3,10 @@ import { useLessonBookingStore } from '../stores/useLessonBookingStore';
 import LessonList from '../components/common/LessonList.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
 
+definePageMeta({
+  middleware: 'auth',
+});
+
 const lessonBookingStore = useLessonBookingStore();
 lessonBookingStore.initializeBookingHistory();
 lessonBookingStore.addBookingHistory();
