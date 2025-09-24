@@ -22,36 +22,52 @@ export const useStudioStore = defineStore('studio', {
     async getStudioList() {
       this.isStudioLoading = true;
       try {
-        const { data } = await useSanctumFetch('/api/get_studio_list', {
+        const { data, error } = await useSanctumFetch('/api/get_studio_list', {
           method: 'GET',
         });
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         this.studioList = data.value as Studio[];
         this.isStudioLoading = false;
         console.log('studio data fetched:', this.studioList);
       } catch (err) {
+        this.isStudioLoading = false;
         console.error('Error fetching studio data:', err);
+        throw err;
       }
     },
     async getFavoriteStudioList() {
       this.isFavoriteStudioLoading = true;
       try {
-        const { data } = await useSanctumFetch(
+        const { data, error } = await useSanctumFetch(
           '/api/get_favorite_studio_list',
           {
             method: 'GET',
           }
         );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         this.initialFavoriteStudioList = data.value as Studio[];
         this.favoriteStudioList = data.value as Studio[];
         this.isFavoriteStudioLoading = false;
         console.log('favorite studio data fetched:', this.favoriteStudioList);
       } catch (err) {
+        this.isFavoriteStudioLoading = false;
         console.error('Error fetching favorite studio data:', err);
+        throw err;
       }
     },
     async saveFavoriteStudioList() {
       try {
-        const { data } = await useSanctumFetch(
+        const { data, error } = await useSanctumFetch(
           '/api/save_favorite_studio_list',
           {
             method: 'POST',
@@ -61,11 +77,18 @@ export const useStudioStore = defineStore('studio', {
             },
           }
         );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         console.log('saveFavoriteStudioList fetched:', data.value);
         this.saveButtonActive = false;
         this.openToast(2500);
       } catch (err) {
         console.error('Error fetching saveFavoriteStudioList data:', err);
+        throw err;
       }
     },
     deleteFavoriteStudio(studioId: number) {

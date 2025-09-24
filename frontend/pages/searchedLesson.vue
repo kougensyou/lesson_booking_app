@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useLessonStore } from '../stores/useLessonStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
+import { useRouter } from 'vue-router';
 import LessonList from '../components/common/LessonList.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
 
@@ -7,7 +9,15 @@ definePageMeta({
   middleware: 'auth',
 });
 
+const router = useRouter();
+
 const lessonStore = useLessonStore();
+
+const addSearchedLessons = () => {
+  lessonStore.addSearchedLessonsApi().catch((error: any) => {
+    useApiErrorHandler(router, error);
+  });
+};
 </script>
 <template>
   <div class="">
@@ -26,7 +36,7 @@ const lessonStore = useLessonStore();
   <LessonList
     v-if="!lessonStore.isAddLessonLoading"
     :lesson-list="lessonStore.searchedLessonList"
-    :add-lessons="lessonStore.addSearchedLessonsApi"
+    :add-lessons="addSearchedLessons"
     :loaded-page="lessonStore.loadedPage"
     :last-page="lessonStore.lastPage"
     :is-loading="lessonStore.isAddLessonLoading"

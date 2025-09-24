@@ -22,7 +22,7 @@ export const useUserStore = defineStore('user', {
     emailForPasswordReset: '' as string,
   }),
   actions: {
-    async login() {
+    async loginApi() {
       try {
         const { user, login } = useSanctumAuth();
         await login(this.loginData);
@@ -30,6 +30,7 @@ export const useUserStore = defineStore('user', {
         this.initializeLoginData();
       } catch (err) {
         console.error('Login failed:', err);
+        throw err;
       }
     },
     async logout() {
@@ -39,44 +40,54 @@ export const useUserStore = defineStore('user', {
         this.initializeUser();
       } catch (err) {
         console.error('Logout failed:', err);
+        throw err;
       }
     },
-    async updatePassword() {
+    async updatePasswordApi() {
       try {
-        const { data } = await useSanctumFetch('/api/update_password', {
+        const { data, error } = await useSanctumFetch('/api/update_password', {
           method: 'POST',
           body: {
             password_data: this.passwordData,
           },
         });
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         console.log('updatePassword fetched:', data.value);
         this.initializePasswordData();
         this.openToast(2500);
       } catch (err) {
         console.error('Update password failed:', err);
+        throw err;
       }
     },
-    async updateUser() {
+    async updateUserApi() {
       const formData = new FormData();
       if (this.fileData) {
         formData.append('image', this.fileData);
       }
       formData.append('user', JSON.stringify(this.user));
+      //console.log('updateUser user: ' + JSON.stringify(this.user));
       try {
         const { data } = await useSanctumFetch('/api/update_user', {
           method: 'POST',
           body: formData,
         });
         this.user = data.value as User;
+        //console.log('updateUser user: ' + JSON.stringify(this.user));
         console.log('updateUser fetched:', data.value);
         this.openToast(2500);
       } catch (err) {
         console.error('Update user failed:', err);
       }
     },
-    async sendPasswordResetMail() {
+    async sendPasswordResetMailApi() {
       try {
-        const { data } = await useSanctumFetch(
+        const { data, error } = await useSanctumFetch(
           '/api/send_password_reset_mail',
           {
             method: 'POST',
@@ -85,10 +96,17 @@ export const useUserStore = defineStore('user', {
             },
           }
         );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         console.log('sendPasswordResetMail fetched:', data.value);
         this.openToast(2500);
       } catch (err) {
         console.error('sendPasswordResetMail failed:', err);
+        throw err;
       }
     },
     initializeLoginData() {

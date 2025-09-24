@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import FirstUser from '~/components/firstLessonBookingConfirm/FirstUser.vue';
 import ConfirmDialog from '~/components/firstLessonBookingConfirm/ConfirmDialog.vue';
 import { useRouter } from 'vue-router';
@@ -13,9 +14,14 @@ const lessonBookingStore = useLessonBookingStore();
 const router = useRouter();
 
 const applyFirstLesson = () => {
-  lessonBookingStore.applyFirstLessonApi().then(() => {
-    router.push({ path: '/firstLessonBookingDone' });
-  });
+  lessonBookingStore
+    .applyFirstLessonApi()
+    .catch((error: any) => {
+      useApiErrorHandler(router, error);
+    })
+    .then(() => {
+      router.push({ path: '/firstLessonBookingDone' });
+    });
 };
 </script>
 <template>

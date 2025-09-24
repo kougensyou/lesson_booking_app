@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import { useUserStore } from '../stores/useUserStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
+import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
 
 definePageMeta({
   layout: 'no-sidebar',
 });
 
+const router = useRouter();
+
 const userStore = useUserStore();
 userStore.setToastMessageForPasswordReset();
+
+const sendPasswordResetMail = () => {
+  userStore.sendPasswordResetMailApi().catch((error: any) => {
+    useApiErrorHandler(router, error);
+  });
+};
 </script>
 <template>
   <div class="pt-4 pb-4">
@@ -26,7 +36,7 @@ userStore.setToastMessageForPasswordReset();
 
       <button
         class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"
-        @click="userStore.sendPasswordResetMail()"
+        @click="sendPasswordResetMail()"
       >
         <span class="text-white">{{ $t('passwordReset.sendButton') }}</span>
         <span

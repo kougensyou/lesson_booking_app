@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLessonStore } from '../stores/useLessonStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import LessonList from '../components/common/LessonList.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
 
@@ -7,10 +8,16 @@ definePageMeta({
   middleware: 'auth',
 });
 
+const router = useRouter();
+
 const lessonStore = useLessonStore();
 
 lessonStore.initializePaginationData();
-lessonStore.addSameStudioLessonList(lessonStore.lessonDetail.studio_id);
+lessonStore
+  .addSameStudioLessonList(lessonStore.lessonDetail.studio_id)
+  .catch((error: any) => {
+    useApiErrorHandler(router, error);
+  });
 </script>
 <template>
   <div class="p-4">

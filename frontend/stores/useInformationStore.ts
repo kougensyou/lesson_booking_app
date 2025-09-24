@@ -12,9 +12,18 @@ export const useInformationStore = defineStore('information', {
     async getInformationList() {
       this.isInformationLoading = true;
       try {
-        const { data } = await useSanctumFetch('/api/get_information_list', {
-          method: 'GET',
-        });
+        const { data, error } = await useSanctumFetch(
+          '/api/get_information_list',
+          {
+            method: 'GET',
+          }
+        );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         const informationData = data.value as InformationData;
         this.sliderInfoList = informationData.slider_info as Info[];
         this.gridInfoList = informationData.grid_info as Info[];
@@ -22,7 +31,9 @@ export const useInformationStore = defineStore('information', {
         this.isInformationLoading = false;
         console.log('information data fetched:', informationData);
       } catch (err) {
+        this.isInformationLoading = false;
         console.error('Error fetching information list:', err);
+        throw err;
       }
     },
   },

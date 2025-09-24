@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/useUserStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
+import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
 
 definePageMeta({
   middleware: 'auth',
 });
 
+const router = useRouter();
+
 const userStore = useUserStore();
 userStore.setToastMessageForUser();
+
+const updateUser = () => {
+  userStore.updateUserApi().catch((error: any) => {
+    useApiErrorHandler(router, error);
+  });
+};
 </script>
 
 <template>
@@ -102,7 +112,7 @@ userStore.setToastMessageForUser();
 
     <button
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
-      @click="userStore.updateUser()"
+      @click="updateUser()"
     >
       <span class="text-white">{{ $t('userUpdate.update') }}</span>
       <span

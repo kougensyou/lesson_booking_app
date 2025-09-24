@@ -1,14 +1,24 @@
 <script setup lang="ts">
 import { useReportStore } from '../stores/useReportStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
+import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
 
 definePageMeta({
   middleware: 'auth',
 });
 
+const router = useRouter();
+
 const reportStore = useReportStore();
 reportStore.initializeReport();
 reportStore.setToastMessage();
+
+const sendReport = () => {
+  reportStore.sendReportApi().catch((error: any) => {
+    useApiErrorHandler(router, error);
+  });
+};
 </script>
 <template>
   <div class="max-w-[640px] mx-auto p-6">
@@ -49,7 +59,7 @@ reportStore.setToastMessage();
 
     <button
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"
-      @click="reportStore.sendReport()"
+      @click="sendReport()"
     >
       <span class="text-white">{{ $t('report.send') }}</span>
       <span

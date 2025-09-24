@@ -93,14 +93,25 @@ export const useLessonStore = defineStore('lesson', {
     async getNextLessonData() {
       this.isNextLessonLoading = true;
       try {
-        const { data } = await useSanctumFetch('/api/get_next_lesson_data', {
-          method: 'GET',
-        });
+        const { data, error } = await useSanctumFetch(
+          '/api/get_next_lesson_data',
+          {
+            method: 'GET',
+          }
+        );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         this.nextLessonList = data.value as Lesson[];
         this.isNextLessonLoading = false;
         console.log(' data fetched:', data.value);
-      } catch (err) {
+      } catch (err: any) {
+        this.isNextLessonLoading = false;
         console.error('Error fetching lesson list:', err);
+        throw err;
       }
     },
     initializePaginationData() {
@@ -113,7 +124,7 @@ export const useLessonStore = defineStore('lesson', {
     async addSameStudioLessonList(studioId: string) {
       this.isAddLessonLoading = true;
       try {
-        const { data } = await useSanctumFetch(
+        const { data, error } = await useSanctumFetch(
           '/api/add_same_studio_lesson_list',
           {
             method: 'GET',
@@ -123,6 +134,12 @@ export const useLessonStore = defineStore('lesson', {
             },
           }
         );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         const sameStudioLessonsResponse = data.value as any;
         this.sameStudioLessonList = this.sameStudioLessonList.concat(
           sameStudioLessonsResponse.data
@@ -131,36 +148,54 @@ export const useLessonStore = defineStore('lesson', {
         this.isAddLessonLoading = false;
         console.log('same studio lesson data fetched:', data.value);
       } catch (err) {
+        this.isAddLessonLoading = false;
         console.error('Error fetching same studio lesson data:', err);
+        throw err;
       }
     },
     async getLessonCategoryList() {
       this.isLessonCategoryLoading = true;
       try {
-        const { data } = await useSanctumFetch(
+        const { data, error } = await useSanctumFetch(
           '/api/get_lesson_category_list',
           {
             method: 'GET',
           }
         );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         this.lessonCategoryList = data.value as LessonCategory[];
         this.isLessonCategoryLoading = false;
       } catch (err) {
+        this.isLessonCategoryLoading = false;
         console.error('Error getLessonCategoryList:', err);
+        throw err;
       }
     },
     async getTimeOptions() {
       this.isTimeOptionsLoading = true;
       try {
-        const { data } = await useSanctumFetch('/api/get_time_options', {
+        const { data, error } = await useSanctumFetch('/api/get_time_options', {
           method: 'GET',
         });
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         const timeOptionsData = data.value as TimeOptions;
         this.startTimeOptions = timeOptionsData.start_time_options;
         this.endTimeOptions = timeOptionsData.end_time_options;
         this.isTimeOptionsLoading = false;
       } catch (err) {
+        this.isTimeOptionsLoading = false;
         console.error('Error getTimeOptions:', err);
+        throw err;
       }
     },
     async initializeSelectedDates() {
@@ -174,14 +209,22 @@ export const useLessonStore = defineStore('lesson', {
     async addSearchedLessonsApi() {
       this.isAddLessonLoading = true;
       try {
-        console.log('searching lessons with input:', this.searchInputForm);
-        const { data } = await useSanctumFetch('/api/add_searched_lessons', {
-          method: 'GET',
-          query: {
-            page: ++this.loadedPage,
-            search_input_form: this.searchInputForm,
-          },
-        });
+        const { data, error } = await useSanctumFetch(
+          '/api/add_searched_lessons',
+          {
+            method: 'GET',
+            query: {
+              page: ++this.loadedPage,
+              search_input_form: this.searchInputForm,
+            },
+          }
+        );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         const searchedLessonsResponse = data.value as any;
         this.searchedLessonList = this.searchedLessonList.concat(
           searchedLessonsResponse.data
@@ -190,7 +233,9 @@ export const useLessonStore = defineStore('lesson', {
         this.isAddLessonLoading = false;
         console.log('searched lessons:', this.searchedLessonList);
       } catch (err) {
+        this.isAddLessonLoading = false;
         console.error('Error searching lessons:', err);
+        throw err;
       }
     },
     setLessonId(lessonId: string) {
@@ -199,17 +244,28 @@ export const useLessonStore = defineStore('lesson', {
     async getLessonDetailApi() {
       this.isLessonDetailLoading = true;
       try {
-        const { data } = await useSanctumFetch('/api/get_lesson_detail', {
-          method: 'GET',
-          query: {
-            lesson_id: this.lessonId,
-          },
-        });
+        const { data, error } = await useSanctumFetch(
+          '/api/get_lesson_detail',
+          {
+            method: 'GET',
+            query: {
+              lesson_id: this.lessonId,
+            },
+          }
+        );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         this.lessonDetail = data.value as LessonDetail;
         this.isLessonDetailLoading = false;
         console.log('lesson detail data fetched:', this.lessonDetail);
       } catch (err) {
+        this.isLessonDetailLoading = false;
         console.error('Error fetching lesson detail data:', err);
+        throw err;
       }
     },
     setStudioId(studioId: string) {
@@ -238,14 +294,23 @@ export const useLessonStore = defineStore('lesson', {
     async getStudioLessonDataApi() {
       this.isStudioLessonLoading = true;
       try {
-        const { data } = await useSanctumFetch('/api/get_studio_lesson_data', {
-          method: 'GET',
-          query: {
-            studio_id: this.selectedStudioId,
-            from_date: this.fromDate,
-            to_date: this.toDate,
-          },
-        });
+        const { data, error } = await useSanctumFetch(
+          '/api/get_studio_lesson_data',
+          {
+            method: 'GET',
+            query: {
+              studio_id: this.selectedStudioId,
+              from_date: this.fromDate,
+              to_date: this.toDate,
+            },
+          }
+        );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         const studioLessonData = data.value as StudioLessonData;
         this.timeOptions = studioLessonData.time_options;
         this.studioData = studioLessonData.studio_data as Studio;
@@ -253,7 +318,9 @@ export const useLessonStore = defineStore('lesson', {
         this.isStudioLessonLoading = false;
         console.log('studio lesson data fetched:', studioLessonData);
       } catch (err) {
+        this.isStudioLessonLoading = false;
         console.error('Error fetching studio lesson data:', err);
+        throw err;
       }
     },
   },

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useStudioStore } from '../stores/useStudioStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
@@ -9,12 +10,15 @@ definePageMeta({
 });
 
 const route = useRoute();
+const router = useRouter();
 const studioStore = useStudioStore();
 onMounted(() => {
   const addFlag = route.query.add_flag;
   if (!addFlag) {
     studioStore.setToastMessage();
-    studioStore.getFavoriteStudioList();
+    studioStore.getFavoriteStudioList().catch((error: any) => {
+      useApiErrorHandler(router, error);
+    });
   }
 });
 </script>

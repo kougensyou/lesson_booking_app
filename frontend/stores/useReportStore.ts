@@ -19,9 +19,9 @@ export const useReportStore = defineStore('report', {
       this.email = '';
       this.contents = '';
     },
-    async sendReport() {
+    async sendReportApi() {
       try {
-        const { data } = await useSanctumFetch('/api/send_report', {
+        const { data, error } = await useSanctumFetch('/api/send_report', {
           method: 'POST',
           body: {
             title: this.title,
@@ -29,11 +29,18 @@ export const useReportStore = defineStore('report', {
             contents: this.contents,
           },
         });
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         console.log('sendReport fetched:', data.value);
         this.initializeReport();
         this.openToast(2500);
       } catch (err) {
         console.error('Error fetching sendReport data:', err);
+        throw err;
       }
     },
     openToast(ms = 2500) {

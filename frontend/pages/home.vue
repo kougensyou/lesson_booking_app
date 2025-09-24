@@ -2,6 +2,8 @@
 import { useLessonStore } from '../stores/useLessonStore';
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useInformationStore } from '~/stores/useInformationStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
+import { useRouter } from 'vue-router';
 import NextLesson from '~/components/home/NextLesson.vue';
 import LessonCalendar from '~/components/home/LessonCalendar.vue';
 import Information from '~/components/home/Information.vue';
@@ -13,15 +15,23 @@ definePageMeta({
   middleware: 'auth',
 });
 
+const router = useRouter();
+
 const lessonStore = useLessonStore();
 const lessonBookingStore = useLessonBookingStore();
 const informationStore = useInformationStore();
 
 lessonBookingStore.setCalendarLocaleForHome();
 
-lessonStore.getNextLessonData();
-lessonBookingStore.getSelectedLessonList();
-informationStore.getInformationList();
+lessonStore.getNextLessonData().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
+lessonBookingStore.getSelectedLessonList().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
+informationStore.getInformationList().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
 </script>
 <template>
   <div class="">

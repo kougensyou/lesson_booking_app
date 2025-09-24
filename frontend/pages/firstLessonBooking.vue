@@ -10,6 +10,8 @@ definePageMeta({
   layout: 'no-sidebar',
 });
 
+const router = useRouter();
+
 const lessonStore = useLessonStore();
 const studioStore = useStudioStore();
 const lessonBookingStore = useLessonBookingStore();
@@ -18,14 +20,20 @@ const userStore = useUserStore();
 const changeStudioLessonData = (selectedDateObj: Date) => {
   lessonStore.setDate(selectedDateObj);
   lessonStore.setWeekData();
-  lessonStore.getStudioLessonDataApi();
+  lessonStore.getStudioLessonDataApi().catch((error: any) => {
+    useApiErrorHandler(router, error);
+  });
 };
 
 lessonStore.setDate(new Date());
 lessonStore.setWeekData();
 
-await studioStore.getStudioList();
-await lessonStore.getLessonCategoryList();
+studioStore.getStudioList().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
+lessonStore.getLessonCategoryList().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
 </script>
 <template>
   <div class="px-4 py-3 space-y-6">

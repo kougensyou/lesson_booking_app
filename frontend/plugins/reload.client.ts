@@ -1,6 +1,6 @@
-import type { User } from "~/types/user";
+import type { User } from '~/types/user';
 
-export default defineNuxtPlugin(async() => {
+export default defineNuxtPlugin(async () => {
   if (import.meta.client) {
     if (sessionStorage.getItem('reloaded')) {
       try {

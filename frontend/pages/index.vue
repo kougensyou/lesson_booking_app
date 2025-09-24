@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useUserStore } from '../stores/useUserStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
+import { useRouter } from 'vue-router';
 
 definePageMeta({
   layout: 'no-sidebar',
@@ -9,7 +11,15 @@ document.fonts.ready.then(() => {
   document.documentElement.classList.add('font-loaded');
 });
 
-const user = useUserStore();
+const router = useRouter();
+
+const userStore = useUserStore();
+
+const login = () => {
+  userStore.loginApi().catch((error: any) => {
+    useApiErrorHandler(router, error);
+  });
+};
 </script>
 <template>
   <div class="pt-2 pb-2">
@@ -24,7 +34,7 @@ const user = useUserStore();
         {{ $t('index.email') }}
       </div>
       <input
-        v-model="user.loginData.email"
+        v-model="userStore.loginData.email"
         class="input border-2 p-2 w-full"
         type="text"
         :placeholder="$t('index.emailPlaceholder')"
@@ -33,14 +43,14 @@ const user = useUserStore();
         {{ $t('index.password') }}
       </div>
       <input
-        v-model="user.loginData.password"
+        v-model="userStore.loginData.password"
         class="input border-2 p-2 w-full"
         type="password"
         :placeholder="$t('index.passwordPlaceholder')"
       />
       <button
         class="mt-12 w-full bg-sky-500 rounded-3xl py-4 relative group font-loaded"
-        @click="user.login()"
+        @click="login()"
       >
         <span class="text-white">{{ $t('index.loginButton') }}</span>
         <span

@@ -2,6 +2,7 @@
 import { useLessonStore } from '../stores/useLessonStore';
 import { useLessonBookingStore } from '../stores/useLessonBookingStore';
 import { useRoute, useRouter } from 'vue-router';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import ConfirmDialog from '~/components/lessonDetail/ConfirmDialog.vue';
 import ConfirmButton from '~/components/lessonDetail/ConfirmButton.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
@@ -15,15 +16,25 @@ const route = useRoute();
 const router = useRouter();
 
 const bookLesson = () => {
-  lessonBookingStore.bookLessonApi(lessonStore.lessonId).then(() => {
-    router.push({ path: '/bookDone' });
-  });
+  lessonBookingStore
+    .bookLessonApi(lessonStore.lessonId)
+    .catch((error: any) => {
+      useApiErrorHandler(router, error);
+    })
+    .then(() => {
+      router.push({ path: '/bookDone' });
+    });
 };
 
 const cancelLesson = () => {
-  lessonBookingStore.cancelLessonApi(lessonStore.lessonId).then(() => {
-    router.push({ path: '/cancelDone' });
-  });
+  lessonBookingStore
+    .cancelLessonApi(lessonStore.lessonId)
+    .catch((error: any) => {
+      useApiErrorHandler(router, error);
+    })
+    .then(() => {
+      router.push({ path: '/cancelDone' });
+    });
 };
 
 const lessonStore = useLessonStore();
@@ -32,7 +43,9 @@ const lessonBookingStore = useLessonBookingStore();
 const lessonId = route.query.lesson_id as string;
 
 lessonStore.setLessonId(lessonId);
-lessonStore.getLessonDetailApi();
+lessonStore.getLessonDetailApi().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
 </script>
 <template>
   <div class="">

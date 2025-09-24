@@ -1,14 +1,23 @@
 <script setup lang="ts">
 import { useUserStore } from '../stores/useUserStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
+import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
 
 definePageMeta({
   middleware: 'auth',
 });
 
+const router = useRouter();
 const userStore = useUserStore();
 userStore.initializePasswordData();
 userStore.setToastMessageForPassword();
+
+const updatePassword = () => {
+  userStore.updatePasswordApi().catch((error: any) => {
+    useApiErrorHandler(router, error);
+  });
+};
 </script>
 <template>
   <div class="max-w-[640px] mx-auto p-6">
@@ -49,7 +58,7 @@ userStore.setToastMessageForPassword();
 
     <button
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
-      @click="userStore.updatePassword()"
+      @click="updatePassword()"
     >
       <span class="text-white">{{ $t('passwordChange.updatePassword') }}</span>
       <span

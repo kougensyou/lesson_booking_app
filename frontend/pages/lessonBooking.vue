@@ -7,6 +7,7 @@ import { useStudioStore } from '../stores/useStudioStore';
 import { useLessonStore } from '../stores/useLessonStore';
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useRouter } from 'vue-router';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import SpinLoading from '~/components/common/SpinLoading.vue';
 import CardLoading from '~/components/common/CardLoading.vue';
 
@@ -24,17 +25,30 @@ lessonBookingStore.setCalendarLocaleForLessonBooking();
 
 const addSearchedLessons = () => {
   lessonStore.initializePaginationData();
-  lessonStore.addSearchedLessonsApi().then(() => {
-    router.push({ path: '/searchedLesson' });
-  });
+  lessonStore
+    .addSearchedLessonsApi()
+    .catch((error: any) => {
+      useApiErrorHandler(router, error);
+    })
+    .then(() => {
+      router.push({ path: '/searchedLesson' });
+    });
 };
 
 lessonStore.initializeSelectedDates();
 
-studioStore.getStudioList();
-studioStore.getFavoriteStudioList();
-lessonStore.getLessonCategoryList();
-lessonStore.getTimeOptions();
+studioStore.getStudioList().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
+studioStore.getFavoriteStudioList().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
+lessonStore.getLessonCategoryList().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
+lessonStore.getTimeOptions().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
 </script>
 <template>
   <div class="">

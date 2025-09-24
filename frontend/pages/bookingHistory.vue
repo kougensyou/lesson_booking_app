@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLessonBookingStore } from '../stores/useLessonBookingStore';
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import LessonList from '../components/common/LessonList.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
 
@@ -7,9 +8,13 @@ definePageMeta({
   middleware: 'auth',
 });
 
+const router = useRouter();
+
 const lessonBookingStore = useLessonBookingStore();
 lessonBookingStore.initializeBookingHistory();
-lessonBookingStore.addBookingHistory();
+lessonBookingStore.addBookingHistory().catch((error: any) => {
+  useApiErrorHandler(router, error);
+});
 </script>
 <template>
   <div class="">

@@ -74,7 +74,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     async getSelectedLessonList() {
       this.isSelectedLessonLoading = true;
       try {
-        const { data } = await useSanctumFetch(
+        const { data, error } = await useSanctumFetch(
           '/api/get_selected_lesson_list',
           {
             method: 'GET',
@@ -84,12 +84,19 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
             },
           }
         );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         this.selectedLessonList = data.value as LessonBooking[];
         this.isSelectedLessonLoading = false;
         console.log('home data fetched:', data.value);
       } catch (err) {
         this.isSelectedLessonLoading = false;
         console.error('Error fetching lesson list:', err);
+        throw err;
       }
     },
     async getPrevLessonList() {
@@ -100,7 +107,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           this.selectedMonth = 11;
           this.selectedYear -= 1;
         }
-        const { data } = await useSanctumFetch(
+        const { data, error } = await useSanctumFetch(
           '/api/get_selected_lesson_list',
           {
             method: 'GET',
@@ -110,11 +117,18 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
             },
           }
         );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         const selectedLessonList = data.value as LessonBooking[];
         this.selectedLessonList = selectedLessonList;
         console.log('selected lesson list fetched:', selectedLessonList);
       } catch (err) {
         console.error('Error fetching lesson list:', err);
+        throw err;
       }
     },
     async getNextLessonList() {
@@ -124,7 +138,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           this.selectedMonth = 0;
           this.selectedYear += 1;
         }
-        const { data } = await useSanctumFetch(
+        const { data, error } = await useSanctumFetch(
           '/api/get_selected_lesson_list',
           {
             method: 'GET',
@@ -134,11 +148,18 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
             },
           }
         );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         const selectedLessonList = data.value as LessonBooking[];
         this.selectedLessonList = selectedLessonList;
         console.log('selected lesson list fetched:', selectedLessonList);
       } catch (err) {
         console.error('Error fetching lesson list:', err);
+        throw err;
       }
     },
     openDialog() {
@@ -150,33 +171,51 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     async bookLessonApi(lessonId: string) {
       this.isBookingStatusLoading = true;
       try {
-        const { data } = await useSanctumFetch('/api/book_lesson', {
+        const { data, error } = await useSanctumFetch('/api/book_lesson', {
           method: 'POST',
           body: {
             lesson_id: lessonId,
           },
         });
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         this.closeDialog();
         this.isBookingStatusLoading = false;
         console.log('bookLesson fetched:', data.value);
       } catch (err) {
+        this.closeDialog();
+        this.isBookingStatusLoading = false;
         console.error('Error fetching bookLesson data:', err);
+        throw err;
       }
     },
     async cancelLessonApi(lessonId: string) {
       this.isBookingStatusLoading = true;
       try {
-        const { data } = await useSanctumFetch('/api/cancel_lesson', {
+        const { data, error } = await useSanctumFetch('/api/cancel_lesson', {
           method: 'POST',
           body: {
             lesson_id: lessonId,
           },
         });
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         this.closeDialog();
         this.isBookingStatusLoading = false;
         console.log('cancelLesson fetched:', data.value);
       } catch (err) {
+        this.closeDialog();
+        this.isBookingStatusLoading = false;
         console.error('Error fetching cancelLesson data:', err);
+        throw err;
       }
     },
     initializeBookingHistory() {
@@ -188,12 +227,21 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     async addBookingHistory() {
       this.isBookingHistoryLoading = true;
       try {
-        const { data } = await useSanctumFetch('/api/add_booking_history', {
-          method: 'GET',
-          query: {
-            page: ++this.loadedPage,
-          },
-        });
+        const { data, error } = await useSanctumFetch(
+          '/api/add_booking_history',
+          {
+            method: 'GET',
+            query: {
+              page: ++this.loadedPage,
+            },
+          }
+        );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         const bookingHistoryResponse = data.value as any;
         this.bookingHistoryList = this.bookingHistoryList.concat(
           bookingHistoryResponse.data
@@ -202,7 +250,9 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         this.isBookingHistoryLoading = false;
         console.log('booking history fetched:', bookingHistoryResponse);
       } catch (err) {
+        this.isBookingHistoryLoading = false;
         console.error('Error fetching booking history:', err);
+        throw err;
       }
     },
     setFirstSelectedLesson(studioLessonData: BaseStudioLesson) {
@@ -219,16 +269,27 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     },
     async applyFirstLessonApi() {
       try {
-        const { data } = await useSanctumFetch('/api/apply_first_lesson', {
-          method: 'POST',
-          body: {
-            first_booking: this.firstBooking,
-          },
-        });
+        const { data, error } = await useSanctumFetch(
+          '/api/apply_first_lesson',
+          {
+            method: 'POST',
+            body: {
+              first_booking: this.firstBooking,
+            },
+          }
+        );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+          });
+        }
         this.closeDialog();
         console.log('applyFirstLesson fetched:', data.value);
       } catch (err) {
+        this.closeDialog();
         console.error('Error fetching applyFirstLesson data:', err);
+        throw err;
       }
     },
   },
