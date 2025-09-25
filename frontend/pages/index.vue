@@ -15,12 +15,10 @@ const router = useRouter();
 
 const userStore = useUserStore();
 
+userStore.initializeErrors();
+
 const login = () => {
   userStore.loginApi().catch((error: any) => {
-    if (error.status === 422) {
-      userStore.setErrors(error.data.errors);
-      return;
-    }
     useApiErrorHandler(router, error);
   });
 };

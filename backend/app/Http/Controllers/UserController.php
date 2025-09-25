@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\User\PasswordResetMailRequest;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Services\UserService;
@@ -32,7 +33,7 @@ class UserController extends Controller
         return $this->userService->updatePassword($userId, $passwordData);
     }
 
-    public function sendPasswordResetMail(Request $request) {
+    public function sendPasswordResetMail(PasswordResetMailRequest $request) {
         $toEmail = $request->input('email');
         return $this->userService->sendPasswordResetMail($toEmail);
     }

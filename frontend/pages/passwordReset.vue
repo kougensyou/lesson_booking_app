@@ -13,6 +13,8 @@ const router = useRouter();
 const userStore = useUserStore();
 userStore.setToastMessageForPasswordReset();
 
+userStore.initializeErrors();
+
 const sendPasswordResetMail = () => {
   userStore.sendPasswordResetMailApi().catch((error: any) => {
     useApiErrorHandler(router, error);
@@ -31,8 +33,12 @@ const sendPasswordResetMail = () => {
         type="email"
         :placeholder="$t('passwordReset.emailPlaceholder')"
         v-model="userStore.emailForPasswordReset"
-        class="w-full max-w-md border rounded px-4 py-2 mb-4 text-gray-800"
+        class="w-full border rounded px-4 py-2 mb-4 text-gray-800"
       />
+
+      <span class="text-red-600" v-if="userStore.errors?.email">{{
+        userStore.errors.email[0]
+      }}</span>
 
       <button
         class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"

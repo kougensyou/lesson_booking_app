@@ -23,6 +23,9 @@ export const useUserStore = defineStore('user', {
     errors: {} as any,
   }),
   actions: {
+    initializeErrors() {
+      this.errors = {};
+    },
     setErrors(errors: any) {
       this.errors = errors;
     },
@@ -32,8 +35,12 @@ export const useUserStore = defineStore('user', {
         await login(this.loginData);
         this.user = user.value as User;
         this.initializeLoginData();
-      } catch (err) {
+      } catch (err: any) {
         console.error('Login failed:', err);
+        if (err.statusCode === 422) {
+          this.setErrors(err.data.errors);
+          return;
+        }
         throw err;
       }
     },
@@ -104,12 +111,17 @@ export const useUserStore = defineStore('user', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         console.log('sendPasswordResetMail fetched:', data.value);
         this.openToast(2500);
-      } catch (err) {
+      } catch (err: any) {
         console.error('sendPasswordResetMail failed:', err);
+        if (err.statusCode === 422) {
+          this.setErrors(err.data.errors);
+          return;
+        }
         throw err;
       }
     },
