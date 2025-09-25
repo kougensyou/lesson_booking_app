@@ -103,6 +103,7 @@ export const useLessonStore = defineStore('lesson', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         this.nextLessonList = data.value as Lesson[];
@@ -138,6 +139,7 @@ export const useLessonStore = defineStore('lesson', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         const sameStudioLessonsResponse = data.value as any;
@@ -147,7 +149,7 @@ export const useLessonStore = defineStore('lesson', {
         this.lastPage = sameStudioLessonsResponse.last_page;
         this.isAddLessonLoading = false;
         console.log('same studio lesson data fetched:', data.value);
-      } catch (err) {
+      } catch (err: any) {
         this.isAddLessonLoading = false;
         console.error('Error fetching same studio lesson data:', err);
         throw err;
@@ -166,11 +168,12 @@ export const useLessonStore = defineStore('lesson', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         this.lessonCategoryList = data.value as LessonCategory[];
         this.isLessonCategoryLoading = false;
-      } catch (err) {
+      } catch (err: any) {
         this.isLessonCategoryLoading = false;
         console.error('Error getLessonCategoryList:', err);
         throw err;
@@ -186,13 +189,14 @@ export const useLessonStore = defineStore('lesson', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         const timeOptionsData = data.value as TimeOptions;
         this.startTimeOptions = timeOptionsData.start_time_options;
         this.endTimeOptions = timeOptionsData.end_time_options;
         this.isTimeOptionsLoading = false;
-      } catch (err) {
+      } catch (err: any) {
         this.isTimeOptionsLoading = false;
         console.error('Error getTimeOptions:', err);
         throw err;
@@ -223,6 +227,7 @@ export const useLessonStore = defineStore('lesson', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         const searchedLessonsResponse = data.value as any;
@@ -232,7 +237,7 @@ export const useLessonStore = defineStore('lesson', {
         this.lastPage = searchedLessonsResponse.last_page;
         this.isAddLessonLoading = false;
         console.log('searched lessons:', this.searchedLessonList);
-      } catch (err) {
+      } catch (err: any) {
         this.isAddLessonLoading = false;
         console.error('Error searching lessons:', err);
         throw err;
@@ -257,12 +262,13 @@ export const useLessonStore = defineStore('lesson', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         this.lessonDetail = data.value as LessonDetail;
         this.isLessonDetailLoading = false;
         console.log('lesson detail data fetched:', this.lessonDetail);
-      } catch (err) {
+      } catch (err: any) {
         this.isLessonDetailLoading = false;
         console.error('Error fetching lesson detail data:', err);
         throw err;
@@ -309,6 +315,7 @@ export const useLessonStore = defineStore('lesson', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         const studioLessonData = data.value as StudioLessonData;
@@ -317,7 +324,7 @@ export const useLessonStore = defineStore('lesson', {
         this.studioLessonList = studioLessonData.studio_lesson_list;
         this.isStudioLessonLoading = false;
         console.log('studio lesson data fetched:', studioLessonData);
-      } catch (err) {
+      } catch (err: any) {
         this.isStudioLessonLoading = false;
         console.error('Error fetching studio lesson data:', err);
         throw err;

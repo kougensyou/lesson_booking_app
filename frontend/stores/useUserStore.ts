@@ -49,7 +49,7 @@ export const useUserStore = defineStore('user', {
         const { logout } = useSanctumAuth();
         await logout();
         this.initializeUser();
-      } catch (err) {
+      } catch (err: any) {
         console.error('Logout failed:', err);
         throw err;
       }
@@ -66,12 +66,13 @@ export const useUserStore = defineStore('user', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         console.log('updatePassword fetched:', data.value);
         this.initializePasswordData();
         this.openToast(2500);
-      } catch (err) {
+      } catch (err: any) {
         console.error('Update password failed:', err);
         throw err;
       }
@@ -92,7 +93,7 @@ export const useUserStore = defineStore('user', {
         //console.log('updateUser user: ' + JSON.stringify(this.user));
         console.log('updateUser fetched:', data.value);
         this.openToast(2500);
-      } catch (err) {
+      } catch (err: any) {
         console.error('Update user failed:', err);
       }
     },

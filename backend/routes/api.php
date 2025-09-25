@@ -24,6 +24,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LogoutController::class , 'logout']);
 
 Route::post('/send_password_reset_mail', [UserController::class , 'sendPasswordResetMail']);
+Route::post('/validate_first_lesson', [LessonBookingController::class , 'validateFirstLesson']);
 Route::post('/apply_first_lesson', [LessonBookingController::class , 'applyFirstLesson']);
 
 Route::get('get_lesson_category_list', [LessonController::class , 'getLessonCategoryList']);

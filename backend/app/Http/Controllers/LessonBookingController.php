@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LessonBooking\FirstBookingRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +47,13 @@ class LessonBookingController extends Controller
     public function addBookingHistory(Request $request) {
         $userId = Auth::id();
         return $this->lessonBookingService->addBookingHistory($userId);
+    }
+
+    public function validateFirstLesson(FirstBookingRequest $request) {
+        return response()->json([
+            'message' => 'Validation passed',
+            'data'    => $request->validated(),
+        ], 200);
     }
 
     public function applyFirstLesson(Request $request) {

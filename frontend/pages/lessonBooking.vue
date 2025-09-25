@@ -27,11 +27,11 @@ const addSearchedLessons = () => {
   lessonStore.initializePaginationData();
   lessonStore
     .addSearchedLessonsApi()
-    .catch((error: any) => {
-      useApiErrorHandler(router, error);
-    })
     .then(() => {
       router.push({ path: '/searchedLesson' });
+    })
+    .catch((error: any) => {
+      useApiErrorHandler(router, error);
     });
 };
 

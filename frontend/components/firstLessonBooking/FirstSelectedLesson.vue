@@ -22,6 +22,7 @@ defineProps<{
   changeStudioLessonData: Function;
   setFirstSelectedLesson: Function;
   initializeFirstSelectedLesson: Function;
+  errors: any;
 }>();
 </script>
 <template>
@@ -42,6 +43,10 @@ defineProps<{
         {{ category.category_name }}
       </option>
     </select>
+
+    <span class="text-red-600" v-if="errors?.lesson_category_name">{{
+      errors.lesson_category_name[0]
+    }}</span>
   </div>
 
   <div>
@@ -73,6 +78,10 @@ defineProps<{
         {{ studio.studio_name }}
       </option>
     </select>
+
+    <span class="text-red-600" v-if="errors?.studio_name">{{
+      errors.studio_name[0]
+    }}</span>
   </div>
 
   <StudioLessonCalendar

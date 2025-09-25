@@ -26,19 +26,10 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     isBookingHistoryLoading: false as boolean,
     bookingHistoryList: [] as Lesson[],
     firstBooking: {
-      selectedLesson: {
-        lesson_category_name: '',
-        studio_name: '',
-        lesson_day: '',
-        lesson_time: '',
-        lesson_name: '',
-      } as FirstSelectedLesson,
-      user: {
-        name: '',
-        email: '',
-        birth_date: '',
-      } as FirstUser,
+      selectedLesson: {} as FirstSelectedLesson,
+      user: {} as FirstUser,
     } as FirstBooking,
+    errors: {} as any,
   }),
   getters: {
     attributes(state): Array<Attribute> {
@@ -52,6 +43,12 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     },
   },
   actions: {
+    initializeErrors() {
+      this.errors = {};
+    },
+    setErrors(errors: any) {
+      this.errors = errors;
+    },
     setCalendarLocaleForHome() {
       const { t } = useI18n();
       this.calendarLocale = t('home.calendarLocale');
@@ -88,12 +85,13 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         this.selectedLessonList = data.value as LessonBooking[];
         this.isSelectedLessonLoading = false;
         console.log('home data fetched:', data.value);
-      } catch (err) {
+      } catch (err: any) {
         this.isSelectedLessonLoading = false;
         console.error('Error fetching lesson list:', err);
         throw err;
@@ -121,12 +119,13 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         const selectedLessonList = data.value as LessonBooking[];
         this.selectedLessonList = selectedLessonList;
         console.log('selected lesson list fetched:', selectedLessonList);
-      } catch (err) {
+      } catch (err: any) {
         console.error('Error fetching lesson list:', err);
         throw err;
       }
@@ -152,12 +151,13 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         const selectedLessonList = data.value as LessonBooking[];
         this.selectedLessonList = selectedLessonList;
         console.log('selected lesson list fetched:', selectedLessonList);
-      } catch (err) {
+      } catch (err: any) {
         console.error('Error fetching lesson list:', err);
         throw err;
       }
@@ -181,12 +181,13 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         this.closeDialog();
         this.isBookingStatusLoading = false;
         console.log('bookLesson fetched:', data.value);
-      } catch (err) {
+      } catch (err: any) {
         this.closeDialog();
         this.isBookingStatusLoading = false;
         console.error('Error fetching bookLesson data:', err);
@@ -206,12 +207,13 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         this.closeDialog();
         this.isBookingStatusLoading = false;
         console.log('cancelLesson fetched:', data.value);
-      } catch (err) {
+      } catch (err: any) {
         this.closeDialog();
         this.isBookingStatusLoading = false;
         console.error('Error fetching cancelLesson data:', err);
@@ -240,6 +242,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         const bookingHistoryResponse = data.value as any;
@@ -249,7 +252,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         this.lastPage = bookingHistoryResponse.last_page;
         this.isBookingHistoryLoading = false;
         console.log('booking history fetched:', bookingHistoryResponse);
-      } catch (err) {
+      } catch (err: any) {
         this.isBookingHistoryLoading = false;
         console.error('Error fetching booking history:', err);
         throw err;
@@ -267,6 +270,34 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       this.firstBooking.selectedLesson.lesson_time = '';
       this.firstBooking.selectedLesson.lesson_name = '';
     },
+    async validateFirstLessonApi() {
+      try {
+        const { data, error } = await useSanctumFetch(
+          '/api/validate_first_lesson',
+          {
+            method: 'POST',
+            body: {
+              first_booking: this.firstBooking,
+            },
+          }
+        );
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+            data: error.value.data,
+          });
+        }
+        console.log('validateFirstLesson fetched:', data.value);
+      } catch (err: any) {
+        console.error('Error fetching validateFirstLesson data:', err);
+        if (err.statusCode === 422) {
+          this.setErrors(err.data.errors);
+          return;
+        }
+        throw err;
+      }
+    },
     async applyFirstLessonApi() {
       try {
         const { data, error } = await useSanctumFetch(
@@ -282,11 +313,12 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         this.closeDialog();
         console.log('applyFirstLesson fetched:', data.value);
-      } catch (err) {
+      } catch (err: any) {
         this.closeDialog();
         console.error('Error fetching applyFirstLesson data:', err);
         throw err;

@@ -29,12 +29,13 @@ export const useStudioStore = defineStore('studio', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         this.studioList = data.value as Studio[];
         this.isStudioLoading = false;
         console.log('studio data fetched:', this.studioList);
-      } catch (err) {
+      } catch (err: any) {
         this.isStudioLoading = false;
         console.error('Error fetching studio data:', err);
         throw err;
@@ -53,13 +54,14 @@ export const useStudioStore = defineStore('studio', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         this.initialFavoriteStudioList = data.value as Studio[];
         this.favoriteStudioList = data.value as Studio[];
         this.isFavoriteStudioLoading = false;
         console.log('favorite studio data fetched:', this.favoriteStudioList);
-      } catch (err) {
+      } catch (err: any) {
         this.isFavoriteStudioLoading = false;
         console.error('Error fetching favorite studio data:', err);
         throw err;
@@ -81,12 +83,13 @@ export const useStudioStore = defineStore('studio', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         console.log('saveFavoriteStudioList fetched:', data.value);
         this.saveButtonActive = false;
         this.openToast(2500);
-      } catch (err) {
+      } catch (err: any) {
         console.error('Error fetching saveFavoriteStudioList data:', err);
         throw err;
       }

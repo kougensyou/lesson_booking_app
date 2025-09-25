@@ -22,6 +22,7 @@ export const useInformationStore = defineStore('information', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         const informationData = data.value as InformationData;
@@ -30,7 +31,7 @@ export const useInformationStore = defineStore('information', {
         this.listInfoList = informationData.list_info as Info[];
         this.isInformationLoading = false;
         console.log('information data fetched:', informationData);
-      } catch (err) {
+      } catch (err: any) {
         this.isInformationLoading = false;
         console.error('Error fetching information list:', err);
         throw err;

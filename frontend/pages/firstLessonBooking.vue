@@ -25,6 +25,17 @@ const changeStudioLessonData = (selectedDateObj: Date) => {
   });
 };
 
+const validateFirstLesson = () => {
+  lessonBookingStore
+    .validateFirstLessonApi()
+    .then(() => {
+      router.push({ path: '/firstLessonBookingConfirm' });
+    })
+    .catch((error: any) => {
+      useApiErrorHandler(router, error);
+    });
+};
+
 lessonStore.setDate(new Date());
 lessonStore.setWeekData();
 
@@ -52,11 +63,15 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
       :is-auth="userStore.user.id ? true : false"
       :week-data="lessonStore.weekData"
       :time-options="lessonStore.timeOptions"
+      :errors="lessonBookingStore.errors"
     />
-    <FirstUser :user="lessonBookingStore.firstBooking.user" />
+    <FirstUser
+      :user="lessonBookingStore.firstBooking.user"
+      :errors="lessonBookingStore.errors"
+    />
     <button
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
-      @click="$router.push('/firstLessonBookingConfirm')"
+      @click="validateFirstLesson()"
     >
       <span class="text-white">{{ $t('firstLessonBooking.next') }}</span>
       <span

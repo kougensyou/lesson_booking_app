@@ -3,6 +3,7 @@ import type { FirstUser } from '~/types/lessonBooking';
 
 defineProps<{
   user: FirstUser;
+  errors: any;
 }>();
 </script>
 <template>
@@ -15,6 +16,8 @@ defineProps<{
       type="text"
       class="mt-1 w-full rounded border p-2"
     />
+
+    <span class="text-red-600" v-if="errors?.name">{{ errors.name[0] }}</span>
   </div>
 
   <div>
@@ -23,9 +26,13 @@ defineProps<{
     }}</label>
     <input
       v-model="user.birth_date"
-      type="text"
+      type="date"
       class="mt-1 w-full rounded border p-2"
     />
+
+    <span class="text-red-600" v-if="errors?.birth_date">{{
+      errors.birth_date[0]
+    }}</span>
   </div>
 
   <div>
@@ -37,5 +44,7 @@ defineProps<{
       type="text"
       class="mt-1 w-full rounded border p-2"
     />
+
+    <span class="text-red-600" v-if="errors?.email">{{ errors.email[0] }}</span>
   </div>
 </template>

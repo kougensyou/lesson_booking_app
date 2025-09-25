@@ -18,22 +18,22 @@ const router = useRouter();
 const bookLesson = () => {
   lessonBookingStore
     .bookLessonApi(lessonStore.lessonId)
-    .catch((error: any) => {
-      useApiErrorHandler(router, error);
-    })
     .then(() => {
       router.push({ path: '/bookDone' });
+    })
+    .catch((error: any) => {
+      useApiErrorHandler(router, error);
     });
 };
 
 const cancelLesson = () => {
   lessonBookingStore
     .cancelLessonApi(lessonStore.lessonId)
-    .catch((error: any) => {
-      useApiErrorHandler(router, error);
-    })
     .then(() => {
       router.push({ path: '/cancelDone' });
+    })
+    .catch((error: any) => {
+      useApiErrorHandler(router, error);
     });
 };
 

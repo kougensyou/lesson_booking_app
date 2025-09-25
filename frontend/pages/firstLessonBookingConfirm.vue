@@ -16,11 +16,11 @@ const router = useRouter();
 const applyFirstLesson = () => {
   lessonBookingStore
     .applyFirstLessonApi()
-    .catch((error: any) => {
-      useApiErrorHandler(router, error);
-    })
     .then(() => {
       router.push({ path: '/firstLessonBookingDone' });
+    })
+    .catch((error: any) => {
+      useApiErrorHandler(router, error);
     });
 };
 </script>

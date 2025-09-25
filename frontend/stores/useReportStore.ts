@@ -33,12 +33,13 @@ export const useReportStore = defineStore('report', {
           throw createError({
             statusCode: error.value.statusCode,
             message: error.value.message,
+            data: error.value.data,
           });
         }
         console.log('sendReport fetched:', data.value);
         this.initializeReport();
         this.openToast(2500);
-      } catch (err) {
+      } catch (err: any) {
         console.error('Error fetching sendReport data:', err);
         throw err;
       }
