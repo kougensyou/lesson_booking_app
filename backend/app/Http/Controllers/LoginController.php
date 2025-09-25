@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\Login\LoginFormRequest;
 
 final class LoginController extends Controller
 {
@@ -19,17 +17,13 @@ final class LoginController extends Controller
     ) {
     }
 
-    public function login(Request $request): JsonResponse
+    public function login(LoginFormRequest $request): JsonResponse
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
+        $credentials = $request->only('email', 'password');
         if (auth()->attempt($credentials)) {
-            return response()->json(['message' => 'OK!'], 200);
+            return response()->json(['message' => 'Login successful'], 200);
         }
 
-        return response()->json(['message' => 'ユーザーが見つかりません。'], 422);
+        return response()->json(['message' => 'Invalid credentials'], 401);
     }
 }

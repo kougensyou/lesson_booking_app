@@ -20,8 +20,12 @@ export const useUserStore = defineStore('user', {
     user: {} as User,
     fileData: null as File | null,
     emailForPasswordReset: '' as string,
+    errors: {} as any,
   }),
   actions: {
+    setErrors(errors: any) {
+      this.errors = errors;
+    },
     async loginApi() {
       try {
         const { user, login } = useSanctumAuth();
