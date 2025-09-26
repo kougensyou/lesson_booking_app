@@ -10,6 +10,7 @@ definePageMeta({
 
 const router = useRouter();
 const userStore = useUserStore();
+userStore.initializeErrors();
 userStore.initializePasswordData();
 userStore.setToastMessageForPassword();
 
@@ -33,6 +34,11 @@ const updatePassword = () => {
         type="password"
         class="w-full border rounded px-3 py-2"
       />
+      <template v-for="errorMessage in userStore.errors?.currentPassword">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
     <div class="mb-4">
       <label class="text-left text-slate-500">{{
@@ -43,6 +49,11 @@ const updatePassword = () => {
         type="password"
         class="w-full border rounded px-3 py-2"
       />
+      <template v-for="errorMessage in userStore.errors?.newPassword">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <div class="mb-4">
@@ -54,6 +65,13 @@ const updatePassword = () => {
         type="password"
         class="w-full border rounded px-3 py-2"
       />
+      <template
+        v-for="errorMessage in userStore.errors?.newPasswordConfirmation"
+      >
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <button

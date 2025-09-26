@@ -36,9 +36,11 @@ const sendPasswordResetMail = () => {
         class="w-full border rounded px-4 py-2 mb-4 text-gray-800"
       />
 
-      <span class="text-red-600" v-if="userStore.errors?.email">{{
-        userStore.errors.email[0]
-      }}</span>
+      <template v-for="errorMessage in userStore.errors?.email">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
 
       <button
         class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"

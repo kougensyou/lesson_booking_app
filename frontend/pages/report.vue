@@ -35,9 +35,11 @@ const sendReport = () => {
         type="text"
         class="w-full border rounded px-3 py-2"
       />
-      <span class="text-red-600" v-if="reportStore.errors?.title">{{
-        reportStore.errors.title[0]
-      }}</span>
+      <template v-for="errorMessage in reportStore.errors?.title">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
     <div class="mb-4">
       <label class="text-left text-slate-500">{{
@@ -48,9 +50,11 @@ const sendReport = () => {
         type="email"
         class="w-full border rounded px-3 py-2"
       />
-      <span class="text-red-600" v-if="reportStore.errors?.email">{{
-        reportStore.errors.email[0]
-      }}</span>
+      <template v-for="errorMessage in reportStore.errors?.email">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <div class="mb-4">
@@ -62,9 +66,11 @@ const sendReport = () => {
         rows="5"
         class="w-full border rounded px-3 py-2"
       ></textarea>
-      <span class="text-red-600" v-if="reportStore.errors?.contents">{{
-        reportStore.errors.contents[0]
-      }}</span>
+      <template v-for="errorMessage in reportStore.errors?.contents">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <button

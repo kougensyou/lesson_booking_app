@@ -70,10 +70,15 @@ export const useUserStore = defineStore('user', {
           });
         }
         console.log('updatePassword fetched:', data.value);
+        this.initializeErrors();
         this.initializePasswordData();
         this.openToast(2500);
       } catch (err: any) {
         console.error('Update password failed:', err.data);
+        if (err.statusCode === 422) {
+          this.setErrors(err.data.errors);
+          return;
+        }
         throw err;
       }
     },

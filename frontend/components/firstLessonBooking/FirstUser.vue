@@ -17,7 +17,11 @@ defineProps<{
       class="mt-1 w-full rounded border p-2"
     />
 
-    <span class="text-red-600" v-if="errors?.name">{{ errors.name[0] }}</span>
+    <template v-for="errorMessage in errors?.name">
+      <div class="text-red-600 w-full">
+        {{ errorMessage }}
+      </div>
+    </template>
   </div>
 
   <div>
@@ -30,9 +34,11 @@ defineProps<{
       class="mt-1 w-full rounded border p-2"
     />
 
-    <span class="text-red-600" v-if="errors?.birth_date">{{
-      errors.birth_date[0]
-    }}</span>
+    <template v-for="errorMessage in errors?.birth_date">
+      <div class="text-red-600 w-full">
+        {{ errorMessage }}
+      </div>
+    </template>
   </div>
 
   <div>
@@ -45,6 +51,10 @@ defineProps<{
       class="mt-1 w-full rounded border p-2"
     />
 
-    <span class="text-red-600" v-if="errors?.email">{{ errors.email[0] }}</span>
+    <template v-for="errorMessage in errors?.email">
+      <div class="text-red-600 w-full">
+        {{ errorMessage }}
+      </div>
+    </template>
   </div>
 </template>

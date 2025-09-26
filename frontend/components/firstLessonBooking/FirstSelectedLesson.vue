@@ -44,9 +44,11 @@ defineProps<{
       </option>
     </select>
 
-    <span class="text-red-600" v-if="errors?.lesson_category_name">{{
-      errors.lesson_category_name[0]
-    }}</span>
+    <template v-for="errorMessage in errors?.lesson_category_name">
+      <div class="text-red-600 w-full">
+        {{ errorMessage }}
+      </div>
+    </template>
   </div>
 
   <div>
@@ -79,9 +81,11 @@ defineProps<{
       </option>
     </select>
 
-    <span class="text-red-600" v-if="errors?.studio_name">{{
-      errors.studio_name[0]
-    }}</span>
+    <template v-for="errorMessage in errors?.studio_name">
+      <div class="text-red-600 w-full">
+        {{ errorMessage }}
+      </div>
+    </template>
   </div>
 
   <StudioLessonCalendar
@@ -98,9 +102,11 @@ defineProps<{
     "
   />
 
-  <span class="text-red-600" v-if="errors?.lesson_name">{{
-    errors.lesson_name[0]
-  }}</span>
+  <template v-for="errorMessage in errors?.lesson_name">
+    <div class="text-red-600 w-full">
+      {{ errorMessage }}
+    </div>
+  </template>
 
   <div
     v-if="selectedLesson.lesson_name"

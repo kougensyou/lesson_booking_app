@@ -149,6 +149,12 @@ return [
         'lesson_name' => [
             'required' => 'レッスンを選択してください',
         ],
+        'newPassword' => [
+            'mismatch' => '新しいパスワードと確認用パスワードが一致しません。',
+        ],
+        'currentPassword' => [
+            'invalid' => '現在のパスワードが正しくありません。',
+        ],
     ],
 
     /*
@@ -175,5 +181,8 @@ return [
         'report_title'         => 'お問合せ件名',
         'report_email'         => '返信先メールアドレス',
         'report_contents'      => 'お問合せ内容',
+        'current_password'     => '現在のパスワード',
+        'new_password'         => '新しいパスワード',
+        'new_password_confirmation' => '新しいパスワード(確認用)',
     ],
 ];

@@ -132,6 +132,12 @@ return [
         'lesson_name' => [
             'required' => 'Please select a lesson.',
         ],
+        'newPassword' => [
+            'mismatch' => 'The new password and confirmation do not match.',
+        ],
+        'currentPassword' => [
+            'invalid' => 'The current password is incorrect.',
+        ],
     ],
 
     /*
@@ -158,6 +164,9 @@ return [
         'report_title'         => 'Title',
         'report_email'         => 'Reply Email',
         'report_contents'      => 'Contents',
+        'current_password'     => 'Current Password',
+        'new_password'         => 'New Password',
+        'new_password_confirmation' => 'New Password (Confirmation)',
     ],
 
 ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\PasswordResetMailRequest;
+use App\Http\Requests\User\PasswordChangeRequest;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Services\UserService;
@@ -27,7 +28,7 @@ class UserController extends Controller
         return $this->userService->getUser($userId);
     }
 
-    public function updatePassword(Request $request) {
+    public function updatePassword(PasswordChangeRequest $request) {
         $userId = Auth::id();
         $passwordData = $request->input('password_data');
         return $this->userService->updatePassword($userId, $passwordData);

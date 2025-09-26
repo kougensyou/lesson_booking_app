@@ -41,9 +41,11 @@ const login = () => {
         type="text"
         :placeholder="$t('index.emailPlaceholder')"
       />
-      <span class="text-red-600" v-if="userStore.errors?.email">{{
-        userStore.errors.email[0]
-      }}</span>
+      <template v-for="errorMessage in userStore.errors?.email">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
       <div class="pb-2 text-left text-slate-500">
         {{ $t('index.password') }}
       </div>
@@ -53,9 +55,11 @@ const login = () => {
         type="password"
         :placeholder="$t('index.passwordPlaceholder')"
       />
-      <span class="text-red-600" v-if="userStore.errors?.password">{{
-        userStore.errors.password[0]
-      }}</span>
+      <template v-for="errorMessage in userStore.errors?.password">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
       <button
         class="mt-12 w-full bg-sky-500 rounded-3xl py-4 relative group font-loaded"
         @click="login()"
