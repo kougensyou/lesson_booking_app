@@ -172,5 +172,8 @@ return [
         'email'                => 'メールアドレス',
         'birth_date'           => '生年月日',
         'password'             => 'パスワード',
+        'report_title'         => 'お問合せ件名',
+        'report_email'         => '返信先メールアドレス',
+        'report_contents'      => 'お問合せ内容',
     ],
 ];

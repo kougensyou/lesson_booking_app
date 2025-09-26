@@ -8,8 +8,15 @@ export const useReportStore = defineStore('report', {
     toastMessage: '' as string,
     toastVisible: false as boolean,
     toastTimeout: 0 as number,
+    errors: {} as any,
   }),
   actions: {
+    initializeErrors() {
+      this.errors = {};
+    },
+    setErrors(errors: any) {
+      this.errors = errors;
+    },
     setToastMessage() {
       const { t } = useI18n();
       this.toastMessage = t('report.toastMessage');
@@ -41,6 +48,9 @@ export const useReportStore = defineStore('report', {
         this.openToast(2500);
       } catch (err: any) {
         console.error('Error fetching sendReport data:', err.data);
+        if (err.statusCode === 422) {
+          this.setErrors(err.data.errors);
+        }
         throw err;
       }
     },

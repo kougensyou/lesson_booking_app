@@ -155,6 +155,9 @@ return [
         'email'                => 'Email',
         'birth_date'           => 'Birth Date',
         'password'             => 'Password',
+        'report_title'         => 'Title',
+        'report_email'         => 'Reply Email',
+        'report_contents'      => 'Contents',
     ],
 
 ];

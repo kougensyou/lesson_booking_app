@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Report\PostRequest;
 
 use App\Http\Services\ReportService;
 
@@ -15,7 +16,7 @@ class ReportController extends Controller
         $this->reportService = new ReportService();
     }
 
-    public function sendReport(Request $request) {
+    public function sendReport(PostRequest $request) {
         $userId = Auth::id();
         $title = $request->input('title');
         $email = $request->input('email');
