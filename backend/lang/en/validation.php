@@ -129,8 +129,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'lesson_name' => [
+            'required' => 'Please select a lesson.',
         ],
     ],
 
@@ -145,6 +145,16 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'lesson_category_name' => 'Category',
+        'studio_name'          => 'Studio',
+        'lesson_day'           => 'Lesson Day',
+        'lesson_time'          => 'Lesson Time',
+        'lesson_name'          => 'Lesson Name',
+        'name'                 => 'Name',
+        'email'                => 'Email',
+        'birth_date'           => 'Birth Date',
+        'password'             => 'Password',
+    ],
 
 ];

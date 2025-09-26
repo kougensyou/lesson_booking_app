@@ -38,9 +38,7 @@ class FirstBookingRequest extends FormRequest
         return [
             'lesson_category_name' => 'required|string|max:255',
             'studio_name'          => 'required|string|max:255',
-            'lesson_day'           => 'required|date',
-            'lesson_time'          => 'required|string|max:50',
-            'lesson_name'          => 'required|string|max:255',
+            'lesson_name'          => 'required',
             'name'                 => 'required|string|max:255',
             'email'                => 'required|email|max:255',
             'birth_date'           => 'required|date',
@@ -49,15 +47,11 @@ class FirstBookingRequest extends FormRequest
 
     public function attributes(): array
     {
-        return [
-            'lesson_category_name' => 'カテゴリー名',
-            'studio_name'          => 'スタジオ名',
-            'lesson_day'           => 'レッスン日',
-            'lesson_time'          => 'レッスン時間',
-            'lesson_name'          => 'レッスン名',
-            'name'                 => '氏名',
-            'email'                => 'メールアドレス',
-            'birth_date'           => '生年月日',
-        ];
+        return __('validation.attributes');
+    }
+
+    public function messages(): array
+    {
+        return __('validation.custom');
     }
 }

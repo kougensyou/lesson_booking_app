@@ -36,7 +36,7 @@ export const useUserStore = defineStore('user', {
         this.user = user.value as User;
         this.initializeLoginData();
       } catch (err: any) {
-        console.error('Login failed:', err);
+        console.error('Login failed:', err.data);
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
           return;
@@ -50,7 +50,7 @@ export const useUserStore = defineStore('user', {
         await logout();
         this.initializeUser();
       } catch (err: any) {
-        console.error('Logout failed:', err);
+        console.error('Logout failed:', err.data);
         throw err;
       }
     },
@@ -73,7 +73,7 @@ export const useUserStore = defineStore('user', {
         this.initializePasswordData();
         this.openToast(2500);
       } catch (err: any) {
-        console.error('Update password failed:', err);
+        console.error('Update password failed:', err.data);
         throw err;
       }
     },
@@ -94,7 +94,7 @@ export const useUserStore = defineStore('user', {
         console.log('updateUser fetched:', data.value);
         this.openToast(2500);
       } catch (err: any) {
-        console.error('Update user failed:', err);
+        console.error('Update user failed:', err.data);
       }
     },
     async sendPasswordResetMailApi() {
@@ -118,7 +118,7 @@ export const useUserStore = defineStore('user', {
         console.log('sendPasswordResetMail fetched:', data.value);
         this.openToast(2500);
       } catch (err: any) {
-        console.error('sendPasswordResetMail failed:', err);
+        console.error('sendPasswordResetMail failed:', err.data);
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
           return;

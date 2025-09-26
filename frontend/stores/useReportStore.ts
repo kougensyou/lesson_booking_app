@@ -40,7 +40,7 @@ export const useReportStore = defineStore('report', {
         this.initializeReport();
         this.openToast(2500);
       } catch (err: any) {
-        console.error('Error fetching sendReport data:', err);
+        console.error('Error fetching sendReport data:', err.data);
         throw err;
       }
     },

@@ -98,6 +98,10 @@ defineProps<{
     "
   />
 
+  <span class="text-red-600" v-if="errors?.lesson_name">{{
+    errors.lesson_name[0]
+  }}</span>
+
   <div
     v-if="selectedLesson.lesson_name"
     class="border rounded-md p-4 flex items-start mb-6 bg-white"

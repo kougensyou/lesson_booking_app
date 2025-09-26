@@ -111,7 +111,7 @@ export const useLessonStore = defineStore('lesson', {
         console.log(' data fetched:', data.value);
       } catch (err: any) {
         this.isNextLessonLoading = false;
-        console.error('Error fetching lesson list:', err);
+        console.error('Error fetching lesson list:', err.data);
         throw err;
       }
     },
@@ -151,7 +151,7 @@ export const useLessonStore = defineStore('lesson', {
         console.log('same studio lesson data fetched:', data.value);
       } catch (err: any) {
         this.isAddLessonLoading = false;
-        console.error('Error fetching same studio lesson data:', err);
+        console.error('Error fetching same studio lesson data:', err.data);
         throw err;
       }
     },
@@ -175,7 +175,7 @@ export const useLessonStore = defineStore('lesson', {
         this.isLessonCategoryLoading = false;
       } catch (err: any) {
         this.isLessonCategoryLoading = false;
-        console.error('Error getLessonCategoryList:', err);
+        console.error('Error getLessonCategoryList:', err.data);
         throw err;
       }
     },
@@ -198,7 +198,7 @@ export const useLessonStore = defineStore('lesson', {
         this.isTimeOptionsLoading = false;
       } catch (err: any) {
         this.isTimeOptionsLoading = false;
-        console.error('Error getTimeOptions:', err);
+        console.error('Error getTimeOptions:', err.data);
         throw err;
       }
     },
@@ -239,7 +239,7 @@ export const useLessonStore = defineStore('lesson', {
         console.log('searched lessons:', this.searchedLessonList);
       } catch (err: any) {
         this.isAddLessonLoading = false;
-        console.error('Error searching lessons:', err);
+        console.error('Error searching lessons:', err.data);
         throw err;
       }
     },
@@ -270,7 +270,7 @@ export const useLessonStore = defineStore('lesson', {
         console.log('lesson detail data fetched:', this.lessonDetail);
       } catch (err: any) {
         this.isLessonDetailLoading = false;
-        console.error('Error fetching lesson detail data:', err);
+        console.error('Error fetching lesson detail data:', err.data);
         throw err;
       }
     },
@@ -326,7 +326,7 @@ export const useLessonStore = defineStore('lesson', {
         console.log('studio lesson data fetched:', studioLessonData);
       } catch (err: any) {
         this.isStudioLessonLoading = false;
-        console.error('Error fetching studio lesson data:', err);
+        console.error('Error fetching studio lesson data:', err.data);
         throw err;
       }
     },

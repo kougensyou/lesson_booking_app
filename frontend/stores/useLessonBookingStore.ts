@@ -26,8 +26,18 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     isBookingHistoryLoading: false as boolean,
     bookingHistoryList: [] as Lesson[],
     firstBooking: {
-      selectedLesson: {} as FirstSelectedLesson,
-      user: {} as FirstUser,
+      selectedLesson: {
+        lesson_category_name: '',
+        studio_name: '',
+        lesson_day: '',
+        lesson_time: '',
+        lesson_name: '',
+      } as FirstSelectedLesson,
+      user: {
+        name: '',
+        email: '',
+        birth_date: '',
+      } as FirstUser,
     } as FirstBooking,
     errors: {} as any,
   }),
@@ -43,6 +53,22 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     },
   },
   actions: {
+    initializeFirstBooking() {
+      this.firstBooking = {
+        selectedLesson: {
+          lesson_category_name: '',
+          studio_name: '',
+          lesson_day: '',
+          lesson_time: '',
+          lesson_name: '',
+        } as FirstSelectedLesson,
+        user: {
+          name: '',
+          email: '',
+          birth_date: '',
+        } as FirstUser,
+      };
+    },
     initializeErrors() {
       this.errors = {};
     },
@@ -93,7 +119,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         console.log('home data fetched:', data.value);
       } catch (err: any) {
         this.isSelectedLessonLoading = false;
-        console.error('Error fetching lesson list:', err);
+        console.error('Error fetching lesson list:', err.data);
         throw err;
       }
     },
@@ -126,7 +152,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         this.selectedLessonList = selectedLessonList;
         console.log('selected lesson list fetched:', selectedLessonList);
       } catch (err: any) {
-        console.error('Error fetching lesson list:', err);
+        console.error('Error fetching lesson list:', err.data);
         throw err;
       }
     },
@@ -158,7 +184,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         this.selectedLessonList = selectedLessonList;
         console.log('selected lesson list fetched:', selectedLessonList);
       } catch (err: any) {
-        console.error('Error fetching lesson list:', err);
+        console.error('Error fetching lesson list:', err.data);
         throw err;
       }
     },
@@ -190,7 +216,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       } catch (err: any) {
         this.closeDialog();
         this.isBookingStatusLoading = false;
-        console.error('Error fetching bookLesson data:', err);
+        console.error('Error fetching bookLesson data:', err.data);
         throw err;
       }
     },
@@ -216,7 +242,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       } catch (err: any) {
         this.closeDialog();
         this.isBookingStatusLoading = false;
-        console.error('Error fetching cancelLesson data:', err);
+        console.error('Error fetching cancelLesson data:', err.data);
         throw err;
       }
     },
@@ -254,7 +280,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         console.log('booking history fetched:', bookingHistoryResponse);
       } catch (err: any) {
         this.isBookingHistoryLoading = false;
-        console.error('Error fetching booking history:', err);
+        console.error('Error fetching booking history:', err.data);
         throw err;
       }
     },
@@ -290,10 +316,9 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         }
         console.log('validateFirstLesson fetched:', data.value);
       } catch (err: any) {
-        console.error('Error fetching validateFirstLesson data:', err);
+        console.error('Error fetching validateFirstLesson data:', err.data);
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
-          return;
         }
         throw err;
       }
@@ -320,7 +345,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         console.log('applyFirstLesson fetched:', data.value);
       } catch (err: any) {
         this.closeDialog();
-        console.error('Error fetching applyFirstLesson data:', err);
+        console.error('Error fetching applyFirstLesson data:', err.data);
         throw err;
       }
     },

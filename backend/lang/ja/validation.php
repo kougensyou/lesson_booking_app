@@ -146,74 +146,31 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'lesson_name' => [
+            'required' => 'レッスンを選択してください',
         ],
     ],
 
     /*
       |--------------------------------------------------------------------------
       | Custom Validation Attributes
-      | カスタム検証属性
       |--------------------------------------------------------------------------
       |
       | The following language lines are used to swap attribute place-holders
       | with something more reader friendly such as E-Mail Address instead
       | of "email". This simply helps us make messages a little cleaner.
       |
-      | 次の言語行は、属性プレースホルダを「email」ではなく「E-Mail Address」などの
-      | 読みやすいものと交換するために使用されます。
-      |
     */
 
     'attributes' => [
-        'user_id' => 'ユーザーID',
-        'user_name' => '氏名',
-        'user_type' => 'ユーザ種別',
-        'master_id' => 'マスタID',
-        'master_name' => '項目名称',
-        'email' => 'メールアドレス',
-        'email_confirmation' => 'メールアドレス（確認用）',
-        'item_id' => 'アイテムID',
-        'item_code01' => '識別０１',
-        'item_code02' => '識別０２',
-        'item_code03' => '識別０３',
-        'item_code04' => '識別０４',
-        'item_code05' => '識別０５',
-        'item_value01' => '名称０１',
-        'item_value02' => '名称０２',
-        'item_value03' => '名称０３',
-        'item_value04' => '名称０４',
-        'item_value05' => '名称０５',
-        'item_number01' => '数値０１',
-        'item_number02' => '数値０２',
-        'item_number03' => '数値０３',
-        'sort_seq' => '順序',
-        'log_level' => 'ログレベル',
-        'search_from_date' => '検索日(開始)',
-        'search_to_date' => '検索日(終了)',
-        'group_id' => 'グループID',
-        'max_levels' => 'カラム内上限数',
-        'size_per_sim_gb' => 'シミュレーション実行時割り当てGB数',
-        'sim_split_digits' => 'シミュレーション実行時枝番数',
-        'job_time_max' => 'ジョブ実行終了時間',
-        'parallels' => '同時最大実行数',
-        'delimiter' => '区切り文字',
-        'random_seed' => '乱数種',
-        'input_sample_size' => 'サンプルサイズ',
-        'unit_sample_size' => '1ファイルあたりサンプルサイズ',
-        'sharing_method' => '共有方法',
-        'page' => 'ページ',
-        'calc_id' => '計算ID',
-        'tenant_id' => 'テナントID',
-        'area_kbn' => '地区区分',
-        'file_type' => 'ファイル種別',
-        'file_name' => '入力ファイル名',
-        'file_path' => 'ファイルパス',
-        'calc_status' => 'ステータス',
-        'char_code' => '文字コード',
-        'skip_rows' => '先頭スキップ行数',
-        'head_row' => 'ヘッダ行',
-        'import_target' => '取込対象',
+        'lesson_category_name' => 'カテゴリー',
+        'studio_name'          => 'スタジオ',
+        'lesson_day'           => 'レッスン日',
+        'lesson_time'          => 'レッスン時間',
+        'lesson_name'          => 'レッスン名',
+        'name'                 => '名前',
+        'email'                => 'メールアドレス',
+        'birth_date'           => '生年月日',
+        'password'             => 'パスワード',
     ],
 ];

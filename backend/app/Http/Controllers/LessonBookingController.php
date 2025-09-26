@@ -56,7 +56,7 @@ class LessonBookingController extends Controller
         ], 200);
     }
 
-    public function applyFirstLesson(Request $request) {
+    public function applyFirstLesson(FirstBookingRequest $request) {
         $firstBooking = $request->input('first_booking');
         $this->lessonBookingService->applyFirstLesson($firstBooking);
 

@@ -37,7 +37,7 @@ export const useStudioStore = defineStore('studio', {
         console.log('studio data fetched:', this.studioList);
       } catch (err: any) {
         this.isStudioLoading = false;
-        console.error('Error fetching studio data:', err);
+        console.error('Error fetching studio data:', err.data);
         throw err;
       }
     },
@@ -63,7 +63,7 @@ export const useStudioStore = defineStore('studio', {
         console.log('favorite studio data fetched:', this.favoriteStudioList);
       } catch (err: any) {
         this.isFavoriteStudioLoading = false;
-        console.error('Error fetching favorite studio data:', err);
+        console.error('Error fetching favorite studio data:', err.data);
         throw err;
       }
     },
@@ -90,7 +90,7 @@ export const useStudioStore = defineStore('studio', {
         this.saveButtonActive = false;
         this.openToast(2500);
       } catch (err: any) {
-        console.error('Error fetching saveFavoriteStudioList data:', err);
+        console.error('Error fetching saveFavoriteStudioList data:', err.data);
         throw err;
       }
     },

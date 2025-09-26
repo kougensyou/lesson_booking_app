@@ -33,7 +33,7 @@ export const useInformationStore = defineStore('information', {
         console.log('information data fetched:', informationData);
       } catch (err: any) {
         this.isInformationLoading = false;
-        console.error('Error fetching information list:', err);
+        console.error('Error fetching information list:', err.data);
         throw err;
       }
     },

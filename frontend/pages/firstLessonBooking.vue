@@ -17,6 +17,9 @@ const studioStore = useStudioStore();
 const lessonBookingStore = useLessonBookingStore();
 const userStore = useUserStore();
 
+lessonBookingStore.initializeErrors();
+lessonBookingStore.initializeFirstBooking();
+
 const changeStudioLessonData = (selectedDateObj: Date) => {
   lessonStore.setDate(selectedDateObj);
   lessonStore.setWeekData();
