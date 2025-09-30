@@ -2,13 +2,10 @@
 import { useUserStore } from '../stores/useUserStore';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
+import chevronRight from '~/assets/icons/chevron_right.svg';
 
 definePageMeta({
   layout: 'no-sidebar',
-});
-
-document.fonts.ready.then(() => {
-  document.documentElement.classList.add('font-loaded');
 });
 
 const router = useRouter();
@@ -65,12 +62,11 @@ const login = () => {
         @click="login()"
       >
         <span class="text-white">{{ $t('index.loginButton') }}</span>
-        <span
-          class="text-transparent material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible group-[.font-loaded]:text-white"
-          aria-hidden="true"
-        >
-          chevron_right
-        </span>
+        <img
+          class="absolute right-3 top-1/2 -translate-y-1/2"
+          :src="chevronRight"
+          alt="Chevron Right"
+        />
       </button>
       <div class="flex items-center justify-center mt-6">
         <a
@@ -89,11 +85,11 @@ const login = () => {
         @click="$router.push('/firstLessonBooking')"
       >
         <span class="text-white">{{ $t('index.firstLesson') }}</span>
-        <span
-          class="text-transparent material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 invisible group-[.font-loaded]:visible group-[.font-loaded]:text-white"
-          aria-hidden="true"
-          >chevron_right</span
-        >
+        <img
+          class="absolute right-3 top-1/2 -translate-y-1/2"
+          :src="chevronRight"
+          alt="Chevron Right"
+        />
       </button>
     </div>
   </div>
