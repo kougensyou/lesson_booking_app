@@ -33,8 +33,29 @@ const addSearchedLessons = () => {
     <SpinLoading />
   </div>
 
+  <div
+    v-if="
+      !lessonStore.isAddLessonLoading &&
+      lessonStore.searchedLessonList.length === 0
+    "
+    class="flex flex-col items-center justify-center h-screen space-y-4"
+  >
+    <span class="text-gray-500 text-sm">{{
+      $t('lessonBooking.noSearchedLessons')
+    }}</span>
+    <button
+      class="w-3/5 bg-sky-500 text-white rounded-3xl py-4"
+      @click="$router.push({ path: '/lessonBooking' })"
+    >
+      <span class="text-white">{{ $t('lessonBooking.back') }}</span>
+    </button>
+  </div>
+
   <LessonList
-    v-if="!lessonStore.isAddLessonLoading"
+    v-if="
+      !lessonStore.isAddLessonLoading &&
+      lessonStore.searchedLessonList.length > 0
+    "
     :lesson-list="lessonStore.searchedLessonList"
     :add-lessons="addSearchedLessons"
     :loaded-page="lessonStore.loadedPage"

@@ -30,8 +30,23 @@ lessonBookingStore.addBookingHistory().catch((error: any) => {
     <SpinLoading />
   </div>
 
+  <div
+    v-if="
+      !lessonBookingStore.isBookingHistoryLoading &&
+      lessonBookingStore.bookingHistoryList.length === 0
+    "
+    class="flex flex-col items-center justify-center h-screen"
+  >
+    <span class="text-gray-500 text-sm">{{
+      $t('bookingHistory.noBookingHistory')
+    }}</span>
+  </div>
+
   <LessonList
-    v-if="!lessonBookingStore.isBookingHistoryLoading"
+    v-if="
+      !lessonBookingStore.isBookingHistoryLoading &&
+      lessonBookingStore.bookingHistoryList.length > 0
+    "
     :lesson-list="lessonBookingStore.bookingHistoryList"
     :add-lessons="lessonBookingStore.addBookingHistory"
     :loaded-page="lessonBookingStore.loadedPage"

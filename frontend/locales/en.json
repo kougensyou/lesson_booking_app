@@ -96,7 +96,9 @@
     "studio": "Studio",
     "instructor": "Instructor",
     "lessonName": "Lesson Name",
-    "searchButton": "Search"
+    "searchButton": "Search",
+    "noSearchedLessons": "No searched lessons.",
+    "back": "Back"
   },
   "studioLesson": {
     "tabTitle": "Lesson of Studio",

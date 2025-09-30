@@ -96,7 +96,9 @@
     "studio": "スタジオ",
     "instructor": "インストラクター",
     "lessonName": "レッスン名",
-    "searchButton": "検索"
+    "searchButton": "検索",
+    "noSearchedLessons": "対象のレッスンがありません",
+    "back": "戻る"
   },
   "studioLesson": {
     "tabTitle": "スタジオ別レッスン一覧",

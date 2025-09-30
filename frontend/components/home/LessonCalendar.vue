@@ -39,14 +39,16 @@ onMounted(() => {
     >
       <template v-slot:day-content="slotProps">
         <div class="flex flex-col h-full z-10 overflow-hidden">
-          <span v-if="checkToday(slotProps.day.day)">
-            <span
-              class="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white m-auto"
-            >
-              {{ slotProps.day.day }}
-            </span>
+          <span
+            v-if="checkToday(slotProps.day.day)"
+            class="flex items-center justify-center w-6 h-6 rounded-full m-auto bg-black text-white"
+          >
+            {{ slotProps.day.day }}
           </span>
-          <span v-else class="text-center text-sm text-gray-900">
+          <span
+            v-else
+            class="flex items-center justify-center w-6 h-6 m-auto text-gray-900"
+          >
             {{ slotProps.day.day }}
           </span>
           <template v-if="slotProps.attributes.length > 0">
