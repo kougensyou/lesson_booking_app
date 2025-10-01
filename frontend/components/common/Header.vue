@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import menu from '~/assets/icons/menu.svg';
+import close from '~/assets/icons/close.svg';
+
 defineProps<{
   isSidebarIcon: boolean;
   isOpen: boolean;
@@ -15,11 +18,8 @@ defineProps<{
         {{ $t('header.title') }}
       </h1>
       <button v-if="isSidebarIcon" @click="toggleSidebar">
-        <span
-          class="material-symbols-outlined text-gray-800"
-          aria-hidden="true"
-          >{{ isOpen ? 'close' : 'menu' }}</span
-        >
+        <img v-if="!isOpen" :src="menu" alt="Menu" />
+        <img v-if="isOpen" :src="close" alt="Close" />
       </button>
     </div>
   </header>
