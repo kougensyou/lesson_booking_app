@@ -19,6 +19,7 @@ export const useUserStore = defineStore('user', {
     toastTimeout: 0 as number,
     user: {} as User,
     fileData: null as File | null,
+    formData: new FormData(),
     emailForPasswordReset: '' as string,
     errors: {} as any,
   }),
@@ -83,23 +84,35 @@ export const useUserStore = defineStore('user', {
       }
     },
     async updateUserApi() {
-      const formData = new FormData();
       if (this.fileData) {
-        formData.append('image', this.fileData);
+        this.formData.append('image', this.fileData);
       }
-      formData.append('user', JSON.stringify(this.user));
-      //console.log('updateUser user: ' + JSON.stringify(this.user));
+      this.formData.append('user', JSON.stringify(this.user));
+      console.log('updateUser user: ' + JSON.stringify(this.user));
       try {
-        const { data } = await useSanctumFetch('/api/update_user', {
+        const { data, error } = await useSanctumFetch('/api/update_user', {
           method: 'POST',
-          body: formData,
+          body: this.formData,
         });
+        if (error.value) {
+          throw createError({
+            statusCode: error.value.statusCode,
+            message: error.value.message,
+            data: error.value.data,
+          });
+        }
         this.user = data.value as User;
         //console.log('updateUser user: ' + JSON.stringify(this.user));
         console.log('updateUser fetched:', data.value);
         this.openToast(2500);
       } catch (err: any) {
         console.error('Update user failed:', err.data);
+        if (err.statusCode === 422) {
+          this.initializeErrors();
+          this.setErrors(err.data.errors);
+          return;
+        }
+        throw err;
       }
     },
     async sendPasswordResetMailApi() {

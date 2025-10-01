@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\PasswordResetMailRequest;
 use App\Http\Requests\User\PasswordChangeRequest;
+use App\Http\Requests\User\UserUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Services\UserService;
@@ -22,7 +23,7 @@ class UserController extends Controller
         return $this->userService->getUser($userId);
     }
 
-    public function updateUser(Request $request) {
+    public function updateUser(UserUpdateRequest $request) {
         $userId = Auth::id();
         $this->userService->updateUser($userId, $request);
         return $this->userService->getUser($userId);

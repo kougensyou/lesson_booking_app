@@ -11,6 +11,7 @@ definePageMeta({
 const router = useRouter();
 
 const userStore = useUserStore();
+userStore.initializeErrors();
 userStore.setToastMessageForUser();
 
 const updateUser = () => {
@@ -43,6 +44,11 @@ const updateUser = () => {
         @change="userStore.onFileChange"
       />
     </div>
+    <template v-for="errorMessage in userStore.errors?.image_url">
+      <div class="text-red-600 w-full">
+        {{ errorMessage }}
+      </div>
+    </template>
 
     <div>
       <label class="block text-sm font-medium">{{
@@ -53,6 +59,11 @@ const updateUser = () => {
         type="text"
         class="mt-1 w-full rounded border p-2"
       />
+      <template v-for="errorMessage in userStore.errors?.name">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <div>
@@ -64,6 +75,11 @@ const updateUser = () => {
         type="text"
         class="mt-1 w-full rounded border p-2"
       />
+      <template v-for="errorMessage in userStore.errors?.birth_date">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <div>
@@ -75,6 +91,11 @@ const updateUser = () => {
         type="text"
         class="mt-1 w-full rounded border p-2"
       />
+      <template v-for="errorMessage in userStore.errors?.zip_code">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <div>
@@ -86,6 +107,11 @@ const updateUser = () => {
         type="text"
         class="mt-1 w-full rounded border p-2"
       />
+      <template v-for="errorMessage in userStore.errors?.address">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <div>
@@ -97,6 +123,11 @@ const updateUser = () => {
         type="text"
         class="mt-1 w-full rounded border p-2"
       />
+      <template v-for="errorMessage in userStore.errors?.tel_no">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <div>
@@ -108,6 +139,11 @@ const updateUser = () => {
         type="text"
         class="mt-1 w-full rounded border p-2"
       />
+      <template v-for="errorMessage in userStore.errors?.email">
+        <div class="text-red-600 w-full">
+          {{ errorMessage }}
+        </div>
+      </template>
     </div>
 
     <button

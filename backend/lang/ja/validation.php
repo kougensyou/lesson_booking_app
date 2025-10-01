@@ -155,6 +155,9 @@ return [
         'currentPassword' => [
             'invalid' => '現在のパスワードが正しくありません。',
         ],
+        'image_url' => [
+            'required' => '画像を選択してください',
+        ],
     ],
 
     /*
@@ -177,6 +180,9 @@ return [
         'name'                 => '名前',
         'email'                => 'メールアドレス',
         'birth_date'           => '生年月日',
+        'tel_no'               => '電話番号',
+        'zip_code'             => '郵便番号',
+        'address'              => '住所',
         'password'             => 'パスワード',
         'report_title'         => 'お問合せ件名',
         'report_email'         => '返信先メールアドレス',

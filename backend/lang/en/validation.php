@@ -138,6 +138,9 @@ return [
         'currentPassword' => [
             'invalid' => 'The current password is incorrect.',
         ],
+        'image_url' => [
+            'required' => 'Please select an image.',
+        ],
     ],
 
     /*
@@ -160,6 +163,9 @@ return [
         'name'                 => 'Name',
         'email'                => 'Email',
         'birth_date'           => 'Birth Date',
+        'tel_no'               => 'Tel No.',
+        'zip_code'             => 'Zip Code',
+        'address'              => 'Address',
         'password'             => 'Password',
         'report_title'         => 'Title',
         'report_email'         => 'Reply Email',
