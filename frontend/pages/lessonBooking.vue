@@ -9,7 +9,7 @@ import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useRouter } from 'vue-router';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import SpinLoading from '~/components/common/SpinLoading.vue';
-import CardLoading from '~/components/common/CardLoading.vue';
+import RectLoading from '~/components/common/RectLoading.vue';
 
 definePageMeta({
   layout: 'bg-gradation',
@@ -75,7 +75,7 @@ lessonStore.getTimeOptions().catch((error: any) => {
     "
     class="px-4"
   >
-    <CardLoading :card-height="'h-96'" :card-width="'w-full'" />
+    <RectLoading :card-height="'h-96'" :card-width="'w-full'" />
   </div>
 
   <template

@@ -8,7 +8,7 @@ import NextLesson from '~/components/home/NextLesson.vue';
 import LessonCalendar from '~/components/home/LessonCalendar.vue';
 import Information from '~/components/home/Information.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
-import CardLoading from '~/components/common/CardLoading.vue';
+import RectLoading from '~/components/common/RectLoading.vue';
 
 definePageMeta({
   layout: 'bg-gradation',
@@ -52,7 +52,7 @@ informationStore.getInformationList().catch((error: any) => {
   />
 
   <div v-if="lessonBookingStore.isSelectedLessonLoading" class="px-4">
-    <CardLoading cardHeight="h-60" cardWidth="w-full" />
+    <RectLoading cardHeight="h-60" cardWidth="w-full" />
   </div>
   <LessonCalendar
     v-if="!lessonBookingStore.isSelectedLessonLoading"
