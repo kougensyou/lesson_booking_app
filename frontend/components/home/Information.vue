@@ -16,9 +16,9 @@ const carouselConfig = {
 </script>
 <template>
   <h1 class="text-xl font-bold px-4 pt-4">{{ $t('home.informationTitle') }}</h1>
-  <Carousel v-bind="carouselConfig">
+  <Carousel v-bind="carouselConfig" class="m-4">
     <Slide v-for="slider in sliderInfoList" :key="slider.id">
-      <div v-if="slider.image_url" class="w-full h-full rounded-3xl pr-4 pl-4">
+      <div v-if="slider.image_url" class="w-full h-full rounded-3xl">
         <a :href="slider.link_url" target="_blank" rel="noopener">
           <img
             :src="slider.image_url"

@@ -51,8 +51,8 @@ informationStore.getInformationList().catch((error: any) => {
     :next-lesson-list="lessonStore.nextLessonList"
   />
 
-  <div v-if="lessonBookingStore.isSelectedLessonLoading" class="px-4">
-    <RectLoading cardHeight="h-60" cardWidth="w-full" />
+  <div v-if="lessonBookingStore.isSelectedLessonLoading">
+    <RectLoading cardHeight="h-96" cardWidth="w-full" />
   </div>
   <LessonCalendar
     v-if="!lessonBookingStore.isSelectedLessonLoading"

@@ -27,7 +27,7 @@ onMounted(() => {
   <h1 class="text-xl font-bold px-4 pt-4">
     {{ $t('home.lessonCalendarTitle') }}
   </h1>
-  <div class="custom-calendar px-4 py-2">
+  <div class="custom-calendar m-4">
     <Calendar
       class="max-w-full"
       :masks="{ title: 'YYYY/MM' }"
@@ -109,12 +109,4 @@ onMounted(() => {
 .custom-calendar .vc-title {
   color: #71747a;
 }
-
-/* .custom-calendar .vc-nav-arrow {
-  color: rgb(125 211 252 / 1);
-}
-
-.custom-calendar .vc-nav-title {
-  color: #71747a;
-} */
 </style>

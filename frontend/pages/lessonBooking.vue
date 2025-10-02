@@ -73,7 +73,6 @@ lessonStore.getTimeOptions().catch((error: any) => {
       lessonStore.isLessonCategoryLoading ||
       lessonStore.isTimeOptionsLoading
     "
-    class="px-4"
   >
     <RectLoading :card-height="'h-96'" :card-width="'w-full'" />
   </div>

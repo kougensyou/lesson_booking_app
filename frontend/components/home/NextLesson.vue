@@ -30,7 +30,7 @@ const carouselConfig = {
     </div>
   </template>
   <template v-if="nextLessonList.length > 0">
-    <div class="ml-4 mr-4">
+    <div class="m-4">
       <Carousel v-bind="carouselConfig">
         <Slide
           v-for="lesson in nextLessonList"

@@ -10,6 +10,7 @@ const carouselConfig = {
   wrapAround: false,
   gap: 20,
   height: 200,
+  snapAlign: 'start',
 };
 </script>
 <template>
@@ -27,7 +28,7 @@ const carouselConfig = {
     </button>
   </div>
   <template v-if="favoriteStudioList.length > 0">
-    <div class="ml-4 mr-4">
+    <div class="m-4">
       <Carousel v-bind="carouselConfig">
         <Slide
           v-for="(favoriteStudio, index) in favoriteStudioList"
