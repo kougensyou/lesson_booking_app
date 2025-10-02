@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     'nuxt-auth-sanctum',
+    'vue3-carousel-nuxt',
   ],
   css: ['v-calendar/dist/style.css'],
   sanctum: {
