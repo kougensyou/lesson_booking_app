@@ -68,6 +68,7 @@ export const useStudioStore = defineStore('studio', {
       }
     },
     async saveFavoriteStudioList() {
+      this.isFavoriteStudioLoading = true;
       try {
         const { data, error } = await useSanctumFetch(
           '/api/save_favorite_studio_list',
@@ -88,9 +89,11 @@ export const useStudioStore = defineStore('studio', {
         }
         console.log('saveFavoriteStudioList fetched:', data.value);
         this.saveButtonActive = false;
+        this.isFavoriteStudioLoading = false;
         this.openToast(2500);
       } catch (err: any) {
         console.error('Error fetching saveFavoriteStudioList data:', err.data);
+        this.isFavoriteStudioLoading = true;
         throw err;
       }
     },

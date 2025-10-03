@@ -4,6 +4,7 @@ import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 definePageMeta({
   middleware: 'auth',
@@ -23,6 +24,12 @@ onMounted(() => {
 });
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('favoriteStudio.tabTitle') }}</title>
+    </Head>
+  </div>
+
   <div class="p-4">
     <h1 class="text-lg font-bold text-center mb-4">
       {{ $t('favoriteStudio.pageTitle') }}
@@ -66,7 +73,15 @@ onMounted(() => {
       @click="studioStore.saveFavoriteStudioList()"
       :disabled="!studioStore.saveButtonActive"
     >
-      {{ $t('favoriteStudio.save') }}
+      <span v-if="!studioStore.isFavoriteStudioLoading">{{
+        $t('favoriteStudio.save')
+      }}</span>
+      <span
+        v-if="studioStore.isFavoriteStudioLoading"
+        class="flex items-center justify-center"
+      >
+        <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+      </span>
     </button>
     <Toast
       :show="studioStore.toastVisible"

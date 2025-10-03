@@ -156,6 +156,7 @@
     "toastMessage": "MYスタジオを保存しました!"
   },
   "report": {
+    "tabTitle": "お問合せ",
     "report": "お問合せ",
     "reportTitle": "お問合せ件名",
     "replyEmail": "返信先メールアドレス",
@@ -164,6 +165,7 @@
     "toastMessage": "お問合せを送信しました!"
   },
   "passwordChange": {
+    "tabTitle": "パスワード変更",
     "passwordChange": "パスワード変更",
     "currentPassword": "現在のパスワード",
     "newPassword": "新しいパスワード",

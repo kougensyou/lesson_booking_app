@@ -25,6 +25,12 @@ const applyFirstLesson = () => {
 };
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('firstLessonBookingConfirm.tabTitle') }}</title>
+    </Head>
+  </div>
+
   <div class="px-4 py-3 space-y-6">
     <div class="border rounded p-4 flex items-start mb-6 bg-white">
       <div class="text-center w-24 flex-shrink-0">

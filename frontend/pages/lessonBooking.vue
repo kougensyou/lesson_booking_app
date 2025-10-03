@@ -8,7 +8,6 @@ import { useLessonStore } from '../stores/useLessonStore';
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useRouter } from 'vue-router';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
-import SpinLoading from '~/components/common/SpinLoading.vue';
 import RectLoading from '~/components/common/RectLoading.vue';
 
 definePageMeta({
@@ -56,16 +55,15 @@ lessonStore.getTimeOptions().catch((error: any) => {
       <title>{{ $t('lessonBooking.tabTitle') }}</title>
     </Head>
   </div>
-  <div
-    v-if="studioStore.isFavoriteStudioLoading"
-    class="flex items-center justify-center pt-12 pb-12"
-  >
-    <SpinLoading />
-  </div>
+
   <StudioSearch
-    v-if="!studioStore.isFavoriteStudioLoading"
+    :is-favorite-studio-loading="studioStore.isFavoriteStudioLoading"
     :favorite-studio-list="studioStore.favoriteStudioList"
   />
+
+  <h1 class="text-xl font-bold px-4 pt-4">
+    {{ $t('lessonBooking.customizedSearch') }}
+  </h1>
 
   <div
     v-if="
@@ -74,7 +72,9 @@ lessonStore.getTimeOptions().catch((error: any) => {
       lessonStore.isTimeOptionsLoading
     "
   >
-    <RectLoading :card-height="'h-96'" :card-width="'w-full'" />
+    <RectLoading :card-height="'360px'" :card-width="'w-full'" />
+    <span class="space-y-4"></span>
+    <RectLoading :card-height="'400px'" :card-width="'w-full'" />
   </div>
 
   <template
@@ -84,10 +84,6 @@ lessonStore.getTimeOptions().catch((error: any) => {
       !lessonStore.isTimeOptionsLoading
     "
   >
-    <h1 class="text-xl font-bold px-4 pt-4">
-      {{ $t('lessonBooking.customizedSearch') }}
-    </h1>
-
     <CalendarSearch
       :calendar-theme-color="lessonStore.calendarThemeColor"
       :calendar-locale="lessonBookingStore.calendarLocale"
@@ -105,7 +101,10 @@ lessonStore.getTimeOptions().catch((error: any) => {
       :start-time-options="lessonStore.startTimeOptions"
       :end-time-options="lessonStore.endTimeOptions"
     />
-
-    <SearchButton :add-searched-lessons="addSearchedLessons" />
   </template>
+
+  <SearchButton
+    :is-add-lesson-loading="lessonStore.isAddLessonLoading"
+    :add-searched-lessons="addSearchedLessons"
+  />
 </template>

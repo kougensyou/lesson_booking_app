@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { Lesson } from '~/types/lesson';
+import SpinLoading from '../common/SpinLoading.vue';
 
 defineProps<{
+  isNextLessonLoading: boolean;
   nextLessonList: Array<Lesson>;
 }>();
 
@@ -10,11 +12,20 @@ const carouselConfig = {
   wrapAround: false,
   gap: 20,
   height: 200,
+  snapAlign: 'start',
 };
 </script>
 <template>
   <h1 class="text-xl font-bold px-4 pt-4">{{ $t('home.nextLessonTitle') }}</h1>
-  <template v-if="nextLessonList.length === 0">
+
+  <div
+    v-if="isNextLessonLoading"
+    class="flex items-center justify-center pt-12 pb-12"
+  >
+    <SpinLoading />
+  </div>
+
+  <template v-if="!isNextLessonLoading && nextLessonList.length === 0">
     <div class="px-4 py-2">
       <div class="flex flex-col items-center justify-center space-y-4 p-4">
         <span class="text-gray-500 text-sm">{{
@@ -29,7 +40,8 @@ const carouselConfig = {
       </div>
     </div>
   </template>
-  <template v-if="nextLessonList.length > 0">
+
+  <template v-if="!isNextLessonLoading && nextLessonList.length > 0">
     <div class="m-4">
       <Carousel v-bind="carouselConfig">
         <Slide

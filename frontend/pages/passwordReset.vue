@@ -3,6 +3,7 @@ import { useUserStore } from '../stores/useUserStore';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 definePageMeta({
   layout: 'no-sidebar',
@@ -22,6 +23,12 @@ const sendPasswordResetMail = () => {
 };
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('passwordReset.tabTitle') }}</title>
+    </Head>
+  </div>
+
   <div class="pt-4 pb-4">
     <div class="max-w-[640px] mx-auto p-4 bg-white">
       <div class="text-center mb-6">
@@ -46,9 +53,17 @@ const sendPasswordResetMail = () => {
         class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"
         @click="sendPasswordResetMail()"
       >
-        <span class="text-white">{{ $t('passwordReset.sendButton') }}</span>
+        <span v-if="!userStore.isUserLoading" class="text-white">{{
+          $t('passwordReset.sendButton')
+        }}</span>
         <span
-          class="text-white material-symbols-outlined absolute right-3"
+          v-if="userStore.isUserLoading"
+          class="flex items-center justify-center"
+        >
+          <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+        </span>
+        <span
+          class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
           aria-hidden="true"
         >
           chevron_right

@@ -3,6 +3,7 @@ import { useReportStore } from '../stores/useReportStore';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 definePageMeta({
   middleware: 'auth',
@@ -22,6 +23,12 @@ const sendReport = () => {
 };
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('report.tabTitle') }}</title>
+    </Head>
+  </div>
+
   <div class="max-w-[640px] mx-auto p-6">
     <h1 class="text-xl font-bold text-center mb-2">
       {{ $t('report.report') }}
@@ -77,7 +84,15 @@ const sendReport = () => {
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"
       @click="sendReport()"
     >
-      <span class="text-white">{{ $t('report.send') }}</span>
+      <span v-if="!reportStore.isReportLoading" class="text-white">{{
+        $t('report.send')
+      }}</span>
+      <span
+        v-if="reportStore.isReportLoading"
+        class="flex items-center justify-center"
+      >
+        <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+      </span>
       <span
         class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
         aria-hidden="true"

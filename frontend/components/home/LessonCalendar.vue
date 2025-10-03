@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { Attribute, LessonBooking } from '~/types/lessonBooking';
 import { Calendar } from 'v-calendar';
+import RectLoading from '../common/RectLoading.vue';
 
 const props = defineProps<{
+  isSelectedLessonLoading: boolean;
   calendarLocale: string;
   selectedLessonList: Array<LessonBooking>;
   attributes: Array<Attribute>;
@@ -27,7 +29,12 @@ onMounted(() => {
   <h1 class="text-xl font-bold px-4 pt-4">
     {{ $t('home.lessonCalendarTitle') }}
   </h1>
-  <div class="custom-calendar m-4">
+
+  <div v-if="isSelectedLessonLoading">
+    <RectLoading :card-height="'400px'" :card-width="'w-full'" />
+  </div>
+
+  <div v-if="!isSelectedLessonLoading" class="custom-calendar m-4">
     <Calendar
       class="max-w-full"
       :masks="{ title: 'YYYY/MM' }"

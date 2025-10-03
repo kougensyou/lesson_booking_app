@@ -3,6 +3,7 @@ import { useUserStore } from '../stores/useUserStore';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 definePageMeta({
   middleware: 'auth',
@@ -21,6 +22,12 @@ const updatePassword = () => {
 };
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('passwordChange.tabTitle') }}</title>
+    </Head>
+  </div>
+
   <div class="max-w-[640px] mx-auto p-6">
     <h1 class="text-xl font-bold text-center mb-2">
       {{ $t('passwordChange.passwordChange') }}
@@ -78,9 +85,17 @@ const updatePassword = () => {
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
       @click="updatePassword()"
     >
-      <span class="text-white">{{ $t('passwordChange.updatePassword') }}</span>
+      <span v-if="!userStore.isUserLoading" class="text-white">{{
+        $t('passwordChange.updatePassword')
+      }}</span>
       <span
-        class="text-white material-symbols-outlined absolute right-3"
+        v-if="userStore.isUserLoading"
+        class="flex items-center justify-center"
+      >
+        <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+      </span>
+      <span
+        class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
         aria-hidden="true"
       >
         chevron_right

@@ -156,6 +156,7 @@
     "toastMessage": "MY Studio has been saved!"
   },
   "report": {
+    "tabTitle": "Report",
     "report": "Contact Us",
     "reportTitle": "Subject",
     "replyEmail": "Reply Email Address",
@@ -164,6 +165,7 @@
     "toastMessage": "Your inquiry has been sent!"
   },
   "passwordChange": {
+    "tabTitle": "Password Change",
     "passwordChange": "Password Change",
     "currentPassword": "Current Password",
     "newPassword": "New Password",

@@ -3,6 +3,7 @@ import { useUserStore } from '~/stores/useUserStore';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 definePageMeta({
   middleware: 'auth',
@@ -22,6 +23,12 @@ const updateUser = () => {
 </script>
 
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('userUpdate.tabTitle') }}</title>
+    </Head>
+  </div>
+
   <div class="px-4 py-3 space-y-6">
     <div class="flex items-center space-x-4">
       <img
@@ -150,9 +157,17 @@ const updateUser = () => {
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
       @click="updateUser()"
     >
-      <span class="text-white">{{ $t('userUpdate.update') }}</span>
+      <span v-if="!userStore.isUserLoading" class="text-white">{{
+        $t('userUpdate.update')
+      }}</span>
       <span
-        class="text-white material-symbols-outlined absolute right-3"
+        v-if="userStore.isUserLoading"
+        class="flex items-center justify-center"
+      >
+        <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+      </span>
+      <span
+        class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
         aria-hidden="true"
       >
         chevron_right

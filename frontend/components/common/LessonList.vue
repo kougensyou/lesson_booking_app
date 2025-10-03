@@ -34,11 +34,11 @@ const handleScroll = () => {
 };
 </script>
 <template>
-  <div ref="scrollComponent" class="scrolling-component space-y-4 bg-gray-100">
+  <div ref="scrollComponent" class="scrolling-component bg-gray-100">
     <div
       v-for="(lesson, index) in lessonList"
       :key="index"
-      class="bg-white border-b p-4"
+      class="bg-white border-b p-4 mt-2 mb-2"
       @click="
         $router.push({
           path: '/lessonDetail',

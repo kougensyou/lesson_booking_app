@@ -8,6 +8,11 @@ definePageMeta({
 const lessonBookingStore = useLessonBookingStore();
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('firstLessonBookingDone.tabTitle') }}</title>
+    </Head>
+  </div>
   <div class="p-4">
     <h2 class="text-l text-center mb-4 whitespace-pre-line">
       {{ $t('firstLessonBookingDone.doneMessage') }}

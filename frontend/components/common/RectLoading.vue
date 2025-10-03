@@ -10,9 +10,11 @@ defineProps<{
       role="status"
       :class="[
         `flex items-center justify-center bg-gray-300 rounded-3xl animate-pulse dark:bg-gray-700`,
-        cardHeight,
         cardWidth,
       ]"
+      :style="{
+        height: cardHeight,
+      }"
     >
       <svg
         class="w-10 h-10 text-gray-200 dark:text-gray-600"

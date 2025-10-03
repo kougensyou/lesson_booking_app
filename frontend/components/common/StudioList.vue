@@ -7,7 +7,14 @@ defineProps<{
 }>();
 </script>
 <template>
-  <div v-for="(studio, i) in studioList" :key="i" class="p-4">
+  <div
+    v-for="(studio, i) in studioList"
+    :key="i"
+    :class="[
+      'pr-4 pl-4',
+      i === 0 || i === studioList.length - 1 ? 'pt-4 pb-4' : 'pt-2 pb-2',
+    ]"
+  >
     <div
       @click="clickStudioCard(studio)"
       class="min-w-[300px] h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between"

@@ -8,6 +8,7 @@ export const useReportStore = defineStore('report', {
     toastMessage: '' as string,
     toastVisible: false as boolean,
     toastTimeout: 0 as number,
+    isReportLoading: false as boolean,
     errors: {} as any,
   }),
   actions: {
@@ -27,6 +28,7 @@ export const useReportStore = defineStore('report', {
       this.contents = '';
     },
     async sendReportApi() {
+      this.isReportLoading = true;
       try {
         const { data, error } = await useSanctumFetch('/api/send_report', {
           method: 'POST',
@@ -45,9 +47,12 @@ export const useReportStore = defineStore('report', {
         }
         console.log('sendReport fetched:', data.value);
         this.initializeReport();
+        this.initializeErrors();
+        this.isReportLoading = false;
         this.openToast(2500);
       } catch (err: any) {
         console.error('Error fetching sendReport data:', err.data);
+        this.isReportLoading = false;
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
         }

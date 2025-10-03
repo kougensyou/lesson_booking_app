@@ -8,6 +8,12 @@ definePageMeta({
 const lessonStore = useLessonStore();
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('cancelDone.tabTitle') }}</title>
+    </Head>
+  </div>
+
   <div class="p-4 max-w-md mx-auto">
     <h2 class="text-lg font-semibold text-center mb-4">
       {{ $t('cancelDone.cancelMessage') }}

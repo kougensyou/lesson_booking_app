@@ -52,10 +52,7 @@ const addSearchedLessons = () => {
   </div>
 
   <LessonList
-    v-if="
-      !lessonStore.isAddLessonLoading &&
-      lessonStore.searchedLessonList.length > 0
-    "
+    v-if="lessonStore.searchedLessonList.length > 0"
     :lesson-list="lessonStore.searchedLessonList"
     :add-lessons="addSearchedLessons"
     :loaded-page="lessonStore.loadedPage"

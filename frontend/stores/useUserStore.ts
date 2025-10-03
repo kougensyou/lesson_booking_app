@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
+    isUserLoading: false as boolean,
     loginData: {
       email: '',
       password: '',
@@ -31,13 +32,16 @@ export const useUserStore = defineStore('user', {
       this.errors = errors;
     },
     async loginApi() {
+      this.isUserLoading = true;
       try {
         const { user, login } = useSanctumAuth();
         await login(this.loginData);
         this.user = user.value as User;
+        this.isUserLoading = false;
         this.initializeLoginData();
       } catch (err: any) {
         console.error('Login failed:', err.data);
+        this.isUserLoading = false;
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
           return;
@@ -46,16 +50,20 @@ export const useUserStore = defineStore('user', {
       }
     },
     async logout() {
+      this.isUserLoading = true;
       try {
         const { logout } = useSanctumAuth();
         await logout();
+        this.isUserLoading = false;
         this.initializeUser();
       } catch (err: any) {
         console.error('Logout failed:', err.data);
+        this.isUserLoading = false;
         throw err;
       }
     },
     async updatePasswordApi() {
+      this.isUserLoading = true;
       try {
         const { data, error } = await useSanctumFetch('/api/update_password', {
           method: 'POST',
@@ -73,9 +81,11 @@ export const useUserStore = defineStore('user', {
         console.log('updatePassword fetched:', data.value);
         this.initializeErrors();
         this.initializePasswordData();
+        this.isUserLoading = false;
         this.openToast(2500);
       } catch (err: any) {
         console.error('Update password failed:', err.data);
+        this.isUserLoading = false;
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
           return;
@@ -84,6 +94,7 @@ export const useUserStore = defineStore('user', {
       }
     },
     async updateUserApi() {
+      this.isUserLoading = true;
       if (this.fileData) {
         this.formData.append('image', this.fileData);
       }
@@ -104,9 +115,11 @@ export const useUserStore = defineStore('user', {
         this.user = data.value as User;
         //console.log('updateUser user: ' + JSON.stringify(this.user));
         console.log('updateUser fetched:', data.value);
+        this.isUserLoading = false;
         this.openToast(2500);
       } catch (err: any) {
         console.error('Update user failed:', err.data);
+        this.isUserLoading = false;
         if (err.statusCode === 422) {
           this.initializeErrors();
           this.setErrors(err.data.errors);
@@ -116,6 +129,7 @@ export const useUserStore = defineStore('user', {
       }
     },
     async sendPasswordResetMailApi() {
+      this.isUserLoading = true;
       try {
         const { data, error } = await useSanctumFetch(
           '/api/send_password_reset_mail',
@@ -134,9 +148,12 @@ export const useUserStore = defineStore('user', {
           });
         }
         console.log('sendPasswordResetMail fetched:', data.value);
+        this.initializeErrors();
+        this.isUserLoading = false;
         this.openToast(2500);
       } catch (err: any) {
         console.error('sendPasswordResetMail failed:', err.data);
+        this.isUserLoading = false;
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
           return;

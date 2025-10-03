@@ -50,6 +50,12 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
 });
 </script>
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('firstLessonBooking.tabTitle') }}</title>
+    </Head>
+  </div>
+
   <div class="px-4 py-3 space-y-6">
     <FirstSelectedLesson
       :selected-lesson="lessonBookingStore.firstBooking.selectedLesson"

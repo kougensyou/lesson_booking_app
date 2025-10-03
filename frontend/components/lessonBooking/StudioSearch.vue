@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { Studio } from '~/types/studio';
+import SpinLoading from '../common/SpinLoading.vue';
 
 defineProps<{
+  isFavoriteStudioLoading: boolean;
   favoriteStudioList: Array<Studio>;
 }>();
 
@@ -27,7 +29,15 @@ const carouselConfig = {
       >
     </button>
   </div>
-  <template v-if="favoriteStudioList.length > 0">
+
+  <div
+    v-if="isFavoriteStudioLoading"
+    class="flex items-center justify-center pt-12 pb-12"
+  >
+    <SpinLoading />
+  </div>
+
+  <template v-if="!isFavoriteStudioLoading && favoriteStudioList.length > 0">
     <div class="m-4">
       <Carousel v-bind="carouselConfig">
         <Slide
@@ -57,7 +67,7 @@ const carouselConfig = {
       </Carousel>
     </div>
   </template>
-  <template v-if="favoriteStudioList.length === 0">
+  <template v-if="!isFavoriteStudioLoading && favoriteStudioList.length === 0">
     <div class="ml-4 mr-4">
       <NuxtLink
         :to="{ path: '/studioForSearch' }"

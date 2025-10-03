@@ -2,6 +2,7 @@
 import { useSettingStore } from '~/stores/useSettingStore';
 import { useUserStore } from '~/stores/useUserStore';
 import { useRouter } from 'vue-router';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 definePageMeta({
   middleware: 'auth',
@@ -22,6 +23,19 @@ const clickSettingArea = (path: string) => {
 </script>
 
 <template>
+  <div class="">
+    <Head>
+      <title>{{ $t('memberInfo.tabTitle') }}</title>
+    </Head>
+  </div>
+
+  <div
+    v-if="userStore.isUserLoading"
+    class="fixed inset-0 flex items-center justify-center"
+  >
+    <SpinLoading />
+  </div>
+
   <div class="px-4 py-3 space-y-6">
     <div class="flex items-center space-x-4">
       <img

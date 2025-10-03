@@ -3,6 +3,7 @@ import { useUserStore } from '../stores/useUserStore';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
 import chevronRight from '~/assets/icons/chevron_right.svg';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 definePageMeta({
   layout: 'no-sidebar',
@@ -61,7 +62,15 @@ const login = () => {
         class="mt-12 w-full bg-sky-500 rounded-3xl py-4 relative group font-loaded"
         @click="login()"
       >
-        <span class="text-white">{{ $t('index.loginButton') }}</span>
+        <span v-if="!userStore.isUserLoading" class="text-white">{{
+          $t('index.loginButton')
+        }}</span>
+        <span
+          v-if="userStore.isUserLoading"
+          class="flex items-center justify-center"
+        >
+          <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+        </span>
         <img
           class="absolute right-3 top-1/2 -translate-y-1/2"
           :src="chevronRight"

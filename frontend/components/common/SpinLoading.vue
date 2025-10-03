@@ -1,11 +1,34 @@
+<script setup>
+defineProps({
+  width: {
+    type: String,
+    default: '36px',
+  },
+  height: {
+    type: String,
+    default: '36px',
+  },
+  color: {
+    type: String,
+    default: '#5d5656f1',
+  },
+});
+</script>
 <template>
-  <span class="spinLoading"></span>
+  <span
+    class="spinLoading"
+    :style="{
+      '--loader-color': color,
+      '--loader-width': width,
+      '--loader-height': height,
+    }"
+  ></span>
 </template>
 <style>
 .spinLoading {
-  width: 36px;
-  height: 36px;
-  border: 4px solid #5d5656f1;
+  width: var(--loader-width);
+  height: var(--loader-height);
+  border: 4px solid var(--loader-color);
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
