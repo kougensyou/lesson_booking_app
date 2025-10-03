@@ -43,26 +43,25 @@ const carouselConfig = {
         <Slide
           v-for="(favoriteStudio, index) in favoriteStudioList"
           :key="favoriteStudio.id"
-        >
-          <NuxtLink
-            :to="{
+          class="min-w-[250px] h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between items-start"
+          @click="
+            $router.push({
               path: '/studioLesson',
               query: { studio_id: favoriteStudio.studio_id },
-            }"
-            class="min-w-[300px] h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between"
-          >
-            <img
-              :src="favoriteStudio.image_url"
-              alt=""
-              class="w-full h-40 object-cover rounded-t-3xl"
-            />
-            <div class="p-2">
-              <h3 class="text-base font-semibold">
-                {{ favoriteStudio.studio_name }}
-                <span class="text-red-500">❤</span>
-              </h3>
-            </div>
-          </NuxtLink>
+            })
+          "
+        >
+          <img
+            :src="favoriteStudio.image_url"
+            alt=""
+            class="w-full h-40 object-cover rounded-t-3xl"
+          />
+          <div class="pl-4 pb-2">
+            <h3 class="text-base font-semibold">
+              {{ favoriteStudio.studio_name }}
+              <span class="text-red-500">❤</span>
+            </h3>
+          </div>
         </Slide>
       </Carousel>
     </div>

@@ -79,7 +79,7 @@ const updateUser = () => {
       }}</label>
       <input
         v-model="userStore.user.birth_date"
-        type="text"
+        type="date"
         class="mt-1 w-full rounded border p-2"
       />
       <template v-for="errorMessage in userStore.errors?.birth_date">

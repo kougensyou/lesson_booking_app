@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Attribute, LessonBooking } from '~/types/lessonBooking';
 import { Calendar } from 'v-calendar';
+import { watch, nextTick } from 'vue';
 import RectLoading from '../common/RectLoading.vue';
 
 const props = defineProps<{
@@ -14,16 +15,22 @@ const props = defineProps<{
   getNextLessonList: Function;
 }>();
 
-onMounted(() => {
-  const prev = document.querySelector('.vc-prev');
-  const next = document.querySelector('.vc-next');
-  prev?.addEventListener('click', async () => {
-    await props.getPrevLessonList();
-  });
-  next?.addEventListener('click', async () => {
-    await props.getNextLessonList();
-  });
-});
+watch(
+  () => props.isSelectedLessonLoading,
+  async (loading) => {
+    if (!loading) {
+      await nextTick();
+      const prev = document.querySelector('.vc-prev');
+      const next = document.querySelector('.vc-next');
+      prev?.addEventListener('click', async () => {
+        await props.getPrevLessonList();
+      });
+      next?.addEventListener('click', async () => {
+        await props.getNextLessonList();
+      });
+    }
+  }
+);
 </script>
 <template>
   <h1 class="text-xl font-bold px-4 pt-4">

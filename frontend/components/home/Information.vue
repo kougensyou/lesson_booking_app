@@ -29,7 +29,10 @@ const carouselConfig = {
   <template v-if="!isInformationLoading">
     <Carousel v-bind="carouselConfig" class="m-4">
       <Slide v-for="slider in sliderInfoList" :key="slider.id">
-        <div v-if="slider.image_url" class="w-full h-full rounded-3xl">
+        <div
+          v-if="slider.image_url && slider.image_path"
+          class="w-full h-full rounded-3xl"
+        >
           <a :href="slider.link_url" target="_blank" rel="noopener">
             <img
               :src="slider.image_url"
