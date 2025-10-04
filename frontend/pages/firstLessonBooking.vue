@@ -5,6 +5,7 @@ import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useUserStore } from '~/stores/useUserStore';
 import FirstSelectedLesson from '~/components/firstLessonBooking/FirstSelectedLesson.vue';
 import FirstUser from '~/components/firstLessonBooking/FirstUser.vue';
+import SpinLoading from '~/components/common/SpinLoading.vue';
 
 definePageMeta({
   layout: 'no-sidebar',
@@ -56,8 +57,17 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
     </Head>
   </div>
 
+  <div
+    v-if="
+      lessonBookingStore.isFirstBookingLoading ||
+      lessonStore.isStudioLessonLoading
+    "
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <div class="px-4 py-3 space-y-6">
     <FirstSelectedLesson
+      :is-studio-lesson-loading="lessonStore.isStudioLessonLoading"
       :selected-lesson="lessonBookingStore.firstBooking.selectedLesson"
       :studio-list="studioStore.studioList"
       :studio-lesson-list="lessonStore.studioLessonList"
@@ -82,9 +92,19 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
       @click="validateFirstLesson()"
     >
-      <span class="text-white">{{ $t('firstLessonBooking.next') }}</span>
       <span
-        class="text-white material-symbols-outlined absolute right-3"
+        v-if="!lessonBookingStore.isFirstBookingLoading"
+        class="text-white"
+        >{{ $t('firstLessonBooking.next') }}</span
+      >
+      <span
+        v-if="lessonBookingStore.isFirstBookingLoading"
+        class="flex items-center justify-center"
+      >
+        <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+      </span>
+      <span
+        class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
         aria-hidden="true"
       >
         chevron_right

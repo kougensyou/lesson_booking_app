@@ -25,6 +25,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     lastPage: 0 as number,
     isBookingHistoryLoading: false as boolean,
     bookingHistoryList: [] as Lesson[],
+    isFirstBookingLoading: false as boolean,
     firstBooking: {
       selectedLesson: {
         lesson_category_name: '',
@@ -297,6 +298,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       this.firstBooking.selectedLesson.lesson_name = '';
     },
     async validateFirstLessonApi() {
+      this.isFirstBookingLoading = true;
       try {
         const { data, error } = await useSanctumFetch(
           '/api/validate_first_lesson',
@@ -315,8 +317,10 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           });
         }
         console.log('validateFirstLesson fetched:', data.value);
+        this.isFirstBookingLoading = false;
       } catch (err: any) {
         console.error('Error fetching validateFirstLesson data:', err.data);
+        this.isFirstBookingLoading = false;
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
         }
@@ -324,6 +328,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       }
     },
     async applyFirstLessonApi() {
+      this.isFirstBookingLoading = true;
       try {
         const { data, error } = await useSanctumFetch(
           '/api/apply_first_lesson',
@@ -342,9 +347,11 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
           });
         }
         this.closeDialog();
+        this.isFirstBookingLoading = false;
         console.log('applyFirstLesson fetched:', data.value);
       } catch (err: any) {
         this.closeDialog();
+        this.isFirstBookingLoading = false;
         console.error('Error fetching applyFirstLesson data:', err.data);
         throw err;
       }

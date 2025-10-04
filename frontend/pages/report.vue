@@ -29,6 +29,11 @@ const sendReport = () => {
     </Head>
   </div>
 
+  <div
+    v-if="reportStore.isReportLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <div class="max-w-[640px] mx-auto p-6">
     <h1 class="text-xl font-bold text-center mb-2">
       {{ $t('report.report') }}

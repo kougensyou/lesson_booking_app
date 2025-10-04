@@ -56,6 +56,16 @@ lessonStore.getTimeOptions().catch((error: any) => {
     </Head>
   </div>
 
+  <div
+    v-if="
+      lessonStore.isAddLessonLoading ||
+      studioStore.isStudioListLoading ||
+      lessonStore.isLessonCategoryLoading ||
+      lessonStore.isTimeOptionsLoading
+    "
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <StudioSearch
     :is-favorite-studio-loading="studioStore.isFavoriteStudioLoading"
     :favorite-studio-list="studioStore.favoriteStudioList"

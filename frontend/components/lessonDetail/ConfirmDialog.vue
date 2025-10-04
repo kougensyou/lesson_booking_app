@@ -15,12 +15,6 @@ defineProps<{
   <div
     class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
   >
-    <div
-      v-if="isBookingStatusLoading"
-      class="fixed inset-0 flex items-center justify-center z-60"
-    >
-      <SpinLoading />
-    </div>
     <div class="bg-white rounded-lg shadow-lg w-[80%] max-w-md p-6">
       <h2
         v-if="!lessonDetail.booked_flag"
@@ -62,18 +56,35 @@ defineProps<{
           class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-3xl font-semibold"
           @click="bookLesson"
         >
-          {{ $t('lessonDetail.bookConfirmed') }}
+          <span v-if="!isBookingStatusLoading">{{
+            $t('lessonDetail.bookConfirmed')
+          }}</span>
+          <span
+            v-if="isBookingStatusLoading"
+            class="flex items-center justify-center"
+          >
+            <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+          </span>
         </button>
         <button
           v-if="lessonDetail.booked_flag"
           class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-3xl font-semibold"
           @click="cancelLesson"
         >
-          {{ $t('lessonDetail.cancelConfirmed') }}
+          <span v-if="!isBookingStatusLoading">{{
+            $t('lessonDetail.cancelConfirmed')
+          }}</span>
+          <span
+            v-if="isBookingStatusLoading"
+            class="flex items-center justify-center"
+          >
+            <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+          </span>
         </button>
         <button
           class="w-full border border-gray-300 text-gray-700 py-2 rounded-3xl"
           @click="closeDialog"
+          :disabled="isBookingStatusLoading"
         >
           {{ $t('lessonDetail.backButton') }}
         </button>

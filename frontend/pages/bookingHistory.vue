@@ -25,6 +25,11 @@ lessonBookingStore.addBookingHistory().catch((error: any) => {
 
   <div
     v-if="lessonBookingStore.isBookingHistoryLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
+  <div
+    v-if="lessonBookingStore.isBookingHistoryLoading"
     class="fixed inset-0 flex items-center justify-center"
   >
     <SpinLoading />

@@ -26,6 +26,12 @@ const login = () => {
     <Head>
       <title>{{ $t('index.tabTitle') }}</title>
     </Head>
+
+    <div
+      v-if="userStore.isUserLoading"
+      class="fixed inset-0 bg-opacity-50 z-50"
+    ></div>
+
     <div class="mt-4 mb-4 p-4 bg-white max-w-[640px] mx-auto">
       <div class="flex items-center justify-center">
         {{ $t('index.title') }}

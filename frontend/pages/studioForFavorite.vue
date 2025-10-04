@@ -26,6 +26,11 @@ studioStore.getStudioList().catch((error: any) => {
 
   <div
     v-if="studioStore.isStudioLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
+  <div
+    v-if="studioStore.isStudioLoading"
     class="fixed inset-0 flex items-center justify-center"
   >
     <SpinLoading />

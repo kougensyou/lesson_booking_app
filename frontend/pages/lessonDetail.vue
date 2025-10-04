@@ -55,6 +55,14 @@ lessonStore.getLessonDetailApi().catch((error: any) => {
   </div>
 
   <div
+    v-if="
+      lessonStore.isLessonDetailLoading ||
+      lessonBookingStore.isBookingStatusLoading
+    "
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
+  <div
     v-if="lessonStore.isLessonDetailLoading"
     class="fixed inset-0 flex items-center justify-center"
   >

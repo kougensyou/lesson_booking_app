@@ -38,6 +38,15 @@ informationStore.getInformationList().catch((error: any) => {
     </Head>
   </div>
 
+  <div
+    v-if="
+      lessonStore.isNextLessonLoading ||
+      lessonBookingStore.isSelectedLessonLoading ||
+      informationStore.isInformationLoading
+    "
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <NextLesson
     :is-next-lesson-loading="lessonStore.isNextLessonLoading"
     :next-lesson-list="lessonStore.nextLessonList"

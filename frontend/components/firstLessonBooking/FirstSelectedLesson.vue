@@ -11,6 +11,7 @@ import StudioLessonCalendar from '../common/StudioLessonCalendar.vue';
 
 defineProps<{
   isAuth: boolean;
+  isStudioLessonLoading: boolean;
   weekData: Array<WeekData>;
   timeOptions: Array<string>;
   studioLessonList: Array<StudioLesson>;
@@ -90,6 +91,7 @@ defineProps<{
 
   <StudioLessonCalendar
     v-if="selectedLesson.studio_name && selectedLesson.lesson_name === ''"
+    :is-loading="isStudioLessonLoading"
     :is-auth="isAuth"
     :week-data="weekData"
     :studio-lesson-list="studioLessonList"

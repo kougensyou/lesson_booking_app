@@ -29,6 +29,11 @@ const updateUser = () => {
     </Head>
   </div>
 
+  <div
+    v-if="userStore.isUserLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <div class="px-4 py-3 space-y-6">
     <div class="flex items-center space-x-4">
       <img

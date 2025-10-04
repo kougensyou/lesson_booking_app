@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import type { StudioLesson, WeekData } from '~/types/lesson';
+import SpinLoading from './SpinLoading.vue';
+
 defineProps<{
   vacantMessage: string;
   noVacantMessage: string;
   isAuth: boolean;
+  isLoading: boolean;
   studioName: string;
   weekData: Array<WeekData>;
   timeOptions: Array<string>;
@@ -51,6 +54,13 @@ defineProps<{
     >
       <div class="text-sm font-bold">{{ d.date }}</div>
       <div class="text-xs text-gray-500">{{ d.label }}</div>
+    </div>
+
+    <div
+      v-if="isLoading"
+      class="fixed inset-0 flex items-center justify-center"
+    >
+      <SpinLoading />
     </div>
 
     <template v-for="time in timeOptions">

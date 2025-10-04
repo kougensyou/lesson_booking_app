@@ -30,6 +30,11 @@ onMounted(() => {
     </Head>
   </div>
 
+  <div
+    v-if="studioStore.isFavoriteStudioLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <div class="p-4">
     <h1 class="text-lg font-bold text-center mb-4">
       {{ $t('favoriteStudio.pageTitle') }}

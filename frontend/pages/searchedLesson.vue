@@ -28,6 +28,11 @@ const addSearchedLessons = () => {
 
   <div
     v-if="lessonStore.isAddLessonLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
+  <div
+    v-if="lessonStore.isAddLessonLoading"
     class="fixed inset-0 flex items-center justify-center"
   >
     <SpinLoading />

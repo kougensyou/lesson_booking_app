@@ -26,6 +26,11 @@ lessonStore
     </Head>
   </div>
 
+  <div
+    v-if="lessonStore.isAddLessonLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <div class="p-4">
     <h2 class="text-xl font-bold text-center mb-4">
       {{ $t('bookDone.doneMessage') }}

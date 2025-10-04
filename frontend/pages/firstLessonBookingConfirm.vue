@@ -31,6 +31,11 @@ const applyFirstLesson = () => {
     </Head>
   </div>
 
+  <div
+    v-if="lessonBookingStore.isFirstBookingLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <div class="px-4 py-3 space-y-6">
     <div class="border rounded p-4 flex items-start mb-6 bg-white">
       <div class="text-center w-24 flex-shrink-0">
@@ -68,6 +73,7 @@ const applyFirstLesson = () => {
 
     <ConfirmDialog
       v-if="lessonBookingStore.isDialogOpen"
+      :is-first-booking-loading="lessonBookingStore.isFirstBookingLoading"
       :selected-lesson="lessonBookingStore.firstBooking.selectedLesson"
       :apply-first-lesson="applyFirstLesson"
       :close-dialog="lessonBookingStore.closeDialog"

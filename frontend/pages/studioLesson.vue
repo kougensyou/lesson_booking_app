@@ -40,6 +40,12 @@ lessonStore.getStudioLessonDataApi().catch((error: any) => {
       <title>{{ $t('studioLesson.tabTitle') }}</title>
     </Head>
   </div>
+
+  <div
+    v-if="lessonStore.isStudioLessonLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <div
     v-if="lessonStore.isStudioLessonLoading"
     class="fixed inset-0 flex items-center justify-center"
@@ -48,7 +54,7 @@ lessonStore.getStudioLessonDataApi().catch((error: any) => {
   </div>
   <div class="pb-4">
     <StudioLessonCalendar
-      v-if="!lessonStore.isStudioLessonLoading"
+      :is-loading="lessonStore.isStudioLessonLoading"
       :vacant-message="$t('studioLesson.vacantMessage')"
       :no-vacant-message="$t('studioLesson.noVacantMessage')"
       :is-auth="userStore.user.id ? true : false"

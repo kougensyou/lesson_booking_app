@@ -29,6 +29,11 @@ const sendPasswordResetMail = () => {
     </Head>
   </div>
 
+  <div
+    v-if="userStore.isUserLoading"
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
+
   <div class="pt-4 pb-4">
     <div class="max-w-[640px] mx-auto p-4 bg-white">
       <div class="text-center mb-6">

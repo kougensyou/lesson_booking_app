@@ -31,10 +31,8 @@ const clickSettingArea = (path: string) => {
 
   <div
     v-if="userStore.isUserLoading"
-    class="fixed inset-0 flex items-center justify-center"
-  >
-    <SpinLoading />
-  </div>
+    class="fixed inset-0 bg-opacity-50 z-50"
+  ></div>
 
   <div class="px-4 py-3 space-y-6">
     <div class="flex items-center space-x-4">
@@ -90,7 +88,22 @@ const clickSettingArea = (path: string) => {
     <a rel="noopener noreferrer" class="text-gray-800">
       {{ setting.setting_name }}
     </a>
-    <span class="text-gray-400 material-symbols-outlined absolute right-3">
+    <span
+      v-if="userStore.isUserLoading && setting.path === '/logout'"
+      class="absolute right-3"
+    >
+      <SpinLoading :color="'#99a1ae'" :width="'22px'" :height="'22px'" />
+    </span>
+    <span
+      v-if="!userStore.isUserLoading && setting.path === '/logout'"
+      class="text-gray-400 material-symbols-outlined absolute right-3"
+    >
+      chevron_right
+    </span>
+    <span
+      v-if="setting.path !== '/logout'"
+      class="text-gray-400 material-symbols-outlined absolute right-3"
+    >
       chevron_right
     </span>
   </div>

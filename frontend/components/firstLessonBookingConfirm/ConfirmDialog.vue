@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { FirstSelectedLesson } from '~/types/lessonBooking';
+import SpinLoading from '../common/SpinLoading.vue';
 
 defineProps<{
+  isFirstBookingLoading: boolean;
   selectedLesson: FirstSelectedLesson;
   applyFirstLesson: Function;
   closeDialog: Function;
@@ -40,11 +42,20 @@ defineProps<{
           class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-3xl font-semibold"
           @click="applyFirstLesson()"
         >
-          {{ $t('firstLessonBookingConfirm.book') }}
+          <span v-if="!isFirstBookingLoading">
+            {{ $t('firstLessonBookingConfirm.book') }}
+          </span>
+          <span
+            v-if="isFirstBookingLoading"
+            class="flex items-center justify-center"
+          >
+            <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
+          </span>
         </button>
         <button
           class="w-full border border-gray-300 text-gray-700 py-2 rounded-3xl"
           @click="closeDialog()"
+          :diabled="isFirstBookingLoading"
         >
           {{ $t('firstLessonBookingConfirm.back') }}
         </button>
