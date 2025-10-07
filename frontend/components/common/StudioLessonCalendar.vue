@@ -92,11 +92,7 @@ defineProps<{
             </div>
             <div class="p-1 text-[11px]">{{ studioLesson.start_time }} ～</div>
             <div class="font-bold p-1 text-[14px] break-words">
-              {{
-                studioLesson.lesson_name.length > 20
-                  ? studioLesson.lesson_name.slice(0, 20) + '…'
-                  : studioLesson.lesson_name
-              }}
+              {{ studioLesson.lesson_name }}
             </div>
             <div v-if="isAuth" class="text-gray-600">
               {{ studioLesson.instructor_name }}

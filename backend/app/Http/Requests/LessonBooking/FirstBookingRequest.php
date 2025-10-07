@@ -36,11 +36,11 @@ class FirstBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lesson_category_name' => 'required|string|max:255',
-            'studio_name'          => 'required|string|max:255',
+            'lesson_category_name' => 'required|string',
+            'studio_name'          => 'required|string',
             'lesson_name'          => 'required',
-            'name'                 => 'required|string|max:255',
-            'email'                => 'required|email|max:255',
+            'name'                 => 'required|string',
+            'email'                => 'required|email',
             'birth_date'           => 'required|date',
         ];
     }

@@ -57,11 +57,13 @@ const carouselConfig = {
         >
           <div>
             <div class="text-md text-gray-500">{{ lesson.lesson_time }}</div>
-            <div class="text-lg font-bold mt-1">{{ lesson.lesson_name }}</div>
+            <div class="text-lg font-bold mt-1">
+              {{ lesson.short_lesson_name }}
+            </div>
           </div>
           <div>
             <div class="text-md text-gray-600 mt-2">
-              {{ lesson.studio_name }}
+              {{ lesson.short_studio_name }}
             </div>
             <div class="flex items-center mt-2">
               <img

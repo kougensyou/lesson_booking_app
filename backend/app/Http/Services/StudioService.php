@@ -34,6 +34,11 @@ class StudioService
             ->where('favorite_studio.user_id', $userId)
             ->get()
             ->map(function ($item) {
+
+                $item->short_studio_name = mb_strlen($item->studio_name) > 15
+                    ? mb_substr($item->studio_name, 0, 15) . ' ...'
+                    : $item->studio_name;
+
                 if ($item->image_path) {
                     $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
                     return $item;

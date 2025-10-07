@@ -126,7 +126,7 @@ defineProps<{
       </div>
     </div>
     <div class="ml-4 flex-1">
-      <div class="font-semibold text-base mb-1">
+      <div class="font-semibold text-base mb-1 break-all w-full">
         {{ selectedLesson.lesson_name }}
       </div>
     </div>

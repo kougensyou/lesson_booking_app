@@ -37,7 +37,7 @@ lessonStore
     </h2>
 
     <div class="bg-white shadow-md rounded-lg p-4 mb-4">
-      <div class="text-center text-2xl font-semibold mb-2">
+      <div class="text-center text-2xl font-semibold mb-2 break-words">
         {{ lessonStore.lessonDetail.lesson_name }}
       </div>
       <div class="text-center text-2xl font-semibold my-2">

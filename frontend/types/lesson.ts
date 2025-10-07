@@ -16,7 +16,9 @@ export interface LessonCategory {
 export interface Lesson {
   id: number;
   studio_name: string;
+  short_studio_name: string;
   lesson_name: string;
+  short_lesson_name: string;
   start_time: string;
   end_time: string;
   lesson_time: string;

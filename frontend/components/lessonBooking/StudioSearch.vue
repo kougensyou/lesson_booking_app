@@ -58,7 +58,7 @@ const carouselConfig = {
           />
           <div class="pl-4 pb-2">
             <h3 class="text-base font-semibold">
-              {{ favoriteStudio.studio_name }}
+              {{ favoriteStudio.short_studio_name }}
               <span class="text-red-500">❤</span>
             </h3>
           </div>

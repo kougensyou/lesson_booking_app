@@ -77,7 +77,7 @@ lessonStore.getLessonDetailApi().catch((error: any) => {
     />
 
     <div class="bg-white min-h-screen p-4 space-y-4 max-w-xl mx-auto">
-      <h1 class="text-xl font-bold">
+      <h1 class="text-xl font-bold break-all w-full">
         {{ lessonStore.lessonDetail.lesson_name }}
       </h1>
       <div class="flex items-center text-gray-600 text-sm">

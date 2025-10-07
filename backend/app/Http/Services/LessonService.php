@@ -36,6 +36,15 @@ class LessonService
                 $start = Carbon::parse($item->start_time);
                 $end = Carbon::parse($item->end_time);
                 $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
+
+                $item->short_lesson_name = mb_strlen($item->lesson_name) > 20
+                    ? mb_substr($item->lesson_name, 0, 20) . ' ...'
+                    : $item->lesson_name;
+
+                $item->short_studio_name = mb_strlen($item->studio_name) > 15
+                    ? mb_substr($item->studio_name, 0, 15) . ' ...'
+                    : $item->studio_name;
+
                 if ($item->image_path) {
                     $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
                     return $item;
@@ -253,12 +262,17 @@ class LessonService
 
                 $emptyFlag = $lesson->max_user_num !== $lesson->booking_user_num;
 
+                $short_lesson_name = mb_strlen($lesson->lesson_name) > 20
+                    ? mb_substr($lesson->lesson_name, 0, 20) . ' ...'
+                    : $lesson->lesson_name;
+
                 $carry[$date][$hourKey][] = [
                     'lesson_id'      => $lesson->id,
                     'lesson_day'      => $date,
                     'lesson_time'     => $start->format('G:i') . ' - ' . $end->format('G:i'),
                     'start_time'      => $time,
                     'lesson_name'     => $lesson->lesson_name,
+                    'short_lesson_name' => $short_lesson_name,
                     'instructor_name' => $lesson->instructor_name,
                     'empty_flag'    => $emptyFlag,
                 ];

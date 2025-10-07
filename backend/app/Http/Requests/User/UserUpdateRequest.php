@@ -33,12 +33,12 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'                => 'required|string|max:255',
-            'email'               => 'required|email|max:255',
-            'zip_code'            => 'required|string|max:255',
-            'address'             => 'required|string|max:255',
+            'name'                => 'required|string|max:30',
+            'email'               => 'required|email|max:30',
+            'zip_code'            => 'required|string|max:10',
+            'address'             => 'required|string|max:100',
             'birth_date'          => 'required|date',
-            'tel_no'              => 'required|string|max:255',
+            'tel_no'              => 'required|string|max:15',
             'image_url'           => 'required|string|max:255',
         ];
     }
