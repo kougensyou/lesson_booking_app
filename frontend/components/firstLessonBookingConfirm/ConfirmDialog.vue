@@ -55,7 +55,7 @@ defineProps<{
         <button
           class="w-full border border-gray-300 text-gray-700 py-2 rounded-3xl"
           @click="closeDialog()"
-          :diabled="isFirstBookingLoading"
+          :disabled="isFirstBookingLoading"
         >
           {{ $t('firstLessonBookingConfirm.back') }}
         </button>

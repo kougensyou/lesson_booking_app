@@ -3,8 +3,10 @@ import { useLessonStore } from '~/stores/useLessonStore';
 import { useStudioStore } from '~/stores/useStudioStore';
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useUserStore } from '~/stores/useUserStore';
+import { onMounted } from 'vue';
 import FirstSelectedLesson from '~/components/firstLessonBooking/FirstSelectedLesson.vue';
 import FirstUser from '~/components/firstLessonBooking/FirstUser.vue';
+import chevronRight from '~/assets/icons/chevron_right.svg';
 import SpinLoading from '~/components/common/SpinLoading.vue';
 
 definePageMeta({
@@ -18,8 +20,17 @@ const studioStore = useStudioStore();
 const lessonBookingStore = useLessonBookingStore();
 const userStore = useUserStore();
 
-lessonBookingStore.initializeErrors();
-lessonBookingStore.initializeFirstBooking();
+onMounted(() => {
+  const current = history.state.current;
+  const forward = history.state.forward;
+  if (
+    current !== '/firstLessonBooking' ||
+    forward !== '/firstLessonBookingConfirm'
+  ) {
+    lessonBookingStore.initializeErrors();
+    lessonBookingStore.initializeFirstBooking();
+  }
+});
 
 const changeStudioLessonData = (selectedDateObj: Date) => {
   lessonStore.setDate(selectedDateObj);
@@ -103,12 +114,11 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
       >
         <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
       </span>
-      <span
-        class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
-        aria-hidden="true"
-      >
-        chevron_right
-      </span>
+      <img
+        class="absolute right-3 top-1/2 -translate-y-1/2"
+        :src="chevronRight"
+        alt="Chevron Right"
+      />
     </button>
   </div>
 </template>

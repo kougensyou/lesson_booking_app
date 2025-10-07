@@ -318,6 +318,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         }
         console.log('validateFirstLesson fetched:', data.value);
         this.isFirstBookingLoading = false;
+        this.initializeErrors();
       } catch (err: any) {
         console.error('Error fetching validateFirstLesson data:', err.data);
         this.isFirstBookingLoading = false;

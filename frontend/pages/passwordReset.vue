@@ -4,6 +4,7 @@ import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
+import chevronRight from '~/assets/icons/chevron_right.svg';
 
 definePageMeta({
   layout: 'no-sidebar',
@@ -67,12 +68,11 @@ const sendPasswordResetMail = () => {
         >
           <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
         </span>
-        <span
-          class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
-          aria-hidden="true"
-        >
-          chevron_right
-        </span>
+        <img
+          class="absolute right-3 top-1/2 -translate-y-1/2"
+          :src="chevronRight"
+          alt="Chevron Right"
+        />
       </button>
     </div>
     <div class="mt-4 mb-4 bg-white max-w-[640px] mx-auto p-6">
@@ -84,11 +84,11 @@ const sendPasswordResetMail = () => {
         @click="$router.push('/firstLessonBooking')"
       >
         <span class="text-white">{{ $t('index.firstLesson') }}</span>
-        <span
-          class="text-white material-symbols-outlined absolute right-3"
-          aria-hidden="true"
-          >chevron_right</span
-        >
+        <img
+          class="absolute right-3 top-1/2 -translate-y-1/2"
+          :src="chevronRight"
+          alt="Chevron Right"
+        />
       </button>
     </div>
   </div>

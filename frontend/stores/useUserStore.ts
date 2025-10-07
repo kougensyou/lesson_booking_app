@@ -116,6 +116,7 @@ export const useUserStore = defineStore('user', {
         //console.log('updateUser user: ' + JSON.stringify(this.user));
         console.log('updateUser fetched:', data.value);
         this.isUserLoading = false;
+        this.initializeErrors();
         this.openToast(2500);
       } catch (err: any) {
         console.error('Update user failed:', err.data);
