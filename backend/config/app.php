@@ -177,10 +177,6 @@ return [
 
         // 追加
         App\Providers\ValidatorServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
-        Laravel\Passport\PassportServiceProvider::class,
-        App\Providers\UtilServiceProvider::class,
-
     ],
 
     /*
@@ -231,11 +227,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-        //追加
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Yaml' => 'Symfony\Component\Yaml\Yaml',
-        'Util' => App\Facades\Util::class,
     ],
 
 ];
