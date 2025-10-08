@@ -2,7 +2,6 @@
 namespace App\Http\Services;
 
 use Carbon\Carbon;
-use App\Exceptions\CustomErrorResponseException;
 use Illuminate\Support\Facades\DB;
 use App\Models\Studio;
 use App\Models\FavoriteStudio;

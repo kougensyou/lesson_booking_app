@@ -2,7 +2,6 @@
 namespace App\Http\Services;
 
 use Carbon\Carbon;
-use App\Exceptions\CustomErrorResponseException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LessonBooking;
@@ -30,7 +29,6 @@ class LessonService
             ->where('lesson_booking.user_id', $userId)
             ->whereNull('lesson_booking.done_flag')
             ->orderBy('lesson.start_time', 'asc')
-            ->take(5)
             ->get()
             ->map(function ($item) {
                 $start = Carbon::parse($item->start_time);
@@ -262,17 +260,12 @@ class LessonService
 
                 $emptyFlag = $lesson->max_user_num !== $lesson->booking_user_num;
 
-                $short_lesson_name = mb_strlen($lesson->lesson_name) > 20
-                    ? mb_substr($lesson->lesson_name, 0, 20) . ' ...'
-                    : $lesson->lesson_name;
-
                 $carry[$date][$hourKey][] = [
                     'lesson_id'      => $lesson->id,
                     'lesson_day'      => $date,
                     'lesson_time'     => $start->format('G:i') . ' - ' . $end->format('G:i'),
                     'start_time'      => $time,
                     'lesson_name'     => $lesson->lesson_name,
-                    'short_lesson_name' => $short_lesson_name,
                     'instructor_name' => $lesson->instructor_name,
                     'empty_flag'    => $emptyFlag,
                 ];
