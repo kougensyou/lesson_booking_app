@@ -1,5 +1,4 @@
 <?php
-// 共通定数
 return [
     'information' => [
         'infoKindSlider' => 1,
@@ -26,9 +25,14 @@ return [
             '21:00','22:00'
         ],
         'pagination' => 10,
+        'shortLessonNameChar' => 20,
+        'shortStudioNameChar' => 15,
     ],
     'lessonBooking' => [
         'lessonDone' => 1,
         'pagination' => 10,
+    ],
+    'studio' => [
+        'shortStudioNameChar' => 15,
     ],
 ];

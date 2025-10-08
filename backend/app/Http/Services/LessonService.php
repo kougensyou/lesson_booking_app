@@ -35,12 +35,12 @@ class LessonService
                 $end = Carbon::parse($item->end_time);
                 $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
 
-                $item->short_lesson_name = mb_strlen($item->lesson_name) > 20
-                    ? mb_substr($item->lesson_name, 0, 20) . ' ...'
+                $item->short_lesson_name = mb_strlen($item->lesson_name) > config('const.lesson.shortLessonNameChar')
+                    ? mb_substr($item->lesson_name, 0, config('const.lesson.shortLessonNameChar')) . ' ...'
                     : $item->lesson_name;
 
-                $item->short_studio_name = mb_strlen($item->studio_name) > 15
-                    ? mb_substr($item->studio_name, 0, 15) . ' ...'
+                $item->short_studio_name = mb_strlen($item->studio_name) > config('const.lesson.shortStudioNameChar')
+                    ? mb_substr($item->studio_name, 0, config('const.lesson.shortStudioNameChar')) . ' ...'
                     : $item->studio_name;
 
                 if ($item->image_path) {

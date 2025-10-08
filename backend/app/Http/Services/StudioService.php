@@ -34,8 +34,8 @@ class StudioService
             ->get()
             ->map(function ($item) {
 
-                $item->short_studio_name = mb_strlen($item->studio_name) > 15
-                    ? mb_substr($item->studio_name, 0, 15) . ' ...'
+                $item->short_studio_name = mb_strlen($item->studio_name) > config('const.studio.shortStudioNameChar')
+                    ? mb_substr($item->studio_name, 0, config('const.studio.shortStudioNameChar')) . ' ...'
                     : $item->studio_name;
 
                 if ($item->image_path) {
@@ -58,7 +58,7 @@ class StudioService
             $initialIds = collect($initialFavoriteStudioList)->pluck('id')->all();
             $currentIds = collect($favoriteStudioList)->pluck('id')->all();
 
-            // 削除
+            // Delete
             $toDelete = array_diff($initialIds, $currentIds);
             if (!empty($toDelete)) {
                 FavoriteStudio::where('user_id', $userId)
@@ -66,7 +66,7 @@ class StudioService
                     ->delete();
             }
 
-            // 追加
+            // Insert
             $toAdd = array_diff($currentIds, $initialIds);
             foreach ($toAdd as $studioId) {
                 FavoriteStudio::create([
