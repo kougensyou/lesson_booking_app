@@ -4,11 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-// モデル共通設定
-
 class AbstractModel extends Model
 {
-    // デフォルト変更
     const CREATED_AT = 'cmn_create_date';
     const UPDATED_AT = 'cmn_update_date';
 
