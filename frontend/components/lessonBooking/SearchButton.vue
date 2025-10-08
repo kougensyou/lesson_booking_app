@@ -3,7 +3,7 @@ import SpinLoading from '../common/SpinLoading.vue';
 
 defineProps<{
   isAddLessonLoading: boolean;
-  addSearchedLessons: Function;
+  searchLessons: Function;
 }>();
 </script>
 <template>
@@ -11,7 +11,7 @@ defineProps<{
     <div class="max-w-md mx-auto">
       <button
         class="w-full bg-sky-500 text-white rounded-3xl py-4 relative"
-        @click="addSearchedLessons"
+        @click="searchLessons"
       >
         <span v-if="!isAddLessonLoading">{{
           $t('lessonBooking.searchButton')

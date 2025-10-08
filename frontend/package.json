@@ -20,6 +20,7 @@
     "nuxt": "^3.17.4",
     "nuxt-auth-sanctum": "^1.1.0",
     "pinia": "^3.0.2",
+    "pinia-plugin-persistedstate": "^4.5.0",
     "v-calendar": "^3.1.2",
     "vue": "^3.5.14",
     "vue-router": "^4.5.1",

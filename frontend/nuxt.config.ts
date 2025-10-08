@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   ssr: false,
   modules: [
     '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     'nuxt-auth-sanctum',

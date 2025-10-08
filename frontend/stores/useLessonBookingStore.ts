@@ -42,6 +42,10 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     } as FirstBooking,
     errors: {} as any,
   }),
+  persist: {
+    storage: sessionStorage,
+    pick: ['firstBooking'],
+  },
   getters: {
     attributes(state): Array<Attribute> {
       return (state.selectedLessonList ?? []).map((lesson, idx) => ({

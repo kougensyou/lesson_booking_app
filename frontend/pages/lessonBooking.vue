@@ -21,19 +21,6 @@ const lessonStore = useLessonStore();
 const lessonBookingStore = useLessonBookingStore();
 
 lessonBookingStore.setCalendarLocaleForLessonBooking();
-
-const addSearchedLessons = () => {
-  lessonStore.initializePaginationData();
-  lessonStore
-    .addSearchedLessonsApi()
-    .then(() => {
-      router.push({ path: '/searchedLesson' });
-    })
-    .catch((error: any) => {
-      useApiErrorHandler(router, error);
-    });
-};
-
 lessonStore.initializeSelectedDates();
 
 studioStore.getStudioList().catch((error: any) => {
@@ -115,6 +102,10 @@ lessonStore.getTimeOptions().catch((error: any) => {
 
   <SearchButton
     :is-add-lesson-loading="lessonStore.isAddLessonLoading"
-    :add-searched-lessons="addSearchedLessons"
+    :search-lessons="
+      () => {
+        router.push({ path: '/searchedLesson' });
+      }
+    "
   />
 </template>

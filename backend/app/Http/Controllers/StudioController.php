@@ -28,7 +28,8 @@ class StudioController extends Controller
         $userId = Auth::id();
         $initialFavoriteStudioList = $request->input('initial_favorite_studio_list');
         $favoriteStudioList = $request->input('favorite_studio_list');
-        return $this->studioService->saveFavoriteStudioList($userId, $initialFavoriteStudioList, $favoriteStudioList);
+        $this->studioService->saveFavoriteStudioList($userId, $initialFavoriteStudioList, $favoriteStudioList);
+        return $this->studioService->getFavoriteStudioList($userId);
     }
 
 }

@@ -88,6 +88,8 @@ export const useStudioStore = defineStore('studio', {
           });
         }
         console.log('saveFavoriteStudioList fetched:', data.value);
+        this.initialFavoriteStudioList = data.value as Studio[];
+        this.favoriteStudioList = data.value as Studio[];
         this.saveButtonActive = false;
         this.isFavoriteStudioLoading = false;
         this.openToast(2500);

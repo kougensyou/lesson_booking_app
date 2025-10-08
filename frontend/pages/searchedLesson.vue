@@ -18,6 +18,16 @@ const addSearchedLessons = () => {
     useApiErrorHandler(router, error);
   });
 };
+
+lessonStore.initializePaginationData();
+lessonStore
+  .addSearchedLessonsApi()
+  .then(() => {
+    router.push({ path: '/searchedLesson' });
+  })
+  .catch((error: any) => {
+    useApiErrorHandler(router, error);
+  });
 </script>
 <template>
   <div class="">

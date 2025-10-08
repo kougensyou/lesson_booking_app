@@ -45,6 +45,10 @@ export const useLessonStore = defineStore('lesson', {
     studioLessonList: {} as StudioLesson,
     selectedStudioId: '',
   }),
+  persist: {
+    storage: sessionStorage,
+    pick: ['lessonDetail', 'searchInputForm'],
+  },
   actions: {
     checkSelected(day: number): boolean {
       return this.searchInputForm.selectedDates.includes(
