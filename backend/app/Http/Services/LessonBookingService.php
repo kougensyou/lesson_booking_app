@@ -43,13 +43,16 @@ class LessonBookingService
         DB::beginTransaction();
         
         try {
+
+            $now = Carbon::now();
+
             $insertData = [
-                'booking_time' => Carbon::now(),
+                'booking_time' => $now,
                 'lesson_id' => $lessonId,
                 'user_id' => Auth::id(),
                 'done_flag' => null,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'created_at' => $now,
+                'updated_at' => $now
             ];
 
             LessonBooking::insert($insertData);
@@ -67,6 +70,7 @@ class LessonBookingService
     }
 
     public function cancelLesson($userId, $lessonId) {
+
         DB::beginTransaction();
 
         try {
@@ -117,7 +121,7 @@ class LessonBookingService
                 return $item;
             });
         } catch (\Throwable $e) {
-            \Log::error('getLessonData error: ' . $e->getMessage());
+            \Log::error('addBookingHistory error: ' . $e->getMessage());
             throw $e;
         }
     }

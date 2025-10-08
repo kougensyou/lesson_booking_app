@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\User\PasswordResetMailRequest;
 use App\Http\Requests\User\PasswordChangeRequest;
 use App\Http\Requests\User\UserUpdateRequest;

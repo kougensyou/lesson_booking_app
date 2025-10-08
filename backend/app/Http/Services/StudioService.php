@@ -1,11 +1,9 @@
 <?php
 namespace App\Http\Services;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\Studio;
 use App\Models\FavoriteStudio;
-
 
 class StudioService
 {
@@ -52,6 +50,7 @@ class StudioService
     }
 
     public function saveFavoriteStudioList($userId, $initialFavoriteStudioList, $favoriteStudioList) {
+
         DB::beginTransaction();
 
         try {

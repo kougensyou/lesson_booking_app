@@ -38,7 +38,7 @@ class FirstBookingRequest extends FormRequest
         return [
             'lesson_category_name' => 'required|string',
             'studio_name'          => 'required|string',
-            'lesson_name'          => 'required',
+            'lesson_name'          => 'required|string',
             'name'                 => 'required|string',
             'email'                => 'required|email',
             'birth_date'           => 'required|date',

@@ -51,7 +51,7 @@ class LessonService
                 return $item;
             });
         } catch (\Throwable $e) {
-            \Log::error('getLessonData error: ' . $e->getMessage());
+            \Log::error('getNextLessonData error: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -89,7 +89,7 @@ class LessonService
             });
 
         } catch (\Throwable $e) {
-            \Log::error('getLessonData error: ' . $e->getMessage());
+            \Log::error('addSameStudioLessonList error: ' . $e->getMessage());
             throw $e;
         }
         
@@ -161,7 +161,7 @@ class LessonService
                     return $item;
                 });
         } catch (\Throwable $e) {
-            \Log::error('searchLessons error: ' . $e->getMessage());
+            \Log::error('addSearchedLessons error: ' . $e->getMessage());
             throw $e;
         }
     }
