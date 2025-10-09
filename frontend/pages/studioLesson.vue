@@ -4,6 +4,7 @@ import { useLessonStore } from '../stores/useLessonStore';
 import { useUserStore } from '../stores/useUserStore';
 import { useRoute, useRouter } from 'vue-router';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
+import { getI18nArray } from '~/composables/i18n';
 import StudioLessonCalendar from '~/components/common/StudioLessonCalendar.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
 
@@ -17,11 +18,14 @@ const router = useRouter();
 const lessonStore = useLessonStore();
 const userStore = useUserStore();
 
+const i18n = useI18n();
+const dayOfTheWeek = getI18nArray(i18n, 'studioLesson.dayOfTheWeek');
+
 const studioId = route.query.studio_id as string;
 
 const changeStudioLessonData = (selectedDateObj: Date, date: string) => {
   lessonStore.setDate(selectedDateObj);
-  lessonStore.setWeekData();
+  lessonStore.setWeekData(dayOfTheWeek);
   lessonStore.setActiveDate(date);
   lessonStore.getStudioLessonDataApi().catch((error: any) => {
     useApiErrorHandler(router, error);
@@ -30,8 +34,8 @@ const changeStudioLessonData = (selectedDateObj: Date, date: string) => {
 
 lessonStore.setStudioId(studioId);
 lessonStore.setDate(new Date());
-lessonStore.setWeekData();
-lessonStore.setTotalWeekData();
+lessonStore.setWeekData(dayOfTheWeek);
+lessonStore.setTotalWeekData(dayOfTheWeek);
 lessonStore.setActiveDate(`${lessonStore.todayMonth}/${lessonStore.todayDay}`);
 lessonStore.getStudioLessonDataApi().catch((error: any) => {
   useApiErrorHandler(router, error);

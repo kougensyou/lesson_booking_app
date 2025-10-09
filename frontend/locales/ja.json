@@ -103,7 +103,8 @@
   "studioLesson": {
     "tabTitle": "スタジオ別レッスン一覧",
     "vacantMessage": "空き〇",
-    "noVacantMessage": "空き✕"
+    "noVacantMessage": "空き✕",
+    "dayOfTheWeek": ["日", "月", "火", "水", "木", "金", "土"]
   },
   "lessonDetail": {
     "tabTitle": "レッスン詳細",

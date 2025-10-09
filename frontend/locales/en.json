@@ -103,7 +103,8 @@
   "studioLesson": {
     "tabTitle": "Lesson of Studio",
     "vacantMessage": "Vacant〇",
-    "noVacantMessage": "Vacant✕"
+    "noVacantMessage": "Vacant✕",
+    "dayOfTheWeek": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   },
   "lessonDetail": {
     "tabTitle": "Lesson Detail",

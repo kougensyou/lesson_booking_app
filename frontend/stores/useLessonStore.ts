@@ -290,18 +290,18 @@ export const useLessonStore = defineStore('lesson', {
         baseDate.getTime() + 6 * 24 * 60 * 60 * 1000
       ).toLocaleDateString('sv-SE');
     },
-    setWeekData() {
+    setWeekData(dayOfTheWeek: string[]) {
       this.weekData = [];
       const date = new Date(this.fromDate);
       for (let i = 0; i < 7; i++) {
         const day = new Date(date.getTime() + i * 24 * 60 * 60 * 1000);
         this.weekData.push({
           date: `${day.getMonth() + 1}/${day.getDate()}`,
-          label: ['日', '月', '火', '水', '木', '金', '土'][day.getDay()],
+          label: dayOfTheWeek[day.getDay()],
         });
       }
     },
-    setTotalWeekData() {
+    setTotalWeekData(dayOfTheWeek: string[]) {
       this.totalWeekData = [];
       const date = new Date(this.fromDate);
 
@@ -317,7 +317,7 @@ export const useLessonStore = defineStore('lesson', {
           dateObj: day,
           date: `${day.getMonth() + 1}/${day.getDate()}`,
           day: day.getDate(),
-          label: ['日', '月', '火', '水', '木', '金', '土'][day.getDay()],
+          label: dayOfTheWeek[day.getDay()],
         });
       }
       console.log('total week data:', this.totalWeekData);
