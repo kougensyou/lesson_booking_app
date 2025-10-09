@@ -8,12 +8,19 @@ defineProps<{
   isAuth: boolean;
   isLoading: boolean;
   studioName: string;
-  weekData: Array<WeekData>;
+  weekData: WeekData[];
+  totalWeekData: Array<WeekData[]>;
+  activeDate: string;
   timeOptions: Array<string>;
   studioLessonList: Array<StudioLesson>;
   changeStudioLessonData: Function;
   clickCard: Function;
 }>();
+
+const carouselConfig = {
+  itemsToShow: 1.0,
+  height: 50,
+};
 </script>
 <template>
   <div v-if="isAuth" class="w-full text-center p-4 bg-white">
@@ -23,27 +30,35 @@ defineProps<{
   </div>
 
   <div
-    class="flex justify-between px-4 py-6 mb-2"
+    class="px-4 py-3 mb-2"
     style="background-image: url('/studio-template.png')"
   >
-    <div
-      v-for="d in weekData"
-      :key="d.date"
-      class="flex flex-col items-center w-12"
-    >
-      <div
-        :class="[
-          'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold',
-          d.active
-            ? 'bg-black text-white'
-            : 'bg-transparent text-white no-border',
-        ]"
-        @click="!d.active ? changeStudioLessonData(d.dateObj) : null"
-      >
-        {{ d.day }}
-      </div>
-      <div class="text-xs text-white">{{ d.label }}</div>
-    </div>
+    <Carousel v-bind="carouselConfig">
+      <Slide v-for="(oneWeekData, i) in totalWeekData" :key="i">
+        <div class="grid grid-cols-7 w-full">
+          <div
+            v-for="d in oneWeekData"
+            :key="d.date"
+            class="flex flex-col items-center"
+          >
+            <div
+              class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer"
+              :class="
+                activeDate === d.date ? 'bg-black text-white' : 'text-white'
+              "
+              @click="
+                !(activeDate === d.date)
+                  ? changeStudioLessonData(d.dateObj, d.date)
+                  : null
+              "
+            >
+              {{ d.day }}
+            </div>
+            <div class="text-xs text-white mt-1">{{ d.label }}</div>
+          </div>
+        </div>
+      </Slide>
+    </Carousel>
   </div>
 
   <div class="grid grid-cols-7 gap-px text-xs border-t border-l px-2">

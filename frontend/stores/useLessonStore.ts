@@ -6,6 +6,7 @@ import type {
   TimeOptions,
   LessonDetail,
   Studio,
+  SelectedWeekData,
   WeekData,
   StudioLesson,
   StudioLessonData,
@@ -36,7 +37,9 @@ export const useLessonStore = defineStore('lesson', {
     isLessonDetailLoading: false as boolean,
     lessonDetail: {} as LessonDetail,
     studioData: {} as Studio,
-    weekData: [] as WeekData[],
+    weekData: [] as SelectedWeekData[],
+    totalWeekData: [] as Array<WeekData[]>,
+    activeDate: '' as string,
     isTimeOptionsLoading: false as boolean,
     timeOptions: [] as string[],
     fromDate: '',
@@ -293,13 +296,34 @@ export const useLessonStore = defineStore('lesson', {
       for (let i = 0; i < 7; i++) {
         const day = new Date(date.getTime() + i * 24 * 60 * 60 * 1000);
         this.weekData.push({
+          date: `${day.getMonth() + 1}/${day.getDate()}`,
+          label: ['日', '月', '火', '水', '木', '金', '土'][day.getDay()],
+        });
+      }
+    },
+    setTotalWeekData() {
+      this.totalWeekData = [];
+      const date = new Date(this.fromDate);
+
+      for (let i = 0; i < 28; i++) {
+        const day = new Date(date.getTime() + i * 24 * 60 * 60 * 1000);
+        const weekIndex = Math.floor(i / 7);
+
+        if (!this.totalWeekData[weekIndex]) {
+          this.totalWeekData[weekIndex] = [];
+        }
+
+        this.totalWeekData[weekIndex].push({
           dateObj: day,
           date: `${day.getMonth() + 1}/${day.getDate()}`,
           day: day.getDate(),
           label: ['日', '月', '火', '水', '木', '金', '土'][day.getDay()],
-          active: i === 0,
         });
       }
+      console.log('total week data:', this.totalWeekData);
+    },
+    setActiveDate(date: string) {
+      this.activeDate = date;
     },
     async getStudioLessonDataApi() {
       this.isStudioLessonLoading = true;

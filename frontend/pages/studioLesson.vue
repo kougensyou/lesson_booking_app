@@ -19,9 +19,10 @@ const userStore = useUserStore();
 
 const studioId = route.query.studio_id as string;
 
-const changeStudioLessonData = (selectedDateObj: Date) => {
+const changeStudioLessonData = (selectedDateObj: Date, date: string) => {
   lessonStore.setDate(selectedDateObj);
   lessonStore.setWeekData();
+  lessonStore.setActiveDate(date);
   lessonStore.getStudioLessonDataApi().catch((error: any) => {
     useApiErrorHandler(router, error);
   });
@@ -30,6 +31,8 @@ const changeStudioLessonData = (selectedDateObj: Date) => {
 lessonStore.setStudioId(studioId);
 lessonStore.setDate(new Date());
 lessonStore.setWeekData();
+lessonStore.setTotalWeekData();
+lessonStore.setActiveDate(`${lessonStore.todayMonth}/${lessonStore.todayDay}`);
 lessonStore.getStudioLessonDataApi().catch((error: any) => {
   useApiErrorHandler(router, error);
 });
@@ -60,6 +63,8 @@ lessonStore.getStudioLessonDataApi().catch((error: any) => {
       :is-auth="userStore.user.id ? true : false"
       :studio-name="lessonStore.studioData.studio_name"
       :week-data="lessonStore.weekData"
+      :total-week-data="lessonStore.totalWeekData"
+      :active-date="lessonStore.activeDate"
       :studio-lesson-list="lessonStore.studioLessonList"
       :time-options="lessonStore.timeOptions"
       :change-studio-lesson-data="changeStudioLessonData"

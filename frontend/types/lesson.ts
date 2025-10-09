@@ -58,12 +58,16 @@ export interface Studio {
   studio_name: string;
 }
 
+export interface SelectedWeekData {
+  date: string;
+  label: string;
+}
+
 export interface WeekData {
   dateObj: Date;
   date: string;
   day: number;
   label: string;
-  active: boolean;
 }
 export interface BaseStudioLesson {
   lesson_id: number;
