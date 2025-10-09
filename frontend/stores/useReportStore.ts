@@ -45,13 +45,13 @@ export const useReportStore = defineStore('report', {
             data: error.value.data,
           });
         }
-        console.log('sendReport fetched:', data.value);
+        // console.log('sendReportApi:', data.value);
         this.initializeReport();
         this.initializeErrors();
         this.isReportLoading = false;
         this.openToast(2500);
       } catch (err: any) {
-        console.error('Error fetching sendReport data:', err.data);
+        console.error('Error sendReportApi:', err.data);
         this.isReportLoading = false;
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);

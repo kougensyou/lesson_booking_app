@@ -30,10 +30,10 @@ export const useInformationStore = defineStore('information', {
         this.gridInfoList = informationData.grid_info as Info[];
         this.listInfoList = informationData.list_info as Info[];
         this.isInformationLoading = false;
-        console.log('information data fetched:', informationData);
+        // console.log('getInformationList:', informationData);
       } catch (err: any) {
         this.isInformationLoading = false;
-        console.error('Error fetching information list:', err.data);
+        console.error('Error getInformationList:', err.data);
         throw err;
       }
     },

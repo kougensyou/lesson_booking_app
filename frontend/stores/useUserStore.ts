@@ -40,7 +40,7 @@ export const useUserStore = defineStore('user', {
         this.isUserLoading = false;
         this.initializeLoginData();
       } catch (err: any) {
-        console.error('Login failed:', err.data);
+        console.error('Error loginApi:', err.data);
         this.isUserLoading = false;
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
@@ -57,7 +57,7 @@ export const useUserStore = defineStore('user', {
         this.isUserLoading = false;
         this.initializeUser();
       } catch (err: any) {
-        console.error('Logout failed:', err.data);
+        console.error('Error logout:', err.data);
         this.isUserLoading = false;
         throw err;
       }
@@ -78,13 +78,13 @@ export const useUserStore = defineStore('user', {
             data: error.value.data,
           });
         }
-        console.log('updatePassword fetched:', data.value);
+        console.log('updatePasswordApi:', data.value);
         this.initializeErrors();
         this.initializePasswordData();
         this.isUserLoading = false;
         this.openToast(2500);
       } catch (err: any) {
-        console.error('Update password failed:', err.data);
+        console.error('Error updatePasswordApi:', err.data);
         this.isUserLoading = false;
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);
@@ -99,7 +99,7 @@ export const useUserStore = defineStore('user', {
         this.formData.append('image', this.fileData);
       }
       this.formData.append('user', JSON.stringify(this.user));
-      console.log('updateUser user: ' + JSON.stringify(this.user));
+      // console.log('updateUser user: ' + JSON.stringify(this.user));
       try {
         const { data, error } = await useSanctumFetch('/api/update_user', {
           method: 'POST',
@@ -113,13 +113,12 @@ export const useUserStore = defineStore('user', {
           });
         }
         this.user = data.value as User;
-        //console.log('updateUser user: ' + JSON.stringify(this.user));
-        console.log('updateUser fetched:', data.value);
+        // console.log('updateUserApi:', data.value);
         this.isUserLoading = false;
         this.initializeErrors();
         this.openToast(2500);
       } catch (err: any) {
-        console.error('Update user failed:', err.data);
+        console.error('Error updateUserApi:', err.data);
         this.isUserLoading = false;
         if (err.statusCode === 422) {
           this.initializeErrors();
@@ -148,12 +147,12 @@ export const useUserStore = defineStore('user', {
             data: error.value.data,
           });
         }
-        console.log('sendPasswordResetMail fetched:', data.value);
+        // console.log('sendPasswordResetMailApi:', data.value);
         this.initializeErrors();
         this.isUserLoading = false;
         this.openToast(2500);
       } catch (err: any) {
-        console.error('sendPasswordResetMail failed:', err.data);
+        console.error('Error sendPasswordResetMailApi:', err.data);
         this.isUserLoading = false;
         if (err.statusCode === 422) {
           this.setErrors(err.data.errors);

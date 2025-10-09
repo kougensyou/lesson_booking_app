@@ -115,10 +115,10 @@ export const useLessonStore = defineStore('lesson', {
         }
         this.nextLessonList = data.value as Lesson[];
         this.isNextLessonLoading = false;
-        console.log(' data fetched:', data.value);
+        // console.log('getNextLessonData:', data.value);
       } catch (err: any) {
         this.isNextLessonLoading = false;
-        console.error('Error fetching lesson list:', err.data);
+        console.error('Error getNextLessonData:', err.data);
         throw err;
       }
     },
@@ -155,10 +155,10 @@ export const useLessonStore = defineStore('lesson', {
         );
         this.lastPage = sameStudioLessonsResponse.last_page;
         this.isAddLessonLoading = false;
-        console.log('same studio lesson data fetched:', data.value);
+        // console.log('addSameStudioLessonList:', data.value);
       } catch (err: any) {
         this.isAddLessonLoading = false;
-        console.error('Error fetching same studio lesson data:', err.data);
+        console.error('Error addSameStudioLessonList:', err.data);
         throw err;
       }
     },
@@ -243,10 +243,10 @@ export const useLessonStore = defineStore('lesson', {
         );
         this.lastPage = searchedLessonsResponse.last_page;
         this.isAddLessonLoading = false;
-        console.log('searched lessons:', this.searchedLessonList);
+        // console.log('addSearchedLessonsApi:', this.searchedLessonList);
       } catch (err: any) {
         this.isAddLessonLoading = false;
-        console.error('Error searching lessons:', err.data);
+        console.error('Error addSearchedLessonsApi:', err.data);
         throw err;
       }
     },
@@ -274,10 +274,10 @@ export const useLessonStore = defineStore('lesson', {
         }
         this.lessonDetail = data.value as LessonDetail;
         this.isLessonDetailLoading = false;
-        console.log('lesson detail data fetched:', this.lessonDetail);
+        // console.log('getLessonDetailApi:', this.lessonDetail);
       } catch (err: any) {
         this.isLessonDetailLoading = false;
-        console.error('Error fetching lesson detail data:', err.data);
+        console.error('Error getLessonDetailApi:', err.data);
         throw err;
       }
     },
@@ -351,10 +351,10 @@ export const useLessonStore = defineStore('lesson', {
         this.studioData = studioLessonData.studio_data as Studio;
         this.studioLessonList = studioLessonData.studio_lesson_list;
         this.isStudioLessonLoading = false;
-        console.log('studio lesson data fetched:', studioLessonData);
+        // console.log('getStudioLessonDataApi:', studioLessonData);
       } catch (err: any) {
         this.isStudioLessonLoading = false;
-        console.error('Error fetching studio lesson data:', err.data);
+        console.error('Error getStudioLessonDataApi:', err.data);
         throw err;
       }
     },

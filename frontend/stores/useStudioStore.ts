@@ -34,10 +34,10 @@ export const useStudioStore = defineStore('studio', {
         }
         this.studioList = data.value as Studio[];
         this.isStudioLoading = false;
-        console.log('studio data fetched:', this.studioList);
+        // console.log('getStudioList:', this.studioList);
       } catch (err: any) {
         this.isStudioLoading = false;
-        console.error('Error fetching studio data:', err.data);
+        console.error('Error getStudioList:', err.data);
         throw err;
       }
     },
@@ -60,10 +60,10 @@ export const useStudioStore = defineStore('studio', {
         this.initialFavoriteStudioList = data.value as Studio[];
         this.favoriteStudioList = data.value as Studio[];
         this.isFavoriteStudioLoading = false;
-        console.log('favorite studio data fetched:', this.favoriteStudioList);
+        // console.log('getFavoriteStudioList:', this.favoriteStudioList);
       } catch (err: any) {
         this.isFavoriteStudioLoading = false;
-        console.error('Error fetching favorite studio data:', err.data);
+        console.error('Error getFavoriteStudioList:', err.data);
         throw err;
       }
     },
@@ -87,14 +87,14 @@ export const useStudioStore = defineStore('studio', {
             data: error.value.data,
           });
         }
-        console.log('saveFavoriteStudioList fetched:', data.value);
+        // console.log('saveFavoriteStudioList:', data.value);
         this.initialFavoriteStudioList = data.value as Studio[];
         this.favoriteStudioList = data.value as Studio[];
         this.saveButtonActive = false;
         this.isFavoriteStudioLoading = false;
         this.openToast(2500);
       } catch (err: any) {
-        console.error('Error fetching saveFavoriteStudioList data:', err.data);
+        console.error('Error saveFavoriteStudioList:', err.data);
         this.isFavoriteStudioLoading = true;
         throw err;
       }
