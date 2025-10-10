@@ -4,6 +4,7 @@ import { useStudioStore } from '~/stores/useStudioStore';
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useUserStore } from '~/stores/useUserStore';
 import { onMounted } from 'vue';
+import { getI18nArray } from '~/composables/i18n';
 import FirstSelectedLesson from '~/components/firstLessonBooking/FirstSelectedLesson.vue';
 import FirstUser from '~/components/firstLessonBooking/FirstUser.vue';
 import chevronRight from '~/assets/icons/chevron_right.svg';
@@ -20,6 +21,9 @@ const studioStore = useStudioStore();
 const lessonBookingStore = useLessonBookingStore();
 const userStore = useUserStore();
 
+const i18n = useI18n();
+const dayOfTheWeek = getI18nArray(i18n, 'studioLesson.dayOfTheWeek');
+
 onMounted(() => {
   const current = history.state.current;
   const forward = history.state.forward;
@@ -32,9 +36,10 @@ onMounted(() => {
   }
 });
 
-const changeStudioLessonData = (selectedDateObj: Date) => {
+const changeStudioLessonData = (selectedDateObj: Date, date: string) => {
   lessonStore.setDate(selectedDateObj);
-  lessonStore.setWeekData();
+  lessonStore.setWeekData(dayOfTheWeek);
+  lessonStore.setActiveDate(date);
   lessonStore.getStudioLessonDataApi().catch((error: any) => {
     useApiErrorHandler(router, error);
   });
@@ -52,7 +57,9 @@ const validateFirstLesson = () => {
 };
 
 lessonStore.setDate(new Date());
-lessonStore.setWeekData();
+lessonStore.setWeekData(dayOfTheWeek);
+lessonStore.setTotalWeekData(dayOfTheWeek);
+lessonStore.setActiveDate(`${lessonStore.todayMonth}/${lessonStore.todayDay}`);
 
 studioStore.getStudioList().catch((error: any) => {
   useApiErrorHandler(router, error);
@@ -92,6 +99,8 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
       "
       :is-auth="userStore.user.id ? true : false"
       :week-data="lessonStore.weekData"
+      :total-week-data="lessonStore.totalWeekData"
+      :active-date="lessonStore.activeDate"
       :time-options="lessonStore.timeOptions"
       :errors="lessonBookingStore.errors"
     />

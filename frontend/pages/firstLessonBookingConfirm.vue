@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useLessonBookingStore } from '~/stores/useLessonBookingStore';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
+import { useRouter } from 'vue-router';
 import FirstUser from '~/components/firstLessonBookingConfirm/FirstUser.vue';
 import ConfirmDialog from '~/components/firstLessonBookingConfirm/ConfirmDialog.vue';
-import { useRouter } from 'vue-router';
+import chevronRight from '~/assets/icons/chevron_right.svg';
 
 definePageMeta({
   layout: 'no-sidebar',
@@ -63,12 +64,11 @@ const applyFirstLesson = () => {
       @click="lessonBookingStore.openDialog()"
     >
       <span class="text-white">{{ $t('firstLessonBookingConfirm.book') }}</span>
-      <span
-        class="text-white material-symbols-outlined absolute right-3"
-        aria-hidden="true"
-      >
-        chevron_right
-      </span>
+      <img
+        class="absolute right-3 top-1/2 -translate-y-1/2"
+        :src="chevronRight"
+        alt="Chevron Right"
+      />
     </button>
 
     <ConfirmDialog

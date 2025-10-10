@@ -9,7 +9,7 @@ defineProps<{
   isLoading: boolean;
   studioName: string;
   weekData: WeekData[];
-  totalWeekData: Array<WeekData[]>;
+  totalWeekData: Array<Array<WeekData>>;
   activeDate: string;
   timeOptions: Array<string>;
   studioLessonList: Array<StudioLesson>;

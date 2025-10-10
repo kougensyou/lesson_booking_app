@@ -38,7 +38,7 @@ export const useLessonStore = defineStore('lesson', {
     lessonDetail: {} as LessonDetail,
     studioData: {} as Studio,
     weekData: [] as SelectedWeekData[],
-    totalWeekData: [] as Array<WeekData[]>,
+    totalWeekData: [] as Array<Array<WeekData>>,
     activeDate: '' as string,
     isTimeOptionsLoading: false as boolean,
     timeOptions: [] as string[],

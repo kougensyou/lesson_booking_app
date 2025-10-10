@@ -13,6 +13,8 @@ defineProps<{
   isAuth: boolean;
   isStudioLessonLoading: boolean;
   weekData: Array<WeekData>;
+  totalWeekData: Array<Array<WeekData>>;
+  activeDate: string;
   timeOptions: Array<string>;
   studioLessonList: Array<StudioLesson>;
   selectedLesson: FirstSelectedLesson;
@@ -94,6 +96,8 @@ defineProps<{
     :is-loading="isStudioLessonLoading"
     :is-auth="isAuth"
     :week-data="weekData"
+    :total-week-data="totalWeekData"
+    :active-date="activeDate"
     :studio-lesson-list="studioLessonList"
     :time-options="timeOptions"
     :change-studio-lesson-data="changeStudioLessonData"
