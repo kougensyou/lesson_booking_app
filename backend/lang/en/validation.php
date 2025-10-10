@@ -136,7 +136,7 @@ return [
             'mismatch' => 'The new password and confirmation do not match.',
         ],
         'currentPassword' => [
-            'invalid' => 'The current password is incorrect.',
+            'invalid' => 'The Current Password is incorrect.',
         ],
         'image_url' => [
             'required' => 'Please select an image.',
@@ -163,12 +163,12 @@ return [
         'name'                 => 'Name',
         'email'                => 'Email',
         'birth_date'           => 'Birth Date',
-        'tel_no'               => 'Tel No.',
+        'tel_no'               => 'Phone Number',
         'zip_code'             => 'Zip Code',
         'address'              => 'Address',
         'password'             => 'Password',
         'report_title'         => 'Title',
-        'report_email'         => 'Reply Email',
+        'report_email'         => 'Reply Email Address',
         'report_contents'      => 'Contents',
         'current_password'     => 'Current Password',
         'new_password'         => 'New Password',

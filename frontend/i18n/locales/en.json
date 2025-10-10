@@ -36,7 +36,7 @@
     "email": "Email",
     "emailPlaceholder": "Ex：test{'@'}test.com",
     "password": "Password",
-    "passwordPlaceholder": "alphanumeric characters (half-width)",
+    "passwordPlaceholder": "half-width alphanumeric characters",
     "loginButton": "Login",
     "forgetPassword": "Forget Password?",
     "noAccount": "Don't have an account?",
@@ -59,16 +59,16 @@
     "studio": "Studio",
     "change": "Change",
     "name": "Name",
-    "birthDay": "Date of Birth",
+    "birthDay": "Birth Date",
     "email": "Email",
     "next": "Next"
   },
   "firstLessonBookingConfirm": {
     "tabTitle": "Trial Lesson Booking",
     "name": "Name",
-    "birthDay": "Date of Birth",
+    "birthDay": "Birth Date",
     "email": "Email",
-    "bookDialogMessage": "Is the following information correct?",
+    "bookDialogMessage": "Is the following correct?",
     "book": "Book",
     "back": "Back"
   },
@@ -97,7 +97,7 @@
     "instructor": "Instructor",
     "lessonName": "Lesson Name",
     "searchButton": "Search",
-    "noSearchedLessons": "No searched lessons.",
+    "noSearchedLessons": "No lessons were found.",
     "back": "Back"
   },
   "studioLesson": {
@@ -108,14 +108,14 @@
   },
   "lessonDetail": {
     "tabTitle": "Lesson Detail",
-    "bookButton": "Book a Lesson",
-    "cancelButton": "Cancel a Lesson",
+    "bookButton": "Book",
+    "cancelButton": "Cancel",
     "backButton": "Back",
-    "bookConfirmed": "Booking Confirmed",
-    "cancelConfirmed": "Cancel Confirmed",
-    "confirmDialogMessage": "Do you book the following lesson?",
-    "cancelDialogMessage": "Do you cancel the following lesson?",
-    "doneMessage": "This lesson has been completed.",
+    "bookConfirmed": "Book",
+    "cancelConfirmed": "Cancel",
+    "bookDialogMessage": "Do you want to book the following lesson?",
+    "cancelDialogMessage": "Do you want to cancel the following lesson?",
+    "doneMessage": "This lesson is finished.",
     "bookingMessage": "This lesson is currently booked.",
     "fullMessage": "This lesson is fully booked."
   },
@@ -138,14 +138,14 @@
   },
   "memberInfo": {
     "tabTitle": "Member Information/Settings",
-    "birthDay": "Date of Birth",
+    "birthDay": "Birth Date",
     "address": "Address",
-    "telNo": "Telephone Number",
+    "telNo": "Phone Number",
     "email": "Email",
-    "userUpdate": "Profile Update",
-    "favoriteStudio": "Favorite Studio Registration",
+    "userUpdate": "Update Profile",
+    "favoriteStudio": "Register Favorite Studio",
     "report": "Report",
-    "passwordChange": "Password Change",
+    "passwordChange": "Change Password",
     "logout": "Logout"
   },
   "favoriteStudio": {
@@ -159,11 +159,11 @@
   "report": {
     "tabTitle": "Report",
     "report": "Contact Us",
-    "reportTitle": "Subject",
+    "reportTitle": "Title",
     "replyEmail": "Reply Email Address",
-    "reportContent": "Content",
+    "reportContent": "Contents",
     "send": "Send",
-    "toastMessage": "Your inquiry has been sent!"
+    "toastMessage": "Your Report has been sent!"
   },
   "passwordChange": {
     "tabTitle": "Password Change",
@@ -177,11 +177,11 @@
   "userUpdate": {
     "tabTitle": "User Update",
     "selectImage": "Select Image",
-    "name": "Profile Name",
-    "birthDay": "Date of Birth",
+    "name": "Name",
+    "birthDay": "Birth Date",
     "zipCode": "Zip Code",
     "address": "Address",
-    "telNo": "Telephone Number",
+    "telNo": "Phone Number",
     "email": "Email",
     "update": "Update Profile",
     "toastMessage": "Your profile has been updated!"
