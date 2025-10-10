@@ -1,5 +1,3 @@
-const selectedLocale = 'ja';
-
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
@@ -49,16 +47,12 @@ export default defineNuxtConfig({
   },
   i18n: {
     locales: [
-      { code: 'ja', name: '日本語', file: 'ja.json' },
-      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'ja', language: 'ja-JP', file: 'ja.json' },
+      { code: 'en', language: 'en-US', file: 'en.json' },
     ],
-    lazy: true,
-    langDir: '../locales/',
-    defaultLocale: selectedLocale,
+    langDir: 'locales/',
+    defaultLocale: 'en',
     strategy: 'no_prefix',
-    bundle: {
-      optimizeTranslationDirective: false,
-    },
   },
   app: {
     head: {
