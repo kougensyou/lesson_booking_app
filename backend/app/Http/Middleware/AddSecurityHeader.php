@@ -17,16 +17,10 @@ class AddSecurityHeader
     {
         $response = $next($request);
 
-        $switch_object = 'Symfony\\Component\\HttpFoundation\\StreamedResponse';
-
-        $csp_header = 
-            "img-src 'self' data:; ".
-            "frame-ancestors 'self'; ".
-            "form-action 'self'; ";
+        $csp_header = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'self'; form-action 'self';";
 
         $output_headers = [
             'Content-Security-Policy' => $csp_header,
-            'X-Frame-Options'         => 'SAMEORIGIN',
             'X-Content-Type-Options'  =>  'nosniff',
         ];
 

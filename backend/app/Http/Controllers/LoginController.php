@@ -21,6 +21,7 @@ final class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (auth()->attempt($credentials)) {
+            $request->session()->regenerate();
             return response()->json(['message' => 'Login successful'], 200);
         }
 
