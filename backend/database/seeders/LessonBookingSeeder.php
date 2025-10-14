@@ -12,7 +12,7 @@ class LessonBookingSeeder extends Seeder
     {
         LessonBooking::insert([
             ['booking_time' => Carbon::now(), 'lesson_id' => 1, 'user_id' => 1, 'done_flag' => null],
-            ['booking_time' => Carbon::now()->subDay(), 'lesson_id' => 2, 'user_id' => 2, 'done_flag' => null],
+            ['booking_time' => Carbon::now()->subDay(), 'lesson_id' => 2, 'user_id' => 2, 'done_flag' => 1],
             ['booking_time' => Carbon::now()->subDays(2), 'lesson_id' => 3, 'user_id' => 3, 'done_flag' => 1],
         ]);
     }

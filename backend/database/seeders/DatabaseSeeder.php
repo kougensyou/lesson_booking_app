@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             LessonBookingSeeder::class,
             LessonCategorySeeder::class,
             LessonSeeder::class,
-            StudioCategorySeeder::class,
-            StudioSeeder::class
+            StudioSeeder::class,
+            ReportSeeder::class,
         ]);
     }
 }
