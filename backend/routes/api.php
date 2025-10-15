@@ -23,7 +23,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LogoutController::class , 'logout']);
 
-Route::post('/send_password_reset_mail', [UserController::class , 'sendPasswordResetMail']);
+// Route::post('/send_password_reset_mail', [UserController::class , 'sendPasswordResetMail']);
 Route::post('/validate_first_lesson', [LessonBookingController::class , 'validateFirstLesson']);
 Route::post('/apply_first_lesson', [LessonBookingController::class , 'applyFirstLesson']);
 
@@ -47,6 +47,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('add_booking_history', [LessonBookingController::class , 'addBookingHistory']);
     Route::post('save_favorite_studio_list', [StudioController::class , 'saveFavoriteStudioList']);
     Route::post('send_report', [ReportController::class , 'sendReport']);
-    Route::post('update_password', [UserController::class , 'updatePassword']);
+    // Route::post('update_password', [UserController::class , 'updatePassword']);
     Route::post('update_user', [UserController::class , 'updateUser']);
 });

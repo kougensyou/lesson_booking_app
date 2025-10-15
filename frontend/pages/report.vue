@@ -4,6 +4,7 @@ import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
 import SpinLoading from '~/components/common/SpinLoading.vue';
+import chevronRight from '~/assets/icons/chevron_right.svg';
 
 definePageMeta({
   middleware: 'auth',
@@ -86,7 +87,7 @@ const sendReport = () => {
     </div>
 
     <button
-      class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"
+      class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
       @click="sendReport()"
     >
       <span v-if="!reportStore.isReportLoading" class="text-white">{{
@@ -98,12 +99,11 @@ const sendReport = () => {
       >
         <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
       </span>
-      <span
-        class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
-        aria-hidden="true"
-      >
-        chevron_right
-      </span>
+      <img
+        class="absolute right-3 top-1/2 -translate-y-1/2"
+        :src="chevronRight"
+        alt="Chevron Right"
+      />
     </button>
     <Toast
       :show="reportStore.toastVisible"

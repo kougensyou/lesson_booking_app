@@ -146,11 +146,7 @@ const updateUser = () => {
       <label class="block text-sm font-medium">{{
         $t('userUpdate.email')
       }}</label>
-      <input
-        v-model="userStore.user.email"
-        type="text"
-        class="mt-1 w-full rounded border p-2"
-      />
+      {{ userStore.user.email }}
       <template v-for="errorMessage in userStore.errors?.email">
         <div class="text-red-600 w-full">
           {{ errorMessage }}

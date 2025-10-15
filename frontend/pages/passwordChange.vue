@@ -3,7 +3,8 @@ import { useUserStore } from '../stores/useUserStore';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
-import SpinLoading from '~/components/common/SpinLoading.vue';
+// import SpinLoading from '~/components/common/SpinLoading.vue';
+// import chevronRight from '~/assets/icons/chevron_right.svg';
 
 definePageMeta({
   middleware: 'auth',
@@ -86,7 +87,7 @@ const updatePassword = () => {
       </template>
     </div>
 
-    <button
+    <!-- <button
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
       @click="updatePassword()"
     >
@@ -99,12 +100,16 @@ const updatePassword = () => {
       >
         <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
       </span>
-      <span
-        class="text-white material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2"
-        aria-hidden="true"
-      >
-        chevron_right
-      </span>
+      <img
+        class="absolute right-3 top-1/2 -translate-y-1/2"
+        :src="chevronRight"
+        alt="Chevron Right"
+      />
+    </button> -->
+    <button
+      class="bg-gray-200 text-gray-500 cursor-not-allowed mt-12 rounded-3xl w-full py-4 relative"
+    >
+      <span>{{ $t('passwordChange.updatePassword') }}</span>
     </button>
     <Toast :show="userStore.toastVisible" :message="userStore.toastMessage" />
   </div>

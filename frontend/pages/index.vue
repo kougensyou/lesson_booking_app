@@ -65,7 +65,7 @@ const login = () => {
         </div>
       </template>
       <button
-        class="mt-12 w-full bg-sky-500 rounded-3xl py-4 relative group font-loaded"
+        class="mt-12 w-full bg-sky-500 rounded-3xl py-4 relative"
         @click="login()"
       >
         <span v-if="!userStore.isUserLoading" class="text-white">{{
@@ -96,7 +96,7 @@ const login = () => {
         <div class="font-bold">{{ $t('index.noAccount') }}</div>
       </div>
       <button
-        class="mt-12 bg-orange-500 rounded-3xl w-full py-4 relative group font-loaded"
+        class="mt-12 bg-orange-500 rounded-3xl w-full py-4 relative"
         @click="$router.push('/firstLessonBooking')"
       >
         <span class="text-white">{{ $t('index.firstLesson') }}</span>

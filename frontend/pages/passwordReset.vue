@@ -3,7 +3,7 @@ import { useUserStore } from '../stores/useUserStore';
 import { useApiErrorHandler } from '~/composables/useApiErrorHandler';
 import { useRouter } from 'vue-router';
 import Toast from '~/components/common/Toast.vue';
-import SpinLoading from '~/components/common/SpinLoading.vue';
+// import SpinLoading from '~/components/common/SpinLoading.vue';
 import chevronRight from '~/assets/icons/chevron_right.svg';
 
 definePageMeta({
@@ -55,8 +55,8 @@ const sendPasswordResetMail = () => {
         </div>
       </template>
 
-      <button
-        class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative group font-loaded"
+      <!-- <button
+        class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
         @click="sendPasswordResetMail()"
       >
         <span v-if="!userStore.isUserLoading" class="text-white">{{
@@ -73,6 +73,11 @@ const sendPasswordResetMail = () => {
           :src="chevronRight"
           alt="Chevron Right"
         />
+      </button> -->
+      <button
+        class="bg-gray-200 text-gray-500 cursor-not-allowed mt-12 rounded-3xl w-full py-4 relative"
+      >
+        <span>{{ $t('passwordChange.updatePassword') }}</span>
       </button>
     </div>
     <div class="mt-4 mb-4 bg-white max-w-[640px] mx-auto p-6">
@@ -80,7 +85,7 @@ const sendPasswordResetMail = () => {
         <div class="font-bold">{{ $t('index.noAccount') }}</div>
       </div>
       <button
-        class="mt-12 bg-orange-500 rounded-3xl w-full py-4 relative group font-loaded"
+        class="mt-12 bg-orange-500 rounded-3xl w-full py-4 relative"
         @click="$router.push('/firstLessonBooking')"
       >
         <span class="text-white">{{ $t('index.firstLesson') }}</span>
