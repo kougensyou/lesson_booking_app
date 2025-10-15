@@ -24,7 +24,7 @@ class UserService
                 $item->image_url = null;
                 return $item;
             })
-            ->first();
+            ->firstOrFail();
         } catch (\Throwable $e) {
             \Log::error('getUser error: ' . $e->getMessage());
             throw $e;

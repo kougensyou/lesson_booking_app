@@ -204,7 +204,7 @@ class LessonService
                 $item->empty_flag = $item->max_user_num !== $item->booking_user_num;
                 return $item;
             })
-            ->first();
+            ->firstOrFail();
 
         } catch (\Throwable $e) {
             \Log::error('getLessonDetail error: ' . $e->getMessage());
@@ -276,7 +276,7 @@ class LessonService
     private function getStudioData($studioId) {
         return Studio::select('id', 'studio_name')
         ->where('id', $studioId)
-        ->first();
+        ->firstOrFail();
     }
 
 }
