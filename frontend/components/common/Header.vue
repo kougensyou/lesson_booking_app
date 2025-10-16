@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import menu from '~/assets/icons/menu.svg';
 import close from '~/assets/icons/close.svg';
-import Logo from '~/assets/icons/logo.png';
+import Logo from '~/public/lesson-booking-logo.png';
 
 defineProps<{
   isSidebarIcon: boolean;
