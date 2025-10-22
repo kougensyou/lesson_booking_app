@@ -2,13 +2,17 @@ import { defineStore } from 'pinia';
 
 export const useReportStore = defineStore('report', {
   state: () => ({
+    // Report Input Form
     title: '',
     email: '',
     contents: '',
+    // Toast
     toastMessage: '' as string,
     toastVisible: false as boolean,
     toastTimeout: 0 as number,
+    // Loading
     isReportLoading: false as boolean,
+    // Errors
     errors: {} as any,
   }),
   actions: {

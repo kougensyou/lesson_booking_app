@@ -7,6 +7,11 @@ use App\Models\Info;
 
 class InformationService
 {
+    /**
+     * Get a list of information from the database
+     *
+     * @return array
+     */
     public function getInformationList() {
         try {
             $sliderInfo = Info::where('kind', config('const.information.infoKindSlider'))

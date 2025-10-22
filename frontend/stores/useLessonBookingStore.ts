@@ -10,8 +10,14 @@ import type { BaseStudioLesson, Lesson } from '~/types/lesson';
 
 export const useLessonBookingStore = defineStore('lessonBooking', {
   state: () => ({
+    // Loading
     isSelectedLessonLoading: false as boolean,
+    isBookingStatusLoading: false as boolean,
+    isBookingHistoryLoading: false as boolean,
+    isFirstBookingLoading: false as boolean,
+    // Selected Lessons
     selectedLessonList: [] as LessonBooking[],
+    // Calendar Settings
     calendarLocale: '' as string,
     calendarThemeColor: 'blue',
     selectedMonth: new Date().getMonth(),
@@ -19,13 +25,14 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     todayMonth: new Date().getMonth() + 1,
     todayYear: new Date().getFullYear(),
     todayDay: new Date().getDate(),
-    isBookingStatusLoading: false as boolean,
+    // Dialog
     isDialogOpen: false as boolean,
+    // Pagination
     loadedPage: 0 as number,
     lastPage: 0 as number,
-    isBookingHistoryLoading: false as boolean,
+    // Booking History List
     bookingHistoryList: [] as Lesson[],
-    isFirstBookingLoading: false as boolean,
+    // First Lesson Booking
     firstBooking: {
       selectedLesson: {
         lesson_category_name: '',
@@ -88,6 +95,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       const { t } = useI18n();
       this.calendarLocale = t('lessonBooking.calendarLocale');
     },
+    // Parse a date string into a Date object.
     parseDateString(dateStr: string | undefined | null): Date {
       if (!dateStr || typeof dateStr !== 'string') return new Date('');
       return new Date(dateStr.replace(' ', 'T'));
@@ -128,6 +136,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         throw err;
       }
     },
+    // Get booked lessons for previous month
     async getPrevLessonList() {
       // console.log('getPrevLessonList called');
       try {
@@ -161,6 +170,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         throw err;
       }
     },
+    // Get booked lessons for next month
     async getNextLessonList() {
       try {
         this.selectedMonth += 1;
@@ -257,6 +267,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       this.isBookingHistoryLoading = false;
       this.bookingHistoryList = [];
     },
+    // Load more booking history
     async addBookingHistory() {
       this.isBookingHistoryLoading = true;
       try {
@@ -289,6 +300,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         throw err;
       }
     },
+    // Set first selected lesson
     setFirstSelectedLesson(studioLessonData: BaseStudioLesson) {
       this.firstBooking.selectedLesson.lesson_day = studioLessonData.lesson_day;
       this.firstBooking.selectedLesson.lesson_time =

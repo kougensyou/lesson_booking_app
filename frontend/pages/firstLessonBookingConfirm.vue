@@ -38,6 +38,7 @@ const applyFirstLesson = () => {
   ></div>
 
   <div class="px-4 py-3 space-y-6">
+    <!-- First Selected Lesson Information -->
     <div class="border rounded p-4 flex items-start mb-6 bg-white">
       <div class="text-center w-24 flex-shrink-0">
         <div class="text-sm font-semibold">
@@ -57,8 +58,10 @@ const applyFirstLesson = () => {
       </div>
     </div>
 
+    <!-- First User Information -->
     <FirstUser :user="lessonBookingStore.firstBooking.user" />
 
+    <!-- Apply Button -->
     <button
       class="mt-12 bg-sky-500 rounded-3xl py-4 w-full relative"
       @click="lessonBookingStore.openDialog()"
@@ -71,6 +74,7 @@ const applyFirstLesson = () => {
       />
     </button>
 
+    <!-- Confirm Dialog -->
     <ConfirmDialog
       v-if="lessonBookingStore.isDialogOpen"
       :is-first-booking-loading="lessonBookingStore.isFirstBookingLoading"

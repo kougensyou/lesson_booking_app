@@ -14,18 +14,18 @@ import type {
 
 export const useLessonStore = defineStore('lesson', {
   state: () => ({
+    // Loading
     isNextLessonLoading: false as boolean,
-    nextLessonList: [] as Lesson[],
-    sameStudioLessonList: [] as Lesson[],
     isLessonCategoryLoading: false as boolean,
-    lessonCategoryList: [] as LessonCategory[],
+    isAddLessonLoading: false as boolean,
+    isLessonDetailLoading: false as boolean,
+    isTimeOptionsLoading: false as boolean,
+    isStudioLessonLoading: false as boolean,
+    // Search Form
     searchInputForm: {
       selectedDates: [] as string[],
     } as SearchInputForm,
-    loadedPage: 0 as number,
-    lastPage: 0 as number,
-    isAddLessonLoading: false as boolean,
-    searchedLessonList: [] as Lesson[],
+    lessonCategoryList: [] as LessonCategory[],
     startTimeOptions: [] as string[],
     endTimeOptions: [] as string[],
     selectedMonth: new Date().getMonth(),
@@ -33,19 +33,25 @@ export const useLessonStore = defineStore('lesson', {
     todayMonth: new Date().getMonth() + 1,
     todayYear: new Date().getFullYear(),
     todayDay: new Date().getDate(),
+    // Pagination
+    loadedPage: 0 as number,
+    lastPage: 0 as number,
+    // Lesson List
+    nextLessonList: [] as Lesson[],
+    sameStudioLessonList: [] as Lesson[],
+    searchedLessonList: [] as Lesson[],
+    studioLessonList: {} as StudioLesson,
+    // Lesson Detail
     lessonId: '',
-    isLessonDetailLoading: false as boolean,
     lessonDetail: {} as LessonDetail,
     studioData: {} as Studio,
+    // Studio Lesson Data
     weekData: [] as SelectedWeekData[],
     totalWeekData: [] as Array<Array<WeekData>>,
     activeDate: '' as string,
-    isTimeOptionsLoading: false as boolean,
     timeOptions: [] as string[],
     fromDate: '',
     toDate: '',
-    isStudioLessonLoading: false as boolean,
-    studioLessonList: {} as StudioLesson,
     selectedStudioId: '',
   }),
   persist: {
@@ -53,6 +59,7 @@ export const useLessonStore = defineStore('lesson', {
     pick: ['lessonDetail', 'searchInputForm'],
   },
   actions: {
+    // Check if the given day is included in the selected dates.
     checkSelected(day: number): boolean {
       return this.searchInputForm.selectedDates.includes(
         this.selectedYear.toString() +
@@ -62,6 +69,7 @@ export const useLessonStore = defineStore('lesson', {
           day.toString().padStart(2, '0')
       );
     },
+    // Change selected month to previous month
     changeByPrev() {
       this.selectedMonth -= 1;
       if (this.selectedMonth < 0) {
@@ -69,6 +77,7 @@ export const useLessonStore = defineStore('lesson', {
         this.selectedYear -= 1;
       }
     },
+    // Change selected month to next month
     changeByNext() {
       this.selectedMonth += 1;
       if (this.selectedMonth > 11) {
@@ -76,6 +85,7 @@ export const useLessonStore = defineStore('lesson', {
         this.selectedYear += 1;
       }
     },
+    // Remove the given day from the selected dates.
     removeSelected(day: number) {
       this.searchInputForm.selectedDates =
         this.searchInputForm.selectedDates.filter(
@@ -88,6 +98,7 @@ export const useLessonStore = defineStore('lesson', {
               day.toString().padStart(2, '0')
         );
     },
+    // Add the given day to the selected dates.
     addSelected(day: number) {
       this.searchInputForm.selectedDates.push(
         this.selectedYear.toString() +
@@ -129,6 +140,7 @@ export const useLessonStore = defineStore('lesson', {
       this.searchedLessonList = [] as Lesson[];
       this.sameStudioLessonList = [] as Lesson[];
     },
+    // Load more lessons from the same studio
     async addSameStudioLessonList(studioId: string) {
       this.isAddLessonLoading = true;
       try {
@@ -217,6 +229,7 @@ export const useLessonStore = defineStore('lesson', {
         '-' +
         this.todayDay.toString().padStart(2, '0');
     },
+    // Load more lessons based on search input form
     async addSearchedLessonsApi() {
       this.isAddLessonLoading = true;
       try {
@@ -284,12 +297,27 @@ export const useLessonStore = defineStore('lesson', {
     setStudioId(studioId: string) {
       this.selectedStudioId = studioId;
     },
+    /**
+     * Set date range for studio lesson data.
+     * Set this.fromDate and this.toDate based on given baseDate.
+     * The range is 7 days from the baseDate.
+     */
     setDate(baseDate: Date) {
       this.fromDate = baseDate.toLocaleDateString('sv-SE');
       this.toDate = new Date(
         baseDate.getTime() + 6 * 24 * 60 * 60 * 1000
       ).toLocaleDateString('sv-SE');
     },
+    /**
+     * Set week data for studio lesson data.
+     * Set this.weekData based on given dayOfTheWeek.
+     * this.weekData is an array of objects with date and label.
+     * Date is in the format of "MM/DD" and label is the day of the week.
+     * The range is 7 days from this.fromDate.
+     * @param {string[]} dayOfTheWeek - array of day of the week.
+     * @example
+     * setWeekData(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
+     */
     setWeekData(dayOfTheWeek: string[]) {
       this.weekData = [];
       const date = new Date(this.fromDate);
@@ -301,6 +329,16 @@ export const useLessonStore = defineStore('lesson', {
         });
       }
     },
+    /**
+     * Set total week data for studio lesson data.
+     * Set this.totalWeekData based on given dayOfTheWeek.
+     * this.totalWeekData is a 2D array of objects with dateObj, date, day and label.
+     * Date is in the format of "MM/DD" and label is the day of the week.
+     * The range is 4 weeks from this.fromDate.
+     * @param {string[]} dayOfTheWeek - array of day of the week.
+     * @example
+     * setTotalWeekData(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
+     */
     setTotalWeekData(dayOfTheWeek: string[]) {
       this.totalWeekData = [];
       const date = new Date(this.fromDate);

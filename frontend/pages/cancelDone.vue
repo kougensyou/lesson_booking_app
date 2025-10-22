@@ -15,6 +15,7 @@ const lessonStore = useLessonStore();
   </div>
 
   <div class="p-4 max-w-md mx-auto">
+    <!-- Canceled Lesson Information -->
     <h2 class="text-lg font-semibold text-center mb-4">
       {{ $t('cancelDone.cancelMessage') }}
     </h2>
@@ -38,6 +39,7 @@ const lessonStore = useLessonStore();
       </div>
     </div>
 
+    <!-- Buttons -->
     <div class="space-y-2">
       <button
         @click="$router.push({ path: '/lessonBooking' })"

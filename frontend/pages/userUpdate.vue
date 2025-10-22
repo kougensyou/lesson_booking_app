@@ -35,6 +35,7 @@ const updateUser = () => {
   ></div>
 
   <div class="px-4 py-3 space-y-6">
+    <!-- User Image -->
     <div class="flex items-center space-x-4">
       <img
         :src="userStore.user.image_url"
@@ -61,6 +62,8 @@ const updateUser = () => {
         {{ errorMessage }}
       </div>
     </template>
+
+    <!-- User Input Form -->
 
     <div>
       <label class="block text-sm font-medium">{{
@@ -154,6 +157,7 @@ const updateUser = () => {
       </template>
     </div>
 
+    <!-- Update Button -->
     <button
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
       @click="updateUser()"
@@ -175,5 +179,7 @@ const updateUser = () => {
       </span>
     </button>
   </div>
+
+  <!-- Toast Message -->
   <Toast :show="userStore.toastVisible" :message="userStore.toastMessage" />
 </template>

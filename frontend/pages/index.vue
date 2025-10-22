@@ -33,6 +33,7 @@ const login = () => {
     ></div>
 
     <div class="mt-4 mb-4 p-4 bg-white max-w-[640px] mx-auto">
+      <!-- Input Form -->
       <div class="flex items-center justify-center">
         {{ $t('index.title') }}
       </div>
@@ -64,6 +65,8 @@ const login = () => {
           {{ errorMessage }}
         </div>
       </template>
+
+      <!-- Login Button -->
       <button
         class="mt-12 w-full bg-sky-500 rounded-3xl py-4 relative"
         @click="login()"
@@ -91,6 +94,8 @@ const login = () => {
         >
       </div>
     </div>
+
+    <!-- First Lesson Button -->
     <div class="bg-white max-w-[640px] mx-auto p-6">
       <div class="flex items-center justify-center">
         <div class="font-bold">{{ $t('index.noAccount') }}</div>

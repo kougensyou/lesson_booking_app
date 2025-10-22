@@ -15,6 +15,9 @@ class PasswordChangeRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Prepare the data for validation.
+     */
     protected function prepareForValidation()
     {
         $this->merge([
@@ -38,6 +41,11 @@ class PasswordChangeRequest extends FormRequest
         ];
     }
 
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
     public function attributes(): array
     {
         return [
@@ -47,6 +55,12 @@ class PasswordChangeRequest extends FormRequest
         ];
     }
 
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {

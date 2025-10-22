@@ -7,6 +7,13 @@ use App\Models\FavoriteStudio;
 
 class StudioService
 {
+    
+    /**
+     * Get a list of studios from the database
+     *
+     * @return array
+     * @throws Throwable
+     */
     public function getStudioList() {
         try {
             return Studio::select('id', 'studio_name', 'image_path')
@@ -25,6 +32,13 @@ class StudioService
         }
     }
 
+    /**
+     * Get a list of favorite studios for the user
+     * 
+     * @param int $userId User ID
+     * @return array Favorite studio list
+     * @throws Throwable
+     */
     public function getFavoriteStudioList($userId) {
         try {
             return FavoriteStudio::join('studio', 'studio.id', '=', 'favorite_studio.studio_id')
@@ -49,6 +63,15 @@ class StudioService
         }
     }
 
+    /**
+     * Save a list of favorite studios for the user
+     *
+     * @param int $userId User ID
+     * @param array $initialFavoriteStudioList Initial favorite studio list
+     * @param array $favoriteStudioList Favorite studio list
+     * @return void
+     * @throws Throwable
+     */
     public function saveFavoriteStudioList($userId, $initialFavoriteStudioList, $favoriteStudioList) {
 
         DB::beginTransaction();

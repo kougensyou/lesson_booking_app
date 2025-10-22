@@ -17,6 +17,12 @@ final class LoginController extends Controller
     ) {
     }
 
+    /**
+     * Handle user login request
+     *
+     * @param LoginFormRequest $request
+     * @return JsonResponse
+     */
     public function login(LoginFormRequest $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');

@@ -11,6 +11,15 @@ use App\Models\Studio;
 
 class LessonService
 {
+    /**
+     * Get the next lesson data for a given user
+     * 
+     * @param int $userId User ID
+     * 
+     * @return \Illuminate\Support\Collection
+     * 
+     * @throws \Throwable
+     */
     public function getNextLessonData($userId) {
         try {
             return LessonBooking::select(
@@ -56,6 +65,18 @@ class LessonService
         }
     }
 
+    /**
+     * Add a list of lessons from the same studio
+     * 
+     * This function returns a list of lessons from the same studio
+     * that are not yet booked by the user.
+     * 
+     * @param int $studioId Studio ID
+     * 
+     * @return \Illuminate\Support\Collection
+     * 
+     * @throws \Throwable
+     */
     public function addSameStudioLessonList($studioId) {
         try {
 
@@ -95,6 +116,13 @@ class LessonService
         
     }
 
+    /**
+     * Get a list of time options
+     * 
+     * @return array
+     * @return string start_time_options A list of start time options
+     * @return string end_time_options A list of end time options
+     */
     public function getTimeOptions() {
         return [
             'start_time_options' => config('const.lesson.startTimeOptions'),
@@ -102,6 +130,12 @@ class LessonService
         ];
     }
 
+    /**
+     * Get a list of lesson categories
+     * 
+     * @return \Illuminate\Support\Collection
+     * @throws \Throwable
+     */
     public function getLessonCategoryList() {
         try{
             return LessonCategory::select('id', 'category_name')
@@ -112,6 +146,13 @@ class LessonService
         }
     }
 
+    /**
+     * Add searched lessons based on the search input form
+     * 
+     * @param array $searchInputForm Search input form
+     * @return \Illuminate\Support\Collection
+     * @throws \Throwable
+     */
     public function addSearchedLessons($searchInputForm) {
         try {
             return Lesson::select(
@@ -166,6 +207,15 @@ class LessonService
         }
     }
 
+    /**
+     * Get lesson detail for a given lesson
+     * 
+     * @param int $userId User ID
+     * @param int $lessonId Lesson ID
+     * 
+     * @return \Illuminate\Support\Collection
+     * @throws \Throwable
+     */
     public function getLessonDetail($userId, $lessonId) {
         try {
             return Lesson::select(
@@ -212,6 +262,17 @@ class LessonService
         }
     }
 
+    /**
+     * Get studio lesson data for a given studio and date range
+     * 
+     * @param int $studioId Studio ID
+     * @param string $fromDate Start date of the date range
+     * @param string $toDate End date of the date range
+     * 
+     * @return array Studio lesson data
+     * 
+     * @throws \Throwable
+     */
     public function getStudioLessonData($studioId, $fromDate, $toDate) {
         try {
             $studioLessonList = $this->getStudioLessonList($studioId, $fromDate, $toDate);
@@ -228,6 +289,17 @@ class LessonService
         }
     }
 
+    /**
+     * Get a list of studio lessons for a given studio and date range
+     * 
+     * @param int $studioId Studio ID
+     * @param string $fromDate Start date of the date range
+     * @param string $toDate End date of the date range
+     * 
+     * @return array Studio lesson list
+     * 
+     * @throws \Throwable
+     */
     private function getStudioLessonList($studioId, $fromDate, $toDate)
     {
         return Lesson::select(
@@ -273,6 +345,15 @@ class LessonService
             }, []);
     }
 
+    /**
+     * Get a studio data by studio ID
+     * 
+     * @param int $studioId Studio ID
+     * 
+     * @return array Studio data
+     * 
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
     private function getStudioData($studioId) {
         return Studio::select('id', 'studio_name')
         ->where('id', $studioId)

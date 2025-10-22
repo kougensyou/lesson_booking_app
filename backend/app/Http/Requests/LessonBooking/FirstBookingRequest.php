@@ -14,6 +14,9 @@ class FirstBookingRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Prepare the data for validation.
+     */
     protected function prepareForValidation()
     {
         $this->merge([

@@ -16,6 +16,12 @@ class ReportController extends Controller
         $this->reportService = new ReportService();
     }
 
+    /**
+     * Send a report from the user
+     * 
+     * @param PostRequest $request
+     * @return array
+     */
     public function sendReport(PostRequest $request) {
         $userId = Auth::id();
         $title = $request->input('title');

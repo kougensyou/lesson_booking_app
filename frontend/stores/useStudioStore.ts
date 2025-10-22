@@ -4,12 +4,16 @@ import { useI18n } from 'vue-i18n';
 
 export const useStudioStore = defineStore('studio', {
   state: () => ({
-    initialFavoriteStudioList: [] as Studio[],
+    // Loading
     isFavoriteStudioLoading: false as boolean,
-    favoriteStudioList: [] as Studio[],
     isStudioLoading: false as boolean,
+    // Studio List
+    initialFavoriteStudioList: [] as Studio[],
+    favoriteStudioList: [] as Studio[],
     studioList: [] as Studio[],
+    // Button
     saveButtonActive: false as boolean,
+    // Toast
     toastMessage: '' as string,
     toastVisible: false as boolean,
     toastTimeout: 0 as number,

@@ -16,6 +16,12 @@ class LessonBookingController extends Controller
         $this->lessonBookingService = new LessonBookingService();
     }
 
+    /**
+     * Get a list of lessons for a given user and selected date
+     * 
+     * @param Request $request
+     * @return mixed
+     */
     public function getSelectedLessonList(Request $request) {
         $userId = Auth::id();
         $selectedYear = $request->query('selected_year');
@@ -23,6 +29,14 @@ class LessonBookingController extends Controller
         return $this->lessonBookingService->getSelectedLessonList($userId, $selectedYear, $selectedMonth);
     }
 
+
+    /**
+     * Book a lesson for a given user
+     * 
+     * @param Request $request
+     * @return array
+     * @throws \Throwable
+     */
     public function bookLesson(Request $request) {
         $lessonId = $request->input('lesson_id');
         $this->lessonBookingService->bookLesson($lessonId);
@@ -33,6 +47,13 @@ class LessonBookingController extends Controller
         ];
     }
 
+    /**
+     * Cancel a lesson for a given user
+     * 
+     * @param Request $request
+     * @return array
+     * @throws \Throwable
+     */
     public function cancelLesson(Request $request) {
         $userId = Auth::id();
         $lessonId = $request->input('lesson_id');
@@ -44,11 +65,23 @@ class LessonBookingController extends Controller
         ];
     }
 
+    /**
+     * Add a booking history for a given user
+     *
+     * @param Request $request
+     * @return mixed
+     */     
     public function addBookingHistory(Request $request) {
         $userId = Auth::id();
         return $this->lessonBookingService->addBookingHistory($userId);
     }
 
+    /**
+     * Validate the first lesson booking request
+     * 
+     * @param FirstBookingRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function validateFirstLesson(FirstBookingRequest $request) {
         return response()->json([
             'message' => 'Validation passed',
@@ -56,6 +89,13 @@ class LessonBookingController extends Controller
         ], 200);
     }
 
+    /**
+     * Apply the first lesson booking request
+     * 
+     * @param FirstBookingRequest $request
+     * @return array
+     * @throws \Throwable
+     */
     public function applyFirstLesson(FirstBookingRequest $request) {
         $firstBooking = $request->input('first_booking');
         $this->lessonBookingService->applyFirstLesson($firstBooking);

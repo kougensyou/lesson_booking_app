@@ -34,6 +34,7 @@ const clickSettingArea = (path: string) => {
     class="fixed inset-0 bg-opacity-50 z-50"
   ></div>
 
+  <!-- User Information -->
   <div class="px-4 py-3 space-y-6">
     <div class="flex items-center space-x-4">
       <img
@@ -80,6 +81,8 @@ const clickSettingArea = (path: string) => {
       </button>
     </div>
   </div>
+
+  <!-- Settings -->
   <div
     v-for="setting in settingStore.settingList"
     class="px-4 py-3 border-b border-gray-100 relative"

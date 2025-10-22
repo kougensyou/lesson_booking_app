@@ -48,6 +48,7 @@ lessonStore
     <SpinLoading />
   </div>
 
+  <!-- No Searched Lesson -->
   <div
     v-if="
       !lessonStore.isAddLessonLoading &&
@@ -66,6 +67,7 @@ lessonStore
     </button>
   </div>
 
+  <!-- Searched Lessons List -->
   <LessonList
     v-if="lessonStore.searchedLessonList.length > 0"
     :lesson-list="lessonStore.searchedLessonList"

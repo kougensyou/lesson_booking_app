@@ -37,6 +37,7 @@ const carouselConfig = {
     <SpinLoading />
   </div>
 
+  <!-- Favorite Studio List -->
   <template v-if="!isFavoriteStudioLoading && favoriteStudioList.length > 0">
     <div class="m-4">
       <Carousel v-bind="carouselConfig">
@@ -66,6 +67,8 @@ const carouselConfig = {
       </Carousel>
     </div>
   </template>
+
+  <!-- No Favorite Studio -->
   <template v-if="!isFavoriteStudioLoading && favoriteStudioList.length === 0">
     <div class="ml-4 mr-4">
       <NuxtLink

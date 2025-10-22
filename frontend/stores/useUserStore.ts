@@ -5,23 +5,29 @@ import { useI18n } from 'vue-i18n';
 export const useUserStore = defineStore('user', {
   state: () => ({
     isUserLoading: false as boolean,
+    // Login Data
     loginData: {
       email: '',
       password: '',
       remember: true,
     } as LoginData,
+    // Password Data
     passwordData: {
       currentPassword: '',
       newPassword: '',
       newPasswordConfirmation: '',
     } as PasswordData,
-    toastMessage: '' as string,
-    toastVisible: false as boolean,
-    toastTimeout: 0 as number,
+    // User Update Data
     user: {} as User,
     fileData: null as File | null,
     formData: new FormData(),
+    // Password Reset Data
     emailForPasswordReset: '' as string,
+    // Toast
+    toastMessage: '' as string,
+    toastVisible: false as boolean,
+    toastTimeout: 0 as number,
+    // Errors
     errors: {} as any,
   }),
   actions: {
@@ -198,6 +204,11 @@ export const useUserStore = defineStore('user', {
         ms
       );
     },
+    /**
+     * Called when the user selects a new file for their profile picture.
+     * Updates the store with the new file and sets the user's image_url
+     * to the URL of the file.
+     */
     onFileChange(e: Event) {
       const file = (e.target as HTMLInputElement).files?.[0];
       if (file) {

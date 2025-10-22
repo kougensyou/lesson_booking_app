@@ -17,6 +17,12 @@ final class LogoutController extends Controller
     ) {
     }
 
+    /**
+     * Handle user logout request
+     *
+     * @param Request $request
+     * @return object
+     */
     public function logout(Request $request): object
     {
         if ($this->auth->guard()->guest()) {

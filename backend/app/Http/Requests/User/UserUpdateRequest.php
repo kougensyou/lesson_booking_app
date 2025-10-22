@@ -43,6 +43,11 @@ class UserUpdateRequest extends FormRequest
         ];
     }
 
+    /**
+     * Return the custom validation messages.
+     *
+     * @return array
+     */
     public function messages(): array
     {
         return __('validation.custom');

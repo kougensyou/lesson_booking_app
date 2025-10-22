@@ -6,6 +6,16 @@ use App\Models\Report;
 
 class ReportService
 {
+    /**
+     * Send a report from the user
+     * 
+     * @param int $userId
+     * @param string $title
+     * @param string $email
+     * @param string $contents
+     * @throws \Throwable
+     * @return void
+     */
     public function sendReport($userId, $title, $email, $contents) {
         
         DB::beginTransaction();

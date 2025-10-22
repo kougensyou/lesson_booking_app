@@ -40,6 +40,7 @@ onMounted(() => {
       {{ $t('favoriteStudio.pageTitle') }}
     </h1>
 
+    <!-- Favorite Studio List -->
     <div
       v-for="studio in studioStore.favoriteStudioList"
       :key="studio.id"
@@ -68,6 +69,8 @@ onMounted(() => {
     >
       {{ $t('favoriteStudio.searchStudio') }}
     </div>
+
+    <!-- Save Button -->
     <button
       :class="[
         'w-full py-2 rounded-2xl',
@@ -88,6 +91,8 @@ onMounted(() => {
         <SpinLoading :color="'#FFFFFF'" :width="'22px'" :height="'22px'" />
       </span>
     </button>
+
+    <!-- Toast Message -->
     <Toast
       :show="studioStore.toastVisible"
       :message="studioStore.toastMessage"

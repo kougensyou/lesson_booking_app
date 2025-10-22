@@ -15,6 +15,17 @@ use SendGrid;
 class LessonBookingService
 {
 
+    /**
+     * Get a list of lessons for a given user and selected date
+     * 
+     * @param int $userId
+     * @param int $selectedYear
+     * @param int $selectedMonth
+     * 
+     * @return \Illuminate\Support\Collection
+     * 
+     * @throws \Throwable
+     */
     public function getSelectedLessonList($userId, $selectedYear, $selectedMonth) {
         try{
             $startOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->startOfMonth();
@@ -37,7 +48,13 @@ class LessonBookingService
         }
     }
 
-    
+    /**
+     * Book a lesson for the authenticated user
+     * 
+     * @param int $lessonId
+     * 
+     * @throws \Throwable
+     */
     public function bookLesson($lessonId) {
 
         DB::beginTransaction();
@@ -69,6 +86,14 @@ class LessonBookingService
         }
     }
 
+    /**
+     * Cancel a lesson booking for a given user and lesson
+     * 
+     * @param int $userId User ID
+     * @param int $lessonId Lesson ID
+     * 
+     * @throws \Throwable
+     */
     public function cancelLesson($userId, $lessonId) {
 
         DB::beginTransaction();
@@ -91,6 +116,15 @@ class LessonBookingService
         }
     }
 
+    /**
+     * Get a list of booking history for a given user
+     * 
+     * @param int $userId User ID
+     * 
+     * @return \Illuminate\Support\Collection
+     * 
+     * @throws \Throwable
+     */
     public function addBookingHistory($userId) {
         try {
             return LessonBooking::select(
@@ -126,6 +160,15 @@ class LessonBookingService
         }
     }
 
+    /**
+     * Apply the first lesson booking request
+     * 
+     * @param array $firstBooking Request data for the first lesson booking
+     * 
+     * @return array
+     * 
+     * @throws \Throwable
+     */
     public function applyFirstLesson($firstBooking) {
 
         DB::beginTransaction();

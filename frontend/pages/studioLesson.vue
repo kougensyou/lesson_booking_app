@@ -59,6 +59,8 @@ lessonStore.getStudioLessonDataApi().catch((error: any) => {
   >
     <SpinLoading />
   </div>
+
+  <!-- Studio Lesson Calendar Chart -->
   <div class="pb-4">
     <StudioLessonCalendar
       :is-loading="lessonStore.isStudioLessonLoading"

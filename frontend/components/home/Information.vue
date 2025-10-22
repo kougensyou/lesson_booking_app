@@ -27,6 +27,7 @@ const carouselConfig = {
   </div>
 
   <template v-if="!isInformationLoading">
+    <!-- Slider Format -->
     <Carousel v-bind="carouselConfig" class="m-4">
       <Slide v-for="slider in sliderInfoList" :key="slider.id">
         <div
@@ -44,6 +45,7 @@ const carouselConfig = {
         </div>
       </Slide>
     </Carousel>
+    <!-- Grid Format -->
     <div class="p-4 grid grid-cols-2 gap-4">
       <div
         v-for="(grid, index) in gridInfoList"
@@ -58,6 +60,7 @@ const carouselConfig = {
         />
       </div>
     </div>
+    <!-- List Format -->
     <div v-for="item in listInfoList" :key="item.id" class="px-4 py-3 relative">
       <a
         :href="item.link_url"

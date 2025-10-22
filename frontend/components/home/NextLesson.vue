@@ -25,6 +25,7 @@ const carouselConfig = {
     <SpinLoading />
   </div>
 
+  <!-- No Next Lesson -->
   <template v-if="!isNextLessonLoading && nextLessonList.length === 0">
     <div class="px-4 py-2">
       <div class="flex flex-col items-center justify-center space-y-4 p-4">
@@ -41,6 +42,7 @@ const carouselConfig = {
     </div>
   </template>
 
+  <!-- Next Lesson List -->
   <template v-if="!isNextLessonLoading && nextLessonList.length > 0">
     <div class="m-4">
       <Carousel v-bind="carouselConfig">

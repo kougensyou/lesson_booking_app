@@ -70,12 +70,14 @@ lessonStore.getLessonDetailApi().catch((error: any) => {
   </div>
 
   <template v-if="!lessonStore.isLessonDetailLoading">
+    <!-- Status Message -->
     <StatusMessage
       :done-flag="lessonStore.lessonDetail.done_flag"
       :booked-flag="lessonStore.lessonDetail.booked_flag"
       :empty-flag="lessonStore.lessonDetail.empty_flag"
     />
 
+    <!-- Lesson Detail -->
     <div class="bg-white min-h-screen p-4 space-y-4 max-w-xl mx-auto">
       <h1 class="text-xl font-bold break-all w-full">
         {{ lessonStore.lessonDetail.lesson_name }}
@@ -127,6 +129,7 @@ lessonStore.getLessonDetailApi().catch((error: any) => {
     </div>
   </template>
 
+  <!-- Confirm Dialog -->
   <ConfirmDialog
     v-if="lessonBookingStore.isDialogOpen"
     :is-booking-status-loading="lessonBookingStore.isBookingStatusLoading"

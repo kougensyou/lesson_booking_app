@@ -11,6 +11,15 @@ use SendGrid;
 class UserService
 {
 
+    /**
+     * Get user data for the given user ID
+     * 
+     * @param int $userId User ID
+     * 
+     * @return \Illuminate\Support\Collection
+     * 
+     * @throws \Throwable
+     */
     public function getUser($userId) {
         try {
             return User::select('id', 'name', 'email', 'zip_code', 'address', 'birth_date', 'tel_no', 'image_path')
@@ -31,6 +40,16 @@ class UserService
         }
     }
 
+    /**
+     * Update user data
+     *
+     * @param int $userId User ID
+     * @param \Illuminate\Http\Request $request Request object
+     *
+     * @throws \Throwable
+     *
+     * @return void
+     */
     public function updateUser($userId, Request $request) {
 
         DB::beginTransaction();
@@ -77,6 +96,16 @@ class UserService
         }
     }
 
+    /**
+     * Update the user password
+     *
+     * @param int $userId User ID
+     * @param array $passwordData Password data array containing the new password and its confirmation
+     *
+     * @throws \Throwable
+     *
+     * @return void
+     */
     public function updatePassword($userId, $passwordData) {
 
         DB::beginTransaction();
@@ -95,6 +124,15 @@ class UserService
         }
     }
 
+    /**
+     * Sends a password reset mail to the given email address
+     *
+     * @param string $toEmail Email address to send the password reset mail to
+     * 
+     * @throws \Throwable
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function sendPasswordResetMail($toEmail) {
 
         DB::beginTransaction();
@@ -130,6 +168,14 @@ class UserService
         }
     }
 
+    /**
+     * Update the user password to a randomly generated string
+     * 
+     * @param string $toEmail
+     * @param string $randomPassword
+     * 
+     * @return void
+     */
     private function updatePasswordForReset($toEmail, $randomPassword) {
         
             $user = User::where('email', $toEmail)->firstOrFail();

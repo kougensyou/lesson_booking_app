@@ -32,6 +32,7 @@ lessonStore
   ></div>
 
   <div class="p-4">
+    <!-- Booked Lesson Information -->
     <h2 class="text-xl font-bold text-center mb-4">
       {{ $t('bookDone.doneMessage') }}
     </h2>
@@ -66,6 +67,7 @@ lessonStore
       <SpinLoading />
     </div>
 
+    <!-- Recommended Lesson List -->
     <div v-if="!lessonStore.isAddLessonLoading" class="mt-6">
       <h3 class="font-semibold mb-2">
         {{ $t('bookDone.recommended') }}

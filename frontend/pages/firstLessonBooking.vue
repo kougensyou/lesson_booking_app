@@ -84,6 +84,7 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
   ></div>
 
   <div class="px-4 py-3 space-y-6">
+    <!-- First Selected Lesson Information -->
     <FirstSelectedLesson
       :is-studio-lesson-loading="lessonStore.isStudioLessonLoading"
       :selected-lesson="lessonBookingStore.firstBooking.selectedLesson"
@@ -104,10 +105,14 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
       :time-options="lessonStore.timeOptions"
       :errors="lessonBookingStore.errors"
     />
+
+    <!-- First User Information -->
     <FirstUser
       :user="lessonBookingStore.firstBooking.user"
       :errors="lessonBookingStore.errors"
     />
+
+    <!-- Validation Button -->
     <button
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
       @click="validateFirstLesson()"

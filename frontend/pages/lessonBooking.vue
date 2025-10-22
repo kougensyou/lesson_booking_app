@@ -53,11 +53,13 @@ lessonStore.getTimeOptions().catch((error: any) => {
     class="fixed inset-0 bg-opacity-50 z-50"
   ></div>
 
+  <!-- Studio Search -->
   <StudioSearch
     :is-favorite-studio-loading="studioStore.isFavoriteStudioLoading"
     :favorite-studio-list="studioStore.favoriteStudioList"
   />
 
+  <!-- Customized Search -->
   <h1 class="text-xl font-bold px-4 pt-4">
     {{ $t('lessonBooking.customizedSearch') }}
   </h1>
@@ -100,6 +102,7 @@ lessonStore.getTimeOptions().catch((error: any) => {
     />
   </template>
 
+  <!-- Search Button -->
   <SearchButton
     :is-add-lesson-loading="lessonStore.isAddLessonLoading"
     :search-lessons="

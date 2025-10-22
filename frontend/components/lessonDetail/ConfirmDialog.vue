@@ -29,6 +29,7 @@ defineProps<{
         {{ $t('lessonDetail.cancelDialogMessage') }}
       </h2>
 
+      <!-- Lesson Information -->
       <div class="border rounded-md p-4 flex items-start mb-6">
         <div class="text-center w-24 flex-shrink-0">
           <div class="text-sm font-semibold">
@@ -50,6 +51,8 @@ defineProps<{
           </div>
         </div>
       </div>
+
+      <!-- Buttons -->
       <div class="max-w-md mx-auto space-y-4">
         <button
           v-if="!lessonDetail.booked_flag"

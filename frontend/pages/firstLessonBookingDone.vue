@@ -13,6 +13,8 @@ const lessonBookingStore = useLessonBookingStore();
       <title>{{ $t('firstLessonBookingDone.tabTitle') }}</title>
     </Head>
   </div>
+
+  <!-- Done Message -->
   <div class="p-4">
     <h2 class="text-l text-center mb-4 whitespace-pre-line">
       {{ $t('firstLessonBookingDone.doneMessage') }}

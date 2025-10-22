@@ -37,10 +37,9 @@ const sendPasswordResetMail = () => {
 
   <div class="pt-4 pb-4">
     <div class="max-w-[640px] mx-auto p-4 bg-white">
-      <div class="text-center mb-6">
-        <p class="text-gray-700">{{ $t('passwordReset.resetMessage1') }}</p>
-        <p class="text-gray-700">{{ $t('passwordReset.resetMessage2') }}</p>
-      </div>
+      <p class="text-center mb-6 text-gray-700 whitespace-pre-line">
+        {{ $t('passwordReset.resetMessage') }}
+      </p>
 
       <input
         type="email"
@@ -80,6 +79,8 @@ const sendPasswordResetMail = () => {
         <span>{{ $t('passwordChange.updatePassword') }}</span>
       </button>
     </div>
+
+    <!-- First Lesson Button -->
     <div class="mt-4 mb-4 bg-white max-w-[640px] mx-auto p-6">
       <div class="flex items-center justify-center">
         <div class="font-bold">{{ $t('index.noAccount') }}</div>

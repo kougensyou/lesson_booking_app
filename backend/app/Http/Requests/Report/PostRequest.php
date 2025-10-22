@@ -28,6 +28,11 @@ class PostRequest extends FormRequest
         ];
     }
 
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
     public function attributes(): array
     {
         return [

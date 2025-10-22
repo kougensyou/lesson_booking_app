@@ -34,6 +34,7 @@ const updatePassword = () => {
     class="fixed inset-0 bg-opacity-50 z-50"
   ></div>
 
+  <!-- Input Form -->
   <div class="max-w-[640px] mx-auto p-6">
     <h1 class="text-xl font-bold text-center mb-2">
       {{ $t('passwordChange.passwordChange') }}
@@ -111,6 +112,8 @@ const updatePassword = () => {
     >
       <span>{{ $t('passwordChange.updatePassword') }}</span>
     </button>
+
+    <!-- Toast Message -->
     <Toast :show="userStore.toastVisible" :message="userStore.toastMessage" />
   </div>
 </template>

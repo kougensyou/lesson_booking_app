@@ -35,6 +35,7 @@ const sendReport = () => {
     class="fixed inset-0 bg-opacity-50 z-50"
   ></div>
 
+  <!-- Input Form -->
   <div class="max-w-[640px] mx-auto p-6">
     <h1 class="text-xl font-bold text-center mb-2">
       {{ $t('report.report') }}
@@ -86,6 +87,7 @@ const sendReport = () => {
       </template>
     </div>
 
+    <!-- Send Button -->
     <button
       class="mt-12 bg-sky-500 rounded-3xl w-full py-4 relative"
       @click="sendReport()"
@@ -105,6 +107,8 @@ const sendReport = () => {
         alt="Chevron Right"
       />
     </button>
+
+    <!-- Toast Message -->
     <Toast
       :show="reportStore.toastVisible"
       :message="reportStore.toastMessage"
