@@ -5,9 +5,9 @@ export interface LoginData {
 }
 
 export interface PasswordData {
-  currentPassword: string;
-  newPassword: string;
-  newPasswordConfirmation: string;
+  current_password: string;
+  new_password: string;
+  new_password_confirmation: string;
 }
 
 export interface User {

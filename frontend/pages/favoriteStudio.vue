@@ -40,7 +40,7 @@ onMounted(() => {
       {{ $t('favoriteStudio.pageTitle') }}
     </h1>
 
-    <!-- Favorite Studio List -->
+    <!-- Studio List -->
     <div
       v-for="studio in studioStore.favoriteStudioList"
       :key="studio.id"

@@ -10,9 +10,9 @@ const props = defineProps<{
   selectedLessonList: Array<LessonBooking>;
   attributes: Array<Attribute>;
   calendarThemeColor: string;
-  checkToday: Function;
-  getPrevLessonList: Function;
-  getNextLessonList: Function;
+  checkToday: (day: number) => boolean;
+  getPrevLessonList: () => void;
+  getNextLessonList: () => void;
 }>();
 
 watch(
@@ -20,14 +20,10 @@ watch(
   async (loading) => {
     if (!loading) {
       await nextTick();
-      const prev = document.querySelector('.vc-prev');
-      const next = document.querySelector('.vc-next');
-      prev?.addEventListener('click', async () => {
-        await props.getPrevLessonList();
-      });
-      next?.addEventListener('click', async () => {
-        await props.getNextLessonList();
-      });
+      const prev = document.querySelector<HTMLElement>('.vc-prev');
+      const next = document.querySelector<HTMLElement>('.vc-next');
+      if (prev) prev.addEventListener('click', props.getPrevLessonList);
+      if (next) next.addEventListener('click', props.getNextLessonList);
     }
   }
 );
@@ -53,23 +49,27 @@ watch(
     >
       <template v-slot:day-content="slotProps">
         <div class="flex flex-col h-full z-10 overflow-hidden">
+          <!-- Today -->
           <span
             v-if="checkToday(slotProps.day.day)"
             class="flex items-center justify-center w-6 h-6 rounded-full m-auto bg-black text-white"
           >
             {{ slotProps.day.day }}
           </span>
+          <!-- Not Today -->
           <span
             v-else
             class="flex items-center justify-center w-6 h-6 m-auto text-gray-900"
           >
             {{ slotProps.day.day }}
           </span>
+          <!-- Booked Lesson -->
           <template v-if="slotProps.attributes.length > 0">
+            <!-- Done Booked Lesson -->
             <template
               v-if="
                 slotProps.attributes.some(
-                  (attr: Attribute) => attr.customData.done_flag
+                  (attr: Attribute) => attr.custom_data.done_flag
                 )
               "
             >
@@ -82,10 +82,11 @@ watch(
                 >
               </span>
             </template>
+            <!-- Undone Booked Lesson -->
             <template
               v-else-if="
                 slotProps.attributes.some(
-                  (attr: Attribute) => !attr.customData.done_flag
+                  (attr: Attribute) => !attr.custom_data.done_flag
                 )
               "
             >
@@ -98,6 +99,7 @@ watch(
               </span>
             </template>
           </template>
+          <!-- No Booked Lesson -->
           <template v-else>
             <span
               class="flex items-center justify-center w-full h-full mt-1 mb-1"

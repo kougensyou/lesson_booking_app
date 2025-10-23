@@ -132,10 +132,10 @@ return [
         'lesson_name' => [
             'required' => 'Please select a lesson.',
         ],
-        'newPassword' => [
+        'new_password' => [
             'mismatch' => 'The new password and confirmation do not match.',
         ],
-        'currentPassword' => [
+        'current_password' => [
             'invalid' => 'The Current Password is incorrect.',
         ],
         'image_url' => [

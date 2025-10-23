@@ -19,6 +19,8 @@ defineProps<{
         {{ $t('firstLessonBookingConfirm.bookDialogMessage') }}
       </h2>
 
+      <!-- Lesson Details -->
+
       <div class="border rounded-md p-4 flex items-start mb-6">
         <div class="text-center w-24 flex-shrink-0">
           <div class="text-sm font-semibold">
@@ -37,6 +39,8 @@ defineProps<{
           </div>
         </div>
       </div>
+
+      <!-- Buttons -->
       <div class="max-w-md mx-auto space-y-4">
         <button
           class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-3xl font-semibold"

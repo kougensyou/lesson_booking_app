@@ -44,11 +44,11 @@ const updatePassword = () => {
         $t('passwordChange.currentPassword')
       }}</label>
       <input
-        v-model="userStore.passwordData.currentPassword"
+        v-model="userStore.passwordData.current_password"
         type="password"
         class="w-full border rounded px-3 py-2"
       />
-      <template v-for="errorMessage in userStore.errors?.currentPassword">
+      <template v-for="errorMessage in userStore.errors?.current_password">
         <div class="text-red-600 w-full">
           {{ errorMessage }}
         </div>
@@ -59,11 +59,11 @@ const updatePassword = () => {
         $t('passwordChange.newPassword')
       }}</label>
       <input
-        v-model="userStore.passwordData.newPassword"
+        v-model="userStore.passwordData.new_password"
         type="password"
         class="w-full border rounded px-3 py-2"
       />
-      <template v-for="errorMessage in userStore.errors?.newPassword">
+      <template v-for="errorMessage in userStore.errors?.new_password">
         <div class="text-red-600 w-full">
           {{ errorMessage }}
         </div>
@@ -75,12 +75,12 @@ const updatePassword = () => {
         $t('passwordChange.newPasswordConfirmation')
       }}</label>
       <input
-        v-model="userStore.passwordData.newPasswordConfirmation"
+        v-model="userStore.passwordData.new_password_confirmation"
         type="password"
         class="w-full border rounded px-3 py-2"
       />
       <template
-        v-for="errorMessage in userStore.errors?.newPasswordConfirmation"
+        v-for="errorMessage in userStore.errors?.new_password_confirmation"
       >
         <div class="text-red-600 w-full">
           {{ errorMessage }}

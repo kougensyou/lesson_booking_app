@@ -149,10 +149,10 @@ return [
         'lesson_name' => [
             'required' => 'レッスンを選択してください',
         ],
-        'newPassword' => [
+        'new_password' => [
             'mismatch' => '新しいパスワードと確認用パスワードが一致しません。',
         ],
-        'currentPassword' => [
+        'current_password' => [
             'invalid' => '現在のパスワードが正しくありません。',
         ],
         'image_url' => [

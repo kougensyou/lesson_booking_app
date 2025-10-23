@@ -29,6 +29,7 @@ defineProps<{
 }>();
 </script>
 <template>
+  <!-- Lesson Category -->
   <div>
     <label class="block text-sm font-medium">{{
       $t('firstLessonBooking.lessonCategory')
@@ -54,6 +55,7 @@ defineProps<{
     </template>
   </div>
 
+  <!-- Lesson Details -->
   <div>
     <label class="block text-sm font-medium">{{
       $t('firstLessonBooking.studio')
@@ -135,6 +137,8 @@ defineProps<{
       </div>
     </div>
   </div>
+
+  <!-- Lesson Change Button -->
   <button
     v-if="selectedLesson.lesson_name"
     class="w-full py-3 border border-red-500 text-red-500 font-bold rounded bg-transparent"

@@ -177,9 +177,9 @@ class LessonBookingService
 
             $body = __('messages.first_lesson_booking', [
                 'name' => $firstBooking['user']['name'], 
-                'studio_name' => $firstBooking['selectedLesson']['studio_name'], 
-                'lesson_name' => $firstBooking['selectedLesson']['lesson_name'], 
-                'lesson_datetime' => $firstBooking['selectedLesson']['lesson_day'] . ' ' . $firstBooking['selectedLesson']['lesson_time'],
+                'studio_name' => $firstBooking['selected_lesson']['studio_name'], 
+                'lesson_name' => $firstBooking['selected_lesson']['lesson_name'], 
+                'lesson_datetime' => $firstBooking['selected_lesson']['lesson_day'] . ' ' . $firstBooking['selected_lesson']['lesson_time'],
             ]);
 
             $email = new \SendGrid\Mail\Mail();

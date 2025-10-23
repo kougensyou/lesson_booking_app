@@ -42,7 +42,7 @@ const carouselConfig = {
     </div>
   </template>
 
-  <!-- Next Lesson List -->
+  <!-- Next Lesson -->
   <template v-if="!isNextLessonLoading && nextLessonList.length > 0">
     <div class="m-4">
       <Carousel v-bind="carouselConfig">

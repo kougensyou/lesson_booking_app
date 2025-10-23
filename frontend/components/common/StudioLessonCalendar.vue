@@ -48,7 +48,7 @@ const carouselConfig = {
               "
               @click="
                 !(activeDate === d.date)
-                  ? changeStudioLessonData(d.dateObj, d.date)
+                  ? changeStudioLessonData(d.date_obj, d.date)
                   : null
               "
             >

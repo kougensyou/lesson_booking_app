@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 export const useReportStore = defineStore('report', {
   state: () => ({
-    // Report Input Form
+    // Input Form
     title: '',
     email: '',
     contents: '',

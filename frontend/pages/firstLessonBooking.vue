@@ -36,8 +36,8 @@ onMounted(() => {
   }
 });
 
-const changeStudioLessonData = (selectedDateObj: Date, date: string) => {
-  lessonStore.setDate(selectedDateObj);
+const changeStudioLessonData = (selecteddate_obj: Date, date: string) => {
+  lessonStore.setDate(selecteddate_obj);
   lessonStore.setWeekData(dayOfTheWeek);
   lessonStore.setActiveDate(date);
   lessonStore.getStudioLessonDataApi().catch((error: any) => {
@@ -84,10 +84,10 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
   ></div>
 
   <div class="px-4 py-3 space-y-6">
-    <!-- First Selected Lesson Information -->
+    <!-- Lesson Information -->
     <FirstSelectedLesson
       :is-studio-lesson-loading="lessonStore.isStudioLessonLoading"
-      :selected-lesson="lessonBookingStore.firstBooking.selectedLesson"
+      :selected-lesson="lessonBookingStore.firstBooking.selected_lesson"
       :studio-list="studioStore.studioList"
       :studio-lesson-list="lessonStore.studioLessonList"
       :lesson-category-list="lessonStore.lessonCategoryList"
@@ -106,7 +106,7 @@ lessonStore.getLessonCategoryList().catch((error: any) => {
       :errors="lessonBookingStore.errors"
     />
 
-    <!-- First User Information -->
+    <!-- User Information -->
     <FirstUser
       :user="lessonBookingStore.firstBooking.user"
       :errors="lessonBookingStore.errors"

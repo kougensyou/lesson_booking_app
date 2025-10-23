@@ -221,6 +221,7 @@ export const useLessonStore = defineStore('lesson', {
         throw err;
       }
     },
+    // Initialize the selected dates to today's date.
     async initializeSelectedDates() {
       this.searchInputForm.selectedDates[0] =
         this.todayYear.toString() +
@@ -298,7 +299,6 @@ export const useLessonStore = defineStore('lesson', {
       this.selectedStudioId = studioId;
     },
     /**
-     * Set date range for studio lesson data.
      * Set this.fromDate and this.toDate based on given baseDate.
      * The range is 7 days from the baseDate.
      */
@@ -308,16 +308,7 @@ export const useLessonStore = defineStore('lesson', {
         baseDate.getTime() + 6 * 24 * 60 * 60 * 1000
       ).toLocaleDateString('sv-SE');
     },
-    /**
-     * Set week data for studio lesson data.
-     * Set this.weekData based on given dayOfTheWeek.
-     * this.weekData is an array of objects with date and label.
-     * Date is in the format of "MM/DD" and label is the day of the week.
-     * The range is 7 days from this.fromDate.
-     * @param {string[]} dayOfTheWeek - array of day of the week.
-     * @example
-     * setWeekData(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
-     */
+    // Set this.weekData based on given dayOfTheWeek.
     setWeekData(dayOfTheWeek: string[]) {
       this.weekData = [];
       const date = new Date(this.fromDate);
@@ -329,16 +320,7 @@ export const useLessonStore = defineStore('lesson', {
         });
       }
     },
-    /**
-     * Set total week data for studio lesson data.
-     * Set this.totalWeekData based on given dayOfTheWeek.
-     * this.totalWeekData is a 2D array of objects with dateObj, date, day and label.
-     * Date is in the format of "MM/DD" and label is the day of the week.
-     * The range is 4 weeks from this.fromDate.
-     * @param {string[]} dayOfTheWeek - array of day of the week.
-     * @example
-     * setTotalWeekData(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
-     */
+    // Set this.totalWeekData based on given dayOfTheWeek.
     setTotalWeekData(dayOfTheWeek: string[]) {
       this.totalWeekData = [];
       const date = new Date(this.fromDate);
@@ -352,7 +334,7 @@ export const useLessonStore = defineStore('lesson', {
         }
 
         this.totalWeekData[weekIndex].push({
-          dateObj: day,
+          date_obj: day,
           date: `${day.getMonth() + 1}/${day.getDate()}`,
           day: day.getDate(),
           label: dayOfTheWeek[day.getDay()],
@@ -363,6 +345,7 @@ export const useLessonStore = defineStore('lesson', {
     setActiveDate(date: string) {
       this.activeDate = date;
     },
+    // Get lessons from specific studio and date range
     async getStudioLessonDataApi() {
       this.isStudioLessonLoading = true;
       try {

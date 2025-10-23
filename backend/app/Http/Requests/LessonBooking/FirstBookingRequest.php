@@ -20,11 +20,11 @@ class FirstBookingRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'lesson_category_name' => $this->input('first_booking.selectedLesson.lesson_category_name'),
-            'studio_name'          => $this->input('first_booking.selectedLesson.studio_name'),
-            'lesson_day'           => $this->input('first_booking.selectedLesson.lesson_day'),
-            'lesson_time'          => $this->input('first_booking.selectedLesson.lesson_time'),
-            'lesson_name'          => $this->input('first_booking.selectedLesson.lesson_name'),
+            'lesson_category_name' => $this->input('first_booking.selected_lesson.lesson_category_name'),
+            'studio_name'          => $this->input('first_booking.selected_lesson.studio_name'),
+            'lesson_day'           => $this->input('first_booking.selected_lesson.lesson_day'),
+            'lesson_time'          => $this->input('first_booking.selected_lesson.lesson_time'),
+            'lesson_name'          => $this->input('first_booking.selected_lesson.lesson_name'),
             'name'                 => $this->input('first_booking.user.name'),
             'email'                => $this->input('first_booking.user.email'),
             'birth_date'           => $this->input('first_booking.user.birth_date'),

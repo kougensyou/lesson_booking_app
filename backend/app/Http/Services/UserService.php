@@ -112,7 +112,7 @@ class UserService
 
         try {
             $user = auth()->user();
-            $user->password = \Hash::make($passwordData['newPassword']);
+            $user->password = \Hash::make($passwordData['new_password']);
             $user->save();
 
             DB::commit();

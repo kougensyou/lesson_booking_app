@@ -6,7 +6,7 @@ export interface LessonBooking {
 
 export interface Attribute {
   dates: Date;
-  customData: {
+  custom_data: {
     done_flag: boolean;
   };
 }
@@ -26,6 +26,6 @@ export interface FirstUser {
 }
 
 export interface FirstBooking {
-  selectedLesson: FirstSelectedLesson;
+  selected_lesson: FirstSelectedLesson;
   user: FirstUser;
 }

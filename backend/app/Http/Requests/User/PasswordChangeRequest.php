@@ -21,9 +21,9 @@ class PasswordChangeRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'currentPassword'     => $this->input('password_data.currentPassword'),
-            'newPassword'         => $this->input('password_data.newPassword'),
-            'newPasswordConfirmation' => $this->input('password_data.newPasswordConfirmation'),
+            'current_password'     => $this->input('password_data.current_password'),
+            'new_password'         => $this->input('password_data.new_password'),
+            'new_password_confirmation' => $this->input('password_data.new_password_confirmation'),
         ]);
     }
 
@@ -35,9 +35,9 @@ class PasswordChangeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'currentPassword'     => 'required|string',
-            'newPassword'         => 'required|string',
-            'newPasswordConfirmation' => 'required|string',
+            'current_password'     => 'required|string',
+            'new_password'         => 'required|string',
+            'new_password_confirmation' => 'required|string',
         ];
     }
 
@@ -49,9 +49,9 @@ class PasswordChangeRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'currentPassword' => __('validation.attributes.current_password'),
-            'newPassword' => __('validation.attributes.new_password'),
-            'newPasswordConfirmation' => __('validation.attributes.new_password_confirmation'),
+            'current_password' => __('validation.attributes.current_password'),
+            'new_password' => __('validation.attributes.new_password'),
+            'new_password_confirmation' => __('validation.attributes.new_password_confirmation'),
         ];
     }
 
@@ -64,12 +64,12 @@ class PasswordChangeRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if ($this->newPassword !== $this->newPasswordConfirmation) {
-                $validator->errors()->add('newPassword', __('validation.custom.newPassword.mismatch'));
+            if ($this->new_password !== $this->new_password_confirmation) {
+                $validator->errors()->add('new_password', __('validation.custom.new_password.mismatch'));
             }
 
-            if (!Hash::check($this->currentPassword, $this->user()->password)) {
-                $validator->errors()->add('currentPassword', __('validation.custom.currentPassword.invalid'));
+            if (!Hash::check($this->current_password, $this->user()->password)) {
+                $validator->errors()->add('current_password', __('validation.custom.current_password.invalid'));
             }
         });
     }

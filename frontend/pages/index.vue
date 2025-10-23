@@ -66,7 +66,7 @@ const login = () => {
         </div>
       </template>
 
-      <!-- Login Button -->
+      <!-- Login -->
       <button
         class="mt-12 w-full bg-sky-500 rounded-3xl py-4 relative"
         @click="login()"
@@ -95,7 +95,7 @@ const login = () => {
       </div>
     </div>
 
-    <!-- First Lesson Button -->
+    <!-- First Lesson -->
     <div class="bg-white max-w-[640px] mx-auto p-6">
       <div class="flex items-center justify-center">
         <div class="font-bold">{{ $t('index.noAccount') }}</div>

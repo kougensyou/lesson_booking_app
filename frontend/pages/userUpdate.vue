@@ -35,7 +35,7 @@ const updateUser = () => {
   ></div>
 
   <div class="px-4 py-3 space-y-6">
-    <!-- User Image -->
+    <!-- Image -->
     <div class="flex items-center space-x-4">
       <img
         :src="userStore.user.image_url"
@@ -63,7 +63,7 @@ const updateUser = () => {
       </div>
     </template>
 
-    <!-- User Input Form -->
+    <!-- Input Form -->
 
     <div>
       <label class="block text-sm font-medium">{{

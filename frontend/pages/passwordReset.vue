@@ -41,6 +41,8 @@ const sendPasswordResetMail = () => {
         {{ $t('passwordReset.resetMessage') }}
       </p>
 
+      <!-- Input Form -->
+
       <input
         type="email"
         :placeholder="$t('passwordReset.emailPlaceholder')"
@@ -80,7 +82,7 @@ const sendPasswordResetMail = () => {
       </button>
     </div>
 
-    <!-- First Lesson Button -->
+    <!-- First Lesson -->
     <div class="mt-4 mb-4 bg-white max-w-[640px] mx-auto p-6">
       <div class="flex items-center justify-center">
         <div class="font-bold">{{ $t('index.noAccount') }}</div>
@@ -98,5 +100,7 @@ const sendPasswordResetMail = () => {
       </button>
     </div>
   </div>
+
+  <!-- Toast Message -->
   <Toast :show="userStore.toastVisible" :message="userStore.toastMessage" />
 </template>

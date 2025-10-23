@@ -67,7 +67,7 @@ lessonStore
     </button>
   </div>
 
-  <!-- Searched Lessons List -->
+  <!-- Searched Lessons -->
   <LessonList
     v-if="lessonStore.searchedLessonList.length > 0"
     :lesson-list="lessonStore.searchedLessonList"

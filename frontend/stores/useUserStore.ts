@@ -13,9 +13,9 @@ export const useUserStore = defineStore('user', {
     } as LoginData,
     // Password Data
     passwordData: {
-      currentPassword: '',
-      newPassword: '',
-      newPasswordConfirmation: '',
+      current_password: '',
+      new_password: '',
+      new_password_confirmation: '',
     } as PasswordData,
     // User Update Data
     user: {} as User,
@@ -37,6 +37,7 @@ export const useUserStore = defineStore('user', {
     setErrors(errors: any) {
       this.errors = errors;
     },
+    // Login and updates the user data in the store.
     async loginApi() {
       this.isUserLoading = true;
       try {
@@ -55,6 +56,7 @@ export const useUserStore = defineStore('user', {
         throw err;
       }
     },
+    // Logout and initialize user data in the store.
     async logout() {
       this.isUserLoading = true;
       try {
@@ -173,9 +175,9 @@ export const useUserStore = defineStore('user', {
       this.loginData.remember = true;
     },
     initializePasswordData() {
-      this.passwordData.currentPassword = '';
-      this.passwordData.newPassword = '';
-      this.passwordData.newPasswordConfirmation = '';
+      this.passwordData.current_password = '';
+      this.passwordData.new_password = '';
+      this.passwordData.new_password_confirmation = '';
     },
     initializeUser() {
       this.user = {} as User;

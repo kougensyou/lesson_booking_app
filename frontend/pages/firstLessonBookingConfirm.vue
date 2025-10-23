@@ -38,27 +38,27 @@ const applyFirstLesson = () => {
   ></div>
 
   <div class="px-4 py-3 space-y-6">
-    <!-- First Selected Lesson Information -->
+    <!-- Lesson Information -->
     <div class="border rounded p-4 flex items-start mb-6 bg-white">
       <div class="text-center w-24 flex-shrink-0">
         <div class="text-sm font-semibold">
-          {{ lessonBookingStore.firstBooking.selectedLesson.studio_name }}
+          {{ lessonBookingStore.firstBooking.selected_lesson.studio_name }}
         </div>
         <div class="text-lg font-bold mt-1">
-          {{ lessonBookingStore.firstBooking.selectedLesson.lesson_day }}
+          {{ lessonBookingStore.firstBooking.selected_lesson.lesson_day }}
         </div>
         <div class="text-sm">
-          {{ lessonBookingStore.firstBooking.selectedLesson.lesson_time }}
+          {{ lessonBookingStore.firstBooking.selected_lesson.lesson_time }}
         </div>
       </div>
       <div class="ml-4 flex-1">
         <div class="font-semibold text-base mb-1 break-all w-full">
-          {{ lessonBookingStore.firstBooking.selectedLesson.lesson_name }}
+          {{ lessonBookingStore.firstBooking.selected_lesson.lesson_name }}
         </div>
       </div>
     </div>
 
-    <!-- First User Information -->
+    <!-- User Information -->
     <FirstUser :user="lessonBookingStore.firstBooking.user" />
 
     <!-- Apply Button -->
@@ -78,7 +78,7 @@ const applyFirstLesson = () => {
     <ConfirmDialog
       v-if="lessonBookingStore.isDialogOpen"
       :is-first-booking-loading="lessonBookingStore.isFirstBookingLoading"
-      :selected-lesson="lessonBookingStore.firstBooking.selectedLesson"
+      :selected-lesson="lessonBookingStore.firstBooking.selected_lesson"
       :apply-first-lesson="applyFirstLesson"
       :close-dialog="lessonBookingStore.closeDialog"
     />

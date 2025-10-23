@@ -34,6 +34,7 @@ onMounted(() => {
     >
       <template v-slot:day-content="slotProps">
         <div class="flex flex-col h-full z-10 overflow-hidden">
+          <!-- Selected Day -->
           <span
             v-if="checkSelected(slotProps.day.day)"
             class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-300 text-white m-auto my-1"
@@ -41,6 +42,7 @@ onMounted(() => {
           >
             {{ slotProps.day.day }}
           </span>
+          <!-- Not Selected Day -->
           <span
             v-else
             class="flex items-center justify-center text-sm w-8 h-8 text-gray-900 m-auto my-1"

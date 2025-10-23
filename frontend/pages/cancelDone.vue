@@ -15,7 +15,7 @@ const lessonStore = useLessonStore();
   </div>
 
   <div class="p-4 max-w-md mx-auto">
-    <!-- Canceled Lesson Information -->
+    <!-- Lesson Information -->
     <h2 class="text-lg font-semibold text-center mb-4">
       {{ $t('cancelDone.cancelMessage') }}
     </h2>

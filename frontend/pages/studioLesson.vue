@@ -23,8 +23,8 @@ const dayOfTheWeek = getI18nArray(i18n, 'studioLesson.dayOfTheWeek');
 
 const studioId = route.query.studio_id as string;
 
-const changeStudioLessonData = (selectedDateObj: Date, date: string) => {
-  lessonStore.setDate(selectedDateObj);
+const changeStudioLessonData = (selecteddate_obj: Date, date: string) => {
+  lessonStore.setDate(selecteddate_obj);
   lessonStore.setWeekData(dayOfTheWeek);
   lessonStore.setActiveDate(date);
   lessonStore.getStudioLessonDataApi().catch((error: any) => {
@@ -60,7 +60,7 @@ lessonStore.getStudioLessonDataApi().catch((error: any) => {
     <SpinLoading />
   </div>
 
-  <!-- Studio Lesson Calendar Chart -->
+  <!-- Studio Lesson -->
   <div class="pb-4">
     <StudioLessonCalendar
       :is-loading="lessonStore.isStudioLessonLoading"

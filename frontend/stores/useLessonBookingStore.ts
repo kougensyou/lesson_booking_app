@@ -15,8 +15,9 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     isBookingStatusLoading: false as boolean,
     isBookingHistoryLoading: false as boolean,
     isFirstBookingLoading: false as boolean,
-    // Selected Lessons
+    // Lesson List
     selectedLessonList: [] as LessonBooking[],
+    bookingHistoryList: [] as Lesson[],
     // Calendar Settings
     calendarLocale: '' as string,
     calendarThemeColor: 'blue',
@@ -30,11 +31,9 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     // Pagination
     loadedPage: 0 as number,
     lastPage: 0 as number,
-    // Booking History List
-    bookingHistoryList: [] as Lesson[],
     // First Lesson Booking
     firstBooking: {
-      selectedLesson: {
+      selected_lesson: {
         lesson_category_name: '',
         studio_name: '',
         lesson_day: '',
@@ -47,6 +46,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
         birth_date: '',
       } as FirstUser,
     } as FirstBooking,
+    // Errors
     errors: {} as any,
   }),
   persist: {
@@ -58,7 +58,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
       return (state.selectedLessonList ?? []).map((lesson, idx) => ({
         key: idx,
         dates: (this as any).parseDateString(lesson.start_time),
-        customData: {
+        custom_data: {
           done_flag: lesson.done_flag,
         },
       }));
@@ -67,7 +67,7 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
   actions: {
     initializeFirstBooking() {
       this.firstBooking = {
-        selectedLesson: {
+        selected_lesson: {
           lesson_category_name: '',
           studio_name: '',
           lesson_day: '',
@@ -302,17 +302,19 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     },
     // Set first selected lesson
     setFirstSelectedLesson(studioLessonData: BaseStudioLesson) {
-      this.firstBooking.selectedLesson.lesson_day = studioLessonData.lesson_day;
-      this.firstBooking.selectedLesson.lesson_time =
+      this.firstBooking.selected_lesson.lesson_day =
+        studioLessonData.lesson_day;
+      this.firstBooking.selected_lesson.lesson_time =
         studioLessonData.lesson_time;
-      this.firstBooking.selectedLesson.lesson_name =
+      this.firstBooking.selected_lesson.lesson_name =
         studioLessonData.lesson_name;
     },
     initializeFirstSelectedLesson() {
-      this.firstBooking.selectedLesson.lesson_day = '';
-      this.firstBooking.selectedLesson.lesson_time = '';
-      this.firstBooking.selectedLesson.lesson_name = '';
+      this.firstBooking.selected_lesson.lesson_day = '';
+      this.firstBooking.selected_lesson.lesson_time = '';
+      this.firstBooking.selected_lesson.lesson_name = '';
     },
+    // Validate first lesson booking
     async validateFirstLessonApi() {
       this.isFirstBookingLoading = true;
       try {

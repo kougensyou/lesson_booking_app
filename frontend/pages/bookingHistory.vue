@@ -35,7 +35,7 @@ lessonBookingStore.addBookingHistory().catch((error: any) => {
     <SpinLoading />
   </div>
 
-  <!-- No Booking History Message -->
+  <!-- No Booking History -->
   <div
     v-if="
       !lessonBookingStore.isBookingHistoryLoading &&
@@ -48,7 +48,7 @@ lessonBookingStore.addBookingHistory().catch((error: any) => {
     }}</span>
   </div>
 
-  <!-- Past Lesson List -->
+  <!-- Booking History -->
   <LessonList
     v-if="
       !lessonBookingStore.isBookingHistoryLoading &&

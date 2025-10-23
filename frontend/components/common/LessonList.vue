@@ -20,6 +20,11 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 
+/**
+ * Handles scroll event to check if the user has scrolled to the bottom of the component.
+ * If the user has scrolled to the bottom and the component is not loading and not at the last page,
+ * calls the addLessons function to load more lessons.
+ */
 const handleScroll = () => {
   const element = scrollComponent.value;
   if (

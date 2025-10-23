@@ -32,7 +32,7 @@ lessonStore
   ></div>
 
   <div class="p-4">
-    <!-- Booked Lesson Information -->
+    <!-- Lesson Information -->
     <h2 class="text-xl font-bold text-center mb-4">
       {{ $t('bookDone.doneMessage') }}
     </h2>

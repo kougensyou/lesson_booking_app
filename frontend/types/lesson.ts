@@ -64,7 +64,7 @@ export interface SelectedWeekData {
 }
 
 export interface WeekData {
-  dateObj: Date;
+  date_obj: Date;
   date: string;
   day: number;
   label: string;
