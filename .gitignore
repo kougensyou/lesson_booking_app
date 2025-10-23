@@ -4,7 +4,6 @@
 /backend/storage/*.json
 /backend/storage/*.csv
 /backend/storage/*.yml
-/backend/storage/app/public
 /backend/storage/app/config.yml
 /backend/storage/app/*.json
 /backend/vendor
