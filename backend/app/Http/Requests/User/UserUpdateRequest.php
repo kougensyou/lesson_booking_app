@@ -14,6 +14,12 @@ class UserUpdateRequest extends FormRequest
         return true;
     }
 
+    /**
+     * If the request has a 'user' key with a string value, decode
+     * it as JSON and merge the resulting array into the request.
+     *
+     * @return void
+     */
     public function prepareForValidation(): void
     {
         if ($this->has('user') && is_string($this->user)) {

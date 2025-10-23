@@ -35,7 +35,6 @@ class LessonBookingController extends Controller
      * 
      * @param Request $request
      * @return array
-     * @throws \Throwable
      */
     public function bookLesson(Request $request) {
         $lessonId = $request->input('lesson_id');
@@ -52,7 +51,6 @@ class LessonBookingController extends Controller
      * 
      * @param Request $request
      * @return array
-     * @throws \Throwable
      */
     public function cancelLesson(Request $request) {
         $userId = Auth::id();
@@ -90,11 +88,10 @@ class LessonBookingController extends Controller
     }
 
     /**
-     * Apply the first lesson booking request
+     * Apply the first lesson booking
      * 
      * @param FirstBookingRequest $request
      * @return array
-     * @throws \Throwable
      */
     public function applyFirstLesson(FirstBookingRequest $request) {
         $firstBooking = $request->input('first_booking');

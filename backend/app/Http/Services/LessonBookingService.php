@@ -161,7 +161,7 @@ class LessonBookingService
     }
 
     /**
-     * Apply the first lesson booking request
+     * Apply the first lesson booking
      * 
      * @param array $firstBooking Request data for the first lesson booking
      * 

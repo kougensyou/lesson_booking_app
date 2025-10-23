@@ -68,9 +68,6 @@ class LessonService
     /**
      * Add a list of lessons from the same studio
      * 
-     * This function returns a list of lessons from the same studio
-     * that are not yet booked by the user.
-     * 
      * @param int $studioId Studio ID
      * 
      * @return \Illuminate\Support\Collection
@@ -297,8 +294,6 @@ class LessonService
      * @param string $toDate End date of the date range
      * 
      * @return array Studio lesson list
-     * 
-     * @throws \Throwable
      */
     private function getStudioLessonList($studioId, $fromDate, $toDate)
     {
@@ -351,8 +346,6 @@ class LessonService
      * @param int $studioId Studio ID
      * 
      * @return array Studio data
-     * 
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     private function getStudioData($studioId) {
         return Studio::select('id', 'studio_name')
