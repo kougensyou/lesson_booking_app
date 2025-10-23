@@ -69,7 +69,7 @@ class UserService
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
-                $newPath = $file->store('images/user', 'public');
+                $newPath = $file->storeAs('images/user', $file->getClientOriginalName(), 'public');
                 $updateData['image_path'] = '/' . $newPath;
 
                 if (!empty($userData['image_path'])) {
