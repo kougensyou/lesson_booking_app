@@ -72,7 +72,7 @@ class LessonBookingService
                 'updated_at' => $now
             ];
 
-            LessonBooking::insert($insertData);
+            LessonBooking::create($insertData);
 
             Lesson::where('id', $lessonId)
             ->increment('booking_user_num', 1);

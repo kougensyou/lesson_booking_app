@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-class Info extends AbstractModel
+use Illuminate\Database\Eloquent\Model;
+
+class Info extends Model
 {
     protected $table = 'info';
-    protected $primaryKey = 'id';
-    public $incrementing = true;
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    protected $guarded = ['id'];
 
     protected $fillable = [
-        'id',
         'name',
         'image_path',
         'kind',

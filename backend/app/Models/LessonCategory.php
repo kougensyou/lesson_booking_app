@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-class LessonCategory extends AbstractModel
+use Illuminate\Database\Eloquent\Model;
+
+class LessonCategory extends Model
 {
     protected $table = 'lesson_category';
-    protected $primaryKey = 'id';
-    public $incrementing = true;
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    protected $guarded = ['id'];
 
     protected $fillable = [
-        'id',
         'category_name',
         'created_at',
         'updated_at',

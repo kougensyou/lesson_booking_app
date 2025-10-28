@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-class Report extends AbstractModel
+use Illuminate\Database\Eloquent\Model;
+
+class Report extends Model
 {
     protected $table = 'report';
-    protected $primaryKey = 'id';
-    public $incrementing = true;
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    protected $guarded = ['id'];
 
     protected $fillable = [
-        'id',
         'user_id',
         'title',
         'email',

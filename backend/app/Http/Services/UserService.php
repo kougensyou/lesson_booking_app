@@ -112,8 +112,10 @@ class UserService
 
         try {
             $user = auth()->user();
-            $user->password = \Hash::make($passwordData['new_password']);
-            $user->save();
+
+            $user->update([
+                'password' => \Hash::make($passwordData['new_password']),
+            ]);
 
             DB::commit();
 
@@ -178,10 +180,13 @@ class UserService
      */
     private function updatePasswordForReset($toEmail, $randomPassword) {
         
-            $user = User::where('email', $toEmail)->firstOrFail();
-            $user->password = \Hash::make($randomPassword);
-            $user->save();
+        $user = User::where('email', $toEmail)->firstOrFail();
+        
+        $user->update([
+            'password' => \Hash::make($randomPassword),
+        ]);
 
-            DB::commit();
+        DB::commit();
+
     }
 }

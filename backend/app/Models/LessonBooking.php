@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-class LessonBooking extends AbstractModel
+use Illuminate\Database\Eloquent\Model;
+
+class LessonBooking extends Model
 {
     protected $table = 'lesson_booking';
-    protected $primaryKey = 'id';
-    public $incrementing = true;
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    protected $guarded = ['id'];
 
     protected $fillable = [
-        'id',
         'booking_time',
         'lesson_id',
         'user_id',
