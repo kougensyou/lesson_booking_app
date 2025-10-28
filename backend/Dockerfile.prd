@@ -1,4 +1,4 @@
-# cmposerのインストール
+# Installing Composer
 FROM composer:2.6.5 as composer
 
 WORKDIR  /app
@@ -7,10 +7,10 @@ COPY composer.lock ./
 
 RUN composer install
 
-# メインステージ
+# Main Stage
 FROM php:8.2-fpm
 
-# ミドルウェアのインストール
+# Installing middlewares
 RUN apt-get update \
 && apt-get install -y \
 git \
@@ -23,14 +23,14 @@ libpq-dev \
 
 WORKDIR  /var/www
 
-# ローカルのファイルをDockerコンテナ内にコピーする
+# Copy local files to Docker container
 COPY . .
 
-# php.iniコピー
+# Copy php.ini
 COPY php.ini /usr/local/etc/php/
 COPY www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 
-# composerコピー
+# Copy Composer
 COPY --from=composer /app/vendor/ ./vendor/
 
 RUN chown -R www-data:www-data /var/www

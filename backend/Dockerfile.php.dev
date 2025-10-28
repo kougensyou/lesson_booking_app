@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-# ミドルウェアのインストール
+# Installing middlewares
 RUN apt-get update \
 && apt-get install -y \
 git \
@@ -11,7 +11,7 @@ libpng-dev \
 libpq-dev \
 && docker-php-ext-install pdo_pgsql pgsql
 
-# Composerのインストール
+# Insalling Composer
 RUN cd /usr/bin && curl -s http://getcomposer.org/installer | php -- --version=2.6.5 && ln -s /usr/bin/composer.phar /usr/bin/composer
 
 WORKDIR  /var/www
@@ -27,6 +27,6 @@ RUN composer install
 RUN chmod 777 -R /var/www
 # RUN chmod 777 -R /tmp/xdebug-file.log
 
-# Xdebugのインストール
+# Installing Xdebug
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
