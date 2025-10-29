@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Services;
+namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Info;

@@ -8,7 +8,7 @@ use App\Http\Requests\User\PasswordChangeRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Services\UserService;
+use App\Services\UserService;
 
 class UserController extends Controller
 {

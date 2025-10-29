@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Services\StudioService;
+use App\Services\StudioService;
 
 class StudioController extends Controller
 {

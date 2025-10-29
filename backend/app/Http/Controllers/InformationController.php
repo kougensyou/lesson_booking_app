@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Http\Services\InformationService;
+use App\Services\InformationService;
 
 class InformationController extends Controller
 {

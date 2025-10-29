@@ -7,7 +7,7 @@ use App\Http\Requests\LessonBooking\FirstBookingRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Services\LessonBookingService;
+use App\Services\LessonBookingService;
 
 class LessonBookingController extends Controller
 {
