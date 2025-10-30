@@ -12,7 +12,8 @@ use App\Services\ReportService;
 class ReportController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->reportService = new ReportService();
     }
 
@@ -21,13 +22,25 @@ class ReportController extends Controller
      * 
      * @param PostRequest $request
      * @return array
+     * 
+     * @throws \Throwable
      */
-    public function sendReport(PostRequest $request) {
-        $userId = Auth::id();
-        $title = $request->input('title');
-        $email = $request->input('email');
-        $contents = $request->input('contents');
-        return $this->reportService->sendReport($userId, $title, $email, $contents);
+    public function sendReport(PostRequest $request): array
+    {
+        try {
+            $userId = Auth::id();
+            $title = $request->input('title');
+            $email = $request->input('email');
+            $contents = $request->input('contents');
+            $this->reportService->sendReport($userId, $title, $email, $contents);
+            return [
+                'success' => true,
+                'message' => 'The report was sent successfully.'
+            ];
+        } catch (\Throwable $e) {
+            \Log::error('sendReport error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
 }

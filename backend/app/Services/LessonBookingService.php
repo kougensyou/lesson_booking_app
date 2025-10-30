@@ -4,6 +4,9 @@ namespace App\Services;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Lesson;
 use App\Models\LessonBooking;
 use App\Models\LessonCategory;
@@ -22,31 +25,25 @@ class LessonBookingService
      * @param int $selectedYear
      * @param int $selectedMonth
      * 
-     * @return \Illuminate\Support\Collection
-     * 
-     * @throws \Throwable
+     * @return Collection
      */
-    public function getSelectedLessonList($userId, $selectedYear, $selectedMonth) {
-        try{
-            $startOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->startOfMonth();
-            $endOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->endOfMonth();
-            return LessonBooking::with(['lesson:id,start_time'])
-                ->where('user_id', $userId)
-                ->whereHas('lesson', function ($query) use ($startOfMonth, $endOfMonth) {
-                    $query->whereBetween('start_time', [$startOfMonth, $endOfMonth]);
-                })
-                ->get()
-                ->map(function ($booking) {
-                    return [
-                        'id' => $booking->id,
-                        'start_time' => $booking->lesson->start_time,
-                        'done_flag' => (bool) $booking->done_flag,
-                    ];
-                });
-        } catch (\Throwable $e) {
-            \Log::error('getSelectedLessonList error: ' . $e->getMessage());
-            throw $e;
-        }
+    public function getSelectedLessonList($userId, $selectedYear, $selectedMonth): Collection
+    {
+        $startOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->startOfMonth();
+        $endOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->endOfMonth();
+        return LessonBooking::with(['lesson:id,start_time'])
+            ->where('user_id', $userId)
+            ->whereHas('lesson', function ($query) use ($startOfMonth, $endOfMonth) {
+                $query->whereBetween('start_time', [$startOfMonth, $endOfMonth]);
+            })
+            ->get()
+            ->map(function ($booking) {
+                return [
+                    'id' => $booking->id,
+                    'start_time' => $booking->lesson->start_time,
+                    'done_flag' => (bool) $booking->done_flag,
+                ];
+            });
     }
 
     /**
@@ -56,7 +53,8 @@ class LessonBookingService
      * 
      * @throws \Throwable
      */
-    public function bookLesson($lessonId) {
+    public function bookLesson($lessonId): void
+    {
 
         DB::beginTransaction();
         
@@ -82,7 +80,6 @@ class LessonBookingService
             
         } catch (\Throwable $e) {
             \DB::rollback();
-            \Log::error('bookLesson error: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -95,7 +92,8 @@ class LessonBookingService
      * 
      * @throws \Throwable
      */
-    public function cancelLesson($userId, $lessonId) {
+    public function cancelLesson($userId, $lessonId): void
+    {
 
         DB::beginTransaction();
 
@@ -112,7 +110,6 @@ class LessonBookingService
             
         } catch (\Throwable $e) {
             DB::rollBack();
-            \Log::error('deleteLessonBooking error: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -122,44 +119,38 @@ class LessonBookingService
      * 
      * @param int $userId User ID
      * 
-     * @return \Illuminate\Support\Collection
-     * 
-     * @throws \Throwable
+     * @return LengthAwarePaginator
      */
-    public function addBookingHistory($userId) {
-        try {
-            return LessonBooking::with(['lesson.studio', 'lesson.instructor'])
-                ->where('user_id', $userId)
-                ->where('done_flag', config('const.lessonBooking.lessonDone'))
-                ->join('lesson', 'lesson_booking.lesson_id', '=', 'lesson.id')
-                ->orderBy('lesson.start_time', 'asc')
-                ->select('lesson_booking.*')
-                ->paginate(config('const.lessonBooking.pagination'))
-                ->through(function ($item) {
-                    $lesson = $item->lesson;
-                    $instructor = $lesson->instructor;
-                    $studio = $lesson->studio;
-                    $start = Carbon::parse($lesson->start_time);
-                    $end = Carbon::parse($lesson->end_time);
+    public function addBookingHistory($userId): LengthAwarePaginator
+    {
+        return LessonBooking::with(['lesson.studio', 'lesson.instructor'])
+            ->where('user_id', $userId)
+            ->where('done_flag', config('const.lessonBooking.lessonDone'))
+            ->join('lesson', 'lesson_booking.lesson_id', '=', 'lesson.id')
+            ->orderBy('lesson.start_time', 'asc')
+            ->select('lesson_booking.*')
+            ->paginate(config('const.lessonBooking.pagination'))
+            ->through(function ($item) {
+                $lesson = $item->lesson;
+                $instructor = $lesson->instructor;
+                $studio = $lesson->studio;
+                $start = Carbon::parse($lesson->start_time);
+                $end = Carbon::parse($lesson->end_time);
 
-                    return [
-                        'id' => $lesson->id,
-                        'studio_name' => $studio->studio_name,
-                        'short_studio_name' => mb_strimwidth($studio->studio_name, 0, 10, ' ...'),
-                        'lesson_name' => $lesson->name,
-                        'short_lesson_name' => mb_strimwidth($lesson->name, 0, 15, ' ...'),
-                        'start_time' => $lesson->start_time,
-                        'end_time' => $lesson->end_time,
-                        'lesson_time' => $start->format('n/j G:i') . ' - ' . $end->format('G:i'),
-                        'instructor_name' => $instructor->name,
-                        'image_path' => $instructor->image_path,
-                        'image_url' => $instructor->image_path ? asset('storage/' . ltrim($instructor->image_path, '/')) : null,
-                    ];
-                });
-        } catch (\Throwable $e) {
-            \Log::error('addBookingHistory error: ' . $e->getMessage());
-            throw $e;
-        }
+                return [
+                    'id' => $lesson->id,
+                    'studio_name' => $studio->studio_name,
+                    'short_studio_name' => mb_strimwidth($studio->studio_name, 0, 10, ' ...'),
+                    'lesson_name' => $lesson->name,
+                    'short_lesson_name' => mb_strimwidth($lesson->name, 0, 15, ' ...'),
+                    'start_time' => $lesson->start_time,
+                    'end_time' => $lesson->end_time,
+                    'lesson_time' => $start->format('n/j G:i') . ' - ' . $end->format('G:i'),
+                    'instructor_name' => $instructor->name,
+                    'image_path' => $instructor->image_path,
+                    'image_url' => $instructor->image_path ? asset('storage/' . ltrim($instructor->image_path, '/')) : null,
+                ];
+            });
     }
 
     /**
@@ -167,44 +158,32 @@ class LessonBookingService
      * 
      * @param array $firstBooking Request data for the first lesson booking
      * 
-     * @return array
-     * 
-     * @throws \Throwable
+     * @return RedirectResponse
      */
-    public function applyFirstLesson($firstBooking) {
+    public function applyFirstLesson($firstBooking): RedirectResponse
+    {
+        $body = __('messages.first_lesson_booking', [
+            'name' => $firstBooking['user']['name'], 
+            'studio_name' => $firstBooking['selected_lesson']['studio_name'], 
+            'lesson_name' => $firstBooking['selected_lesson']['lesson_name'], 
+            'lesson_datetime' => $firstBooking['selected_lesson']['lesson_day'] . ' ' . $firstBooking['selected_lesson']['lesson_time'],
+        ]);
 
-        DB::beginTransaction();
-
-        try {
-
-            $body = __('messages.first_lesson_booking', [
-                'name' => $firstBooking['user']['name'], 
-                'studio_name' => $firstBooking['selected_lesson']['studio_name'], 
-                'lesson_name' => $firstBooking['selected_lesson']['lesson_name'], 
-                'lesson_datetime' => $firstBooking['selected_lesson']['lesson_day'] . ' ' . $firstBooking['selected_lesson']['lesson_time'],
-            ]);
-
-            $email = new \SendGrid\Mail\Mail();
-            $email->setFrom(getenv('SENDGRID_FROM_EMAIL'));
-            $email->setSubject(__('messages.first_lesson_booking_subject'));
-            $email->addTo($firstBooking['user']['email']);
-            $apiKey = getenv('SENDGRID_API_KEY');
-            $sendGrid = new \SendGrid($apiKey);
-            $email->addContent(
-                "text/plain",
-                $body
-            );
-            $response = $sendGrid->send($email);
-            if ($response->statusCode() == 202) {
-                return back()->with(['success' => "E-mails successfully sent out!!"]);
-            }
-            return back()->withErrors(json_decode($response->body())->errors);
-
-        } catch (\Throwable $e) {
-            DB::rollBack();
-            \Log::error('applyFirstLesson error: ' . $e->getMessage());
-            throw $e;
+        $email = new \SendGrid\Mail\Mail();
+        $email->setFrom(getenv('SENDGRID_FROM_EMAIL'));
+        $email->setSubject(__('messages.first_lesson_booking_subject'));
+        $email->addTo($firstBooking['user']['email']);
+        $apiKey = getenv('SENDGRID_API_KEY');
+        $sendGrid = new \SendGrid($apiKey);
+        $email->addContent(
+            "text/plain",
+            $body
+        );
+        $response = $sendGrid->send($email);
+        if ($response->statusCode() == 202) {
+            return back()->with(['success' => "E-mails successfully sent out!!"]);
         }
+        return back()->withErrors(json_decode($response->body())->errors);
     }
 
 

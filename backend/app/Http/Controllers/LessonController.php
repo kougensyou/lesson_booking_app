@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Services\LessonService;
 
 class LessonController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->lessonService = new LessonService();
     }
 
@@ -19,41 +22,66 @@ class LessonController extends Controller
      * Get the next lesson data for a given user
      * 
      * @param Request $request
-     * @return mixed
+     * @return array
+     * 
+     * @throws \Throwable
      */
-    public function getNextLessonData(Request $request) {
-        $userId = Auth::id();
-        return $this->lessonService->getNextLessonData($userId);
+    public function getNextLessonData(Request $request): array
+    {
+        try {
+            $userId = Auth::id();
+            return $this->lessonService->getNextLessonData($userId);
+        } catch (\Throwable $e) {
+            \Log::error('getNextLessonData error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     /**
      * Add a list of lessons from the same studio
      * 
      * @param Request $request
-     * @return mixed
+     * @return LengthAwarePaginator
+     * 
+     * @throws \Throwable
      */
-    public function addSameStudioLessonList(Request $request) {
-        $studioId = $request->query('studio_id');
-        return $this->lessonService->addSameStudioLessonList($studioId);
+    public function addSameStudioLessonList(Request $request): LengthAwarePaginator
+    {
+        try {
+            $studioId = $request->query('studio_id');
+            return $this->lessonService->addSameStudioLessonList($studioId);
+        } catch (\Throwable $e) {
+            \Log::error('addSameStudioLessonList error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     /**
      * Get a list of lesson categories
      * 
      * @param Request $request
-     * @return mixed
+     * @return Collection
+     * 
+     * @throws \Throwable
      */
-    public function getLessonCategorylist(Request $request) {
-        return $this->lessonService->getLessonCategorylist();
+    public function getLessonCategorylist(Request $request): Collection
+    {
+        try {
+            return $this->lessonService->getLessonCategorylist();
+        } catch (\Throwable $e) {
+            \Log::error('getLessonCategoryList error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     /**
      * Get a list of time options
      * 
      * @param Request $request
-     * @return mixed
+     * @return array
      */
-    public function getTimeOptions(Request $request) {
+    public function getTimeOptions(Request $request): array
+    {
         return $this->lessonService->getTimeOptions();
     }
 
@@ -61,36 +89,60 @@ class LessonController extends Controller
      * Add searched lessons based on the search input form
      * 
      * @param Request $request
-     * @return mixed
+     * @return LengthAwarePaginator
+     * 
+     * @throws \Throwable
      */
-    public function addSearchedLessons(Request $request) {
-        $searchInputForm = json_decode($request->query('search_input_form'), true);
-        return $this->lessonService->addSearchedLessons($searchInputForm);
+    public function addSearchedLessons(Request $request): LengthAwarePaginator
+    {
+        try {
+            $searchInputForm = json_decode($request->query('search_input_form'), true);
+            return $this->lessonService->addSearchedLessons($searchInputForm);
+        } catch (\Throwable $e) {
+            \Log::error('addSearchedLessons error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     /**
      * Get lesson detail for a given lesson
      * 
      * @param Request $request
-     * @return mixed
+     * @return object
+     * 
+     * @throws \Throwable
      */
-    public function getLessonDetail(Request $request) {
-        $userId = Auth::id();
-        $lessonId = $request->query('lesson_id');
-        return $this->lessonService->getLessonDetail($userId, $lessonId);
+    public function getLessonDetail(Request $request): object
+    {
+        try {
+            $userId = Auth::id();
+            $lessonId = $request->query('lesson_id');
+            return $this->lessonService->getLessonDetail($userId, $lessonId);
+        } catch (\Throwable $e) {
+            \Log::error('getLessonDetail error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     /**
      * Get studio lesson data for a given studio and date range
      * 
      * @param Request $request
-     * @return mixed
+     * @return array
+     * 
+     * @throws \Throwable
      */
-    public function getStudioLessonData(Request $request) {
-        $studioId = $request->query('studio_id');
-        $fromDate = $request->query('from_date');
-        $toDate = $request->query('to_date');
-        return $this->lessonService->getStudioLessonData($studioId, $fromDate, $toDate);
+    public function getStudioLessonData(Request $request): array
+    {
+        try {
+            $studioId = $request->query('studio_id');
+            $fromDate = $request->query('from_date');
+            $toDate = $request->query('to_date');
+            return $this->lessonService->getStudioLessonData($studioId, $fromDate, $toDate);
+        } catch (\Throwable $e) {
+            \Log::error('getStudioLessonData error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
 }

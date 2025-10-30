@@ -30,7 +30,6 @@ final class LoginController extends Controller
             $request->session()->regenerate();
             return response()->json(['message' => 'Login successful'], 200);
         }
-
         return response()->json(['message' => 'Invalid credentials'], 401);
     }
 }

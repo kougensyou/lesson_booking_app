@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use SendGrid;
 
@@ -16,28 +17,22 @@ class UserService
      * 
      * @param int $userId User ID
      * 
-     * @return \Illuminate\Support\Collection
-     * 
-     * @throws \Throwable
+     * @return User
      */
-    public function getUser($userId) {
-        try {
-            return User::select('id', 'name', 'email', 'zip_code', 'address', 'birth_date', 'tel_no', 'image_path')
-            ->where('id', $userId)
-            ->get()
-            ->map(function ($item) {
-                if ($item->image_path) {
-                    $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                    return $item;
-                }
-                $item->image_url = null;
+    public function getUser($userId): User
+    {
+        return User::select('id', 'name', 'email', 'zip_code', 'address', 'birth_date', 'tel_no', 'image_path')
+        ->where('id', $userId)
+        ->get()
+        ->map(function ($item) {
+            if ($item->image_path) {
+                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
                 return $item;
-            })
-            ->firstOrFail();
-        } catch (\Throwable $e) {
-            \Log::error('getUser error: ' . $e->getMessage());
-            throw $e;
-        }
+            }
+            $item->image_url = null;
+            return $item;
+        })
+        ->firstOrFail();
     }
 
     /**
@@ -47,10 +42,9 @@ class UserService
      * @param \Illuminate\Http\Request $request Request object
      *
      * @throws \Throwable
-     *
-     * @return void
      */
-    public function updateUser($userId, Request $request) {
+    public function updateUser($userId, Request $request): void
+    {
 
         DB::beginTransaction();
 
@@ -103,10 +97,9 @@ class UserService
      * @param array $passwordData Password data array containing the new password and its confirmation
      *
      * @throws \Throwable
-     *
-     * @return void
      */
-    public function updatePassword($userId, $passwordData) {
+    public function updatePassword($userId, $passwordData): void
+    {
 
         DB::beginTransaction();
 
@@ -131,11 +124,12 @@ class UserService
      *
      * @param string $toEmail Email address to send the password reset mail to
      * 
-     * @throws \Throwable
+     * @return RedirectResponse
      * 
-     * @return \Illuminate\Http\Response
+     * @throws \Throwable
      */
-    public function sendPasswordResetMail($toEmail) {
+    public function sendPasswordResetMail($toEmail): RedirectResponse
+    {
 
         DB::beginTransaction();
 
@@ -175,10 +169,9 @@ class UserService
      * 
      * @param string $toEmail
      * @param string $randomPassword
-     * 
-     * @return void
      */
-    private function updatePasswordForReset($toEmail, $randomPassword) {
+    private function updatePasswordForReset($toEmail, $randomPassword): void
+    {
         
         $user = User::where('email', $toEmail)->firstOrFail();
         

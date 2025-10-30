@@ -14,9 +14,9 @@ class ReportService
      * @param string $email
      * @param string $contents
      * @throws \Throwable
-     * @return void
      */
-    public function sendReport($userId, $title, $email, $contents) {
+    public function sendReport($userId, $title, $email, $contents): void
+    {
         
         DB::beginTransaction();
 
@@ -31,7 +31,6 @@ class ReportService
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
-            \Log::error('sendReport error: ' . $e->getMessage());
             throw $e;
         }
     }

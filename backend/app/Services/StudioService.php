@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 use App\Models\Studio;
 use App\Models\FavoriteStudio;
 
@@ -11,58 +12,48 @@ class StudioService
     /**
      * Get a list of studios from the database
      *
-     * @return array
-     * @throws Throwable
+     * @return Collection
      */
-    public function getStudioList() {
-        try {
-            return Studio::select('id', 'studio_name', 'image_path')
-            ->get()
-            ->map(function ($item) {
-                if ($item->image_path) {
-                    $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                    return $item;
-                }
-                $item->image_url = null;
+    public function getStudioList(): Collection
+    {
+        return Studio::select('id', 'studio_name', 'image_path')
+        ->get()
+        ->map(function ($item) {
+            if ($item->image_path) {
+                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
                 return $item;
-            });
-        } catch (\Throwable $e) {
-            \Log::error('getStudioList error: ' . $e->getMessage());
-            throw $e;
-        }
+            }
+            $item->image_url = null;
+            return $item;
+        });
     }
 
     /**
      * Get a list of favorite studios for the user
      * 
      * @param int $userId User ID
-     * @return array Favorite studio list
-     * @throws Throwable
+     * @return Collection Favorite studio list
      */
-    public function getFavoriteStudioList($userId) {
-        try {
-            return FavoriteStudio::with('studio')
-                ->where('user_id', $userId)
-                ->get()
-                ->map(function ($item) {
-                    $studio = $item->studio;
+    public function getFavoriteStudioList($userId): Collection
+    {
+        return FavoriteStudio::with('studio')
+            ->where('user_id', $userId)
+            ->get()
+            ->map(function ($item) {
+                $studio = $item->studio;
 
-                    return [
-                        'id' => $studio->id,
-                        'studio_name' => $studio->studio_name,
-                        'short_studio_name' => mb_strimwidth(
-                            $studio->studio_name,
-                            0,
-                            config('const.studio.shortStudioNameChar'),
-                            ' ...'
-                        ),
-                        'image_url' => $studio->image_path ? asset('storage/' . ltrim($studio->image_path, '/')) : null,
-                    ];
-                });
-        } catch (\Throwable $e) {
-            \Log::error('getFavoriteStudioList error: ' . $e->getMessage());
-            throw $e;
-        }
+                return [
+                    'id' => $studio->id,
+                    'studio_name' => $studio->studio_name,
+                    'short_studio_name' => mb_strimwidth(
+                        $studio->studio_name,
+                        0,
+                        config('const.studio.shortStudioNameChar'),
+                        ' ...'
+                    ),
+                    'image_url' => $studio->image_path ? asset('storage/' . ltrim($studio->image_path, '/')) : null,
+                ];
+            });
     }
 
     /**
@@ -71,10 +62,10 @@ class StudioService
      * @param int $userId User ID
      * @param array $initialFavoriteStudioList Initial favorite studio list
      * @param array $favoriteStudioList Favorite studio list
-     * @return void
      * @throws Throwable
      */
-    public function saveFavoriteStudioList($userId, $initialFavoriteStudioList, $favoriteStudioList) {
+    public function saveFavoriteStudioList($userId, $initialFavoriteStudioList, $favoriteStudioList): void
+    {
 
         DB::beginTransaction();
 

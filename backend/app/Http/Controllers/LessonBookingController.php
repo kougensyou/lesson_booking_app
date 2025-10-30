@@ -6,13 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LessonBooking\FirstBookingRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\RedirectResponse;
 
 use App\Services\LessonBookingService;
 
 class LessonBookingController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->lessonBookingService = new LessonBookingService();
     }
 
@@ -20,13 +25,21 @@ class LessonBookingController extends Controller
      * Get a list of lessons for a given user and selected date
      * 
      * @param Request $request
-     * @return mixed
+     * @return Collection
+     * 
+     * @throws \Throwable
      */
-    public function getSelectedLessonList(Request $request) {
-        $userId = Auth::id();
-        $selectedYear = $request->query('selected_year');
-        $selectedMonth = $request->query('selected_month') + 1;
-        return $this->lessonBookingService->getSelectedLessonList($userId, $selectedYear, $selectedMonth);
+    public function getSelectedLessonList(Request $request): Collection
+    {
+        try {
+            $userId = Auth::id();
+            $selectedYear = $request->query('selected_year');
+            $selectedMonth = $request->query('selected_month') + 1;
+            return $this->lessonBookingService->getSelectedLessonList($userId, $selectedYear, $selectedMonth);
+        } catch (\Throwable $e) {
+            \Log::error('getSelectedLessonList error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
 
@@ -35,15 +48,22 @@ class LessonBookingController extends Controller
      * 
      * @param Request $request
      * @return array
+     * 
+     * @throws \Throwable
      */
-    public function bookLesson(Request $request) {
-        $lessonId = $request->input('lesson_id');
-        $this->lessonBookingService->bookLesson($lessonId);
-
-        return [
-            'success' => true,
-            'message' => 'The lesson was booked successfully.'
-        ];
+    public function bookLesson(Request $request): array
+    {
+        try {
+            $lessonId = $request->input('lesson_id');
+            $this->lessonBookingService->bookLesson($lessonId);
+            return [
+                'success' => true,
+                'message' => 'The lesson was booked successfully.'
+            ];
+        } catch (\Throwable $e) {
+            \Log::error('bookLesson error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     /**
@@ -51,36 +71,52 @@ class LessonBookingController extends Controller
      * 
      * @param Request $request
      * @return array
+     * 
+     * @throws \Throwable
      */
-    public function cancelLesson(Request $request) {
-        $userId = Auth::id();
-        $lessonId = $request->input('lesson_id');
-        $this->lessonBookingService->cancelLesson($userId, $lessonId);
-
-        return [
-            'success' => true,
-            'message' => 'The lesson was canceled successfully.'
-        ];
+    public function cancelLesson(Request $request): array
+    {
+        try {
+            $userId = Auth::id();
+            $lessonId = $request->input('lesson_id');
+            $this->lessonBookingService->cancelLesson($userId, $lessonId);
+            return [
+                'success' => true,
+                'message' => 'The lesson was canceled successfully.'
+            ];
+        } catch (\Throwable $e) {
+            \Log::error('cancelLesson error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     /**
      * Add a booking history for a given user
      *
      * @param Request $request
-     * @return mixed
+     * @return LengthAwarePaginator
+     * 
+     * @throws \Throwable
      */     
-    public function addBookingHistory(Request $request) {
-        $userId = Auth::id();
-        return $this->lessonBookingService->addBookingHistory($userId);
+    public function addBookingHistory(Request $request): LengthAwarePaginator
+    {
+        try {
+            $userId = Auth::id();
+            return $this->lessonBookingService->addBookingHistory($userId);
+        } catch (\Throwable $e) {
+            \Log::error('addBookingHistory error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     /**
      * Validate the first lesson booking request
      * 
      * @param FirstBookingRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function validateFirstLesson(FirstBookingRequest $request) {
+    public function validateFirstLesson(FirstBookingRequest $request): JsonResponse
+    {
         return response()->json([
             'message' => 'Validation passed',
             'data'    => $request->validated(),
@@ -91,16 +127,19 @@ class LessonBookingController extends Controller
      * Apply the first lesson booking
      * 
      * @param FirstBookingRequest $request
-     * @return array
+     * @return RedirectResponse
+     * 
+     * @throws \Throwable
      */
-    public function applyFirstLesson(FirstBookingRequest $request) {
-        $firstBooking = $request->input('first_booking');
-        $this->lessonBookingService->applyFirstLesson($firstBooking);
-
-        return [
-            'success' => true,
-            'message' => 'The lesson was applied successfully.'
-        ];
+    public function applyFirstLesson(FirstBookingRequest $request): RedirectResponse
+    {
+        try {
+            $firstBooking = $request->input('first_booking');
+            return $this->lessonBookingService->applyFirstLesson($firstBooking);
+        } catch (\Throwable $e) {
+            \Log::error('applyFirstLesson error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
 }

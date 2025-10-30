@@ -30,11 +30,9 @@ final class LogoutController extends Controller
                 'message' => 'Already Unauthenticated.',
             ]);
         }
-
         $this->auth->guard()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
         return response()->json(['message' => 'Logged out successfully']);
     }
 }

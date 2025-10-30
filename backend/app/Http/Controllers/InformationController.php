@@ -10,7 +10,8 @@ use App\Services\InformationService;
 class InformationController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->informationService = new InformationService();
     }
     
@@ -18,9 +19,17 @@ class InformationController extends Controller
      * Get a list of information from the database
      *
      * @param Request $request
-     * @return mixed
+     * @return array
+     * 
+     * @throws \Throwable
      */
-    public function getInformationList(Request $request) {
-        return $this->informationService->getInformationList();
+    public function getInformationList(Request $request): array
+    {
+        try {
+            return $this->informationService->getInformationList();
+        } catch (\Throwable $e) {
+            \Log::error('getInformationList error: ' . $e->getMessage());
+            throw $e;
+        }
     }
 }

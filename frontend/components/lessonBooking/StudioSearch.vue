@@ -42,13 +42,13 @@ const carouselConfig = {
     <div class="m-4">
       <Carousel v-bind="carouselConfig">
         <Slide
-          v-for="(favoriteStudio, index) in favoriteStudioList"
+          v-for="favoriteStudio in favoriteStudioList"
           :key="favoriteStudio.id"
           class="min-w-[250px] h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between items-start"
           @click="
             $router.push({
               path: '/studioLesson',
-              query: { studio_id: favoriteStudio.studio_id },
+              query: { studio_id: favoriteStudio.id },
             })
           "
         >
