@@ -41,22 +41,24 @@ class StudioService
      */
     public function getFavoriteStudioList($userId) {
         try {
-            return FavoriteStudio::join('studio', 'studio.id', '=', 'favorite_studio.studio_id')
-            ->where('favorite_studio.user_id', $userId)
-            ->get()
-            ->map(function ($item) {
+            return FavoriteStudio::with('studio')
+                ->where('user_id', $userId)
+                ->get()
+                ->map(function ($item) {
+                    $studio = $item->studio;
 
-                $item->short_studio_name = mb_strlen($item->studio_name) > config('const.studio.shortStudioNameChar')
-                    ? mb_substr($item->studio_name, 0, config('const.studio.shortStudioNameChar')) . ' ...'
-                    : $item->studio_name;
-
-                if ($item->image_path) {
-                    $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                    return $item;
-                }
-                $item->image_url = null;
-                return $item;
-            });
+                    return [
+                        'id' => $studio->id,
+                        'studio_name' => $studio->studio_name,
+                        'short_studio_name' => mb_strimwidth(
+                            $studio->studio_name,
+                            0,
+                            config('const.studio.shortStudioNameChar'),
+                            ' ...'
+                        ),
+                        'image_url' => $studio->image_path ? asset('storage/' . ltrim($studio->image_path, '/')) : null,
+                    ];
+                });
         } catch (\Throwable $e) {
             \Log::error('getFavoriteStudioList error: ' . $e->getMessage());
             throw $e;

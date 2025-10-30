@@ -22,43 +22,34 @@ class LessonService
      */
     public function getNextLessonData($userId) {
         try {
-            return LessonBooking::select(
-                'lesson.id',
-                'studio.studio_name as studio_name',
-                'lesson.name as lesson_name',
-                'lesson.start_time',
-                'lesson.end_time',
-                'instructor.name as instructor_name',
-                'instructor.image_path'
-            )
-            ->join('lesson', 'lesson.id', '=', 'lesson_booking.lesson_id')
-            ->join('studio', 'studio.id', '=', 'lesson.studio_id')
-            ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
-            ->where('lesson.start_time', '>', Carbon::now())
-            ->where('lesson_booking.user_id', $userId)
-            ->whereNull('lesson_booking.done_flag')
-            ->orderBy('lesson.start_time', 'asc')
-            ->get()
-            ->map(function ($item) {
-                $start = Carbon::parse($item->start_time);
-                $end = Carbon::parse($item->end_time);
-                $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
+            return LessonBooking::with(['lesson.studio', 'lesson.instructor'])
+                ->where('user_id', $userId)
+                ->whereNull('done_flag')
+                ->whereHas('lesson', fn($query) => $query->where('start_time', '>', Carbon::now()))
+                ->get()
+                ->sortBy(fn($item) => $item->lesson->start_time)
+                ->map(function ($item) {
+                    $lesson = $item->lesson;
+                    $studio = $lesson->studio;
+                    $instructor = $lesson->instructor;
 
-                $item->short_lesson_name = mb_strlen($item->lesson_name) > config('const.lesson.shortLessonNameChar')
-                    ? mb_substr($item->lesson_name, 0, config('const.lesson.shortLessonNameChar')) . ' ...'
-                    : $item->lesson_name;
+                    $start = Carbon::parse($lesson->start_time);
+                    $end = Carbon::parse($lesson->end_time);
 
-                $item->short_studio_name = mb_strlen($item->studio_name) > config('const.lesson.shortStudioNameChar')
-                    ? mb_substr($item->studio_name, 0, config('const.lesson.shortStudioNameChar')) . ' ...'
-                    : $item->studio_name;
-
-                if ($item->image_path) {
-                    $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                    return $item;
-                }
-                $item->image_url = null;
-                return $item;
-            });
+                    return [
+                        'id' => $lesson->id,
+                        'studio_name' => $studio->studio_name,
+                        'short_studio_name' => mb_strimwidth($studio->studio_name, 0, config('const.lesson.shortStudioNameChar'), ' ...'),
+                        'lesson_name' => $lesson->name,
+                        'short_lesson_name' => mb_strimwidth($lesson->name, 0, config('const.lesson.shortLessonNameChar'), ' ...'),
+                        'start_time' => $lesson->start_time,
+                        'end_time' => $lesson->end_time,
+                        'lesson_time' => $start->format('n/j G:i') . ' - ' . $end->format('G:i'),
+                        'instructor_name' => $instructor->name,
+                        'image_path' => $instructor->image_path,
+                        'image_url' => $instructor->image_path ? asset('storage/' . ltrim($instructor->image_path, '/')) : null,
+                    ];
+                });
         } catch (\Throwable $e) {
             \Log::error('getNextLessonData error: ' . $e->getMessage());
             throw $e;
@@ -77,34 +68,32 @@ class LessonService
     public function addSameStudioLessonList($studioId) {
         try {
 
-            return Lesson::select(
-                'lesson.id',
-                'studio.studio_name as studio_name',
-                'lesson.name as lesson_name',
-                'lesson.start_time',
-                'lesson.end_time',
-                'instructor.name as instructor_name',
-                'instructor.image_path'
-            )
-            ->join('studio', 'studio.id', '=', 'lesson.studio_id')
-            ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
-            ->leftJoin('lesson_booking', 'lesson_booking.lesson_id', '=', 'lesson.id')
-            ->whereNull('lesson_booking.id')
-            ->where('lesson.start_time', '>', Carbon::now())
-            ->where('lesson.studio_id', $studioId)
-            ->orderBy('lesson.start_time', 'asc')
-            ->paginate(config('const.lesson.pagination'))
-            ->through(function ($item) {
-                $start = Carbon::parse($item->start_time);
-                $end = Carbon::parse($item->end_time);
-                $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
-                if ($item->image_path) {
-                    $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                    return $item;
-                }
-                $item->image_url = null;
-                return $item;
-            });
+            return Lesson::with(['studio', 'instructor'])
+                ->where('studio_id', $studioId)
+                ->where('start_time', '>', Carbon::now())
+                ->whereDoesntHave('lessonBookings')
+                ->orderBy('start_time', 'asc')
+                ->paginate(config('const.lesson.pagination'))
+                ->through(function ($lesson) {
+                    $start = Carbon::parse($lesson->start_time);
+                    $end = Carbon::parse($lesson->end_time);
+                    $instructor = $lesson->instructor;
+                    $studio = $lesson->studio;
+
+                    return [
+                        'id' => $lesson->id,
+                        'studio_name' => $studio->studio_name,
+                        'short_studio_name' => mb_strimwidth($studio->studio_name, 0, 10, ' ...'),
+                        'lesson_name' => $lesson->name,
+                        'short_lesson_name' => mb_strimwidth($lesson->name, 0, 15, ' ...'),
+                        'start_time' => $lesson->start_time,
+                        'end_time' => $lesson->end_time,
+                        'lesson_time' => $start->format('n/j G:i') . ' - ' . $end->format('G:i'),
+                        'instructor_name' => $instructor->name,
+                        'image_path' => $instructor->image_path,
+                        'image_url' => $instructor->image_path ? asset('storage/' . ltrim($instructor->image_path, '/')) : null,
+                    ];
+                });
 
         } catch (\Throwable $e) {
             \Log::error('addSameStudioLessonList error: ' . $e->getMessage());
@@ -152,51 +141,54 @@ class LessonService
      */
     public function addSearchedLessons($searchInputForm) {
         try {
-            return Lesson::select(
-                    'lesson.id',
-                    'studio.studio_name as studio_name',
-                    'lesson.name as lesson_name',
-                    'lesson.start_time',
-                    'lesson.end_time',
-                    'instructor.name as instructor_name',
-                    'instructor.image_path'
-                )
-                ->join('studio', 'studio.id', '=', 'lesson.studio_id')
-                ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
-                ->where('lesson.start_time', '>', Carbon::now())
+            return Lesson::with(['studio', 'instructor'])
+                ->where('start_time', '>', Carbon::now())
                 ->when(!empty($searchInputForm['selectedDates']), function($q) use ($searchInputForm) {
                     $q->where(function($q2) use ($searchInputForm) {
                         foreach ($searchInputForm['selectedDates'] as $date) {
-                            $q2->orWhere('lesson.start_time', 'like', "%{$date}%");
+                            $q2->orWhereDate('start_time', $date);
                         }
                     });
                 })
                 ->when(!empty($searchInputForm['startTime']), function($q) use ($searchInputForm) {
-                    $q->whereRaw("TO_CHAR(lesson.start_time, 'HH24:MI') > ?", [$searchInputForm['startTime']]);
+                    $q->whereTime('start_time', '>=', $searchInputForm['startTime']);
                 })
                 ->when(!empty($searchInputForm['endTime']), function($q) use ($searchInputForm) {
-                    $q->whereRaw("TO_CHAR(lesson.end_time, 'HH24:MI') < ?", [$searchInputForm['endTime']]);
+                    $q->whereTime('end_time', '<=', $searchInputForm['endTime']);
                 })
                 ->when(!empty($searchInputForm['lessonCategory']), function($q) use ($searchInputForm) {
-                    $q->where('lesson.lesson_category_id', $searchInputForm['lessonCategory']);
+                    $q->where('lesson_category_id', $searchInputForm['lessonCategory']);
                 })
                 ->when(!empty($searchInputForm['studio']), function($q) use ($searchInputForm) {
-                    $q->where('lesson.studio_id', $searchInputForm['studio']);
+                    $q->where('studio_id', $searchInputForm['studio']);
                 })
                 ->when(!empty($searchInputForm['instructor']), function($q) use ($searchInputForm) {
-                    $q->where('instructor.name', 'like', "%{$searchInputForm['instructor']}%");
+                    $q->whereHas('instructor', fn($qi) => $qi->where('name', 'like', "%{$searchInputForm['instructor']}%"));
                 })
                 ->when(!empty($searchInputForm['lessonName']), function($q) use ($searchInputForm) {
-                    $q->where('lesson.name', 'like', "%{$searchInputForm['lessonName']}%");
+                    $q->where('name', 'like', "%{$searchInputForm['lessonName']}%");
                 })
-                ->orderBy('lesson.start_time', 'asc')
+                ->orderBy('start_time', 'asc')
                 ->paginate(config('const.lesson.pagination'))
-                ->through(function ($item) {
-                    $start = Carbon::parse($item->start_time);
-                    $end = Carbon::parse($item->end_time);
-                    $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
-                    $item->image_url = $item->image_path ? asset('storage/' . ltrim($item->image_path, '/')) : null;
-                    return $item;
+                ->through(function ($lesson) {
+                    $start = Carbon::parse($lesson->start_time);
+                    $end = Carbon::parse($lesson->end_time);
+                    $instructor = $lesson->instructor;
+                    $studio = $lesson->studio;
+                    
+                    return [
+                        'id' => $lesson->id,
+                        'studio_name' => $studio->studio_name,
+                        'short_studio_name' => mb_strimwidth($studio->studio_name, 0, 10, ' ...'),
+                        'lesson_name' => $lesson->name,
+                        'short_lesson_name' => mb_strimwidth($lesson->name, 0, 15, ' ...'),
+                        'start_time' => $lesson->start_time,
+                        'end_time' => $lesson->end_time,
+                        'lesson_time' => $start->format('n/j G:i') . ' - ' . $end->format('G:i'),
+                        'instructor_name' => $instructor->name,
+                        'image_path' => $instructor->image_path,
+                        'image_url' => $instructor->image_path ? asset('storage/' . ltrim($instructor->image_path, '/')) : null,
+                    ];
                 });
         } catch (\Throwable $e) {
             \Log::error('addSearchedLessons error: ' . $e->getMessage());
@@ -215,43 +207,41 @@ class LessonService
      */
     public function getLessonDetail($userId, $lessonId) {
         try {
-            return Lesson::select(
-                'studio.id as studio_id',
-                'studio.studio_name as studio_name',
-                'lesson.name as lesson_name',
-                'lesson.explanation as lesson_explanation',
-                'lesson.image_path as lesson_image_path',
-                'lesson.start_time',
-                'lesson.end_time',
-                'lesson.max_user_num',
-                'lesson.booking_user_num',
-                'instructor.name as instructor_name',
-                'instructor.introduction as instructor_introduction',
-                'instructor.image_path as instructor_image_path',
-                \DB::raw('CASE WHEN lesson_booking.id IS NOT NULL THEN true ELSE false END as booked_flag'),
-                'lesson_booking.done_flag'
-            )
-            ->join('studio', 'studio.id', '=', 'lesson.studio_id')
-            ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
-            ->leftJoin('lesson_booking', function ($join) use ($userId) {
-                $join->on('lesson_booking.lesson_id', '=', 'lesson.id')
-                    ->where('lesson_booking.user_id', '=', $userId);
-            })
-            ->where('lesson.id', $lessonId)
-            ->get()
-            ->map(function ($item) {
-                $start = Carbon::parse($item->start_time);
-                $end = Carbon::parse($item->end_time);
-                $item->lesson_day = $start->format('n/j');
-                $item->lesson_time = $start->format('G:i') . ' - ' . $end->format('G:i');
-                $item->lesson_datetime = $item->lesson_day . ' ' . $item->lesson_time;
-                $item->lesson_image_url = $item->lesson_image_path ? asset('storage/' . ltrim($item->lesson_image_path, '/')) : null;
-                $item->instructor_image_url = $item->instructor_image_path ? asset('storage/' . ltrim($item->instructor_image_path, '/')) : null;
-                $item->booked_flag = (bool) $item->booked_flag;
-                $item->empty_flag = $item->max_user_num !== $item->booking_user_num;
-                return $item;
-            })
-            ->firstOrFail();
+
+            $lesson = Lesson::with([
+                    'studio',
+                    'instructor',
+                    'lessonBookings' => fn($q) => $q->where('user_id', $userId)
+                ])
+                ->findOrFail($lessonId);
+
+            $start = Carbon::parse($lesson->start_time);
+            $end = Carbon::parse($lesson->end_time);
+
+            $booked = $lesson->lessonBookings->isNotEmpty();
+
+            return (object) [
+                'studio_id' => $lesson->studio->id,
+                'studio_name' => $lesson->studio->studio_name,
+                'lesson_name' => $lesson->name,
+                'lesson_explanation' => $lesson->explanation,
+                'lesson_image_path' => $lesson->image_path,
+                'lesson_image_url' => $lesson->image_path ? asset('storage/' . ltrim($lesson->image_path, '/')) : null,
+                'start_time' => $lesson->start_time,
+                'end_time' => $lesson->end_time,
+                'lesson_day' => $start->format('n/j'),
+                'lesson_time' => $start->format('G:i') . ' - ' . $end->format('G:i'),
+                'lesson_datetime' => $start->format('n/j') . ' ' . $start->format('G:i') . ' - ' . $end->format('G:i'),
+                'max_user_num' => $lesson->max_user_num,
+                'booking_user_num' => $lesson->booking_user_num,
+                'empty_flag' => $lesson->max_user_num !== $lesson->booking_user_num,
+                'instructor_name' => $lesson->instructor->name,
+                'instructor_introduction' => $lesson->instructor->introduction,
+                'instructor_image_path' => $lesson->instructor->image_path,
+                'instructor_image_url' => $lesson->instructor->image_path ? asset('storage/' . ltrim($lesson->instructor->image_path, '/')) : null,
+                'booked_flag' => $booked,
+                'done_flag' => $booked ? $lesson->lessonBookings->first()->done_flag : null,
+            ];
 
         } catch (\Throwable $e) {
             \Log::error('getLessonDetail error: ' . $e->getMessage());
@@ -297,45 +287,34 @@ class LessonService
      */
     private function getStudioLessonList($studioId, $fromDate, $toDate)
     {
-        return Lesson::select(
-                'studio.studio_name as studio_name',
-                'lesson.id',
-                'lesson.name as lesson_name',
-                'lesson.start_time',
-                'lesson.end_time',
-                'lesson.max_user_num',
-                'lesson.booking_user_num',
-                'instructor.name as instructor_name',
-                'instructor.image_path'
-            )
-            ->join('studio', 'studio.id', '=', 'lesson.studio_id')
-            ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
-            ->where('lesson.start_time', '>', Carbon::now())
-            ->where('lesson.studio_id', $studioId)
-            ->whereBetween('lesson.start_time', [
+        return Lesson::with(['instructor', 'studio'])
+            ->where('studio_id', $studioId)
+            ->where('start_time', '>', Carbon::now())
+            ->whereBetween('start_time', [
                 Carbon::parse($fromDate)->startOfDay(),
                 Carbon::parse($toDate)->endOfDay()
             ])
-            ->orderBy('lesson.start_time')
+            ->orderBy('start_time')
             ->get()
             ->reduce(function ($carry, $lesson) {
                 $start = Carbon::parse($lesson->start_time);
                 $end = Carbon::parse($lesson->end_time);
                 $date = $start->format('n/j');
                 $hourKey = $start->format('H:00');
-                $time    = $start->format('H:i');
+                $time = $start->format('H:i');
 
                 $emptyFlag = $lesson->max_user_num !== $lesson->booking_user_num;
 
                 $carry[$date][$hourKey][] = [
                     'lesson_id'      => $lesson->id,
-                    'lesson_day'      => $date,
-                    'lesson_time'     => $start->format('G:i') . ' - ' . $end->format('G:i'),
-                    'start_time'      => $time,
-                    'lesson_name'     => $lesson->lesson_name,
-                    'instructor_name' => $lesson->instructor_name,
-                    'empty_flag'    => $emptyFlag,
+                    'lesson_day'     => $date,
+                    'lesson_time'    => $start->format('G:i') . ' - ' . $end->format('G:i'),
+                    'start_time'     => $time,
+                    'lesson_name'    => $lesson->name,
+                    'instructor_name'=> $lesson->instructor->name,
+                    'empty_flag'     => $emptyFlag,
                 ];
+
                 return $carry;
             }, []);
     }

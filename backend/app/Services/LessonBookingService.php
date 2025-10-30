@@ -30,18 +30,19 @@ class LessonBookingService
         try{
             $startOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->startOfMonth();
             $endOfMonth = Carbon::create($selectedYear, $selectedMonth, 1)->endOfMonth();
-            return LessonBooking::select(
-                'done_flag',
-                'lesson.start_time',
-            )
-            ->join('lesson', 'lesson.id', '=', 'lesson_booking.lesson_id')
-            ->whereBetween('lesson.start_time', [
-                $startOfMonth,
-                $endOfMonth
-            ])
-            ->where('lesson_booking.user_id', $userId)
-            ->orderBy('lesson.start_time', 'asc')
-            ->get();
+            return LessonBooking::with(['lesson:id,start_time'])
+                ->where('user_id', $userId)
+                ->whereHas('lesson', function ($query) use ($startOfMonth, $endOfMonth) {
+                    $query->whereBetween('start_time', [$startOfMonth, $endOfMonth]);
+                })
+                ->get()
+                ->map(function ($booking) {
+                    return [
+                        'id' => $booking->id,
+                        'start_time' => $booking->lesson->start_time,
+                        'done_flag' => (bool) $booking->done_flag,
+                    ];
+                });
         } catch (\Throwable $e) {
             \Log::error('getSelectedLessonList error: ' . $e->getMessage());
             throw $e;
@@ -127,33 +128,34 @@ class LessonBookingService
      */
     public function addBookingHistory($userId) {
         try {
-            return LessonBooking::select(
-                'lesson.id',
-                'studio.studio_name as studio_name',
-                'lesson.name as lesson_name',
-                'lesson.start_time',
-                'lesson.end_time',
-                'instructor.name as instructor_name',
-                'instructor.image_path'
-            )
-            ->join('lesson', 'lesson.id', '=', 'lesson_booking.lesson_id')
-            ->join('studio', 'studio.id', '=', 'lesson.studio_id')
-            ->join('instructor', 'instructor.id', '=', 'lesson.instructor_id')
-            ->where('lesson_booking.user_id', $userId)
-            ->where('lesson_booking.done_flag', config('const.lessonBooking.lessonDone'))
-            ->orderBy('lesson.start_time', 'asc')
-            ->paginate(config('const.lessonBooking.pagination'))
-            ->through(function ($item) {
-                $start = Carbon::parse($item->start_time);
-                $end = Carbon::parse($item->end_time);
-                $item->lesson_time = $start->format('n/j G:i') . ' - ' . $end->format('G:i');
-                if ($item->image_path) {
-                    $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                    return $item;
-                }
-                $item->image_url = null;
-                return $item;
-            });
+            return LessonBooking::with(['lesson.studio', 'lesson.instructor'])
+                ->where('user_id', $userId)
+                ->where('done_flag', config('const.lessonBooking.lessonDone'))
+                ->join('lesson', 'lesson_booking.lesson_id', '=', 'lesson.id')
+                ->orderBy('lesson.start_time', 'asc')
+                ->select('lesson_booking.*')
+                ->paginate(config('const.lessonBooking.pagination'))
+                ->through(function ($item) {
+                    $lesson = $item->lesson;
+                    $instructor = $lesson->instructor;
+                    $studio = $lesson->studio;
+                    $start = Carbon::parse($lesson->start_time);
+                    $end = Carbon::parse($lesson->end_time);
+
+                    return [
+                        'id' => $lesson->id,
+                        'studio_name' => $studio->studio_name,
+                        'short_studio_name' => mb_strimwidth($studio->studio_name, 0, 10, ' ...'),
+                        'lesson_name' => $lesson->name,
+                        'short_lesson_name' => mb_strimwidth($lesson->name, 0, 15, ' ...'),
+                        'start_time' => $lesson->start_time,
+                        'end_time' => $lesson->end_time,
+                        'lesson_time' => $start->format('n/j G:i') . ' - ' . $end->format('G:i'),
+                        'instructor_name' => $instructor->name,
+                        'image_path' => $instructor->image_path,
+                        'image_url' => $instructor->image_path ? asset('storage/' . ltrim($instructor->image_path, '/')) : null,
+                    ];
+                });
         } catch (\Throwable $e) {
             \Log::error('addBookingHistory error: ' . $e->getMessage());
             throw $e;

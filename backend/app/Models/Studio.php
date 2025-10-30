@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Studio extends Model
 {
@@ -15,4 +17,19 @@ class Studio extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(Lesson::class);
+    }
+
+    public function favoriteStudios(): HasMany
+    {
+        return $this->hasMany(FavoriteStudio::class);
+    }
 }
