@@ -12,7 +12,7 @@ const carouselConfig = {
   wrapAround: false,
   gap: 20,
   height: 200,
-  snapAlign: 'start',
+  snapAlign: 'start' as const,
 };
 </script>
 <template>

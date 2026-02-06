@@ -46,7 +46,7 @@ lessonStore.getTimeOptions().catch((error: any) => {
   <div
     v-if="
       lessonStore.isAddLessonLoading ||
-      studioStore.isStudioListLoading ||
+      studioStore.isStudioLoading ||
       lessonStore.isLessonCategoryLoading ||
       lessonStore.isTimeOptionsLoading
     "
@@ -66,7 +66,7 @@ lessonStore.getTimeOptions().catch((error: any) => {
 
   <div
     v-if="
-      studioStore.isStudioListLoading ||
+      studioStore.isStudioLoading ||
       lessonStore.isLessonCategoryLoading ||
       lessonStore.isTimeOptionsLoading
     "
@@ -78,13 +78,13 @@ lessonStore.getTimeOptions().catch((error: any) => {
 
   <template
     v-if="
-      !studioStore.isStudioListLoading &&
+      !studioStore.isStudioLoading &&
       !lessonStore.isLessonCategoryLoading &&
       !lessonStore.isTimeOptionsLoading
     "
   >
     <CalendarSearch
-      :calendar-theme-color="lessonStore.calendarThemeColor"
+      :calendar-theme-color="lessonBookingStore.calendarThemeColor"
       :calendar-locale="lessonBookingStore.calendarLocale"
       :check-selected="lessonStore.checkSelected"
       :change-by-prev="lessonStore.changeByPrev"

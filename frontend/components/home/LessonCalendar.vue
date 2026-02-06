@@ -69,7 +69,7 @@ watch(
             <template
               v-if="
                 slotProps.attributes.some(
-                  (attr: Attribute) => attr.custom_data.done_flag
+                  (attr: Attribute) => attr.customData?.done_flag
                 )
               "
             >
@@ -86,7 +86,7 @@ watch(
             <template
               v-else-if="
                 slotProps.attributes.some(
-                  (attr: Attribute) => !attr.custom_data.done_flag
+                  (attr: Attribute) => !attr.customData?.done_flag
                 )
               "
             >

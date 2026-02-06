@@ -6,7 +6,6 @@ import type {
   TimeOptions,
   LessonDetail,
   Studio,
-  SelectedWeekData,
   WeekData,
   StudioLesson,
   StudioLessonData,
@@ -46,7 +45,7 @@ export const useLessonStore = defineStore('lesson', {
     lessonDetail: {} as LessonDetail,
     studioData: {} as Studio,
     // Studio Lesson Data
-    weekData: [] as SelectedWeekData[],
+    weekData: [] as WeekData[],
     totalWeekData: [] as Array<Array<WeekData>>,
     activeDate: '' as string,
     timeOptions: [] as string[],
@@ -315,7 +314,9 @@ export const useLessonStore = defineStore('lesson', {
       for (let i = 0; i < 7; i++) {
         const day = new Date(date.getTime() + i * 24 * 60 * 60 * 1000);
         this.weekData.push({
+          date_obj: day,
           date: `${day.getMonth() + 1}/${day.getDate()}`,
+          day: day.getDate(),
           label: dayOfTheWeek[day.getDay()],
         });
       }

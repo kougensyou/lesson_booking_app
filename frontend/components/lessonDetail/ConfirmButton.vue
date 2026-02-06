@@ -2,7 +2,7 @@
 import type { LessonDetail } from '~/types/lesson';
 
 defineProps<{
-  openDialog: Function;
+  openDialog: () => void;
   lessonDetail: LessonDetail;
 }>();
 </script>

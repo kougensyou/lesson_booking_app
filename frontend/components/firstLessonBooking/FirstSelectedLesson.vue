@@ -16,7 +16,7 @@ defineProps<{
   totalWeekData: Array<Array<WeekData>>;
   activeDate: string;
   timeOptions: Array<string>;
-  studioLessonList: Array<StudioLesson>;
+  studioLessonList: StudioLesson;
   selectedLesson: FirstSelectedLesson;
   studioList: Array<Studio>;
   lessonCategoryList: Array<LessonCategory>;
@@ -103,6 +103,9 @@ defineProps<{
     :studio-lesson-list="studioLessonList"
     :time-options="timeOptions"
     :change-studio-lesson-data="changeStudioLessonData"
+    :studio-name="selectedLesson.studio_name"
+    :vacant-message="$t('studioLesson.vacantMessage')"
+    :no-vacant-message="$t('studioLesson.noVacantMessage')"
     :click-card="
       (studioLesson: BaseStudioLesson) => {
         setFirstSelectedLesson(studioLesson);

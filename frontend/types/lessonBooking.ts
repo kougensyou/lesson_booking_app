@@ -5,8 +5,8 @@ export interface LessonBooking {
 }
 
 export interface Attribute {
-  dates: Date;
-  custom_data: {
+  dates: Date[];
+  customData?: {
     done_flag: boolean;
   };
 }

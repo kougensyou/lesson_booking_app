@@ -43,7 +43,7 @@ const updateUser = () => {
         class="w-16 h-16 rounded-full"
       />
       <button
-        @click="$refs.fileInput.click()"
+        @click="userStore.fileInput?.click()"
         class="px-3 py-1 border border-red-500 rounded text-red-500 bg-transparent"
       >
         {{ $t('userUpdate.selectImage') }}

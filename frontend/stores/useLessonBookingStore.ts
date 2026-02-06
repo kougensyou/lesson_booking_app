@@ -57,8 +57,8 @@ export const useLessonBookingStore = defineStore('lessonBooking', {
     attributes(state): Array<Attribute> {
       return (state.selectedLessonList ?? []).map((lesson, idx) => ({
         key: idx,
-        dates: (this as any).parseDateString(lesson.start_time),
-        custom_data: {
+        dates: [(this as any).parseDateString(lesson.start_time)],
+        customData: {
           done_flag: lesson.done_flag,
         },
       }));

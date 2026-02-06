@@ -44,7 +44,7 @@ studioStore.getStudioList().catch((error: any) => {
         studioStore.addFavoriteStudio(studio);
         $router.push({
           path: '/favoriteStudio',
-          query: { add_flag: true },
+          state: { add_flag: true },
         });
       }
     "

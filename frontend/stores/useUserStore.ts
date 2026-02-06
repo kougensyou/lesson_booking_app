@@ -19,6 +19,7 @@ export const useUserStore = defineStore('user', {
     } as PasswordData,
     // User Update Data
     user: {} as User,
+    fileInput: null as HTMLInputElement | null,
     fileData: null as File | null,
     formData: new FormData(),
     // Password Reset Data

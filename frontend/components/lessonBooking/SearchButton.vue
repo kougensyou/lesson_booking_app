@@ -3,7 +3,7 @@ import SpinLoading from '../common/SpinLoading.vue';
 
 defineProps<{
   isAddLessonLoading: boolean;
-  searchLessons: Function;
+  searchLessons: () => void;
 }>();
 </script>
 <template>

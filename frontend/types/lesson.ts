@@ -55,12 +55,8 @@ export interface LessonDetail {
 }
 
 export interface Studio {
+  image_url: string;
   studio_name: string;
-}
-
-export interface SelectedWeekData {
-  date: string;
-  label: string;
 }
 
 export interface WeekData {

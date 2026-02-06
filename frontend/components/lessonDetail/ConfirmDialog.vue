@@ -5,9 +5,9 @@ import SpinLoading from '../common/SpinLoading.vue';
 defineProps<{
   lessonDetail: LessonDetail;
   isBookingStatusLoading: boolean;
-  bookLesson: Function;
-  cancelLesson: Function;
-  closeDialog: Function;
+  bookLesson: () => void;
+  cancelLesson: () => void;
+  closeDialog: () => void;
 }>();
 </script>
 <template>

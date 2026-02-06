@@ -12,7 +12,7 @@ defineProps<{
   totalWeekData: Array<Array<WeekData>>;
   activeDate: string;
   timeOptions: Array<string>;
-  studioLessonList: Array<StudioLesson>;
+  studioLessonList: StudioLesson;
   changeStudioLessonData: Function;
   clickCard: Function;
 }>();
@@ -88,7 +88,9 @@ const carouselConfig = {
         :key="d.date"
         class="border-r border-b p-1 align-top bg-indigo-50 min-h-32"
       >
-        <template v-for="studioLesson in studioLessonList?.[d.date]?.[time]">
+        <template
+          v-for="studioLesson in (studioLessonList as any)?.[d.date]?.[time]"
+        >
           <div
             class="bg-white rounded text-center"
             @click="clickCard(studioLesson)"
