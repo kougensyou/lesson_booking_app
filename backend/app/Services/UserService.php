@@ -6,11 +6,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use App\Models\User;
 use SendGrid;
+use App\Repositories\UserRepository;
+use App\Models\User;
 
 class UserService
 {
+
+    public function __construct()
+    {
+        $this->userRepository = new UserRepository();
+    }
 
     /**
      * Get user data for the given user ID
@@ -21,18 +27,7 @@ class UserService
      */
     public function getUser($userId): User
     {
-        return User::select('id', 'name', 'email', 'zip_code', 'address', 'birth_date', 'tel_no', 'image_path')
-        ->where('id', $userId)
-        ->get()
-        ->map(function ($item) {
-            if ($item->image_path) {
-                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                return $item;
-            }
-            $item->image_url = null;
-            return $item;
-        })
-        ->firstOrFail();
+        return $this->userRepository->getUser($userId);
     }
 
     /**
@@ -78,8 +73,7 @@ class UserService
                 }
             }
 
-            User::where('id', '=', $userId)
-            ->update($updateData);
+            $this->userRepository->updateUser($userId, $updateData);
 
             DB::commit();
 
@@ -106,9 +100,7 @@ class UserService
         try {
             $user = auth()->user();
 
-            $user->update([
-                'password' => \Hash::make($passwordData['new_password']),
-            ]);
+            $this->userRepository->updatePassword($user, $passwordData);
 
             DB::commit();
 
@@ -137,25 +129,9 @@ class UserService
 
             $randomPassword = Str::random(12);
 
-            $this->updatePasswordForReset($toEmail, $randomPassword);
+            $this->userRepository->updatePasswordForReset($toEmail, $randomPassword);
 
-            $body = __('messages.password_changed', ['password' => $randomPassword]);
-
-            $email = new \SendGrid\Mail\Mail();
-            $email->setFrom(getenv('SENDGRID_FROM_EMAIL'));
-            $email->setSubject(__('messages.password_reset_subject'));
-            $email->addTo($toEmail);
-            $apiKey = getenv('SENDGRID_API_KEY');
-            $sendGrid = new \SendGrid($apiKey);
-            $email->addContent(
-                "text/plain",
-                $body
-            );
-            $response = $sendGrid->send($email);
-            if ($response->statusCode() == 202) {
-                return back()->with(['success' => "E-mails successfully sent out!!"]);
-            }
-            return back()->withErrors(json_decode($response->body())->errors);
+            return $this->userRepository->sendMail($toEmail, $randomPassword);
 
         } catch (\Throwable $e) {
             DB::rollBack();
@@ -164,22 +140,4 @@ class UserService
         }
     }
 
-    /**
-     * Update the user password to a randomly generated string
-     * 
-     * @param string $toEmail
-     * @param string $randomPassword
-     */
-    private function updatePasswordForReset($toEmail, $randomPassword): void
-    {
-        
-        $user = User::where('email', $toEmail)->firstOrFail();
-        
-        $user->update([
-            'password' => \Hash::make($randomPassword),
-        ]);
-
-        DB::commit();
-
-    }
 }

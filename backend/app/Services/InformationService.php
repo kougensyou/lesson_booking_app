@@ -1,12 +1,16 @@
 <?php
 namespace App\Services;
 
-use Illuminate\Support\Facades\DB;
-use App\Models\Info;
-
+use App\Repositories\InformationRepository;
 
 class InformationService
 {
+
+    public function __construct()
+    {
+        $this->informationRepository = new InformationRepository();
+    }
+    
     /**
      * Get a list of information from the database
      *
@@ -14,34 +18,9 @@ class InformationService
      */
     public function getInformationList(): array
     {
-        $sliderInfo = Info::where('kind', config('const.information.infoKindSlider'))
-        ->where('visible_flag', true)
-        ->orderBy('sort_order', 'asc')
-        ->get()
-        ->map(function ($item) {
-            if ($item->image_path) {
-                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                return $item;
-            }
-            $item->image_url = null;
-            return $item;
-        });
-        $gridInfo = Info::where('kind', config('const.information.infoKindGrid'))
-        ->where('visible_flag', true)
-        ->orderBy('sort_order', 'asc')
-        ->get()
-        ->map(function ($item) {
-            if ($item->image_path) {
-                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
-                return $item;
-            }
-            $item->image_url = null;
-            return $item;
-        });
-        $listInfo = Info::where('kind', config('const.information.infoKindList'))
-        ->where('visible_flag', true)
-        ->orderBy('sort_order', 'asc')
-        ->get();
+        $sliderInfo = $this->informationRepository->getInformationList(config('const.information.infoKindSlider'));
+        $gridInfo = $this->informationRepository->getInformationList(config('const.information.infoKindGrid'));
+        $listInfo = $this->informationRepository->getInformationList(config('const.information.infoKindList'));
         return [
             'slider_info' => $sliderInfo,
             'grid_info'   => $gridInfo,

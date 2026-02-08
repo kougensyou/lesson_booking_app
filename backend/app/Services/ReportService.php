@@ -2,10 +2,16 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
-use App\Models\Report;
+use App\Repositories\ReportRepository;
 
 class ReportService
 {
+
+    public function __construct()
+    {
+        $this->reportRepository = new ReportRepository();
+    }
+
     /**
      * Send a report from the user
      * 
@@ -20,13 +26,16 @@ class ReportService
         
         DB::beginTransaction();
 
+        $insertData = [
+            'user_id' => $userId,
+            'title' => $title,
+            'email' => $email,
+            'contents' => $contents,
+        ];
+
         try {
-            Report::create([
-                'user_id' => $userId,
-                'title' => $title,
-                'email' => $email,
-                'contents' => $contents,
-            ]);
+
+            $this->reportRepository->createReport($insertData);
 
             DB::commit();
         } catch (\Throwable $e) {
