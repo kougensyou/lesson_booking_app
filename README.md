@@ -15,11 +15,14 @@ https://docs.docker.com/compose/install/
 ```
 
 ## RUNNING STEPS
-1. Clone the repository:
+
+1. Create your environment file and fill in values:
 
 ```bash
-cd lesson-booking-app
+cp backend/.env.example backend/.env
 ```
+
+Open `backend/.env` and set the parameters (DB, mail, etc.).
 
 2. Build and start the containers:
 
@@ -33,57 +36,12 @@ docker compose up -d --build
 docker compose down
 ```
 
-## SERVICES
-- Frontend (Nuxt dev server):
-
-```text
-http://localhost:3000
-```
-
-- Nginx (reverse proxy):
-
-```text
-http://localhost
-```
-
-- Backend API (via Nginx port mapping):
-
-```text
-http://localhost:9000
-```
-
 ## INITIALIZATION (Laravel)
 Run these once after the first build:
 
 ```bash
-docker compose exec backend php artisan key:generate
 docker compose exec backend php artisan migrate
 ```
-
-## COMMON COMMANDS
-- Rebuild everything:
-
-```bash
-docker compose up -d --build
-```
-
-- Run a backend command:
-
-```bash
-docker compose exec backend <command>
-```
-
-- Open a shell in a container:
-
-```bash
-docker compose exec backend sh
-docker compose exec frontend sh
-```
-
-## CONFIGURATION
-- Backend env: `backend/.env`
-- Frontend env (if needed): `frontend/.env`
-- Nginx config: `nginx/nginx.conf`
 
 ## REFERENCES
 - Docker Engine:
