@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Http\RedirectResponse;
 use App\Repositories\LessonBookingRepository;
 
 class LessonBookingService
@@ -110,12 +109,10 @@ class LessonBookingService
      * Apply the first lesson booking
      * 
      * @param array $firstBooking Request data for the first lesson booking
-     * 
-     * @return RedirectResponse
      */
-    public function applyFirstLesson($firstBooking): RedirectResponse
+    public function applyFirstLesson($firstBooking): void
     {
-        return $this->lessonBookingRepository->sendMail($firstBooking);
+        $this->lessonBookingRepository->sendMail($firstBooking);
     }
 
 }

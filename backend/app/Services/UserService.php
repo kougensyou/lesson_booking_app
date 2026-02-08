@@ -5,8 +5,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use SendGrid;
 use App\Repositories\UserRepository;
 use App\Models\User;
 
@@ -100,7 +98,7 @@ class UserService
         try {
             $user = auth()->user();
 
-            $this->userRepository->updatePassword($user, $passwordData);
+            $this->userRepository->updatePassword($user, $passwordData['new_password']);
 
             DB::commit();
 
@@ -116,11 +114,9 @@ class UserService
      *
      * @param string $toEmail Email address to send the password reset mail to
      * 
-     * @return RedirectResponse
-     * 
      * @throws \Throwable
      */
-    public function sendPasswordResetMail($toEmail): RedirectResponse
+    public function sendPasswordResetMail($toEmail): void
     {
 
         DB::beginTransaction();
@@ -129,9 +125,13 @@ class UserService
 
             $randomPassword = Str::random(12);
 
-            $this->userRepository->updatePasswordForReset($toEmail, $randomPassword);
+            $user = $this->userRepository->findUserByEmail($toEmail);
 
-            return $this->userRepository->sendMail($toEmail, $randomPassword);
+            $this->userRepository->updatePassword($user, $randomPassword);
+
+            DB::commit();
+
+            $this->userRepository->sendMail($toEmail, $randomPassword);
 
         } catch (\Throwable $e) {
             DB::rollBack();

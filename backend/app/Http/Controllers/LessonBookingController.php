@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Http\RedirectResponse;
-
 use App\Services\LessonBookingService;
 
 class LessonBookingController extends Controller
@@ -127,15 +125,19 @@ class LessonBookingController extends Controller
      * Apply the first lesson booking
      * 
      * @param FirstBookingRequest $request
-     * @return RedirectResponse
+     * @return array
      * 
      * @throws \Throwable
      */
-    public function applyFirstLesson(FirstBookingRequest $request): RedirectResponse
+    public function applyFirstLesson(FirstBookingRequest $request): array
     {
         try {
             $firstBooking = $request->input('first_booking');
-            return $this->lessonBookingService->applyFirstLesson($firstBooking);
+            $this->lessonBookingService->applyFirstLesson($firstBooking);
+            return [
+                'success' => true,
+                'message' => 'The first lesson was applied successfully.'
+            ];
         } catch (\Throwable $e) {
             \Log::error('applyFirstLesson error: ' . $e->getMessage());
             throw $e;

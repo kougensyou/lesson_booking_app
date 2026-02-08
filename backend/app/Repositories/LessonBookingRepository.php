@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Http\RedirectResponse;
 use App\Models\Lesson;
 use App\Models\LessonBooking;
 use App\Models\LessonCategory;
 use App\Models\Studio;
 use App\Models\FavoriteStudio;
-use SendGrid;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 
 class LessonBookingRepository
@@ -141,9 +141,8 @@ class LessonBookingRepository
      * 
      * @param array $firstBooking Request data for the first lesson booking
      * 
-     * @return RedirectResponse
      */
-    public function sendMail($firstBooking): RedirectResponse
+    public function sendMail($firstBooking): void
     {
         $body = __('messages.first_lesson_booking', [
             'name' => $firstBooking['user']['name'], 
@@ -152,21 +151,25 @@ class LessonBookingRepository
             'lesson_datetime' => $firstBooking['selected_lesson']['lesson_day'] . ' ' . $firstBooking['selected_lesson']['lesson_time'],
         ]);
 
-        $email = new \SendGrid\Mail\Mail();
-        $email->setFrom(getenv('SENDGRID_FROM_EMAIL'));
-        $email->setSubject(__('messages.first_lesson_booking_subject'));
-        $email->addTo($firstBooking['user']['email']);
-        $apiKey = getenv('SENDGRID_API_KEY');
-        $sendGrid = new \SendGrid($apiKey);
-        $email->addContent(
-            "text/plain",
-            $body
-        );
-        $response = $sendGrid->send($email);
-        if ($response->statusCode() == 202) {
-            return back()->with(['success' => "E-mails successfully sent out!!"]);
-        }
-        return back()->withErrors(json_decode($response->body())->errors);
+        $mail = new PHPMailer(true);
+
+        $mail->isSMTP();
+        $mail->Host       = getenv('MAIL_HOST');
+        $mail->SMTPAuth   = true;
+        $mail->Username   = getenv('MAIL_USERNAME');
+        $mail->Password   = getenv('MAIL_APPPASSWORD');
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = getenv('MAIL_PORT');
+
+        $mail->setFrom(getenv('SENDER_MAILADDRESS'), 'Sender');
+        $mail->addAddress($firstBooking['user']['email']);
+
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(false);
+        $mail->Subject = __('messages.first_lesson_booking_subject');
+        $mail->Body    = $body;
+
+        $mail->send();
     }
 
 

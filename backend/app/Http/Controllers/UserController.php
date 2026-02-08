@@ -7,8 +7,6 @@ use App\Http\Requests\User\PasswordResetMailRequest;
 use App\Http\Requests\User\PasswordChangeRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-
 use App\Services\UserService;
 use App\Models\User;
 
@@ -86,15 +84,19 @@ class UserController extends Controller
      * Send password reset mail
      *
      * @param PasswordResetMailRequest $request
-     * @return RedirectResponse
+     * @return array
      * 
      * @throws \Throwable
      */
-    public function sendPasswordResetMail(PasswordResetMailRequest $request): RedirectResponse
+    public function sendPasswordResetMail(PasswordResetMailRequest $request): array
     {
         try {
             $toEmail = $request->input('email');
-            return $this->userService->sendPasswordResetMail($toEmail);
+            $this->userService->sendPasswordResetMail($toEmail);
+            return [
+                'success' => true,
+                'message' => 'The password reset mail was sent successfully.'
+            ];
         } catch (\Throwable $e) {
             \Log::error('sendPasswordResetMail error: ' . $e->getMessage());
             throw $e;

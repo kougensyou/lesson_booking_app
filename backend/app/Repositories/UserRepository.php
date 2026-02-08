@@ -5,9 +5,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Models\User;
-use SendGrid;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class UserRepository
 {
@@ -57,13 +57,11 @@ class UserRepository
      *
      * @throws \Throwable
      */
-    public function updatePassword($user, $passwordData): void
+    public function updatePassword($user, $password): void
     {
-
         $user->update([
-            'password' => \Hash::make($passwordData['new_password']),
+            'password' => \Hash::make($password),
         ]);
-
     }
 
     /**
@@ -72,47 +70,42 @@ class UserRepository
      * @param string $toEmail Email address to send the password reset mail to
      * @param string $randomPassword Randomly generated password
      * 
-     * @return RedirectResponse
-     * 
      * @throws \Throwable
      */
-    public function sendMail($toEmail, $randomPassword): RedirectResponse
+    public function sendMail($toEmail, $randomPassword): void
     {
         $body = __('messages.password_changed', ['password' => $randomPassword]);
 
-        $email = new \SendGrid\Mail\Mail();
-        $email->setFrom(getenv('SENDGRID_FROM_EMAIL'));
-        $email->setSubject(__('messages.password_reset_subject'));
-        $email->addTo($toEmail);
-        $apiKey = getenv('SENDGRID_API_KEY');
-        $sendGrid = new \SendGrid($apiKey);
-        $email->addContent(
-            "text/plain",
-            $body
-        );
-        $response = $sendGrid->send($email);
-        if ($response->statusCode() == 202) {
-            return back()->with(['success' => "E-mails successfully sent out!!"]);
-        }
-        return back()->withErrors(json_decode($response->body())->errors);
+        $mail = new PHPMailer(true);
+
+        $mail->isSMTP();
+        $mail->Host       = getenv('MAIL_HOST');
+        $mail->SMTPAuth   = true;
+        $mail->Username   = getenv('MAIL_USERNAME');
+        $mail->Password   = getenv('MAIL_APPPASSWORD');
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = getenv('MAIL_PORT');
+
+        $mail->setFrom(getenv('SENDER_MAILADDRESS'), 'Sender');
+        $mail->addAddress($toEmail);
+
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(false);
+        $mail->Subject = __('messages.password_reset_subject');
+        $mail->Body    = $body;
+
+        $mail->send();
     }
 
     /**
-     * Update the user password to a randomly generated string
+     * Find a user by email address
      * 
-     * @param string $toEmail
-     * @param string $randomPassword
+     * @param string $toEmail Email address
+     * 
+     * @return User|null
      */
-    public function updatePasswordForReset($toEmail, $randomPassword): void
+    public function findUserByEmail($toEmail): ?User
     {
-        
-        $user = User::where('email', $toEmail)->firstOrFail();
-        
-        $user->update([
-            'password' => \Hash::make($randomPassword),
-        ]);
-
-        DB::commit();
-
+        return User::where('email', $toEmail)->firstOrFail();
     }
 }
