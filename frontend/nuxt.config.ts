@@ -1,7 +1,9 @@
+import javascriptObfuscator from 'vite-plugin-javascript-obfuscator';
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
   ssr: false,
+  sourcemap: { client: false, server: false },
   modules: [
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
@@ -69,6 +71,16 @@ export default defineNuxtConfig({
     },
   },
   vite: {
+    plugins: [
+      javascriptObfuscator({
+        apply: 'build',
+        include: ['**/*.js'],
+        options: {
+          compact: true,
+          controlFlowFlattening: true,
+        },
+      }),
+    ],
     server: {
       allowedHosts: ['frontend'],
       watch: {
