@@ -64,31 +64,3 @@ server {
         send_timeout 300;
     }
 }
-
-server {
-    listen 9000 ssl;
-    server_name lessonbooking.cocokarasys.com;
-    root /var/www/public;
-
-    ssl_certificate /etc/letsencrypt/live/lessonbooking.cocokarasys.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/lessonbooking.cocokarasys.com/privkey.pem;
- 
-    index index.html index.htm index.php;
- 
-    charset utf-8;
-
-    location /.well-known/acme-challenge/ {
-        root /var/www/certbot;
-    }
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-        fastcgi_pass backend:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-}

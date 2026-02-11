@@ -37,7 +37,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "9000:9000"
       - "5173:5173"
     volumes:
       - ./backend/storage/app:/var/www/storage/app/
