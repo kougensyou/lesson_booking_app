@@ -49,7 +49,7 @@ const carouselConfig = {
         <Slide
           v-for="lesson in nextLessonList"
           :key="lesson.id"
-          class="carousel__slide min-w-[250px] h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between p-8"
+          class="carousel__slide h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between p-8"
           @click="
             $router.push({
               path: '/lessonDetail',

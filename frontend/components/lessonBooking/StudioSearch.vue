@@ -44,7 +44,7 @@ const carouselConfig = {
         <Slide
           v-for="favoriteStudio in favoriteStudioList"
           :key="favoriteStudio.id"
-          class="min-w-[250px] h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between items-start"
+          class="h-[200px] bg-white rounded-3xl shadow-md flex flex-col justify-between items-start"
           @click="
             $router.push({
               path: '/studioLesson',

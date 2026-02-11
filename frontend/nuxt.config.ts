@@ -82,12 +82,14 @@ export default defineNuxtConfig({
       }),
     ],
     server: {
-      allowedHosts: ['frontend'],
+      allowedHosts: ['frontend', 'lessonbooking.cocokarasys.com', 'localhost'],
       watch: {
         usePolling: true,
       },
       hmr: {
-        clientPort: 80,
+        protocol: 'wss',
+        host: 'lessonbooking.cocokarasys.com',
+        clientPort: 443,
       },
     },
   },
