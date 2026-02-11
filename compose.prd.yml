@@ -27,7 +27,6 @@ services:
     command: sh -c "npm run dev -- --host 0.0.0.0 --port 3000"
     volumes:
       - ./frontend/:/var/www/
-      - /var/www/node_modules
     networks:
       - lesson-booking-network
   nginx:

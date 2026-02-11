@@ -1,7 +1,7 @@
 import javascriptObfuscator from 'vite-plugin-javascript-obfuscator';
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   ssr: false,
   sourcemap: { client: false, server: false },
   modules: [

@@ -10,6 +10,7 @@ definePageMeta({
 });
 
 const router = useRouter();
+const fileInput = ref<HTMLInputElement | null>(null);
 
 const userStore = useUserStore();
 userStore.initializeErrors();
@@ -19,6 +20,10 @@ const updateUser = () => {
   userStore.updateUserApi().catch((error: any) => {
     useApiErrorHandler(router, error);
   });
+};
+
+const openFilePicker = () => {
+  fileInput.value?.click();
 };
 </script>
 
@@ -43,7 +48,7 @@ const updateUser = () => {
         class="w-16 h-16 rounded-full"
       />
       <button
-        @click="userStore.fileInput?.click()"
+        @click="openFilePicker"
         class="px-3 py-1 border border-red-500 rounded text-red-500 bg-transparent"
       >
         {{ $t('userUpdate.selectImage') }}
