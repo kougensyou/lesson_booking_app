@@ -86,7 +86,7 @@ const carouselConfig = {
       <div
         v-for="d in weekData"
         :key="d.date"
-        class="border-r border-b p-1 align-top bg-indigo-50 min-h-32"
+        class="border-r border-b align-top bg-indigo-50 min-h-32"
       >
         <template
           v-for="studioLesson in (studioLessonList as any)?.[d.date]?.[time]"
@@ -97,18 +97,18 @@ const carouselConfig = {
           >
             <div
               v-if="isAuth && studioLesson.empty_flag"
-              class="bg-green-200 font-bold p-1 text-[11px]"
+              class="bg-green-200 font-bold py-1 text-[11px]"
             >
               {{ vacantMessage }}
             </div>
             <div
               v-if="isAuth && !studioLesson.empty_flag"
-              class="bg-red-200 font-bold p-1 text-[11px]"
+              class="bg-red-200 font-bold py-1 text-[11px]"
             >
               {{ noVacantMessage }}
             </div>
-            <div class="p-1 text-[11px]">{{ studioLesson.start_time }} ～</div>
-            <div class="font-bold p-1 text-[14px] break-words">
+            <div class="py-1 text-[11px]">{{ studioLesson.start_time }} ～</div>
+            <div class="font-bold py-1 text-[14px] break-words">
               {{ studioLesson.lesson_name }}
             </div>
             <div v-if="isAuth" class="text-gray-600">
