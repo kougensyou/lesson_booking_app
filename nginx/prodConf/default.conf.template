@@ -20,7 +20,25 @@ server {
     ssl_certificate /etc/letsencrypt/live/lessonbooking.cocokarasys.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/lessonbooking.cocokarasys.com/privkey.pem;
 
+    root /var/www/public;
+    index index.php index.html index.htm;
+
     charset utf-8;
+
+    location ^~ /api/ {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ^~ /sanctum/ {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass backend:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
 
     location / {
         proxy_pass http://frontend:3000/;

@@ -3,11 +3,12 @@ services:
     container_name: lesson_booking_backend
     build: 
       context: ./backend
-      dockerfile: Dockerfile.php.dev
+      dockerfile: Dockerfile.prd
     extra_hosts:
      - "host.docker.internal:host-gateway"
+    user: "root"
+    command: sh -c "mkdir -p /var/www/storage/logs && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && chmod -R ug+rwX /var/www/storage /var/www/bootstrap/cache && php-fpm"
     volumes:
-     - ./backend/:/var/www/
      - ./backend/storage/app:/var/www/storage/app/
      - ./backend/storage/logs:/var/www/storage/logs/
      - ./backend/public:/var/www/public
@@ -23,7 +24,7 @@ services:
     environment:
       - NUXT_HOST=0.0.0.0
       - NUXT_PORT=3000
-    command: sh -c "npm run dev -- --host 0.0.0.0 --port 3000"
+    command: sh -c "npm run build && npm run preview -- --host 0.0.0.0 --port 3000"
     volumes:
       - ./frontend/:/var/www/
       - /var/www/node_modules
@@ -40,7 +41,6 @@ services:
       - "9000:9000"
       - "5173:5173"
     volumes:
-      - ./backend/:/var/www/
       - ./backend/storage/app:/var/www/storage/app/
       - ./backend/public:/var/www/public
       - ./certbot/conf:/etc/letsencrypt
@@ -67,4 +67,4 @@ services:
       - lesson-booking-network
 networks:
   lesson-booking-network:
-    driver: bridge
+    external: true

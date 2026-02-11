@@ -12,13 +12,11 @@ libpq-dev \
 && docker-php-ext-install pdo_pgsql pgsql
 
 # Insalling Composer
-RUN cd /usr/bin && curl -s http://getcomposer.org/installer | php -- --version=2.6.5 && ln -s /usr/bin/composer.phar /usr/bin/composer
+RUN cd /usr/bin && curl -s https://getcomposer.org/installer | php -- --version=2.6.5 && ln -s /usr/bin/composer.phar /usr/bin/composer
 
 WORKDIR  /var/www
 
 COPY . .
-COPY composer.json /var/www
-COPY composer.lock /var/www
 COPY php.ini /usr/local/etc/php/
 COPY www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 
