@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'test1',
                 'email' => 'test1@example.com',
-                'password' => bcrypt('testtest1'),
+                'password' => bcrypt('cocokarasys1'),
                 'birth_date' => '1995-01-01',
                 'image_path' => '/images/user/test1_profile.png',
                 'zip_code' => '123-4567',
