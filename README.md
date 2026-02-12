@@ -31,13 +31,13 @@ Open `frontend/.env`, `backend/.env` and set the parameters (URL, DB, mail, etc.
 docker compose up -d --build
 ```
 
-3. Stop the containers when done:
+※Stop the containers when done:
 
 ```bash
 docker compose down
 ```
 
-4. Run these once after the first build:
+3. Run these once after the first build:
 
 ```bash
 docker compose exec backend composer install
@@ -46,7 +46,7 @@ docker compose exec backend php artisan db:seed
 docker compose exec backend php artisan storage:link
 ```
 
-5. type following url on your browser:
+4. type following url on your browser:
 
 ```bash
 http://localhost:80
