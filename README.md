@@ -40,6 +40,7 @@ docker compose down
 4. Run these once after the first build:
 
 ```bash
+docker compose exec backend composer install
 docker compose exec backend php artisan migrate
 docker compose exec backend php artisan db:seed
 docker compose exec backend php artisan storage:link
@@ -50,6 +51,25 @@ docker compose exec backend php artisan storage:link
 ```bash
 http://localhost:80
 ```
+
+## TROUBLESHOOTING
+
+### Laravel 500 error: `Permission denied` on `storage/framework/views`
+
+If login or API requests fail with errors like:
+
+```text
+file_put_contents(/var/www/storage/framework/views/...): Failed to open stream: Permission denied
+```
+
+fix writable permissions for Laravel cache/log directories:
+
+```bash
+docker compose exec backend sh -lc 'chown -R 1000:1000 /var/www/storage /var/www/bootstrap/cache'
+chmod -R 777 backend/storage backend/bootstrap/cache
+```
+
+This can happen when cache/log files are created as `root` inside the backend container.
 
 ## REFERENCES
 - Docker Engine:
