@@ -86,11 +86,17 @@ export default defineNuxtConfig({
       watch: {
         usePolling: true,
       },
-      hmr: {
-        protocol: 'wss',
-        host: 'lessonbooking.cocokarasys.com',
-        clientPort: 443,
-      },
+      hmr: process.env.IS_DEV
+        ? {
+            protocol: 'ws',
+            host: 'localhost',
+            clientPort: 80,
+          }
+        : {
+            protocol: 'wss',
+            host: 'lessonbooking.cocokarasys.com',
+            clientPort: 443,
+          },
     },
   },
 });

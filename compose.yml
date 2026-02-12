@@ -18,12 +18,14 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile.vite.dev
+    user: "${UID:-1000}:${GID:-1000}"
     ports:
       - "3000:3000"
-    command: sh -c "npm run lint:fix & npm run format & npm run dev"
+    command: sh -c "npm ci && npm run dev"
     volumes:
       - ./frontend/:/var/www/
-      - /var/www/node_modules
+      - frontend_node_modules:/var/www/node_modules
+      - frontend_nuxt:/var/www/.nuxt
     networks:
       - lesson-booking-network
   nginx:
@@ -47,3 +49,6 @@ services:
 networks:
   lesson-booking-network:
     external: true
+volumes:
+  frontend_node_modules:
+  frontend_nuxt:
