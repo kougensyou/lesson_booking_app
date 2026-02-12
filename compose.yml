@@ -25,7 +25,6 @@ services:
     volumes:
       - ./frontend/:/var/www/
       - frontend_node_modules:/var/www/node_modules
-      - frontend_nuxt:/var/www/.nuxt
     networks:
       - lesson-booking-network
   nginx:
@@ -51,4 +50,3 @@ networks:
     external: true
 volumes:
   frontend_node_modules:
-  frontend_nuxt:
