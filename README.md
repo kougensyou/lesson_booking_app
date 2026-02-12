@@ -14,15 +14,16 @@ Install Docker Engine and Docker Compose using the official docs:
 https://docs.docker.com/compose/install/
 ```
 
-## RUNNING STEPS
+## RUNNING STEPS(Local Development Server)
 
 1. Create your environment file and fill in values:
 
 ```bash
+cp frontend/.env.example frontend/.env
 cp backend/.env.example backend/.env
 ```
 
-Open `backend/.env` and set the parameters (DB, mail, etc.).
+Open `frontend/.env`, `backend/.env` and set the parameters (URL, DB, mail, etc.).
 
 2. Build and start the containers:
 
@@ -36,11 +37,18 @@ docker compose up -d --build
 docker compose down
 ```
 
-## INITIALIZATION (Laravel)
-Run these once after the first build:
+4. Run these once after the first build:
 
 ```bash
 docker compose exec backend php artisan migrate
+docker compose exec backend php artisan db:seed
+docker compose exec backend php artisan storage:link
+```
+
+5. type following url on your browser:
+
+```bash
+http://localhost:80
 ```
 
 ## REFERENCES
