@@ -41,7 +41,7 @@ server {
     }
 
     location ^~ /storage/ {
-        valid_referers lessonbooking.cocokarasys.com *.cocokarasys.com;
+        valid_referers none blocked lessonbooking.cocokarasys.com *.cocokarasys.com;
         if ($invalid_referer) {
             return 403;
         }

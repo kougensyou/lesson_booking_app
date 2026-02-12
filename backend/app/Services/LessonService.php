@@ -98,7 +98,7 @@ class LessonService
             'lesson_name' => $lesson->name,
             'lesson_explanation' => $lesson->explanation,
             'lesson_image_path' => $lesson->image_path,
-            'lesson_image_url' => $lesson->image_path ? asset('storage/' . ltrim($lesson->image_path, '/')) : null,
+            'lesson_image_url' => $lesson->image_path ? '/storage/' . ltrim($lesson->image_path, '/') : null,
             'start_time' => $lesson->start_time,
             'end_time' => $lesson->end_time,
             'lesson_day' => $start->format('n/j'),
@@ -110,7 +110,7 @@ class LessonService
             'instructor_name' => $lesson->instructor->name,
             'instructor_introduction' => $lesson->instructor->introduction,
             'instructor_image_path' => $lesson->instructor->image_path,
-            'instructor_image_url' => $lesson->instructor->image_path ? asset('storage/' . ltrim($lesson->instructor->image_path, '/')) : null,
+            'instructor_image_url' => $lesson->instructor->image_path ? '/storage/' . ltrim($lesson->instructor->image_path, '/') : null,
             'booked_flag' => $booked,
             'done_flag' => $booked ? $lesson->lessonBookings->first()->done_flag : null,
         ];

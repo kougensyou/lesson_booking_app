@@ -49,7 +49,7 @@ class LessonRepository
                     'lesson_time' => $start->format('n/j G:i') . ' - ' . $end->format('G:i'),
                     'instructor_name' => $instructor->name,
                     'image_path' => $instructor->image_path,
-                    'image_url' => $instructor->image_path ? asset('storage/' . ltrim($instructor->image_path, '/')) : null,
+                    'image_url' => $instructor->image_path ? '/storage/' . ltrim($instructor->image_path, '/') : null,
                 ];
             })
             ->toArray();
@@ -87,7 +87,7 @@ class LessonRepository
                     'lesson_time' => $start->format('n/j G:i') . ' - ' . $end->format('G:i'),
                     'instructor_name' => $instructor->name,
                     'image_path' => $instructor->image_path,
-                    'image_url' => $instructor->image_path ? asset('storage/' . ltrim($instructor->image_path, '/')) : null,
+                    'image_url' => $instructor->image_path ? '/storage/' . ltrim($instructor->image_path, '/') : null,
                 ];
             }); 
     }
@@ -157,7 +157,7 @@ class LessonRepository
                     'lesson_time' => $start->format('n/j G:i') . ' - ' . $end->format('G:i'),
                     'instructor_name' => $instructor->name,
                     'image_path' => $instructor->image_path,
-                    'image_url' => $instructor->image_path ? asset('storage/' . ltrim($instructor->image_path, '/')) : null,
+                    'image_url' => $instructor->image_path ? '/storage/' . ltrim($instructor->image_path, '/') : null,
                 ];
             });
     }

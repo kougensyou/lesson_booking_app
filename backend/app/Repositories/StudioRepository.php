@@ -20,7 +20,7 @@ class StudioRepository
         ->get()
         ->map(function ($item) {
             if ($item->image_path) {
-                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
+                $item->image_url = '/storage/' . ltrim($item->image_path, '/');
                 return $item;
             }
             $item->image_url = null;
@@ -51,7 +51,7 @@ class StudioRepository
                         config('const.studio.shortStudioNameChar'),
                         ' ...'
                     ),
-                    'image_url' => $studio->image_path ? asset('storage/' . ltrim($studio->image_path, '/')) : null,
+                    'image_url' => $studio->image_path ? '/storage/' . ltrim($studio->image_path, '/') : null,
                 ];
             });
     }

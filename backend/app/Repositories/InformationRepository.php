@@ -23,7 +23,7 @@ class InformationRepository
         ->get()
         ->map(function ($item) {
             if ($item->image_path) {
-                $item->image_url = asset('storage/' . ltrim($item->image_path, '/'));
+                $item->image_url = '/storage/' . ltrim($item->image_path, '/');
                 return $item;
             }
             $item->image_url = null;
