@@ -21,7 +21,12 @@ class InformationRepository
         ->where('visible_flag', true)
         ->orderBy('sort_order', 'asc')
         ->get()
-        ->map(function ($item) {
+        ->pipe(fn(Collection $informationList) => $this->addImageUrls($informationList));
+    }
+
+    protected function addImageUrls(Collection $informationList): Collection
+    {
+        return $informationList->map(function ($item) {
             if ($item->image_path) {
                 $item->image_url = '/storage/' . ltrim($item->image_path, '/');
                 return $item;
@@ -30,5 +35,4 @@ class InformationRepository
             return $item;
         });
     }
-
 }
