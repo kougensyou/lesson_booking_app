@@ -11,10 +11,11 @@ use App\Services\StudioService;
 
 class StudioController extends Controller
 {
+    private StudioService $studioService;
 
-    public function __construct()
+    public function __construct(StudioService $studioService)
     {
-        $this->studioService = new StudioService();
+        $this->studioService = $studioService;
     }
 
     /**

@@ -9,10 +9,11 @@ use App\Services\InformationService;
 
 class InformationController extends Controller
 {
+    private InformationService $informationService;
 
-    public function __construct()
+    public function __construct(InformationService $informationService)
     {
-        $this->informationService = new InformationService();
+        $this->informationService = $informationService;
     }
     
     /**

@@ -12,10 +12,11 @@ use App\Services\LessonService;
 
 class LessonController extends Controller
 {
+    private LessonService $lessonService;
 
-    public function __construct()
+    public function __construct(LessonService $lessonService)
     {
-        $this->lessonService = new LessonService();
+        $this->lessonService = $lessonService;
     }
 
     /**

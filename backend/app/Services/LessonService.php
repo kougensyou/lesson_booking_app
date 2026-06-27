@@ -10,9 +10,11 @@ use App\Repositories\LessonRepository;
 
 class LessonService
 {
-    public function __construct()
+    private LessonRepository $lessonRepository;
+
+    public function __construct(LessonRepository $lessonRepository)
     {
-        $this->lessonRepository = new LessonRepository();
+        $this->lessonRepository = $lessonRepository;
     }
 
     /**

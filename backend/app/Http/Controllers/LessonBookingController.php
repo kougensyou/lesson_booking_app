@@ -13,10 +13,11 @@ use App\Services\LessonBookingService;
 
 class LessonBookingController extends Controller
 {
+    private LessonBookingService $lessonBookingService;
 
-    public function __construct()
+    public function __construct(LessonBookingService $lessonBookingService)
     {
-        $this->lessonBookingService = new LessonBookingService();
+        $this->lessonBookingService = $lessonBookingService;
     }
 
     /**

@@ -5,10 +5,11 @@ use App\Repositories\InformationRepository;
 
 class InformationService
 {
+    private InformationRepository $informationRepository;
 
-    public function __construct()
+    public function __construct(InformationRepository $informationRepository)
     {
-        $this->informationRepository = new InformationRepository();
+        $this->informationRepository = $informationRepository;
     }
     
     /**

@@ -6,10 +6,11 @@ use App\Repositories\ReportRepository;
 
 class ReportService
 {
+    private ReportRepository $reportRepository;
 
-    public function __construct()
+    public function __construct(ReportRepository $reportRepository)
     {
-        $this->reportRepository = new ReportRepository();
+        $this->reportRepository = $reportRepository;
     }
 
     /**

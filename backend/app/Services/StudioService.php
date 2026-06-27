@@ -7,10 +7,11 @@ use App\Repositories\StudioRepository;
 
 class StudioService
 {
+    private StudioRepository $studioRepository;
 
-    public function __construct()
+    public function __construct(StudioRepository $studioRepository)
     {
-        $this->studioRepository = new StudioRepository();
+        $this->studioRepository = $studioRepository;
     }
     
     /**
